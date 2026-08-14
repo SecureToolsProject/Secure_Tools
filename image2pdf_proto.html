@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Tools · Image → PDF</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a2f;
+      --panel2: #18223d;
+      --text: #eef3ff;
+      --muted: #9eabc7;
+      --border: #2a3658;
+      --accent: #6ea8fe;
+      --danger: #ff6b81;
+      --ok: #68d391;
+      --shadow: 0 18px 45px rgba(0,0,0,.25);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(110,168,254,.13), transparent 32%),
+        radial-gradient(circle at 85% 15%, rgba(104,211,145,.08), transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+    button, select, input { font: inherit; }
+    .wrap { width: min(1100px, calc(100% - 32px)); margin: 0 auto; padding: 42px 0 60px; }
+    .hero { margin-bottom: 24px; }
+    h1 { font-size: clamp(30px, 5vw, 48px); margin: 0 0 10px; letter-spacing: -.04em; }
+    .hero p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .card {
+      background: rgba(18,26,47,.88);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .drop {
+      padding: 42px 22px;
+      text-align: center;
+      border: 2px dashed #385080;
+      border-radius: 20px;
+      transition: .2s ease;
+      cursor: pointer;
+      background: rgba(255,255,255,.012);
+    }
+    .drop.dragover {
+      border-color: var(--accent);
+      background: rgba(110,168,254,.08);
+      transform: translateY(-2px);
+    }
+    .drop .icon { font-size: 46px; margin-bottom: 12px; }
+    .drop strong { display: block; font-size: 20px; margin-bottom: 7px; }
+    .drop span { color: var(--muted); font-size: 14px; }
+    #fileInput { display: none; }
+    .top-card { padding: 18px; }
+    .layout { margin-top: 18px; display: grid; grid-template-columns: 1fr 320px; gap: 18px; }
+    .files { padding: 18px; min-height: 320px; }
+    .side { padding: 18px; height: max-content; position: sticky; top: 18px; }
+    .section-title { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom: 14px; }
+    .section-title h2 { font-size: 18px; margin: 0; }
+    .count { color: var(--muted); font-size: 13px; }
+    .empty {
+      min-height: 250px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      color:var(--muted);
+      border:1px dashed var(--border);
+      border-radius:16px;
+      line-height:1.7;
+      padding:20px;
+    }
+    .list { display:flex; flex-direction:column; gap:10px; }
+    .item {
+      display:grid;
+      grid-template-columns: 72px minmax(0,1fr) auto;
+      align-items:center;
+      gap:12px;
+      padding:10px;
+      background:var(--panel2);
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+    .thumb {
+      width:72px; height:72px; object-fit:cover;
+      border-radius:10px; background:#0a0f1e;
+      border:1px solid var(--border);
+    }
+    .meta { min-width:0; }
+    .name { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:700; }
+    .sub { color:var(--muted); font-size:12px; margin-top:5px; }
+    .actions { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+    .icon-btn {
+      width:34px; height:34px; border-radius:9px;
+      border:1px solid var(--border); color:var(--text);
+      background:#11192c; cursor:pointer;
+    }
+    .icon-btn:hover { border-color:#52658e; }
+    .icon-btn.remove:hover { border-color:var(--danger); color:var(--danger); }
+    label { display:block; color:var(--muted); font-size:13px; margin:16px 0 7px; }
+    select, input[type="number"], input[type="text"] {
+      width:100%; background:#0f172a; color:var(--text);
+      border:1px solid var(--border); border-radius:11px;
+      padding:11px 12px; outline:none;
+    }
+    select:focus, input:focus { border-color:var(--accent); }
+
+    .filename-help {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .check { display:flex; gap:9px; align-items:center; margin-top:14px; color:var(--text); font-size:14px; }
+    .check input { accent-color:var(--accent); }
+    .buttons { display:grid; gap:9px; margin-top:20px; }
+    .btn {
+      border:0; border-radius:12px; padding:12px 14px;
+      font-weight:800; cursor:pointer;
+    }
+    .btn.primary { background:var(--accent); color:#07111f; }
+    .btn.secondary { background:#202c48; color:var(--text); border:1px solid var(--border); }
+    .btn.danger { background:transparent; color:var(--danger); border:1px solid rgba(255,107,129,.35); }
+    .btn:disabled { opacity:.45; cursor:not-allowed; }
+    .status {
+      margin-top:14px; min-height:20px; color:var(--muted);
+      font-size:13px; line-height:1.5;
+    }
+    .privacy {
+      margin-top:18px; padding:14px 16px; border-radius:14px;
+      background:rgba(104,211,145,.06);
+      border:1px solid rgba(104,211,145,.2);
+      color:#c9f4d8; font-size:13px; line-height:1.6;
+    }
+    .progress {
+      display:none; margin-top:12px; height:8px; border-radius:999px;
+      background:#0b1223; overflow:hidden; border:1px solid var(--border);
+    }
+    .bar { width:0%; height:100%; background:var(--accent); transition:width .12s; }
+    @media (max-width: 820px) {
+      .layout { grid-template-columns: 1fr; }
+      .side { position:static; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width:min(100% - 20px,1100px); padding-top:24px; }
+      .item { grid-template-columns:58px minmax(0,1fr); }
+      .thumb { width:58px; height:58px; }
+      .actions { grid-column:1/-1; justify-content:flex-start; }
+    }
+  
+    /* Secure Tools product layer */
+    .brandbar {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:34px;
+    }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:11px;
+      font-weight:850;
+      letter-spacing:-.02em;
+    }
+    .brand-mark {
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:10px;
+      background:linear-gradient(145deg, rgba(110,168,254,.22), rgba(104,211,145,.12));
+      border:1px solid rgba(110,168,254,.34);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .brand-sub {
+      color:var(--muted);
+      font-size:12px;
+      font-weight:650;
+      letter-spacing:.02em;
+    }
+    .local-pill {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 11px;
+      border:1px solid rgba(104,211,145,.24);
+      background:rgba(104,211,145,.07);
+      color:#c9f4d8;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:750;
+      white-space:nowrap;
+    }
+    .local-dot {
+      width:7px;height:7px;border-radius:50%;
+      background:var(--ok);
+      box-shadow:0 0 0 4px rgba(104,211,145,.09);
+    }
+    .hero {
+      margin-bottom:22px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:20px;
+      align-items:end;
+    }
+    .hero-copy .eyebrow {
+      color:var(--accent);
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .hero h1 { margin-bottom:10px; }
+    .trust-strip {
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .trust-chip {
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.025);
+      border-radius:999px;
+      padding:7px 10px;
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .drop {
+      position:relative;
+      overflow:hidden;
+    }
+    .drop::after {
+      content:"LOCAL ONLY";
+      position:absolute;
+      top:13px;
+      right:14px;
+      padding:5px 7px;
+      border-radius:7px;
+      background:rgba(104,211,145,.07);
+      border:1px solid rgba(104,211,145,.18);
+      color:#b8e7c8;
+      font-size:10px;
+      font-weight:850;
+      letter-spacing:.08em;
+    }
+    .drop .icon {
+      width:48px;height:48px;
+      margin:0 auto 14px;
+      display:grid;
+      place-items:center;
+      font-size:0;
+      border-radius:14px;
+      background:rgba(110,168,254,.09);
+      border:1px solid rgba(110,168,254,.2);
+    }
+    .drop .icon::before {
+      content:"＋";
+      font-size:26px;
+      line-height:1;
+      color:var(--accent);
+    }
+    .section-kicker {
+      color:var(--muted);
+      font-size:12px;
+      margin-top:3px;
+    }
+    .privacy {
+      background:rgba(110,168,254,.055);
+      border-color:rgba(110,168,254,.18);
+      color:#d7e6ff;
+    }
+    .privacy strong { color:var(--text); }
+    .privacy-grid {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:7px;
+      margin-top:9px;
+      color:var(--muted);
+    }
+    .privacy-row {
+      display:flex;
+      gap:8px;
+      align-items:flex-start;
+    }
+    .privacy-check {
+      color:var(--ok);
+      font-weight:900;
+      flex:0 0 auto;
+    }
+    .footer-note {
+      margin-top:18px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.6;
+    }
+    .footer-note strong { color:#cbd7ef; }
+    .btn.primary {
+      background:linear-gradient(135deg, #76adff, #6ea8fe);
+      box-shadow:0 9px 22px rgba(110,168,254,.16);
+    }
+    .btn.primary:hover:not(:disabled) { filter:brightness(1.04); transform:translateY(-1px); }
+    .btn { transition:.16s ease; }
+    @media (max-width: 760px) {
+      .brandbar { align-items:flex-start; }
+      .hero { grid-template-columns:1fr; }
+      .trust-strip { justify-content:flex-start; }
+      .local-pill { display:none; }
+    }
+
+  </style>
+<script type="text/javascript" nonce="8e1032a0f31d4d279d0705e6286" src="//local.adguard.org?ts=1786498538407&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000b558820b9c6e37cc8c4b040d%26fn%3Dsecure-tools-image-to-pdf-final.html%26cd%3Dattachment%26ts%3D496250%26p%3Dfs%26cid%3D1%26sig%3D45a58ed5bc207d60b388c16cf62eebc857096b1ca014bd5e1480d273a62f95e4%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-loc&amp;st-dnt"></script><script type="text/javascript" nonce="8e1032a0f31d4d279d0705e6286" src="//local.adguard.org?ts=1786498538407&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script></head>
+<body>
+  <main class="wrap">
+    <header class="brandbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">S</div>
+        <div>
+          <div>Secure Tools</div>
+          <div class="brand-sub">Private utilities, processed on your device</div>
+        </div>
+      </div>
+      <div class="local-pill"><span class="local-dot"></span>파일은 이 기기에서만 처리됩니다</div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">IMAGE TOOL</div>
+        <h1>Image → PDF</h1>
+        <p>JPG, PNG, WebP 등 여러 이미지를 원하는 순서대로 묶어 PDF로 저장하세요.<br>선택한 파일 내용은 서버로 업로드되지 않습니다.</p>
+      </div>
+      <div class="trust-strip" aria-label="privacy features">
+        <span class="trust-chip">서버 업로드 없음</span>
+        <span class="trust-chip">계정 필요 없음</span>
+        <span class="trust-chip">브라우저 로컬 처리</span>
+      </div>
+    </section>
+
+    <section class="card top-card">
+      <div class="drop" id="dropZone">
+        <div class="icon">🖼️</div>
+        <strong>이미지를 여기에 끌어놓으세요</strong>
+        <span>또는 클릭해서 파일 선택 · JPG, PNG, WebP, GIF, BMP, AVIF 혼합 가능</span>
+        <input id="fileInput" type="file" accept="image/*,.jpg,.jpeg,.png,.webp,.gif,.bmp,.avif" multiple />
+      </div>
+    </section>
+
+    <section class="layout">
+      <div class="card files">
+        <div class="section-title">
+          <div><h2>이미지 목록</h2><div class="section-kicker">위에서 아래 순서대로 PDF 페이지가 생성됩니다.</div></div>
+          <div class="count" id="count">0개</div>
+        </div>
+        <div id="empty" class="empty">
+          아직 불러온 이미지가 없습니다.<br />위 영역에서 이미지를 추가하면 여기에 표시됩니다.
+        </div>
+        <div id="list" class="list"></div>
+      </div>
+
+      <aside class="card side">
+        <div class="section-title"><div><h2>PDF 설정</h2><div class="section-kicker">결과 파일은 로컬에서 생성됩니다.</div></div></div>
+        <label for="filename">기본 저장 파일명</label>
+        <input id="filename" class="setting-input" type="text" value="converted-images" placeholder="예: 여행사진" autocomplete="off" />
+        <div class="filename-help">저장 창이 열리면 이 이름을 기본값으로 제안합니다.</div>
+
+        <label for="pageSize">페이지 크기</label>
+        <select id="pageSize">
+          <option value="image">이미지 크기에 맞춤</option>
+          <option value="a4" selected>A4</option>
+          <option value="letter">Letter</option>
+        </select>
+
+        <label for="orientation">페이지 방향</label>
+        <select id="orientation">
+          <option value="auto" selected>자동</option>
+          <option value="portrait">세로</option>
+          <option value="landscape">가로</option>
+        </select>
+
+        <label for="margin">여백 (mm)</label>
+        <input id="margin" type="number" min="0" max="50" value="10" />
+<label for="quality">JPEG 품질</label>
+        <select id="quality">
+          <option value="1">최고 품질</option>
+          <option value="0.92" selected>높음</option>
+          <option value="0.8">보통</option>
+          <option value="0.65">용량 절약</option>
+        </select>
+
+        <div class="check">
+          <input type="checkbox" id="fillPage" />
+          <label for="fillPage" style="margin:0;color:var(--text)">페이지를 꽉 채우기</label>
+        </div>
+
+        <div class="check">
+          <input type="checkbox" id="autoDownload" />
+          <label for="autoDownload" style="margin:0;color:var(--text)">PDF 생성 후 자동 다운로드</label>
+        </div>
+
+        <div class="check">
+          <input type="checkbox" id="clearAfterSave" checked />
+          <label for="clearAfterSave" style="margin:0;color:var(--text)">저장 후 불러온 파일 자동 정리</label>
+        </div>
+
+        <div class="buttons">
+          <button class="btn primary" id="convertBtn" disabled>PDF 만들기 / 저장</button>
+          <button class="btn secondary" id="addBtn">이미지 추가</button>
+          <button class="btn danger" id="clearBtn" disabled>전체 삭제</button>
+        </div>
+
+        <div class="progress" id="progress"><div class="bar" id="bar"></div></div>
+        <div class="status" id="status"></div>
+
+        <div class="privacy">
+          <strong>Privacy-first 처리</strong>
+          <div class="privacy-grid">
+            <div class="privacy-row"><span class="privacy-check">✓</span><span>이미지 내용은 변환 중에도 외부 서버로 전송하지 않습니다.</span></div>
+            <div class="privacy-row"><span class="privacy-check">✓</span><span>로그인이나 계정 생성 없이 사용할 수 있습니다.</span></div>
+            <div class="privacy-row"><span class="privacy-check">✓</span><span>‘저장 후 자동 정리’를 켜면 불러온 파일 참조를 즉시 해제합니다.</span></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+    <div class="footer-note">
+      <strong>Secure Tools</strong>는 파일 자체를 수집하거나 업로드하지 않는 로컬 우선 유틸리티를 지향합니다.
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+  <script>
+    const { jsPDF } = window.jspdf;
+    const files = [];
+    const el = id => document.getElementById(id);
+
+    const input = el('fileInput');
+    const drop = el('dropZone');
+    const list = el('list');
+    const empty = el('empty');
+    const count = el('count');
+    const convertBtn = el('convertBtn');
+    const clearBtn = el('clearBtn');
+    const status = el('status');
+    const progress = el('progress');
+    const bar = el('bar');
+
+    drop.addEventListener('click', () => input.click());
+    el('addBtn').addEventListener('click', () => input.click());
+
+    ['dragenter','dragover'].forEach(evt => drop.addEventListener(evt, e => {
+      e.preventDefault(); drop.classList.add('dragover');
+    }));
+    ['dragleave','drop'].forEach(evt => drop.addEventListener(evt, e => {
+      e.preventDefault(); drop.classList.remove('dragover');
+    }));
+    drop.addEventListener('drop', e => addFiles([...e.dataTransfer.files]));
+    input.addEventListener('change', e => {
+      addFiles([...e.target.files]);
+      input.value = '';
+    });
+
+    function formatBytes(bytes) {
+      const units = ['B','KB','MB','GB'];
+      let i = 0, n = bytes;
+      while (n >= 1024 && i < units.length-1) { n /= 1024; i++; }
+      return `${n.toFixed(i ? 1 : 0)} ${units[i]}`;
+    }
+
+    function addFiles(newFiles) {
+      const valid = newFiles.filter(f => {
+        const extOk = /\.(jpe?g|png|webp|gif|bmp|avif)$/i.test(f.name);
+        return (f.type && f.type.startsWith('image/')) || extOk;
+      });
+      if (!valid.length) {
+        status.textContent = '브라우저에서 읽을 수 있는 이미지 파일만 추가할 수 있습니다.';
+        return;
+      }
+      valid.forEach(file => {
+        files.push({
+          file,
+          url: URL.createObjectURL(file),
+          id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random())
+        });
+      });
+      status.textContent = `${valid.length}개 이미지를 추가했습니다.`;
+      render();
+    }
+
+    function render() {
+      list.innerHTML = '';
+      empty.style.display = files.length ? 'none' : 'grid';
+      count.textContent = `${files.length}개`;
+      convertBtn.disabled = !files.length;
+      clearBtn.disabled = !files.length;
+
+      files.forEach((item, index) => {
+        const row = document.createElement('div');
+        row.className = 'item';
+        row.innerHTML = `
+          <img class="thumb" src="${item.url}" alt="">
+          <div class="meta">
+            <div class="name" title="${escapeHtml(item.file.name)}">${escapeHtml(item.file.name)}</div>
+            <div class="sub">${formatBytes(item.file.size)} · ${index + 1}페이지</div>
+          </div>
+          <div class="actions">
+            <button class="icon-btn" title="위로" data-action="up">↑</button>
+            <button class="icon-btn" title="아래로" data-action="down">↓</button>
+            <button class="icon-btn remove" title="삭제" data-action="remove">✕</button>
+          </div>`;
+        row.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+          const action = btn.dataset.action;
+          if (action === 'up' && index > 0) [files[index-1], files[index]] = [files[index], files[index-1]];
+          if (action === 'down' && index < files.length-1) [files[index+1], files[index]] = [files[index], files[index+1]];
+          if (action === 'remove') {
+            URL.revokeObjectURL(files[index].url);
+            files.splice(index, 1);
+          }
+          render();
+        }));
+        list.appendChild(row);
+      });
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, m => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
+      })[m]);
+    }
+
+    function clearFiles(message = '목록을 비웠습니다.') {
+      files.forEach(x => URL.revokeObjectURL(x.url));
+      files.length = 0;
+      input.value = '';
+      status.textContent = message;
+      render();
+    }
+
+    clearBtn.addEventListener('click', () => clearFiles());
+
+    async function loadImage(file) {
+      // 1) createImageBitmap 경로: 대용량 JPG와 일부 브라우저에서 더 안정적
+      if ('createImageBitmap' in window) {
+        try {
+          const bitmap = await createImageBitmap(file);
+          return {
+            source: bitmap,
+            width: bitmap.width,
+            height: bitmap.height,
+            close: () => bitmap.close && bitmap.close()
+          };
+        } catch (_) {}
+      }
+
+      // 2) FileReader Data URL 경로: blob URL 로딩 실패 회피
+      const dataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error(`파일을 읽지 못했습니다: ${file.name}`));
+        reader.readAsDataURL(file);
+      });
+
+      return await new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve({
+          source: img,
+          width: img.naturalWidth || img.width,
+          height: img.naturalHeight || img.height,
+          close: () => {}
+        });
+        img.onerror = () => reject(new Error(`이미지를 해석하지 못했습니다: ${file.name}. 파일이 손상되었거나 현재 브라우저가 이 형식을 지원하지 않을 수 있습니다.`));
+        img.src = dataUrl;
+      });
+    }
+
+    function canvasData(imgObj, quality) {
+      const canvas = document.createElement('canvas');
+      canvas.width = imgObj.width;
+      canvas.height = imgObj.height;
+      const ctx = canvas.getContext('2d', { alpha: false });
+      if (!ctx) throw new Error('브라우저가 Canvas를 지원하지 않습니다.');
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(imgObj.source, 0, 0);
+      return canvas.toDataURL('image/jpeg', quality);
+    }
+
+    function mmFromPx(px) {
+      return px * 25.4 / 96;
+    }
+
+    function pageDims(size, orientation, img) {
+      let portrait;
+      if (orientation === 'auto') portrait = img.height >= img.width;
+      else portrait = orientation === 'portrait';
+
+      if (size === 'a4') return portrait ? [210, 297] : [297, 210];
+      if (size === 'letter') return portrait ? [215.9, 279.4] : [279.4, 215.9];
+
+      let w = mmFromPx(img.width);
+      let h = mmFromPx(img.height);
+      if (orientation === 'portrait' && w > h) [w,h] = [h,w];
+      if (orientation === 'landscape' && h > w) [w,h] = [h,w];
+      return [w, h];
+    }
+
+    convertBtn.addEventListener('click', async () => {
+      if (!files.length) return;
+      convertBtn.disabled = true;
+      progress.style.display = 'block';
+      bar.style.width = '0%';
+      status.textContent = 'PDF를 생성하고 있습니다…';
+
+      try {
+        const size = el('pageSize').value;
+        const orientation = el('orientation').value;
+        const margin = Math.max(0, Number(el('margin').value) || 0);
+        const quality = Number(el('quality').value);
+        const fill = el('fillPage').checked;
+
+        let pdf = null;
+
+        for (let i = 0; i < files.length; i++) {
+          const img = await loadImage(files[i].file);
+          const [pw, ph] = pageDims(size, orientation, img);
+
+          if (!pdf) {
+            pdf = new jsPDF({
+              orientation: pw >= ph ? 'landscape' : 'portrait',
+              unit: 'mm',
+              format: [pw, ph],
+              compress: true
+            });
+          } else {
+            pdf.addPage([pw, ph], pw >= ph ? 'landscape' : 'portrait');
+          }
+
+          const data = canvasData(img, quality);
+          const availW = Math.max(1, pw - margin * 2);
+          const availH = Math.max(1, ph - margin * 2);
+          const imgRatio = img.width / img.height;
+          const boxRatio = availW / availH;
+
+          let drawW, drawH;
+          if (fill) {
+            if (imgRatio > boxRatio) {
+              drawH = availH;
+              drawW = drawH * imgRatio;
+            } else {
+              drawW = availW;
+              drawH = drawW / imgRatio;
+            }
+          } else {
+            if (imgRatio > boxRatio) {
+              drawW = availW;
+              drawH = drawW / imgRatio;
+            } else {
+              drawH = availH;
+              drawW = drawH * imgRatio;
+            }
+          }
+
+          const x = (pw - drawW) / 2;
+          const y = (ph - drawH) / 2;
+          pdf.addImage(data, 'JPEG', x, y, drawW, drawH, undefined, 'FAST');
+          img.close();
+
+          bar.style.width = `${Math.round(((i + 1) / files.length) * 100)}%`;
+          status.textContent = `${i + 1} / ${files.length} 페이지 처리 중`;
+          await new Promise(r => setTimeout(r, 0));
+        }
+        let baseFilename = (el('filename')?.value || 'converted-images').trim();
+        baseFilename = baseFilename.replace(/[\/:*?"<>|]+/g, '_') || 'converted-images';
+        const defaultFilename = /\.pdf$/i.test(baseFilename) ? baseFilename : `${baseFilename}.pdf`;
+        const pageCount = files.length;
+        const autoDownload = el('autoDownload').checked;
+        let saveCompleted = false;
+
+        if (autoDownload) {
+          pdf.save(defaultFilename);
+          status.textContent = `완료: ${defaultFilename} (${pageCount}페이지)를 자동 다운로드했습니다.`;
+          saveCompleted = true;
+        } else {
+          const blob = pdf.output('blob');
+
+          if ('showSaveFilePicker' in window) {
+            try {
+              const handle = await window.showSaveFilePicker({
+                suggestedName: defaultFilename,
+                types: [{
+                  description: 'PDF 문서',
+                  accept: { 'application/pdf': ['.pdf'] }
+                }]
+              });
+              const writable = await handle.createWritable();
+              await writable.write(blob);
+              await writable.close();
+              status.textContent = `완료: ${pageCount}페이지 PDF를 저장했습니다.`;
+              saveCompleted = true;
+            } catch (saveErr) {
+              if (saveErr?.name === 'AbortError') {
+                status.textContent = '저장을 취소했습니다. 생성된 PDF 데이터는 브라우저 메모리에서만 처리되었습니다.';
+              } else {
+                throw saveErr;
+              }
+            }
+          } else {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = defaultFilename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1500);
+            status.textContent = '이 브라우저는 저장 위치 선택 창을 지원하지 않아 일반 다운로드 방식으로 저장했습니다.';
+            saveCompleted = true;
+          }
+        }
+
+        if (saveCompleted && el('clearAfterSave')?.checked) {
+          clearFiles('저장이 완료되어 불러온 이미지 참조를 브라우저 메모리에서 정리했습니다.');
+        }
+      } catch (err) {
+        console.error(err);
+        status.textContent = `오류: ${err.message || 'PDF 생성에 실패했습니다.'}`;
+      } finally {
+        convertBtn.disabled = !files.length;
+        setTimeout(() => { progress.style.display = 'none'; }, 1000);
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>
