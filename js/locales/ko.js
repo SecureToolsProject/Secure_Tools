@@ -5,6 +5,7 @@ export const ko = {
     about: { title: "소개 — Secure Tools", description: "Secure Tools가 단순히 믿는 대신 직접 검증할 수 있는 오픈 소스 로컬 우선 파일 도구를 만드는 이유입니다." },
     notFound: { title: "페이지를 찾을 수 없음 — Secure Tools", description: "요청한 Secure Tools 페이지를 찾을 수 없습니다." },
     imageToPdf: { title: "이미지를 PDF로 — Secure Tools", description: "JPEG, PNG, WebP 이미지를 브라우저에서만 처리해 하나의 PDF로 만드세요." },
+    mergePdf: { title: "PDF 합치기 — Secure Tools", description: "PDF 파일을 업로드하지 않고 브라우저에서 원하는 순서로 합치세요." },
     pdfCategory: { title: "PDF 도구 — Secure Tools", description: "브라우저에서 PDF 문서를 로컬로 만들고 정리하세요." },
     imageCategory: { title: "이미지 도구 — Secure Tools", description: "브라우저에서 로컬로 작동하도록 설계된 프라이빗 이미지 도구입니다." },
     privacyCategory: { title: "개인정보 보호 도구 — Secure Tools", description: "원본 파일을 업로드하지 않고 숨겨진 파일 정보를 확인하고 제거하세요." },
@@ -71,6 +72,30 @@ export const ko = {
   about: {
     eyebrow: "소개", title: "작은 도구, 검증 가능한 신뢰.", intro: "Secure Tools는 브라우저에서 로컬로 작동하는 일상 파일 도구를 모은 개인정보 보호 중심 프로젝트입니다.",
     purposeTitle: "만든 이유", purposeBody: "일상적인 파일 작업 때문에 개인 문서를 알 수 없는 서버에 올리거나 계정을 만들 필요는 없어야 합니다.", philosophyTitle: "로컬 우선, 그리고 개방성", philosophyBody: "이 프로젝트는 누구나 소스와 네트워크 검사를 통해 검증할 수 있는 정적이고 이해하기 쉬운 코드와 개인정보 보호 모델을 지향합니다.",
+  },
+  mergePdf: {
+    eyebrow: "PDF 도구", title: "PDF 합치기", description: "PDF 파일의 순서를 정하고 모든 페이지를 하나의 문서로 합치세요. 파일은 이 기기에 머뭅니다.",
+    drop: { title: "PDF 추가", description: "PDF 파일을 여기에 놓거나 선택기를 사용하세요. 대기열 순서대로 문서가 합쳐집니다.", choose: "PDF 선택", localTitle: "로컬에서 처리됩니다.", localBody: "PDF는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
+    queue: {
+      title: "PDF 순서", count: "PDF: {count}개", empty: "아직 선택한 PDF가 없습니다. 추가한 파일은 위에서 아래 순서로 합쳐집니다.",
+      meta: "{size} · {pages}페이지", moveUp: "PDF를 위로 이동", moveDown: "PDF를 아래로 이동", remove: "PDF 제거",
+    },
+    settings: {
+      title: "합치기 설정", filename: "출력 파일명", filenameHelp: ".pdf 확장자는 자동으로 추가됩니다.",
+      autoDownload: "합친 뒤 자동 다운로드", clearAfterSave: "저장 후 파일 참조 정리", pdfFile: "PDF 문서",
+    },
+    actions: { merge: "PDF 합치기 및 저장", add: "PDF 더 추가", clear: "전체 비우기" },
+    status: {
+      validating: "PDF를 기기에서 확인하고 있습니다…", added: "PDF 파일 {count}개를 추가했습니다.", addedWithRejected: "PDF 파일 {added}개를 추가하고 지원하지 않거나 읽을 수 없는 파일 {rejected}개를 건너뛰었습니다.",
+      removed: "PDF를 제거했습니다.", reordered: "PDF 순서를 변경했습니다.", cleared: "PDF 목록을 비웠습니다.", merging: "기기에서 PDF를 합치고 있습니다…",
+      progress: "{total}개 파일 중 {completed}개를 합치는 중…", progressLabel: "PDF 합치기 진행률", saved: "{pages}페이지 PDF를 저장했습니다.",
+      downloaded: "{pages}페이지인 {name} 파일을 다운로드했습니다.", savedAndCleared: "PDF를 저장하고 파일 참조를 정리했습니다.", saveCancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
+    },
+    errors: {
+      unsupported: "PDF 파일을 선택하세요. 브라우저가 파일 형식을 제공하지 않으면 .pdf 확장자를 허용합니다.", noFiles: "합치기 전에 PDF를 하나 이상 추가하세요.",
+      encrypted: "{name} 파일은 암호화되었거나 비밀번호로 보호되어 합칠 수 없습니다.", unreadable: "{name} 파일을 읽을 수 없습니다. PDF가 손상되었거나 지원되지 않을 수 있습니다.",
+      library: "로컬 PDF 라이브러리를 불러오지 못했습니다.", generation: "PDF를 합치지 못했습니다. 파일 수나 크기를 줄여 다시 시도하세요.", save: "저장 위치를 열 수 없습니다. 다시 시도하세요.",
+    },
   },
   imageToPdf: {
     eyebrow: "이미지 도구", title: "이미지를 PDF로", description: "JPEG, PNG, WebP 이미지를 원하는 순서로 정리해 하나의 PDF로 저장하세요. 모든 처리는 이 기기에서 이루어집니다.",

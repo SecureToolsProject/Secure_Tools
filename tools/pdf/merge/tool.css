@@ -1,0 +1,6 @@
+.pdf-queue-item { grid-template-columns: 4.5rem minmax(0, 1fr) auto; }
+.pdf-file-icon { display: grid; width: 4.5rem; height: 4.5rem; place-items: center; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--accent-soft); color: var(--accent); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; }
+@media (max-width: 38rem) {
+  .pdf-queue-item { grid-template-columns: 3.75rem minmax(0, 1fr); }
+  .pdf-file-icon { width: 3.75rem; height: 3.75rem; }
+}

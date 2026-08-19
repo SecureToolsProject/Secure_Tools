@@ -5,6 +5,7 @@ export const en = {
     about: { title: "About — Secure Tools", description: "Why Secure Tools builds open, local-first file utilities that can be inspected instead of simply trusted." },
     notFound: { title: "Page not found — Secure Tools", description: "The requested Secure Tools page could not be found." },
     imageToPdf: { title: "Images to PDF — Secure Tools", description: "Combine JPEG, PNG, and WebP images into a PDF entirely in your browser." },
+    mergePdf: { title: "Merge PDF — Secure Tools", description: "Arrange and merge PDF files entirely in your browser without uploading them." },
     pdfCategory: { title: "PDF tools — Secure Tools", description: "Create and organize PDF documents locally in your browser." },
     imageCategory: { title: "Image tools — Secure Tools", description: "Private image tools designed to run locally in your browser." },
     privacyCategory: { title: "Privacy tools — Secure Tools", description: "Inspect and remove hidden file details without uploading the source file." },
@@ -88,6 +89,30 @@ export const en = {
     eyebrow: "About", title: "Small tools. Inspectable trust.", intro: "Secure Tools is a privacy-first collection of everyday file utilities built to run locally in the browser.",
     purposeTitle: "Why it exists", purposeBody: "Common file tasks should not require uploading personal documents to an unknown server or creating an account.",
     philosophyTitle: "Local-first and open", philosophyBody: "The project favors static, understandable code and a privacy model that anyone can verify through source and network inspection.",
+  },
+  mergePdf: {
+    eyebrow: "PDF tool", title: "Merge PDF", description: "Arrange PDF files and combine every page into one document. Files stay on this device.",
+    drop: { title: "Add your PDFs", description: "Drop PDF files here or use the picker. The queue order becomes the document order.", choose: "Choose PDFs", localTitle: "Processed locally.", localBody: "Your PDFs never leave this device.", privacyLink: "How privacy works" },
+    queue: {
+      title: "PDF order", count: "PDFs: {count}", empty: "No PDFs selected yet. Added files will be merged from top to bottom.",
+      meta: "{size} · {pages} page(s)", moveUp: "Move PDF up", moveDown: "Move PDF down", remove: "Remove PDF",
+    },
+    settings: {
+      title: "Merge settings", filename: "Output filename", filenameHelp: "A .pdf extension is added automatically.",
+      autoDownload: "Download automatically after merging", clearAfterSave: "Clear file references after saving", pdfFile: "PDF document",
+    },
+    actions: { merge: "Merge and save PDF", add: "Add more PDFs", clear: "Clear all" },
+    status: {
+      validating: "Checking PDFs locally…", added: "Added {count} PDF file(s).", addedWithRejected: "Added {added} PDF file(s); skipped {rejected} unsupported or unreadable file(s).",
+      removed: "PDF removed.", reordered: "PDF order updated.", cleared: "PDF list cleared.", merging: "Merging PDFs locally…",
+      progress: "Merging file {completed} of {total}…", progressLabel: "PDF merge progress", saved: "Saved a {pages}-page PDF.",
+      downloaded: "Downloaded {name} with {pages} page(s).", savedAndCleared: "PDF saved and file references cleared.", saveCancelled: "Save cancelled. No file was written.",
+    },
+    errors: {
+      unsupported: "Choose PDF files. A .pdf extension is accepted when the browser does not provide a file type.", noFiles: "Add at least one PDF before merging.",
+      encrypted: "{name} is encrypted or password protected and cannot be merged.", unreadable: "Could not read {name}. The PDF may be damaged or unsupported.",
+      library: "The local PDF library could not be loaded.", generation: "The PDF could not be merged. Try fewer or smaller files.", save: "The save location could not be opened. Please try again.",
+    },
   },
   imageToPdf: {
     eyebrow: "Image tool", title: "Images to PDF",
