@@ -1,4 +1,5 @@
 import { decodeImage, imageToJpegData } from "./image.js";
+import { sanitizePdfFilename } from "../../shared/file.js";
 
 const PAGE_SIZES = {
   a4: [210, 297],
@@ -7,14 +8,7 @@ const PAGE_SIZES = {
 
 const pxToMillimeters = (pixels) => pixels * 25.4 / 96;
 
-export function sanitizeFilename(value) {
-  const clean = String(value || "")
-    .trim()
-    .replace(/[\\/:*?"<>|\u0000-\u001f]+/g, "_")
-    .replace(/[. ]+$/g, "");
-  const base = clean || "converted-images";
-  return /\.pdf$/i.test(base) ? base : `${base}.pdf`;
-}
+export const sanitizeFilename = (value) => sanitizePdfFilename(value, "converted-images");
 
 export function getPageDimensions(pageSize, orientation, image) {
   const portrait = orientation === "auto"

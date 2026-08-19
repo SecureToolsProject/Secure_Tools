@@ -1,4 +1,6 @@
 import { t } from "../../../js/i18n.js";
+import { formatBytes, moveArrayItem } from "../../shared/file.js";
+import { downloadBlob, requestPdfSaveHandle, writeBlobToHandle } from "../../shared/save.js";
 import { ACCEPTED_IMAGE_TYPES, isSupportedImage } from "./image.js";
 import { createPdfBlob, sanitizeFilename } from "./pdf.js";
 
@@ -34,17 +36,6 @@ function setStatus(key, values = {}, tone = "neutral") {
   state.status = key ? { key, values, tone } : null;
   elements.status.textContent = key ? message(key, values) : "";
   elements.status.dataset.tone = tone;
-}
-
-function formatBytes(bytes) {
-  const units = ["B", "KB", "MB", "GB"];
-  let value = bytes;
-  let unit = 0;
-  while (value >= 1024 && unit < units.length - 1) {
-    value /= 1024;
-    unit += 1;
-  }
-  return `${value.toFixed(unit ? 1 : 0)} ${units[unit]}`;
 }
 
 function createActionButton(action, labelKey, symbol, disabled = false) {
@@ -137,9 +128,8 @@ function removeItem(index) {
 }
 
 function moveItem(index, offset) {
-  const nextIndex = index + offset;
-  if (nextIndex < 0 || nextIndex >= state.items.length) return;
-  [state.items[index], state.items[nextIndex]] = [state.items[nextIndex], state.items[index]];
+  const nextIndex = moveArrayItem(state.items, index, offset);
+  if (nextIndex < 0) return;
   setStatus("imageToPdf.status.reordered", {}, "neutral");
   renderQueue();
   elements.list.querySelector(`[data-id="${state.items[nextIndex].id}"] [data-action="${offset < 0 ? "up" : "down"}"]`)?.focus();
@@ -151,17 +141,6 @@ function clearItems(statusKey = "imageToPdf.status.cleared") {
   elements.input.value = "";
   setStatus(statusKey, {}, "neutral");
   renderQueue();
-}
-
-function downloadBlob(blob, filename) {
-  const url = URL.createObjectURL(blob);
-  const anchor = document.createElement("a");
-  anchor.href = url;
-  anchor.download = filename;
-  document.body.append(anchor);
-  anchor.click();
-  anchor.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1500);
 }
 
 function getOptions() {
@@ -204,13 +183,11 @@ async function generatePdf() {
 
   if (!options.autoDownload && "showSaveFilePicker" in window) {
     try {
-      fileHandle = await window.showSaveFilePicker({
-        suggestedName: filename,
-        types: [{
-          description: t("imageToPdf.settings.pdfFile"),
-          accept: { "application/pdf": [".pdf"] },
-        }],
-      });
+      fileHandle = await requestPdfSaveHandle(
+        window,
+        filename,
+        t("imageToPdf.settings.pdfFile"),
+      );
     } catch (error) {
       if (error.name === "AbortError") {
         setStatus("imageToPdf.status.saveCancelled", {}, "neutral");
@@ -241,9 +218,7 @@ async function generatePdf() {
     });
 
     if (fileHandle) {
-      const writable = await fileHandle.createWritable();
-      await writable.write(blob);
-      await writable.close();
+      await writeBlobToHandle(fileHandle, blob);
       setStatus("imageToPdf.status.saved", { count: state.items.length }, "success");
     } else {
       downloadBlob(blob, filename);
