@@ -1,0 +1,8 @@
+.subpage-main { padding-block: clamp(4.5rem, 10vw, 8rem); }
+.subpage-main .eyebrow { margin-bottom: var(--space-4); }
+.subpage-main .prose > p:first-of-type { margin-bottom: var(--space-7); font-size: clamp(1.05rem, 2vw, 1.25rem); }
+.subpage-main .prose h2 { padding-top: var(--space-5); border-top: 1px solid var(--border); }
+.not-found { display: grid; min-height: 65vh; place-items: center; text-align: center; }
+.not-found .prose { display: flex; align-items: center; flex-direction: column; }
+.not-found h1 { max-width: 12ch; }
+.not-found .button { margin-top: var(--space-4); }

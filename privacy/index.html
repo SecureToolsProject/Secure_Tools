@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How Secure Tools keeps file processing local, avoids tracking, and uses local storage only for preferences.">
+    <meta name="theme-color" content="#f7f7f5">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Privacy — Secure Tools">
+    <meta property="og:description" content="How Secure Tools keeps file processing local, avoids tracking, and uses local storage only for preferences.">
+    <title>Privacy — Secure Tools</title>
+    <script>
+      (() => {
+        let preference = "system";
+        try { preference = localStorage.getItem("secure-tools-theme") || "system"; } catch {}
+        const dark = preference === "dark" || (preference === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = preference;
+        document.documentElement.dataset.resolvedTheme = dark ? "dark" : "light";
+      })();
+    </script>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/secondary.css">
+  </head>
+  <body class="page-shell" data-page="privacy">
+    <a class="skip-link" href="#main" data-i18n="common.skip">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../" aria-label="Secure Tools home"><span class="brand-mark" aria-hidden="true"></span><span>Secure Tools</span></a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="../#tools" data-i18n="common.nav.tools">Tools</a>
+          <a href="./" aria-current="page" data-i18n="common.nav.privacy">Privacy</a>
+          <a href="../about/" data-i18n="common.nav.about">About</a>
+          <a href="https://github.com/maruson08/Secure_Tools" data-repository-link target="_blank" rel="noreferrer" data-i18n="common.nav.source">Source</a>
+        </nav>
+        <div class="header-controls">
+          <label class="control-label"><span data-i18n="common.language">Language</span><select class="control" data-language-select><option value="en">English</option><option value="ko">한국어</option></select></label>
+          <label class="control-label"><span data-i18n="common.theme">Theme</span><select class="control" data-theme-select><option value="system" data-i18n="common.themes.system">System</option><option value="light" data-i18n="common.themes.light">Light</option><option value="dark" data-i18n="common.themes.dark">Dark</option></select></label>
+        </div>
+      </div>
+    </header>
+    <main id="main" class="page-main subpage-main">
+      <article class="container prose">
+        <p class="eyebrow" data-i18n="privacy.eyebrow">Privacy model</p>
+        <h1 data-i18n="privacy.title">Privacy is an architectural choice.</h1>
+        <p data-i18n="privacy.intro">Secure Tools is designed to process file contents locally in your browser. This page describes the current technical model, not a promise about unfinished features.</p>
+        <h2 data-i18n="privacy.localTitle">Local file processing</h2>
+        <p data-i18n="privacy.localBody">Supported tools read and transform files in browser memory. File contents are not sent to a Secure Tools server.</p>
+        <h2 data-i18n="privacy.collectionTitle">No accounts or analytics</h2>
+        <p data-i18n="privacy.collectionBody">The web hub has no user accounts, analytics, behavioral tracking, advertising, or tracking pixels.</p>
+        <h2 data-i18n="privacy.storageTitle">Preference storage</h2>
+        <p data-i18n="privacy.storageBody">localStorage is used only to remember your language and theme selections on this device.</p>
+        <h2 data-i18n="privacy.linksTitle">External links</h2>
+        <p data-i18n="privacy.linksBody">Following an external link, such as GitHub, leaves Secure Tools and is governed by that service's own policies.</p>
+      </article>
+    </main>
+    <footer class="site-footer"><div class="container footer-inner"><div><a class="brand" href="../"><span class="brand-mark" aria-hidden="true"></span><span>Secure Tools</span></a><p data-i18n="common.footerStatement">Your files stay on your device.</p></div><nav aria-label="Footer navigation"><a href="../#tools" data-i18n="common.nav.tools">Tools</a><a href="./" data-i18n="common.nav.privacy">Privacy</a><a href="../about/" data-i18n="common.nav.about">About</a><a href="https://github.com/maruson08/Secure_Tools" data-repository-link target="_blank" rel="noreferrer" data-i18n="common.nav.source">Source</a></nav></div></footer>
+    <script type="module" src="../js/main.js"></script>
+  </body>
+</html>
