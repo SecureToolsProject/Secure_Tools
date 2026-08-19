@@ -17,8 +17,10 @@ const resolveTheme = (theme, mediaQuery) => (
 
 const applyTheme = (theme, mediaQuery) => {
   const root = document.documentElement;
+  const resolvedTheme = resolveTheme(theme, mediaQuery);
   root.dataset.theme = theme;
-  root.dataset.resolvedTheme = resolveTheme(theme, mediaQuery);
+  root.dataset.resolvedTheme = resolvedTheme;
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", resolvedTheme === "dark" ? "#111210" : "#f7f7f5");
   document.querySelectorAll("[data-theme-select]").forEach((select) => {
     select.value = theme;
   });

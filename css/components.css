@@ -38,13 +38,7 @@
 .text-link:hover { color: var(--accent); text-decoration-color: currentColor; }
 .icon { width: 1.1rem; height: 1.1rem; flex: 0 0 auto; }
 
-.site-header {
-  position: relative;
-  z-index: 10;
-  border-bottom: 1px solid var(--border);
-  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
-}
-
+.site-header { position: relative; z-index: 10; border-bottom: 1px solid var(--border); background: color-mix(in srgb, var(--bg-primary) 92%, transparent); }
 .header-inner { display: flex; min-height: 4.5rem; align-items: center; gap: var(--space-6); }
 .brand { display: inline-flex; align-items: center; gap: var(--space-3); font-weight: 780; letter-spacing: -0.025em; text-decoration: none; white-space: nowrap; }
 .brand-mark { width: 0.75rem; height: 0.75rem; border: 3px solid var(--accent); border-radius: 50%; box-shadow: 0 0 0 4px var(--accent-soft); }
@@ -65,7 +59,9 @@
 }
 
 @media (max-width: 38rem) {
-  .header-controls { width: 100%; margin-left: 0; justify-content: space-between; }
+  .header-controls { width: 100%; align-items: stretch; flex-direction: column; margin-left: 0; }
+  .control-label { width: 100%; justify-content: space-between; }
+  .control { width: 8rem; }
   .site-nav { justify-content: space-between; gap: var(--space-3); }
   .site-nav a { font-size: 0.8rem; }
   .footer-inner { flex-direction: column; }

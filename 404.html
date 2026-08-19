@@ -16,6 +16,14 @@
         document.documentElement.dataset.resolvedTheme = dark ? "dark" : "light";
       })();
     </script>
+    <script>
+      (() => {
+        const base = location.hostname.endsWith(".github.io") ? "/Secure_Tools/" : "/";
+        const baseElement = document.createElement("base");
+        baseElement.href = base;
+        document.head.append(baseElement);
+      })();
+    </script>
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/components.css">
     <link rel="stylesheet" href="./css/pages.css">
