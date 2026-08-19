@@ -1,4 +1,4 @@
-import { t } from "../../js/i18n.js";
+import { t } from "../../../js/i18n.js";
 import { ACCEPTED_IMAGE_TYPES, isSupportedImage } from "./image.js";
 import { createPdfBlob, sanitizeFilename } from "./pdf.js";
 

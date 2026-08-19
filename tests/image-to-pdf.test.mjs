@@ -3,13 +3,13 @@ import { createRequire } from "node:module";
 import { File } from "node:buffer";
 import fs from "node:fs";
 
-import { isSupportedImage } from "../tools/image-to-pdf/image.js";
+import { isSupportedImage } from "../tools/pdf/images-to-pdf/image.js";
 import {
   createPdfBlob,
   getImagePlacement,
   getPageDimensions,
   sanitizeFilename,
-} from "../tools/image-to-pdf/pdf.js";
+} from "../tools/pdf/images-to-pdf/pdf.js";
 import { en } from "../js/locales/en.js";
 import { ko } from "../js/locales/ko.js";
 
@@ -107,7 +107,7 @@ function testVendoredLibrary() {
 }
 
 function testTranslations() {
-  const html = fs.readFileSync(new URL("../tools/image-to-pdf/index.html", import.meta.url), "utf8");
+  const html = fs.readFileSync(new URL("../tools/pdf/images-to-pdf/index.html", import.meta.url), "utf8");
   const keys = [...html.matchAll(/data-i18n(?:-aria-label)?="([^"]+)"/g)].map((match) => match[1]);
   const lookup = (dictionary, key) => key.split(".").reduce((value, part) => value?.[part], dictionary);
   for (const dictionary of [en, ko]) {
