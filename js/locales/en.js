@@ -25,7 +25,7 @@ export const en = {
     imagesToPdf: "Images to PDF", mergePdf: "Merge PDF", splitPdf: "Split PDF", imageConverter: "Image Converter",
     imageCompressor: "Image Compressor", imageResizer: "Image Resizer", metadataInspector: "Metadata Inspector", metadataCleaner: "Metadata Cleaner",
     available: "Available", comingSoon: "Coming soon",
-    availabilityNote: "The available prototype is kept separate while the production tool is prepared for a later sprint.",
+    availabilityNote: "Images to PDF is available now. The remaining tools are still in development.",
   },
   why: {
     eyebrow: "Why Secure Tools", title: "A simpler privacy model.",

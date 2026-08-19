@@ -18,7 +18,7 @@ export const ko = {
   tools: {
     eyebrow: "도구", title: "쓸모에 집중하고, 상태는 정직하게.", description: "로컬에서 작동하는 핵심 파일 도구 모음입니다. 사용할 수 있는 도구와 개발 중인 도구를 명확히 구분합니다.",
     categories: { pdf: "PDF", image: "이미지", privacy: "개인정보 보호" }, imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
-    available: "사용 가능", comingSoon: "준비 중", availabilityNote: "현재 프로토타입은 분리되어 있으며, 정식 도구는 이후 스프린트에서 준비됩니다.",
+    available: "사용 가능", comingSoon: "준비 중", availabilityNote: "이미지를 PDF로 도구를 사용할 수 있습니다. 나머지 도구는 아직 개발 중입니다.",
   },
   why: {
     eyebrow: "Secure Tools를 선택하는 이유", title: "더 단순한 개인정보 보호 모델.", description: "Secure Tools는 핵심 파일 처리 과정에서 서버를 제외해 신뢰해야 할 대상을 줄입니다.",
