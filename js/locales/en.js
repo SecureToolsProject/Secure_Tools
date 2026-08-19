@@ -69,7 +69,7 @@ export const en = {
     actions: { generate: "Generate and save PDF", add: "Add more images", clear: "Clear all" },
     status: {
       added: "Added {count} image(s).", addedWithRejected: "Added {added} supported image(s); skipped {rejected} unsupported file(s).", removed: "Image removed.", reordered: "Image order updated.", cleared: "Image list cleared.",
-      generating: "Generating the PDF locally…", progress: "Processing page {completed} of {total}…", saved: "Saved a {count}-page PDF.", downloaded: "Downloaded {name}.", savedAndCleared: "PDF saved and image references cleared.", saveCancelled: "Save cancelled. No file was written.",
+      generating: "Generating the PDF locally…", progress: "Processing page {completed} of {total}…", progressLabel: "PDF generation progress", saved: "Saved a {count}-page PDF.", downloaded: "Downloaded {name}.", savedAndCleared: "PDF saved and image references cleared.", saveCancelled: "Save cancelled. No file was written.",
     },
     errors: {
       unsupported: "Choose JPEG, PNG, or WebP image files.", noFiles: "Add at least one image before generating a PDF.", decode: "Could not read {name}. The file may be damaged or unsupported by this browser.",

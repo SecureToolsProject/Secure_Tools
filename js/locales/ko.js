@@ -49,7 +49,7 @@ export const ko = {
     actions: { generate: "PDF 생성 및 저장", add: "이미지 더 추가", clear: "전체 비우기" },
     status: {
       added: "이미지 {count}개를 추가했습니다.", addedWithRejected: "지원되는 이미지 {added}개를 추가하고 지원하지 않는 파일 {rejected}개를 건너뛰었습니다.", removed: "이미지를 제거했습니다.", reordered: "이미지 순서를 변경했습니다.", cleared: "이미지 목록을 비웠습니다.",
-      generating: "기기에서 PDF를 생성하고 있습니다…", progress: "{total}페이지 중 {completed}페이지 처리 중…", saved: "{count}페이지 PDF를 저장했습니다.", downloaded: "{name} 파일을 다운로드했습니다.", savedAndCleared: "PDF를 저장하고 이미지 참조를 정리했습니다.", saveCancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
+      generating: "기기에서 PDF를 생성하고 있습니다…", progress: "{total}페이지 중 {completed}페이지 처리 중…", progressLabel: "PDF 생성 진행률", saved: "{count}페이지 PDF를 저장했습니다.", downloaded: "{name} 파일을 다운로드했습니다.", savedAndCleared: "PDF를 저장하고 이미지 참조를 정리했습니다.", saveCancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
     },
     errors: {
       unsupported: "JPEG, PNG 또는 WebP 이미지 파일을 선택하세요.", noFiles: "PDF를 생성하기 전에 이미지를 하나 이상 추가하세요.", decode: "{name} 파일을 읽을 수 없습니다. 파일이 손상되었거나 이 브라우저에서 지원하지 않을 수 있습니다.",

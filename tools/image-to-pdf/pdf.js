@@ -62,7 +62,14 @@ export function getImagePlacement(image, pageWidth, pageHeight, margin, fillPage
   };
 }
 
-export async function createPdfBlob({ files, options, JsPDF, onProgress = () => {} }) {
+export async function createPdfBlob({
+  files,
+  options,
+  JsPDF,
+  onProgress = () => {},
+  decode = decodeImage,
+  convert = imageToJpegData,
+}) {
   if (!files.length) {
     const error = new Error("NO_FILES");
     error.code = "NO_FILES";
@@ -78,7 +85,7 @@ export async function createPdfBlob({ files, options, JsPDF, onProgress = () => 
   for (let index = 0; index < files.length; index += 1) {
     let image;
     try {
-      image = await decodeImage(files[index]);
+      image = await decode(files[index]);
       const [pageWidth, pageHeight] = getPageDimensions(
         options.pageSize,
         options.orientation,
@@ -97,7 +104,7 @@ export async function createPdfBlob({ files, options, JsPDF, onProgress = () => 
         pdf.addPage([pageWidth, pageHeight], pageOrientation);
       }
 
-      const jpegData = imageToJpegData(image, Number(options.quality) || 0.92);
+      const jpegData = convert(image, Number(options.quality) || 0.92);
       const placement = getImagePlacement(
         image,
         pageWidth,
