@@ -21,9 +21,12 @@ export const ko = {
     primary: "도구 살펴보기", secondary: "개인정보 보호 확인", trust: "로컬 처리 · 오픈 소스 · 추적 없음", proofLabel: "기기 밖으로 나가는 것", proofValue: "없음", proofNote: "핵심 도구는 브라우저 메모리에서 파일 내용을 처리합니다.",
   },
   tools: {
-    eyebrow: "도구", title: "쓸모에 집중하고, 상태는 정직하게.", description: "로컬에서 작동하는 핵심 파일 도구 모음입니다. 사용할 수 있는 도구와 개발 중인 도구를 명확히 구분합니다.",
-    categories: { pdf: "PDF", image: "이미지", privacy: "개인정보 보호" }, imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
-    available: "사용 가능", comingSoon: "준비 중", availabilityNote: "이미지를 PDF로 도구를 사용할 수 있습니다. 나머지 도구는 아직 개발 중입니다.",
+    eyebrow: "도구", title: "작업할 파일 종류부터 선택하세요.", description: "필요한 카테고리를 둘러본 뒤 도구를 선택하세요. 사용 가능 여부를 항상 명확히 표시합니다.",
+    categories: { pdf: "PDF", image: "이미지", privacy: "개인정보 보호", scan: "스캔 및 OCR", media: "미디어" },
+    categoryDescriptions: { pdf: "문서를 만들고 합치고 정리합니다.", image: "일상 이미지를 변환하고 준비합니다.", privacy: "숨겨진 파일 정보를 확인하고 정리합니다.", scan: "스캔을 유용한 문서로 바꿉니다.", media: "오디오와 비디오를 로컬에서 다룹니다." },
+    browseCategory: "카테고리 보기 →", availableEyebrow: "바로 사용", availableTitle: "지금 사용 가능", availableDescription: "파일을 기기에서 처리하는 완성된 도구입니다.",
+    imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
+    available: "사용 가능", comingSoon: "준비 중",
   },
   categories: {
     eyebrow: "도구 카테고리",
