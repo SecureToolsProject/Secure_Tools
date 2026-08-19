@@ -1,1 +1,7 @@
-/* Page-specific styles are added in the next stage. */
+.page-shell { display: flex; min-height: 100vh; flex-direction: column; }
+.page-main { flex: 1; }
+.prose { max-width: var(--reading-width); }
+.prose h1 { margin-bottom: var(--space-5); font-size: clamp(2.5rem, 7vw, 4.75rem); }
+.prose h2 { margin-top: var(--space-7); margin-bottom: var(--space-3); font-size: 1.5rem; }
+.prose p, .prose li { color: var(--text-secondary); }
+.prose a { color: var(--accent); font-weight: 700; }

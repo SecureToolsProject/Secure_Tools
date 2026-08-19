@@ -1,1 +1,38 @@
-/* Shared component styles are added in the next stage. */
+.button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.65rem 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.button--primary { background: var(--text-primary); color: var(--bg-primary); }
+.button--primary:hover { background: var(--accent-strong); color: var(--text-inverse); }
+.button--secondary { border-color: var(--border); background: var(--bg-secondary); }
+.button--secondary:hover { border-color: var(--border-strong); background: var(--bg-subtle); }
+
+.control {
+  min-height: 2.5rem;
+  padding: 0.4rem 2rem 0.4rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-secondary);
+  transition: border-color var(--transition-fast), background-color var(--transition-theme);
+}
+
+.control:hover { border-color: var(--border-strong); }
+.control-label { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--text-secondary); font-size: 0.8rem; font-weight: 650; }
+.surface { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-secondary); box-shadow: var(--shadow-sm); }
+.status { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--status-muted); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.status::before { width: 0.45rem; height: 0.45rem; border-radius: 50%; background: currentColor; content: ""; }
+.status--available { color: var(--accent); }
+.text-link { font-weight: 700; text-decoration-color: var(--border-strong); transition: color var(--transition-fast), text-decoration-color var(--transition-fast); }
+.text-link:hover { color: var(--accent); text-decoration-color: currentColor; }
+.icon { width: 1.1rem; height: 1.1rem; flex: 0 0 auto; }
