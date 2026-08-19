@@ -3,15 +3,44 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Private file utilities that run in your browser.">
     <title>Secure Tools</title>
+    <script>
+      (() => {
+        let preference = "system";
+        try { preference = localStorage.getItem("secure-tools-theme") || "system"; } catch {}
+        const dark = preference === "dark" || (preference === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = preference;
+        document.documentElement.dataset.resolvedTheme = dark ? "dark" : "light";
+      })();
+    </script>
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/components.css">
     <link rel="stylesheet" href="./css/pages.css">
   </head>
-  <body>
-    <main>
-      <h1>Secure Tools</h1>
-      <p>Private file utilities that run in your browser.</p>
+  <body data-page="home">
+    <a class="skip-link" href="#main" data-i18n="common.skip">Skip to main content</a>
+    <main id="main" class="container section">
+      <p class="eyebrow" data-i18n="hero.eyebrow">Local-first file utilities</p>
+      <h1 data-i18n="hero.title">Private tools for everyday files.</h1>
+      <p class="muted reading-width" data-i18n="hero.description">Convert, inspect, and process files directly on your device. No uploads. No accounts. No tracking.</p>
+      <div>
+        <label class="control-label">
+          <span data-i18n="common.language">Language</span>
+          <select class="control" data-language-select>
+            <option value="en">English</option>
+            <option value="ko">한국어</option>
+          </select>
+        </label>
+        <label class="control-label">
+          <span data-i18n="common.theme">Theme</span>
+          <select class="control" data-theme-select>
+            <option value="system" data-i18n="common.themes.system">System</option>
+            <option value="light" data-i18n="common.themes.light">Light</option>
+            <option value="dark" data-i18n="common.themes.dark">Dark</option>
+          </select>
+        </label>
+      </div>
     </main>
     <script type="module" src="./js/main.js"></script>
   </body>
