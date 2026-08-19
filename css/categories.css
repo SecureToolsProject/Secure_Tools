@@ -1,0 +1,23 @@
+.category-main { padding-block: clamp(3.5rem, 8vw, 7rem); }
+.category-intro { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.65fr); align-items: end; gap: var(--space-7); margin-bottom: var(--space-7); }
+.category-intro h1 { max-width: 12ch; margin-bottom: var(--space-3); }
+.category-intro > div > p:last-child, .category-intro > p { max-width: 38rem; margin-bottom: 0; color: var(--text-secondary); }
+.category-nav { border-bottom: 1px solid var(--border); background: var(--bg-subtle); }
+.category-nav__inner { display: flex; gap: var(--space-2); padding-block: var(--space-3); overflow-x: auto; scrollbar-width: thin; }
+.category-nav a { flex: 0 0 auto; padding: 0.45rem 0.75rem; border-radius: var(--radius-sm); color: var(--text-secondary); font-size: 0.82rem; font-weight: 700; text-decoration: none; }
+.category-nav a:hover, .category-nav a[aria-current="page"] { background: var(--bg-secondary); color: var(--text-primary); }
+.category-tool-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+.category-tool { display: flex; min-height: 12rem; flex-direction: column; align-items: flex-start; padding: var(--space-5); color: inherit; text-decoration: none; }
+.category-tool__top { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: auto; }
+.category-tool h2 { margin: var(--space-5) 0 var(--space-2); font-size: clamp(1.3rem, 3vw, 1.75rem); }
+.category-tool p { margin: 0; color: var(--text-secondary); }
+a.category-tool { transition: border-color var(--transition-fast), transform var(--transition-fast); }
+a.category-tool:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.category-tool__arrow { color: var(--accent); font-size: 1.35rem; }
+.category-note { max-width: 42rem; margin-top: var(--space-6); color: var(--text-secondary); font-size: 0.9rem; }
+@media (max-width: 46rem) {
+  .category-intro, .category-tool-list { grid-template-columns: 1fr; }
+  .category-intro { gap: var(--space-4); }
+  .category-tool { min-height: 10rem; }
+}
+@media (prefers-reduced-motion: reduce) { a.category-tool:hover { transform: none; } }

@@ -5,6 +5,11 @@ export const en = {
     about: { title: "About — Secure Tools", description: "Why Secure Tools builds open, local-first file utilities that can be inspected instead of simply trusted." },
     notFound: { title: "Page not found — Secure Tools", description: "The requested Secure Tools page could not be found." },
     imageToPdf: { title: "Images to PDF — Secure Tools", description: "Combine JPEG, PNG, and WebP images into a PDF entirely in your browser." },
+    pdfCategory: { title: "PDF tools — Secure Tools", description: "Create and organize PDF documents locally in your browser." },
+    imageCategory: { title: "Image tools — Secure Tools", description: "Private image tools designed to run locally in your browser." },
+    privacyCategory: { title: "Privacy tools — Secure Tools", description: "Inspect and remove hidden file details without uploading the source file." },
+    scanCategory: { title: "Scan and OCR tools — Secure Tools", description: "Local scanning and text-recognition tools for private documents." },
+    mediaCategory: { title: "Media tools — Secure Tools", description: "Local audio and video utilities from Secure Tools." },
   },
   common: {
     skip: "Skip to main content", brandTagline: "Private utilities, processed on your device",
@@ -26,6 +31,33 @@ export const en = {
     imageCompressor: "Image Compressor", imageResizer: "Image Resizer", metadataInspector: "Metadata Inspector", metadataCleaner: "Metadata Cleaner",
     available: "Available", comingSoon: "Coming soon",
     availabilityNote: "Images to PDF is available now. The remaining tools are still in development.",
+  },
+  categories: {
+    eyebrow: "Tool category",
+    nav: { pdf: "PDF", image: "Image", privacy: "Privacy", scan: "Scan & OCR", media: "Media" },
+    localNote: "Available tools process file contents in browser memory. Planned items are clearly marked.",
+    plannedNote: "This category is planned. No unavailable item is presented as working.",
+    pdf: {
+      title: "PDF tools", description: "Create and organize PDF documents locally, without uploading private files.",
+      imagesToPdf: "Arrange JPEG, PNG, and WebP images into one PDF.", merge: "Combine PDF files in the order you choose.",
+      split: "Extract selected pages into a new document.", rotateTitle: "Rotate PDF", rotate: "Correct page orientation without changing document quality.",
+    },
+    image: {
+      title: "Image tools", description: "Prepare everyday images privately in your browser.",
+      convert: "Convert common image formats locally.", compress: "Reduce file size with clear quality controls.", resize: "Resize images to exact pixel dimensions.",
+    },
+    privacy: {
+      title: "Privacy tools", description: "Inspect and remove hidden file details without sharing the source file.",
+      inspect: "See what identifying information a file contains.", clean: "Create a copy with supported metadata removed.",
+    },
+    scan: {
+      title: "Scan & OCR tools", description: "Turn scans into useful documents while keeping source material on your device.",
+      ocrTitle: "Image to text", ocr: "Recognize text from an image locally.", documentTitle: "Document scanner", document: "Crop and clean photographed documents.",
+    },
+    media: {
+      title: "Media tools", description: "Small audio and video utilities designed for local processing.",
+      audioTitle: "Audio converter", audio: "Convert common audio formats on your device.", videoTitle: "Video trim", video: "Trim a clip without sending it to a server.",
+    },
   },
   why: {
     eyebrow: "Why Secure Tools", title: "A simpler privacy model.",

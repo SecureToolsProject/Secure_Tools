@@ -5,6 +5,11 @@ export const ko = {
     about: { title: "소개 — Secure Tools", description: "Secure Tools가 단순히 믿는 대신 직접 검증할 수 있는 오픈 소스 로컬 우선 파일 도구를 만드는 이유입니다." },
     notFound: { title: "페이지를 찾을 수 없음 — Secure Tools", description: "요청한 Secure Tools 페이지를 찾을 수 없습니다." },
     imageToPdf: { title: "이미지를 PDF로 — Secure Tools", description: "JPEG, PNG, WebP 이미지를 브라우저에서만 처리해 하나의 PDF로 만드세요." },
+    pdfCategory: { title: "PDF 도구 — Secure Tools", description: "브라우저에서 PDF 문서를 로컬로 만들고 정리하세요." },
+    imageCategory: { title: "이미지 도구 — Secure Tools", description: "브라우저에서 로컬로 작동하도록 설계된 프라이빗 이미지 도구입니다." },
+    privacyCategory: { title: "개인정보 보호 도구 — Secure Tools", description: "원본 파일을 업로드하지 않고 숨겨진 파일 정보를 확인하고 제거하세요." },
+    scanCategory: { title: "스캔 및 OCR 도구 — Secure Tools", description: "개인 문서를 위한 로컬 스캔 및 문자 인식 도구입니다." },
+    mediaCategory: { title: "미디어 도구 — Secure Tools", description: "Secure Tools의 로컬 오디오 및 비디오 유틸리티입니다." },
   },
   common: {
     skip: "본문으로 건너뛰기", brandTagline: "기기에서 처리되는 프라이빗 유틸리티",
@@ -19,6 +24,33 @@ export const ko = {
     eyebrow: "도구", title: "쓸모에 집중하고, 상태는 정직하게.", description: "로컬에서 작동하는 핵심 파일 도구 모음입니다. 사용할 수 있는 도구와 개발 중인 도구를 명확히 구분합니다.",
     categories: { pdf: "PDF", image: "이미지", privacy: "개인정보 보호" }, imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
     available: "사용 가능", comingSoon: "준비 중", availabilityNote: "이미지를 PDF로 도구를 사용할 수 있습니다. 나머지 도구는 아직 개발 중입니다.",
+  },
+  categories: {
+    eyebrow: "도구 카테고리",
+    nav: { pdf: "PDF", image: "이미지", privacy: "개인정보 보호", scan: "스캔 및 OCR", media: "미디어" },
+    localNote: "사용 가능한 도구는 브라우저 메모리에서 파일 내용을 처리합니다. 예정된 항목은 명확히 표시됩니다.",
+    plannedNote: "이 카테고리는 준비 중입니다. 사용할 수 없는 항목을 작동하는 것처럼 표시하지 않습니다.",
+    pdf: {
+      title: "PDF 도구", description: "개인 파일을 업로드하지 않고 PDF 문서를 로컬에서 만들고 정리하세요.",
+      imagesToPdf: "JPEG, PNG, WebP 이미지를 원하는 순서로 하나의 PDF로 만듭니다.", merge: "선택한 순서대로 PDF 파일을 합칩니다.",
+      split: "선택한 페이지를 새 문서로 추출합니다.", rotateTitle: "PDF 회전", rotate: "문서 품질을 바꾸지 않고 페이지 방향을 바로잡습니다.",
+    },
+    image: {
+      title: "이미지 도구", description: "일상 이미지 파일을 브라우저에서 비공개로 준비하세요.",
+      convert: "일반 이미지 형식을 로컬에서 변환합니다.", compress: "명확한 품질 설정으로 파일 크기를 줄입니다.", resize: "이미지를 정확한 픽셀 크기로 조절합니다.",
+    },
+    privacy: {
+      title: "개인정보 보호 도구", description: "원본 파일을 공유하지 않고 숨겨진 정보를 확인하고 제거하세요.",
+      inspect: "파일에 포함된 식별 정보를 확인합니다.", clean: "지원되는 메타데이터를 제거한 사본을 만듭니다.",
+    },
+    scan: {
+      title: "스캔 및 OCR 도구", description: "원본 자료를 기기에 유지하면서 스캔을 유용한 문서로 바꾸세요.",
+      ocrTitle: "이미지를 텍스트로", ocr: "이미지의 글자를 로컬에서 인식합니다.", documentTitle: "문서 스캐너", document: "촬영한 문서를 자르고 깔끔하게 보정합니다.",
+    },
+    media: {
+      title: "미디어 도구", description: "로컬 처리를 위해 설계된 작은 오디오 및 비디오 도구입니다.",
+      audioTitle: "오디오 변환기", audio: "일반 오디오 형식을 기기에서 변환합니다.", videoTitle: "비디오 자르기", video: "서버로 보내지 않고 영상 구간을 자릅니다.",
+    },
   },
   why: {
     eyebrow: "Secure Tools를 선택하는 이유", title: "더 단순한 개인정보 보호 모델.", description: "Secure Tools는 핵심 파일 처리 과정에서 서버를 제외해 신뢰해야 할 대상을 줄입니다.",
