@@ -3,8 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Private file utilities that run in your browser.">
-    <title>Secure Tools</title>
+    <meta name="description" content="Convert, inspect, and process files privately in your browser. No uploads, accounts, analytics, or tracking.">
+    <meta name="theme-color" content="#f7f7f5">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Secure Tools — Private tools for everyday files">
+    <meta property="og:description" content="Convert, inspect, and process files privately in your browser. No uploads, accounts, analytics, or tracking.">
+    <meta property="og:site_name" content="Secure Tools">
+    <title>Secure Tools — Private tools for everyday files</title>
     <script>
       (() => {
         let preference = "system";
@@ -18,30 +23,160 @@
     <link rel="stylesheet" href="./css/components.css">
     <link rel="stylesheet" href="./css/pages.css">
   </head>
-  <body data-page="home">
+  <body class="page-shell" data-page="home">
     <a class="skip-link" href="#main" data-i18n="common.skip">Skip to main content</a>
-    <main id="main" class="container section">
-      <p class="eyebrow" data-i18n="hero.eyebrow">Local-first file utilities</p>
-      <h1 data-i18n="hero.title">Private tools for everyday files.</h1>
-      <p class="muted reading-width" data-i18n="hero.description">Convert, inspect, and process files directly on your device. No uploads. No accounts. No tracking.</p>
-      <div>
-        <label class="control-label">
-          <span data-i18n="common.language">Language</span>
-          <select class="control" data-language-select>
-            <option value="en">English</option>
-            <option value="ko">한국어</option>
-          </select>
-        </label>
-        <label class="control-label">
-          <span data-i18n="common.theme">Theme</span>
-          <select class="control" data-theme-select>
-            <option value="system" data-i18n="common.themes.system">System</option>
-            <option value="light" data-i18n="common.themes.light">Light</option>
-            <option value="dark" data-i18n="common.themes.dark">Dark</option>
-          </select>
-        </label>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="./" aria-label="Secure Tools home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Secure Tools</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="#tools" data-i18n="common.nav.tools">Tools</a>
+          <a href="./privacy/" data-i18n="common.nav.privacy">Privacy</a>
+          <a href="./about/" data-i18n="common.nav.about">About</a>
+          <a href="https://github.com/maruson08/Secure_Tools" data-repository-link target="_blank" rel="noreferrer" data-i18n="common.nav.source">Source</a>
+        </nav>
+        <div class="header-controls">
+          <label class="control-label">
+            <span data-i18n="common.language">Language</span>
+            <select class="control" data-language-select>
+              <option value="en">English</option>
+              <option value="ko">한국어</option>
+            </select>
+          </label>
+          <label class="control-label">
+            <span data-i18n="common.theme">Theme</span>
+            <select class="control" data-theme-select>
+              <option value="system" data-i18n="common.themes.system">System</option>
+              <option value="light" data-i18n="common.themes.light">Light</option>
+              <option value="dark" data-i18n="common.themes.dark">Dark</option>
+            </select>
+          </label>
+        </div>
       </div>
+    </header>
+
+    <main id="main" class="page-main">
+      <section class="hero container">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="hero.eyebrow">Local-first file utilities</p>
+          <h1 data-i18n="hero.title">Private tools for everyday files.</h1>
+          <p class="hero-description" data-i18n="hero.description">Convert, inspect, and process files directly on your device. No uploads. No accounts. No tracking.</p>
+          <div class="hero-actions">
+            <a class="button button--primary" href="#tools" data-i18n="hero.primary">Explore tools</a>
+            <a class="button button--secondary" href="#verify" data-i18n="hero.secondary">Verify privacy</a>
+          </div>
+          <p class="trust-line" data-i18n="hero.trust">Local processing · Open source · No tracking</p>
+        </div>
+        <aside class="hero-proof surface" aria-label="Local processing summary">
+          <span class="proof-signal" aria-hidden="true"></span>
+          <p class="proof-label" data-i18n="hero.proofLabel">What leaves your device</p>
+          <p class="proof-value" data-i18n="hero.proofValue">Nothing</p>
+          <p class="proof-note" data-i18n="hero.proofNote">Core tools process file contents in browser memory.</p>
+        </aside>
+      </section>
+
+      <section id="tools" class="section section--bordered">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="tools.eyebrow">Tools</p>
+              <h2 data-i18n="tools.title">Useful by design. Honest about status.</h2>
+            </div>
+            <p data-i18n="tools.description">A focused collection of local file utilities. Available tools are clearly separated from what is still being built.</p>
+          </div>
+          <div class="tool-directory surface">
+            <section class="tool-group" aria-labelledby="pdf-tools">
+              <h3 id="pdf-tools" data-i18n="tools.categories.pdf">PDF</h3>
+              <ul class="tool-list">
+                <li><a class="tool-row" href="./image2pdf_proto.html"><span data-i18n="tools.imagesToPdf">Images to PDF</span><span class="status status--available" data-i18n="tools.available">Available</span></a></li>
+                <li><div class="tool-row"><span data-i18n="tools.mergePdf">Merge PDF</span><span class="status" data-i18n="tools.comingSoon">Coming soon</span></div></li>
+                <li><div class="tool-row"><span data-i18n="tools.splitPdf">Split PDF</span><span class="status" data-i18n="tools.comingSoon">Coming soon</span></div></li>
+              </ul>
+            </section>
+            <section class="tool-group" aria-labelledby="image-tools">
+              <h3 id="image-tools" data-i18n="tools.categories.image">Image</h3>
+              <ul class="tool-list">
+                <li><div class="tool-row"><span data-i18n="tools.imageConverter">Image Converter</span><span class="status" data-i18n="tools.comingSoon">Coming soon</span></div></li>
+                <li><div class="tool-row"><span data-i18n="tools.imageCompressor">Image Compressor</span><span class="status" data-i18n="tools.comingSoon">Coming soon</span></div></li>
+                <li><div class="tool-row"><span data-i18n="tools.imageResizer">Image Resizer</span><span class="status" data-i18n="tools.comingSoon">Coming soon</span></div></li>
+              </ul>
+            </section>
+            <section class="tool-group" aria-labelledby="privacy-tools">
+              <h3 id="privacy-tools" data-i18n="tools.categories.privacy">Privacy</h3>
+              <ul class="tool-list">
+                <li><div class="tool-row"><span data-i18n="tools.metadataInspector">Metadata Inspector</span><span class="status" data-i18n="tools.comingSoon">Coming soon</span></div></li>
+                <li><div class="tool-row"><span data-i18n="tools.metadataCleaner">Metadata Cleaner</span><span class="status" data-i18n="tools.comingSoon">Coming soon</span></div></li>
+              </ul>
+            </section>
+          </div>
+          <p class="directory-note muted" data-i18n="tools.availabilityNote">The available prototype is kept separate while the production tool is prepared for a later sprint.</p>
+        </div>
+      </section>
+
+      <section class="section section--bordered">
+        <div class="container principles-layout">
+          <div class="section-intro">
+            <p class="eyebrow" data-i18n="why.eyebrow">Why Secure Tools</p>
+            <h2 data-i18n="why.title">A simpler privacy model.</h2>
+            <p class="muted" data-i18n="why.description">Secure Tools minimizes what must be trusted by removing the server from core file-processing workflows.</p>
+          </div>
+          <div class="principle-list">
+            <article><span>01</span><div><h3 data-i18n="why.local.title">Local processing</h3><p data-i18n="why.local.body">Files are processed on your device, inside the browser.</p></div></article>
+            <article><span>02</span><div><h3 data-i18n="why.accounts.title">No accounts</h3><p data-i18n="why.accounts.body">Basic utilities work without registration or personal profiles.</p></div></article>
+            <article><span>03</span><div><h3 data-i18n="why.tracking.title">No tracking</h3><p data-i18n="why.tracking.body">There are no analytics, behavioral trackers, or advertising pixels.</p></div></article>
+            <article><span>04</span><div><h3 data-i18n="why.network.title">Minimal network dependence</h3><p data-i18n="why.network.body">Core processing does not depend on external runtime services.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="verify" class="section verify-section">
+        <div class="container verify-layout">
+          <div>
+            <p class="eyebrow" data-i18n="verify.eyebrow">Verify privacy</p>
+            <h2 data-i18n="verify.title">Do not take our word for it.</h2>
+            <p class="verify-description" data-i18n="verify.description">You can inspect the network activity yourself and confirm that a file never leaves your device.</p>
+            <div class="verify-links">
+              <a class="text-link" href="https://github.com/maruson08/Secure_Tools" data-repository-link target="_blank" rel="noreferrer" data-i18n="verify.source">View source</a>
+              <a class="text-link" href="./privacy/" data-i18n="verify.architecture">Privacy architecture</a>
+            </div>
+          </div>
+          <ol class="verify-steps">
+            <li><span data-i18n="verify.step1">Open your browser's Developer Tools.</span></li>
+            <li><span data-i18n="verify.step2">Select the Network tab.</span></li>
+            <li><span data-i18n="verify.step3">Run a Secure Tool with a sample file.</span></li>
+            <li><span data-i18n="verify.step4">Confirm that the file is never uploaded.</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section section--bordered">
+        <div class="container open-source-layout">
+          <div>
+            <p class="eyebrow" data-i18n="openSource.eyebrow">Open source</p>
+            <h2 data-i18n="openSource.title">Open by design.</h2>
+          </div>
+          <div>
+            <p data-i18n="openSource.description">Secure Tools is built so its privacy claims can be inspected rather than simply trusted.</p>
+            <a class="button button--secondary" href="https://github.com/maruson08/Secure_Tools" data-repository-link target="_blank" rel="noreferrer" data-i18n="openSource.action">Browse the source</a>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div><a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span><span>Secure Tools</span></a><p data-i18n="common.footerStatement">Your files stay on your device.</p></div>
+        <nav aria-label="Footer navigation">
+          <a href="#tools" data-i18n="common.nav.tools">Tools</a>
+          <a href="./privacy/" data-i18n="common.nav.privacy">Privacy</a>
+          <a href="./about/" data-i18n="common.nav.about">About</a>
+          <a href="https://github.com/maruson08/Secure_Tools" data-repository-link target="_blank" rel="noreferrer" data-i18n="common.nav.source">Source</a>
+        </nav>
+      </div>
+    </footer>
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>

@@ -5,3 +5,65 @@
 .prose h2 { margin-top: var(--space-7); margin-bottom: var(--space-3); font-size: 1.5rem; }
 .prose p, .prose li { color: var(--text-secondary); }
 .prose a { color: var(--accent); font-weight: 700; }
+
+.hero { display: grid; min-height: min(48rem, calc(100vh - 4.5rem)); grid-template-columns: minmax(0, 1.55fr) minmax(17rem, 0.65fr); align-items: center; gap: clamp(3rem, 8vw, 8rem); padding-block: clamp(5rem, 11vw, 9rem); }
+.hero h1 { max-width: 12ch; margin-bottom: var(--space-5); }
+.hero-description { max-width: 41rem; margin-bottom: var(--space-6); color: var(--text-secondary); font-size: clamp(1.05rem, 2vw, 1.25rem); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.trust-line { margin: var(--space-5) 0 0; color: var(--text-secondary); font-size: 0.85rem; font-weight: 650; }
+.hero-proof { position: relative; padding: var(--space-6); overflow: hidden; }
+.proof-signal { display: block; width: 0.8rem; height: 0.8rem; margin-bottom: var(--space-7); border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0.55rem var(--accent-soft); }
+.proof-label { margin-bottom: var(--space-2); color: var(--text-secondary); font-size: 0.75rem; font-weight: 750; letter-spacing: 0.08em; text-transform: uppercase; }
+.proof-value { margin-bottom: var(--space-4); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 780; letter-spacing: -0.06em; line-height: 1; }
+.proof-note { margin: 0; color: var(--text-secondary); font-size: 0.9rem; }
+
+.section-heading { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(17rem, 0.65fr); gap: var(--space-7); align-items: end; margin-bottom: var(--space-7); }
+.section-heading h2 { max-width: 14ch; margin-bottom: 0; }
+.section-heading > p { margin-bottom: 0; color: var(--text-secondary); }
+.tool-directory { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: hidden; }
+.tool-group { padding: var(--space-5); }
+.tool-group + .tool-group { border-left: 1px solid var(--border); }
+.tool-group h3 { margin-bottom: var(--space-4); color: var(--text-secondary); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.tool-list { margin: 0; padding: 0; list-style: none; }
+.tool-list li + li { border-top: 1px solid var(--border); }
+.tool-row { display: flex; min-height: 3.8rem; align-items: center; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-3); text-decoration: none; }
+a.tool-row:hover { color: var(--accent); }
+.directory-note { margin: var(--space-4) 0 0; font-size: 0.8rem; }
+
+.principles-layout { display: grid; grid-template-columns: minmax(17rem, 0.7fr) minmax(0, 1fr); gap: clamp(3rem, 9vw, 9rem); }
+.section-intro h2 { max-width: 10ch; }
+.section-intro p:last-child { max-width: 30rem; }
+.principle-list article { display: grid; grid-template-columns: 2rem 1fr; gap: var(--space-4); padding-block: var(--space-5); border-top: 1px solid var(--border); }
+.principle-list article:last-child { border-bottom: 1px solid var(--border); }
+.principle-list article > span { color: var(--accent); font-size: 0.75rem; font-weight: 750; }
+.principle-list h3 { margin-bottom: var(--space-2); }
+.principle-list p { margin: 0; color: var(--text-secondary); }
+
+.verify-section { border-block: 1px solid var(--border); background: var(--bg-subtle); }
+.verify-layout { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(20rem, 1fr); gap: clamp(3rem, 9vw, 8rem); align-items: center; }
+.verify-layout h2 { max-width: 10ch; }
+.verify-description { max-width: 34rem; color: var(--text-secondary); }
+.verify-links { display: flex; flex-wrap: wrap; gap: var(--space-5); margin-top: var(--space-6); }
+.verify-steps { margin: 0; padding: 0; list-style: none; counter-reset: verify; }
+.verify-steps li { display: grid; grid-template-columns: 2.4rem 1fr; gap: var(--space-4); align-items: center; padding-block: var(--space-4); border-top: 1px solid var(--border-strong); counter-increment: verify; }
+.verify-steps li:last-child { border-bottom: 1px solid var(--border-strong); }
+.verify-steps li::before { display: grid; width: 2.25rem; height: 2.25rem; place-items: center; border: 1px solid var(--border-strong); border-radius: 50%; content: counter(verify); font-size: 0.75rem; font-weight: 750; }
+
+.open-source-layout { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-7); align-items: end; }
+.open-source-layout h2 { margin-bottom: 0; }
+.open-source-layout > div:last-child { max-width: 31rem; justify-self: end; }
+.open-source-layout .button { margin-top: var(--space-4); }
+
+@media (max-width: 52rem) {
+  .hero { min-height: auto; grid-template-columns: 1fr; gap: var(--space-7); }
+  .hero-proof { max-width: 30rem; }
+  .section-heading, .principles-layout, .verify-layout, .open-source-layout { grid-template-columns: 1fr; gap: var(--space-6); }
+  .section-heading > p, .open-source-layout > div:last-child { max-width: 38rem; justify-self: start; }
+  .tool-directory { grid-template-columns: 1fr; }
+  .tool-group + .tool-group { border-top: 1px solid var(--border); border-left: 0; }
+}
+
+@media (max-width: 30rem) {
+  .hero-actions .button { width: 100%; }
+  .tool-row { align-items: flex-start; flex-direction: column; gap: var(--space-1); }
+}
