@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Combine JPEG, PNG, and WebP images into a PDF entirely in your browser.">
+    <meta name="theme-color" content="#f7f7f5">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Images to PDF — Secure Tools">
+    <meta property="og:description" content="Combine JPEG, PNG, and WebP images into a PDF entirely in your browser.">
+    <title>Images to PDF — Secure Tools</title>
+    <script>
+      (() => {
+        let preference = "system";
+        try { preference = localStorage.getItem("secure-tools-theme") || "system"; } catch {}
+        const dark = preference === "dark" || (preference === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = preference;
+        document.documentElement.dataset.resolvedTheme = dark ? "dark" : "light";
+      })();
+    </script>
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+    <link rel="stylesheet" href="./tool.css">
+  </head>
+  <body class="page-shell" data-page="imageToPdf">
+    <a class="skip-link" href="#main" data-i18n="common.skip">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Secure Tools home"><span class="brand-mark" aria-hidden="true"></span><span>Secure Tools</span></a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="../../#tools" data-i18n="common.nav.tools">Tools</a>
+          <a href="../../privacy/" data-i18n="common.nav.privacy">Privacy</a>
+          <a href="../../about/" data-i18n="common.nav.about">About</a>
+          <a href="https://github.com/maruson08/Secure_Tools" data-repository-link target="_blank" rel="noreferrer" data-i18n="common.nav.source">Source</a>
+        </nav>
+        <div class="header-controls">
+          <label class="control-label"><span data-i18n="common.language">Language</span><select class="control" data-language-select><option value="en">English</option><option value="ko">한국어</option></select></label>
+          <label class="control-label"><span data-i18n="common.theme">Theme</span><select class="control" data-theme-select><option value="system" data-i18n="common.themes.system">System</option><option value="light" data-i18n="common.themes.light">Light</option><option value="dark" data-i18n="common.themes.dark">Dark</option></select></label>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="page-main tool-main">
+      <div class="container">
+        <section class="tool-intro">
+          <p class="eyebrow" data-i18n="imageToPdf.eyebrow">Image tool</p>
+          <h1 data-i18n="imageToPdf.title">Images to PDF</h1>
+          <p data-i18n="imageToPdf.description">Arrange JPEG, PNG, and WebP images and save them as one PDF. Everything happens on this device.</p>
+        </section>
+
+        <div class="tool-layout">
+          <div class="tool-workspace">
+            <section id="drop-zone" class="drop-zone" aria-labelledby="drop-title">
+              <h2 id="drop-title" data-i18n="imageToPdf.drop.title">Add your images</h2>
+              <p data-i18n="imageToPdf.drop.description">Drop files here or use the picker. JPEG, PNG, and WebP can be mixed.</p>
+              <input id="file-input" class="visually-hidden" type="file" multiple>
+              <label class="button button--primary" for="file-input" data-i18n="imageToPdf.drop.choose">Choose images</label>
+              <p class="local-note"><strong data-i18n="imageToPdf.drop.localTitle">Processed locally.</strong> <span data-i18n="imageToPdf.drop.localBody">Your images never leave this device.</span> <a href="../../privacy/" data-i18n="imageToPdf.drop.privacyLink">How privacy works</a></p>
+            </section>
+
+            <section class="queue surface" aria-labelledby="queue-title">
+              <div class="queue-header"><h2 id="queue-title" data-i18n="imageToPdf.queue.title">Image order</h2><span id="image-count">0 images</span></div>
+              <p id="queue-empty" class="queue-empty" data-i18n="imageToPdf.queue.empty">No images selected yet. Added images will appear here in PDF page order.</p>
+              <ol id="image-list" class="image-list"></ol>
+            </section>
+          </div>
+
+          <aside class="settings surface">
+            <form id="pdf-settings">
+              <h2 data-i18n="imageToPdf.settings.title">PDF settings</h2>
+              <div class="field">
+                <label for="filename" data-i18n="imageToPdf.settings.filename">Output filename</label>
+                <input id="filename" name="filename" value="converted-images" autocomplete="off">
+                <p class="field-help" data-i18n="imageToPdf.settings.filenameHelp">A .pdf extension is added automatically.</p>
+              </div>
+              <div class="field">
+                <label for="page-size" data-i18n="imageToPdf.settings.pageSize">Page size</label>
+                <select id="page-size" name="page-size"><option value="a4" data-i18n="imageToPdf.settings.a4">A4</option><option value="letter" data-i18n="imageToPdf.settings.letter">Letter</option><option value="image" data-i18n="imageToPdf.settings.imageSize">Match image</option></select>
+              </div>
+              <div class="field">
+                <label for="orientation" data-i18n="imageToPdf.settings.orientation">Orientation</label>
+                <select id="orientation" name="orientation"><option value="auto" data-i18n="imageToPdf.settings.auto">Automatic</option><option value="portrait" data-i18n="imageToPdf.settings.portrait">Portrait</option><option value="landscape" data-i18n="imageToPdf.settings.landscape">Landscape</option></select>
+              </div>
+              <div class="field">
+                <label for="fit" data-i18n="imageToPdf.settings.fit">Image fit</label>
+                <select id="fit" name="fit"><option value="contain" data-i18n="imageToPdf.settings.contain">Fit entire image</option><option value="cover" data-i18n="imageToPdf.settings.cover">Fill page</option></select>
+              </div>
+              <div class="field">
+                <label for="margin" data-i18n="imageToPdf.settings.margin">Margin (mm)</label>
+                <input id="margin" name="margin" type="number" min="0" max="50" value="10" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="quality" data-i18n="imageToPdf.settings.quality">Image quality</label>
+                <select id="quality" name="quality"><option value="1" data-i18n="imageToPdf.settings.qualityBest">Best</option><option value="0.92" selected data-i18n="imageToPdf.settings.qualityHigh">High</option><option value="0.8" data-i18n="imageToPdf.settings.qualityBalanced">Balanced</option><option value="0.65" data-i18n="imageToPdf.settings.qualitySmall">Smaller file</option></select>
+              </div>
+              <label class="check-field"><input type="checkbox" name="auto-download"><span data-i18n="imageToPdf.settings.autoDownload">Download automatically after generation</span></label>
+              <label class="check-field"><input type="checkbox" name="clear-after-save" checked><span data-i18n="imageToPdf.settings.clearAfterSave">Clear image references after saving</span></label>
+              <div class="tool-actions">
+                <button id="generate-pdf" class="button button--primary" type="button" disabled data-i18n="imageToPdf.actions.generate">Generate and save PDF</button>
+                <button id="add-images" class="button button--secondary" type="button" data-i18n="imageToPdf.actions.add">Add more images</button>
+                <button id="clear-images" class="button button--secondary" type="button" disabled data-i18n="imageToPdf.actions.clear">Clear all</button>
+              </div>
+              <progress id="generation-progress" class="generation-progress" hidden></progress>
+              <p id="tool-status" class="tool-status" role="status" aria-live="polite"></p>
+            </form>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer"><div class="container footer-inner"><div><a class="brand" href="../../"><span class="brand-mark" aria-hidden="true"></span><span>Secure Tools</span></a><p data-i18n="common.footerStatement">Your files stay on your device.</p></div><nav aria-label="Footer navigation"><a href="../../#tools" data-i18n="common.nav.tools">Tools</a><a href="../../privacy/" data-i18n="common.nav.privacy">Privacy</a><a href="../../about/" data-i18n="common.nav.about">About</a><a href="https://github.com/maruson08/Secure_Tools" data-repository-link target="_blank" rel="noreferrer" data-i18n="common.nav.source">Source</a></nav></div></footer>
+    <script src="../../assets/vendor/jspdf/jspdf.umd.min.js"></script>
+    <script type="module" src="../../js/main.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
