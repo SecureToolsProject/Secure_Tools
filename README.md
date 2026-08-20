@@ -11,6 +11,7 @@ The project uses a category-first architecture, a Pull Request/main CI gate, and
 - [Split PDF](./tools/pdf/split/) — extract ordered page ranges or create predictable per-page and fixed-interval archives.
 - [Organize PDF](./tools/pdf/organize/) — preview, reorder, rotate, remove, and export pages without rasterizing them.
 - [PDF to Images](./tools/pdf/to-images/) — convert ordered pages to PNG, JPEG, or WebP files and local ZIP archives.
+- [PDF Metadata Inspector & Cleaner](./tools/pdf/metadata/) — inspect supported document-info fields and save a locally verified cleaned copy.
 
 The homepage and category hubs clearly distinguish production tools from planned work.
 
@@ -57,7 +58,10 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │   │   ├── index.html
 │   │   ├── images-to-pdf/
 │   │   ├── merge/
-│   │   └── split/
+│   │   ├── split/
+│   │   ├── organize/
+│   │   ├── to-images/
+│   │   └── metadata/
 │   ├── image/
 │   ├── privacy/
 │   ├── scan/
@@ -73,6 +77,7 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
     ├── image-to-pdf.test.mjs
     ├── pdf-merge-and-categories.test.mjs
     ├── pdf-split.test.mjs
+    ├── pdf-metadata.test.mjs
     └── run-all.mjs
 ```
 
@@ -163,6 +168,20 @@ PDF Organizer is available at `/tools/pdf/organize/` for one local source PDF at
 
 The original source file is never modified. The File System Access save picker is used when available, with the shared Blob-download fallback elsewhere.
 
+## PDF Metadata Inspector & Cleaner
+
+PDF Metadata Inspector & Cleaner is available at `/tools/pdf/metadata/` for one local PDF at a time.
+
+- The explicit metadata model inspects Title, Author, Subject, Keywords, Creator, Producer, Creation Date, and Modification Date from the standard PDF document-info dictionary.
+- Values remain raw in application state while the UI formats dates with `Intl.DateTimeFormat`, safely replaces surfaced null characters for display, and limits individual rendered values to 2,000 characters. Cleaning still targets the complete underlying field.
+- Users can remove one or more selected fields or choose the explicit “Remove all supported metadata” path. Missing fields are shown consistently and cannot be selected.
+- Cleaning edits the loaded PDF with `pdf-lib` using `updateMetadata: false`; pages are not rasterized, copied from screenshots, or reconstructed.
+- After serialization, the tool reloads the produced bytes, inspects all supported fields again, and reports cleared or retained selections from that serialized output. Page count, dimensions, and rotation must also match before the result is offered as successful.
+- Repeated cleaning continues from the previously verified output bytes. Loading or clearing a source releases the prior model, comparison, and retained byte references.
+- The original PDF is never modified. Saving uses the shared File System Access picker where available and the revoking Blob-download fallback elsewhere.
+
+The supported scope is deliberately narrow: this tool removes supported PDF document-info metadata, not every possible forensic artifact or embedded information source. `pdf-lib` 1.17.1 does not expose a reliable public API for complete XMP inspection/removal, so Sprint 8 does not use fragile binary manipulation and does not claim to remove XMP packets, attachments, annotations, hidden content, or other embedded structures. Broader structural sanitization is deferred to future hardening work.
+
 ## Local processing dependencies
 
 All processing libraries are pinned and served as same-origin static files. Production pages do not load a CDN.
@@ -178,7 +197,7 @@ All processing libraries are pinned and served as same-origin static files. Prod
 ### pdf-lib
 
 - Version: `1.17.1`
-- Purpose: PDF inspection, page copying, and merge output
+- Purpose: PDF inspection, document-info cleaning, page copying, and merge output
 - Package: `pdf-lib@1.17.1` from npm
 - License: MIT
 - Details and hashes: [assets/vendor/pdf-lib/README.md](./assets/vendor/pdf-lib/README.md)
@@ -218,7 +237,7 @@ Run the complete local and CI validation entry point with:
 node tests/run-all.mjs
 ```
 
-It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, category route, i18n, static resource, privacy/network, security-hardening, ZIP, and CI workflow regression coverage. PDF fixtures are generated deterministically during tests; CI never processes real user files.
+It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category route, i18n, static resource, privacy/network, security-hardening, ZIP, and CI workflow regression coverage. PDF fixtures are generated deterministically during tests; CI never processes real user files.
 
 ## Production security controls
 
@@ -279,7 +298,7 @@ The historical prototype is absent from the deployed tree. External URLs in docu
 
 - PDF rotate, compression, and encryption tools
 - Image conversion, compression, and resizing
-- Metadata inspection and cleaning
+- Broader XMP and structural PDF metadata sanitization
 - Scan/OCR and media tools
 - Offline/PWA support
 
