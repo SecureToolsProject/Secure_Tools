@@ -2,6 +2,7 @@
 .source-panel__header { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-4); }
 .source-panel__header h2 { margin: 0; font-size: 1.35rem; }
 .source-empty { display: grid; min-height: 8rem; place-items: center; margin: 0; padding: var(--space-5); border: 1px dashed var(--border); border-radius: var(--radius-md); color: var(--text-secondary); text-align: center; }
+.source-empty[hidden] { display: none; }
 .source-card { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-primary); }
 .source-card[hidden] { display: none; }
 .pdf-file-icon { display: grid; width: 4.5rem; height: 4.5rem; place-items: center; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--accent-soft); color: var(--accent); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; }

@@ -55,9 +55,10 @@
           <div class="tool-workspace">
             <section id="drop-zone" class="drop-zone" aria-labelledby="drop-title">
               <h2 id="drop-title" data-i18n="imageToPdf.drop.title">Add your images</h2>
-              <p data-i18n="imageToPdf.drop.description">Drop files here or use the picker. JPEG, PNG, and WebP can be mixed.</p>
-              <input id="file-input" class="visually-hidden" type="file" multiple>
-              <label class="button button--primary" for="file-input" data-i18n="imageToPdf.drop.choose">Choose images</label>
+              <p id="drop-description" data-i18n="imageToPdf.drop.description">Drop files here or use the picker. JPEG, PNG, and WebP can be mixed.</p>
+              <input id="file-input" class="visually-hidden" type="file" multiple aria-describedby="drop-description">
+              <label class="drop-zone__picker" for="file-input"><span class="visually-hidden" data-i18n="imageToPdf.drop.choose">Choose images</span></label>
+              <span class="button button--primary" aria-hidden="true" data-i18n="imageToPdf.drop.choose">Choose images</span>
               <p class="local-note"><strong data-i18n="imageToPdf.drop.localTitle">Processed locally.</strong> <span data-i18n="imageToPdf.drop.localBody">Your images never leave this device.</span> <a href="../../../privacy/" data-i18n="imageToPdf.drop.privacyLink">How privacy works</a></p>
             </section>
 
