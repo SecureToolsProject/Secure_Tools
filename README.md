@@ -4,6 +4,8 @@ Secure Tools is a privacy-first web hub for everyday file utilities. Production 
 
 The project uses a category-first architecture, a Pull Request/main CI gate, and static GitHub Pages deployment.
 
+Release-candidate context is recorded in the [v1.0.0 changelog](./CHANGELOG.md) and [release QA checklist](./docs/release-qa.md). The v1.0.0 Git tag and GitHub release are deliberate release-manager actions after manual sign-off; Sprint 11 does not create them.
+
 ## Available tools
 
 - [Images to PDF](./tools/pdf/images-to-pdf/) — arrange JPEG, PNG, and WebP images and save them as one PDF.
@@ -91,9 +93,10 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │   └── image-to-pdf/
 │       └── index.html
 ├── assets/vendor/
-│   ├── jszip/
 │   ├── jspdf/
-│   └── pdf-lib/
+│   ├── jszip/
+│   ├── pdf-lib/
+│   └── pdfjs/
 └── tests/
     ├── ci-foundation.test.mjs
     ├── home-structure.test.mjs
@@ -263,7 +266,7 @@ Run the complete local and CI validation entry point with:
 node tests/run-all.mjs
 ```
 
-It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category-first homepage, system typography, CJK wrapping, long-copy layout, six-language catalog parity and placeholders, locale detection and persistence, static resource, privacy/network, security-hardening, ZIP, and CI workflow regression coverage. PDF fixtures are generated deterministically during tests; CI never processes real user files.
+It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category-first homepage, system typography, CJK wrapping, long-copy layout, six-language catalog parity and placeholders, locale detection and persistence, static resource, privacy/network, security-hardening, dependency-integrity, save-path, ZIP, and CI workflow regression coverage. PDF fixtures are generated deterministically during tests; CI never processes real user files.
 
 ## Production security controls
 
