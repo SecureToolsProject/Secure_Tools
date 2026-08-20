@@ -154,6 +154,7 @@ export const ko = {
       fileTooLarge: "이미지 한 개의 50 MiB 제한을 초과했습니다.", queueFiles: "이미지는 최대 100개까지 추가할 수 있습니다.", queueBytes: "이미지 목록의 전체 500 MiB 제한을 초과했습니다.", dimension: "이미지의 한 변이 16,384픽셀 제한을 초과했습니다.", pixels: "이미지가 5천만 픽셀 제한을 초과했습니다.", signature: "파일 내용이 올바른 JPEG, PNG 또는 WebP 이미지가 아닙니다.",
       imageExport: "이미지가 너무 크거나 PDF용으로 준비할 수 없습니다.", canvas: "이 브라우저에서는 PDF용 이미지를 준비할 수 없습니다.", library: "로컬 PDF 라이브러리를 불러오지 못했습니다.", generation: "PDF를 생성하지 못했습니다. 이미지 수나 크기를 줄여 다시 시도하세요.", save: "저장 위치를 열 수 없습니다. 다시 시도하세요.",
     },
+  },
   organizePdf: {
     eyebrow: "PDF 도구", title: "PDF 정리", description: "원본 PDF를 변경하지 않고 페이지를 재정렬하고 회전하거나 제거하세요. 모든 처리는 이 기기에서 이루어집니다.",
     drop: { title: "PDF 하나 추가", description: "PDF를 여기에 놓거나 선택기를 사용하세요.", choose: "PDF 선택", localTitle: "로컬에서 처리됩니다.", localBody: "PDF는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
@@ -175,7 +176,6 @@ export const ko = {
       oneFile: "PDF는 한 번에 하나만 선택하세요.", unsupported: "PDF 파일을 선택하세요.", protected: "암호로 보호되거나 암호화된 PDF는 정리할 수 없습니다.", unreadable: "PDF가 손상되었거나 읽을 수 없습니다.",
       noPages: "내보내기 전에 페이지를 하나 이상 남겨 주세요.", failure: "PDF를 안전하게 불러오거나 처리하지 못했습니다.", save: "저장 위치를 열 수 없습니다. 다시 시도하세요.",
     },
-  },
   },
   notFound: { eyebrow: "404", title: "이 페이지는 존재하지 않습니다.", description: "주소가 오래되었거나 잘못 입력되었을 수 있습니다.", action: "홈으로 돌아가기" },
 };

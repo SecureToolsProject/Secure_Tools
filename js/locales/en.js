@@ -173,6 +173,7 @@ export const en = {
       fileTooLarge: "This image exceeds the 50 MiB per-file limit.", queueFiles: "You can add up to 100 images.", queueBytes: "The image queue exceeds the 500 MiB total limit.", dimension: "This image exceeds the 16,384 pixel dimension limit.", pixels: "This image exceeds the 50 megapixel limit.", signature: "The file content is not a valid JPEG, PNG, or WebP image.",
       imageExport: "An image was too large or could not be prepared for the PDF.", canvas: "This browser cannot prepare images for PDF generation.", library: "The local PDF library could not be loaded.", generation: "The PDF could not be generated. Try fewer or smaller images.", save: "The save location could not be opened. Please try again.",
     },
+  },
   organizePdf: {
     eyebrow: "PDF tool", title: "Organize PDF", description: "Reorder, rotate, or remove pages without changing the original PDF. Everything stays on this device.",
     drop: { title: "Add one PDF", description: "Drop a PDF here or use the picker.", choose: "Choose PDF", localTitle: "Processed locally.", localBody: "Your PDF never leaves this device.", privacyLink: "How privacy works" },
@@ -194,7 +195,6 @@ export const en = {
       oneFile: "Choose one PDF at a time.", unsupported: "Choose a PDF file.", protected: "This PDF is password-protected or encrypted and cannot be organized.", unreadable: "This PDF is damaged or unreadable.",
       noPages: "Keep at least one page before exporting.", failure: "The PDF could not be loaded or processed safely.", save: "The save location could not be opened. Please try again.",
     },
-  },
   },
   notFound: { eyebrow: "404", title: "This page is not here.", description: "The address may be outdated or mistyped.", action: "Return home" },
 };
