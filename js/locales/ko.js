@@ -6,6 +6,7 @@ export const ko = {
     notFound: { title: "페이지를 찾을 수 없음 — Secure Tools", description: "요청한 Secure Tools 페이지를 찾을 수 없습니다." },
     imageToPdf: { title: "이미지를 PDF로 — Secure Tools", description: "JPEG, PNG, WebP 이미지를 브라우저에서만 처리해 하나의 PDF로 만드세요." },
     mergePdf: { title: "PDF 합치기 — Secure Tools", description: "PDF 파일을 업로드하지 않고 브라우저에서 원하는 순서로 합치세요." },
+    splitPdf: { title: "PDF 나누기 — Secure Tools", description: "원본을 업로드하지 않고 브라우저에서 PDF 페이지를 추출하거나 나누세요." },
     pdfCategory: { title: "PDF 도구 — Secure Tools", description: "브라우저에서 PDF 문서를 로컬로 만들고 정리하세요." },
     imageCategory: { title: "이미지 도구 — Secure Tools", description: "브라우저에서 로컬로 작동하도록 설계된 프라이빗 이미지 도구입니다." },
     privacyCategory: { title: "개인정보 보호 도구 — Secure Tools", description: "원본 파일을 업로드하지 않고 숨겨진 파일 정보를 확인하고 제거하세요." },
@@ -37,7 +38,7 @@ export const ko = {
     pdf: {
       title: "PDF 도구", description: "개인 파일을 업로드하지 않고 PDF 문서를 로컬에서 만들고 정리하세요.",
       imagesToPdf: "JPEG, PNG, WebP 이미지를 원하는 순서로 하나의 PDF로 만듭니다.", merge: "선택한 순서대로 PDF 파일을 합칩니다.",
-      split: "선택한 페이지를 새 문서로 추출합니다.", rotateTitle: "PDF 회전", rotate: "문서 품질을 바꾸지 않고 페이지 방향을 바로잡습니다.",
+      split: "선택한 페이지를 추출하거나 문서를 로컬 파일로 나눕니다.", rotateTitle: "PDF 회전", rotate: "문서 품질을 바꾸지 않고 페이지 방향을 바로잡습니다.",
     },
     image: {
       title: "이미지 도구", description: "일상 이미지 파일을 브라우저에서 비공개로 준비하세요.",
@@ -72,6 +73,40 @@ export const ko = {
   about: {
     eyebrow: "소개", title: "작은 도구, 검증 가능한 신뢰.", intro: "Secure Tools는 브라우저에서 로컬로 작동하는 일상 파일 도구를 모은 개인정보 보호 중심 프로젝트입니다.",
     purposeTitle: "만든 이유", purposeBody: "일상적인 파일 작업 때문에 개인 문서를 알 수 없는 서버에 올리거나 계정을 만들 필요는 없어야 합니다.", philosophyTitle: "로컬 우선, 그리고 개방성", philosophyBody: "이 프로젝트는 누구나 소스와 네트워크 검사를 통해 검증할 수 있는 정적이고 이해하기 쉬운 코드와 개인정보 보호 모델을 지향합니다.",
+  },
+  splitPdf: {
+    eyebrow: "PDF 도구", title: "PDF 나누기", description: "선택한 페이지를 추출하거나 하나의 PDF를 예측 가능한 로컬 파일로 나누세요.",
+    drop: { title: "PDF 하나 추가", description: "PDF를 여기에 놓거나 선택기를 사용하세요. 원본은 이 기기에서만 읽습니다.", choose: "PDF 선택", localTitle: "로컬에서 처리됩니다.", localBody: "PDF는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
+    source: { title: "원본 PDF", empty: "아직 선택한 PDF가 없습니다.", meta: "{size} · {pages}페이지", remove: "원본 PDF 제거" },
+    modes: {
+      title: "나누기 방식", legend: "PDF를 나눌 방식을 선택하세요",
+      extract: { title: "페이지 범위 추출", body: "입력한 페이지 순서 그대로 하나의 PDF를 만듭니다." },
+      every: { title: "페이지마다 나누기", body: "각 페이지를 PDF로 만들어 ZIP 파일에 담습니다." },
+      interval: { title: "고정 간격", body: "지정한 페이지 수마다 PDF 파일을 만듭니다." },
+    },
+    range: { label: "추출할 페이지", help: "예: 1-3, 5, 2,4,7 또는 5,1,3. 중복 페이지는 유지됩니다." },
+    interval: { label: "파일당 페이지 수", help: "남은 페이지는 마지막 파일에 포함됩니다." },
+    settings: {
+      title: "출력 설정", filename: "출력 기본 이름", filenameHelp: "확장자와 정렬 가능한 페이지 번호가 자동으로 추가됩니다.",
+      autoDownload: "나눈 뒤 자동 다운로드", clearAfterSave: "저장 후 원본 파일 참조 정리",
+      pdfFile: "PDF 문서", zipFile: "ZIP 압축 파일",
+    },
+    actions: { split: "나누기 및 저장", clear: "원본 비우기" },
+    status: {
+      reading: "PDF를 기기에서 읽고 있습니다…", loaded: "PDF 준비 완료: {pages}페이지.", cleared: "원본 PDF를 비웠습니다.", preparing: "페이지를 준비하고 있습니다…",
+      archive: "ZIP 압축 파일을 만들고 있습니다…", progress: "{total}개 파일 중 {completed}개 생성 중…", progressLabel: "PDF 나누기 진행률",
+      saved: "출력 파일 {count}개가 포함된 {name} 파일을 저장했습니다.", downloaded: "출력 파일 {count}개가 포함된 {name} 파일을 다운로드했습니다.",
+      savedAndCleared: "나누기 결과를 저장하고 원본 참조를 정리했습니다.", saveCancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
+    },
+    errors: {
+      oneFile: "PDF는 한 번에 하나만 선택하세요.", unsupported: "PDF 파일을 선택하세요. 브라우저가 파일 형식을 제공하지 않을 때만 .pdf 확장자를 허용합니다.", noFile: "나누기 전에 PDF 하나를 추가하세요.",
+      protected: "{name} 파일은 암호화되었거나 비밀번호로 보호되어 나눌 수 없을 수 있습니다.", unreadable: "{name} 파일을 읽을 수 없습니다. PDF가 손상되었거나 지원되지 않을 수 있습니다.",
+      pdfLibrary: "로컬 PDF 라이브러리를 불러오지 못했습니다.", archiveLibrary: "로컬 압축 라이브러리를 불러오지 못했습니다.",
+      generation: "PDF 페이지 파일을 만들지 못했습니다. 더 작은 문서로 다시 시도하세요.", archive: "ZIP 압축 파일을 만들지 못했습니다.", noPages: "PDF에 페이지가 없습니다.",
+      rangeRequired: "페이지나 범위를 하나 이상 입력하세요.", rangeInvalid: "페이지 번호와 오름차순 범위를 쉼표로 구분해 입력하세요.",
+      rangeOutOfBounds: "모든 페이지는 1에서 {pages} 사이여야 합니다.", rangeReversed: "범위는 낮은 페이지에서 높은 페이지 순서여야 합니다.",
+      intervalInvalid: "파일당 페이지 수는 1 이상의 정수로 입력하세요.", mode: "올바른 나누기 방식을 선택하세요.", save: "저장 위치를 열 수 없습니다. 다시 시도하세요.",
+    },
   },
   mergePdf: {
     eyebrow: "PDF 도구", title: "PDF 합치기", description: "PDF 파일의 순서를 정하고 모든 페이지를 하나의 문서로 합치세요. 파일은 이 기기에 머뭅니다.",

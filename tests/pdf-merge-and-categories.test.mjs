@@ -128,7 +128,7 @@ function lookup(dictionary, key) {
 function testRoutesTranslationsAndPrivacy() {
   const routeFiles = [
     "index.html", "privacy/index.html", "about/index.html", "404.html", "tools/image-to-pdf/index.html",
-    "tools/pdf/index.html", "tools/pdf/images-to-pdf/index.html", "tools/pdf/merge/index.html",
+    "tools/pdf/index.html", "tools/pdf/images-to-pdf/index.html", "tools/pdf/merge/index.html", "tools/pdf/split/index.html",
     "tools/image/index.html", "tools/privacy/index.html", "tools/scan/index.html", "tools/media/index.html",
   ];
   for (const relative of routeFiles) assert.equal(fs.existsSync(path.join(root, relative)), true, `Missing route: ${relative}`);
@@ -176,6 +176,9 @@ function testRoutesTranslationsAndPrivacy() {
   for (const file of firstPartyScripts) assert.doesNotMatch(fs.readFileSync(file, "utf8"), networkApi, `Network API found in ${path.relative(root, file)}`);
   const mergeHtml = fs.readFileSync(path.join(root, "tools/pdf/merge/index.html"), "utf8");
   assert.match(mergeHtml, /assets\/vendor\/pdf-lib\/pdf-lib\.min\.js/);
+  const splitHtml = fs.readFileSync(path.join(root, "tools/pdf/split/index.html"), "utf8");
+  assert.match(splitHtml, /assets\/vendor\/pdf-lib\/pdf-lib\.min\.js/);
+  assert.match(splitHtml, /assets\/vendor\/jszip\/jszip\.min\.js/);
 }
 
 testInputValidation();

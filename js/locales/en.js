@@ -6,6 +6,7 @@ export const en = {
     notFound: { title: "Page not found — Secure Tools", description: "The requested Secure Tools page could not be found." },
     imageToPdf: { title: "Images to PDF — Secure Tools", description: "Combine JPEG, PNG, and WebP images into a PDF entirely in your browser." },
     mergePdf: { title: "Merge PDF — Secure Tools", description: "Arrange and merge PDF files entirely in your browser without uploading them." },
+    splitPdf: { title: "Split PDF — Secure Tools", description: "Extract or split PDF pages locally in your browser without uploading the source." },
     pdfCategory: { title: "PDF tools — Secure Tools", description: "Create and organize PDF documents locally in your browser." },
     imageCategory: { title: "Image tools — Secure Tools", description: "Private image tools designed to run locally in your browser." },
     privacyCategory: { title: "Privacy tools — Secure Tools", description: "Inspect and remove hidden file details without uploading the source file." },
@@ -43,7 +44,7 @@ export const en = {
     pdf: {
       title: "PDF tools", description: "Create and organize PDF documents locally, without uploading private files.",
       imagesToPdf: "Arrange JPEG, PNG, and WebP images into one PDF.", merge: "Combine PDF files in the order you choose.",
-      split: "Extract selected pages into a new document.", rotateTitle: "Rotate PDF", rotate: "Correct page orientation without changing document quality.",
+      split: "Extract selected pages or divide a document into local files.", rotateTitle: "Rotate PDF", rotate: "Correct page orientation without changing document quality.",
     },
     image: {
       title: "Image tools", description: "Prepare everyday images privately in your browser.",
@@ -89,6 +90,40 @@ export const en = {
     eyebrow: "About", title: "Small tools. Inspectable trust.", intro: "Secure Tools is a privacy-first collection of everyday file utilities built to run locally in the browser.",
     purposeTitle: "Why it exists", purposeBody: "Common file tasks should not require uploading personal documents to an unknown server or creating an account.",
     philosophyTitle: "Local-first and open", philosophyBody: "The project favors static, understandable code and a privacy model that anyone can verify through source and network inspection.",
+  },
+  splitPdf: {
+    eyebrow: "PDF tool", title: "Split PDF", description: "Extract selected pages or divide one PDF into predictable local files.",
+    drop: { title: "Add one PDF", description: "Drop a PDF here or use the picker. The source is read only on this device.", choose: "Choose PDF", localTitle: "Processed locally.", localBody: "Your PDF never leaves this device.", privacyLink: "How privacy works" },
+    source: { title: "Source PDF", empty: "No PDF selected yet.", meta: "{size} · {pages} page(s)", remove: "Remove source PDF" },
+    modes: {
+      title: "Split mode", legend: "Choose how to split the PDF",
+      extract: { title: "Extract page range", body: "Create one PDF in the exact page order entered." },
+      every: { title: "Split every page", body: "Create one PDF per page inside a ZIP archive." },
+      interval: { title: "Fixed interval", body: "Create grouped PDFs with a fixed number of pages." },
+    },
+    range: { label: "Pages to extract", help: "Examples: 1-3, 5, 2,4,7, or 5,1,3. Duplicates are preserved." },
+    interval: { label: "Pages per file", help: "The final file contains any remaining pages." },
+    settings: {
+      title: "Output settings", filename: "Output base name", filenameHelp: "Extensions and sortable page numbers are added automatically.",
+      autoDownload: "Download automatically after splitting", clearAfterSave: "Clear the source file reference after saving",
+      pdfFile: "PDF document", zipFile: "ZIP archive",
+    },
+    actions: { split: "Split and save", clear: "Clear source" },
+    status: {
+      reading: "Reading the PDF locally…", loaded: "PDF ready: {pages} page(s).", cleared: "Source PDF cleared.", preparing: "Preparing pages…",
+      archive: "Creating the ZIP archive…", progress: "Creating file {completed} of {total}…", progressLabel: "PDF split progress",
+      saved: "Saved {name} with {count} output file(s).", downloaded: "Downloaded {name} with {count} output file(s).",
+      savedAndCleared: "Split result saved and the source reference cleared.", saveCancelled: "Save cancelled. No file was written.",
+    },
+    errors: {
+      oneFile: "Choose one PDF at a time.", unsupported: "Choose a PDF file. A .pdf extension is accepted only when the browser provides no file type.", noFile: "Add one PDF before splitting.",
+      protected: "{name} may be encrypted or password protected and cannot be split.", unreadable: "Could not read {name}. The PDF may be damaged or unsupported.",
+      pdfLibrary: "The local PDF library could not be loaded.", archiveLibrary: "The local archive library could not be loaded.",
+      generation: "The PDF pages could not be created. Try a smaller document.", archive: "The ZIP archive could not be created.", noPages: "The PDF does not contain any pages.",
+      rangeRequired: "Enter at least one page or range.", rangeInvalid: "Use page numbers and ascending ranges separated by commas.",
+      rangeOutOfBounds: "Every page must be between 1 and {pages}.", rangeReversed: "Ranges must run from a lower page to a higher page.",
+      intervalInvalid: "Enter a whole number of at least 1 for pages per file.", mode: "Choose a valid split mode.", save: "The save location could not be opened. Please try again.",
+    },
   },
   mergePdf: {
     eyebrow: "PDF tool", title: "Merge PDF", description: "Arrange PDF files and combine every page into one document. Files stay on this device.",

@@ -2,12 +2,13 @@
 
 Secure Tools is a privacy-first web hub for everyday file utilities. Production tools process file contents locally in the browser instead of uploading them to a server.
 
-Sprint 3 introduces category-first navigation and a second production tool, PDF Merge. Images to PDF now lives under the PDF category, with a static migration page at its former URL.
+Sprint 4 adds a minimal Pull Request/main CI gate and the third production PDF tool, PDF Split. The category-first architecture remains the stable navigation layer.
 
 ## Available tools
 
 - [Images to PDF](./tools/pdf/images-to-pdf/) — arrange JPEG, PNG, and WebP images and save them as one PDF.
 - [Merge PDF](./tools/pdf/merge/) — validate, order, and combine PDF pages without rasterizing them.
+- [Split PDF](./tools/pdf/split/) — extract ordered page ranges or create predictable per-page and fixed-interval archives.
 
 The homepage and category hubs clearly distinguish production tools from planned work.
 
@@ -48,11 +49,13 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 ├── tools/
 │   ├── shared/
 │   │   ├── file.js
+│   │   ├── pdf.js
 │   │   └── save.js
 │   ├── pdf/
 │   │   ├── index.html
 │   │   ├── images-to-pdf/
-│   │   └── merge/
+│   │   ├── merge/
+│   │   └── split/
 │   ├── image/
 │   ├── privacy/
 │   ├── scan/
@@ -60,11 +63,15 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │   └── image-to-pdf/
 │       └── index.html
 ├── assets/vendor/
+│   ├── jszip/
 │   ├── jspdf/
 │   └── pdf-lib/
 └── tests/
+    ├── ci-foundation.test.mjs
     ├── image-to-pdf.test.mjs
-    └── pdf-merge-and-categories.test.mjs
+    ├── pdf-merge-and-categories.test.mjs
+    ├── pdf-split.test.mjs
+    └── run-all.mjs
 ```
 
 `js/main.js` initializes shared theme and internationalization behavior. `js/theme.js` owns Light, Dark, and System selection, OS color-scheme observation, and persistence. `js/i18n.js` detects English or Korean, applies `data-i18n` bindings without reloading, updates metadata and `<html lang>`, and persists manual selection. Repository links are centralized in `js/config.js`.
@@ -107,9 +114,25 @@ PDF Merge is available at `/tools/pdf/merge/`.
 
 Shared filename, file-size, ordering, save-picker, and download behavior lives in `tools/shared/`.
 
-## Local PDF dependencies
+## PDF Split
 
-Both PDF libraries are pinned and served as same-origin static files. Production pages do not load a CDN.
+PDF Split is available at `/tools/pdf/split/` and accepts one source PDF at a time.
+
+- Extract mode accepts individual pages and ascending ranges, preserves the explicit order, and intentionally preserves duplicate page references.
+- Every-page mode creates one PDF per source page.
+- Fixed-interval mode creates sequential groups and includes any remainder in the final file.
+- `pdf-lib` copies original PDF pages without rasterizing them, preserving page dimensions and selectable/vector content.
+- Multi-file modes generate outputs sequentially and add each `Uint8Array` to one local JSZip archive. They do not use base64 or trigger uncontrolled individual downloads.
+- Output names use the shared sanitizer and sortable zero-padded page numbers.
+- The source is read once during generation. Output documents are created one group at a time; the finished archive necessarily retains its entries until the ZIP Blob is produced.
+- Unsupported, malformed, encrypted, and password-protected documents fail without attempting to bypass protection.
+- English/Korean copy, shared theme controls, keyboard-labelled controls, live status, honest progress phases, and reduced-motion foundations are reused from the site architecture.
+
+A single extracted PDF uses the existing save-picker/download fallback. Multi-output modes save one predictable ZIP archive.
+
+## Local processing dependencies
+
+All processing libraries are pinned and served as same-origin static files. Production pages do not load a CDN.
 
 ### jsPDF
 
@@ -127,6 +150,14 @@ Both PDF libraries are pinned and served as same-origin static files. Production
 - License: MIT
 - Details and hashes: [assets/vendor/pdf-lib/README.md](./assets/vendor/pdf-lib/README.md)
 
+### JSZip
+
+- Version: `3.10.1`
+- Purpose: local multi-file PDF Split archives
+- Package: `jszip@3.10.1` from npm
+- License choice: MIT
+- Details and hashes: [assets/vendor/jszip/README.md](./assets/vendor/jszip/README.md)
+
 Each dependency keeps its license and package metadata beside the vendored browser build.
 
 ## Local development
@@ -139,14 +170,23 @@ python -m http.server 8000
 
 Then open [http://localhost:8000](http://localhost:8000). Do not use a `file://` URL.
 
-Run the regression suites with:
+Run the complete local and CI validation entry point with:
 
 ```bash
-node tests/image-to-pdf.test.mjs
-node tests/pdf-merge-and-categories.test.mjs
+node tests/run-all.mjs
 ```
 
-The second suite exercises real `pdf-lib` output, ordering, duplicates, mixed page sizes, a 48-page batch, invalid/encrypted paths, filename and queue utilities, English/Korean coverage, route resources, the legacy migration page, and first-party network APIs.
+It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, category route, i18n, static resource, privacy/network, ZIP, and CI workflow regression coverage. All PDF fixtures are generated deterministically during tests; CI never processes real user files.
+
+## Continuous integration
+
+`.github/workflows/ci.yml` runs on every Pull Request and every push to `main`. The single validation job uses Node.js 24 to:
+
+- check the changed commit range for whitespace errors;
+- syntax-check first-party JavaScript and test modules; and
+- run `node tests/run-all.mjs`.
+
+CI adds no deployment, telemetry, package installation, or backend. Production remains a static site.
 
 ## Development workflow
 
@@ -179,7 +219,7 @@ The unlinked `image2pdf_proto.html` remains a historical reference and is not pr
 
 ## Deferred work
 
-- PDF split, rotate, compression, and encryption tools
+- PDF rotate, compression, and encryption tools
 - Image conversion, compression, and resizing
 - Metadata inspection and cleaning
 - Scan/OCR and media tools
