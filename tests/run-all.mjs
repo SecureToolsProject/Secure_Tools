@@ -28,6 +28,7 @@ for (const test of [
   "tests/pdf-merge-and-categories.test.mjs",
   "tests/file-input-queue-state.test.mjs",
   "tests/pdf-split.test.mjs",
+  "tests/security-hardening.test.mjs",
   "tests/ci-foundation.test.mjs",
 ]) {
   runNode([test], test);

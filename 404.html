@@ -3,27 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
     <meta name="description" content="The requested Secure Tools page could not be found.">
     <meta name="robots" content="noindex">
     <meta name="theme-color" content="#f7f7f5">
     <title>Page not found — Secure Tools</title>
-    <script>
-      (() => {
-        let preference = "system";
-        try { preference = localStorage.getItem("secure-tools-theme") || "system"; } catch {}
-        const dark = preference === "dark" || (preference === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
-        document.documentElement.dataset.theme = preference;
-        document.documentElement.dataset.resolvedTheme = dark ? "dark" : "light";
-      })();
-    </script>
-    <script>
-      (() => {
-        const base = location.hostname.endsWith(".github.io") ? "/Secure_Tools/" : "/";
-        const baseElement = document.createElement("base");
-        baseElement.href = base;
-        document.head.append(baseElement);
-      })();
-    </script>
+    <script src="js/theme-bootstrap.js"></script>
+    <script src="js/not-found-base.js"></script>
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/components.css">
     <link rel="stylesheet" href="./css/pages.css">

@@ -1,7 +1,7 @@
 import { t } from "../../../js/i18n.js";
 import { formatBytes, moveArrayItem } from "../../shared/file.js";
 import { downloadBlob, requestPdfSaveHandle, writeBlobToHandle } from "../../shared/save.js";
-import { ACCEPTED_IMAGE_TYPES, isSupportedImage } from "./image.js";
+import { ACCEPTED_IMAGE_TYPES, selectImageQueueFiles } from "./image.js";
 import { createPdfBlob, sanitizeFilename } from "./pdf.js";
 
 const elements = {
@@ -36,6 +36,26 @@ function setStatus(key, values = {}, tone = "neutral") {
   state.status = key ? { key, values, tone } : null;
   elements.status.textContent = key ? message(key, values) : "";
   elements.status.dataset.tone = tone;
+}
+function rejectionReason(code) {
+  const keyByCode = {
+    UNSUPPORTED_IMAGE: "imageToPdf.errors.unsupported",
+    IMAGE_FILE_TOO_LARGE: "imageToPdf.errors.fileTooLarge",
+    IMAGE_QUEUE_FILES_EXCEEDED: "imageToPdf.errors.queueFiles",
+    IMAGE_SIGNATURE_INVALID: "imageToPdf.errors.signature",
+    IMAGE_QUEUE_BYTES_EXCEEDED: "imageToPdf.errors.queueBytes",
+  };
+  return message(keyByCode[code] || "imageToPdf.errors.unsupported");
+}
+
+function setRejectedStatus(added, rejected) {
+  state.status = { added, rejected, tone: "warning" };
+  const reasons = rejected.map(({ file, code }) => message("imageToPdf.status.rejectedItem", {
+    name: file.name || "file",
+    reason: rejectionReason(code),
+  })).join("; ");
+  elements.status.textContent = message("imageToPdf.status.addedWithReasons", { added, reasons });
+  elements.status.dataset.tone = "warning";
 }
 
 function createActionButton(action, labelKey, symbol, disabled = false) {
@@ -95,11 +115,10 @@ function renderQueue() {
   });
 }
 
-function addFiles(files) {
-  const supported = files.filter(isSupportedImage);
-  const rejectedCount = files.length - supported.length;
+async function addFiles(files) {
+  const { accepted, rejected } = await selectImageQueueFiles(state.items.map((item) => item.file), files);
 
-  supported.forEach((file) => {
+  accepted.forEach((file) => {
     state.items.push({
       id: crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`,
       file,
@@ -107,16 +126,9 @@ function addFiles(files) {
     });
   });
 
-  if (supported.length && rejectedCount) {
-    setStatus("imageToPdf.status.addedWithRejected", {
-      added: supported.length,
-      rejected: rejectedCount,
-    }, "warning");
-  } else if (supported.length) {
-    setStatus("imageToPdf.status.added", { count: supported.length }, "success");
-  } else {
-    setStatus("imageToPdf.errors.unsupported", {}, "error");
-  }
+  if (rejected.length) setRejectedStatus(accepted.length, rejected);
+  else if (accepted.length) setStatus("imageToPdf.status.added", { count: accepted.length }, "success");
+  else setStatus("imageToPdf.errors.unsupported", {}, "error");
   renderQueue();
 }
 
@@ -161,6 +173,9 @@ function errorMessage(error) {
     NO_FILES: "imageToPdf.errors.noFiles",
     UNSUPPORTED_IMAGE: "imageToPdf.errors.unsupported",
     IMAGE_DECODE_FAILED: "imageToPdf.errors.decode",
+    IMAGE_DIMENSION_EXCEEDED: "imageToPdf.errors.dimension",
+    IMAGE_SIGNATURE_INVALID: "imageToPdf.errors.signature",
+    IMAGE_PIXELS_EXCEEDED: "imageToPdf.errors.pixels",
     IMAGE_EXPORT_FAILED: "imageToPdf.errors.imageExport",
     CANVAS_UNAVAILABLE: "imageToPdf.errors.canvas",
     PDF_LIBRARY_UNAVAILABLE: "imageToPdf.errors.library",
@@ -276,7 +291,8 @@ elements.dropZone.addEventListener("drop", (event) => {
 
 document.addEventListener("securetools:languagechange", () => {
   renderQueue();
-  if (state.status) setStatus(state.status.key, state.status.values, state.status.tone);
+  if (state.status?.rejected) setRejectedStatus(state.status.added, state.status.rejected);
+  else if (state.status) setStatus(state.status.key, state.status.values, state.status.tone);
 });
 
 window.addEventListener("beforeunload", () => {

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
     <meta name="description" content="Convert, inspect, and process files privately in your browser. No uploads, accounts, analytics, or tracking.">
     <meta name="theme-color" content="#f7f7f5">
     <meta property="og:type" content="website">
@@ -10,15 +11,7 @@
     <meta property="og:description" content="Convert, inspect, and process files privately in your browser. No uploads, accounts, analytics, or tracking.">
     <meta property="og:site_name" content="Secure Tools">
     <title>Secure Tools — Private tools for everyday files</title>
-    <script>
-      (() => {
-        let preference = "system";
-        try { preference = localStorage.getItem("secure-tools-theme") || "system"; } catch {}
-        const dark = preference === "dark" || (preference === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
-        document.documentElement.dataset.theme = preference;
-        document.documentElement.dataset.resolvedTheme = dark ? "dark" : "light";
-      })();
-    </script>
+    <script src="js/theme-bootstrap.js"></script>
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/components.css">
     <link rel="stylesheet" href="./css/pages.css">

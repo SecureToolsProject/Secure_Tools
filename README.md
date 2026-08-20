@@ -96,6 +96,9 @@ Images to PDF is available at `/tools/pdf/images-to-pdf/`.
 - `image.js` validates and decodes JPEG, PNG, and WebP using browser-local APIs.
 - `pdf.js` owns page geometry, image placement, sequential preparation, and jsPDF generation.
 - Preview object URLs and temporary download URLs are revoked when no longer needed.
+- File admission validates JPEG, PNG, and WebP signatures before browser decoding; a supported signature may override a misleading MIME type or extension.
+- Individual files are limited to 50 MiB, queues to 100 files and 500 MiB, image dimensions to 16,384 pixels per side, and decoded images to 50,000,000 pixels.
+- Mixed batches keep valid files and report each rejected filename with a localized reason.
 
 Images are decoded and converted sequentially so the tool does not keep every full decoded image in memory at once.
 
@@ -136,9 +139,9 @@ All processing libraries are pinned and served as same-origin static files. Prod
 
 ### jsPDF
 
-- Version: `2.5.2`
+- Version: `4.2.1`
 - Purpose: Images to PDF generation
-- Package: `jspdf@2.5.2` from npm
+- Package: `jspdf@4.2.1` from npm
 - License: MIT
 - Details: [assets/vendor/jspdf/README.md](./assets/vendor/jspdf/README.md)
 
@@ -165,6 +168,21 @@ Each dependency keeps its license and package metadata beside the vendored brows
 Serve the repository over HTTP so ES Modules load correctly:
 
 ```bash
+## Production security controls
+
+Secure Tools remains a static, local-processing application. Production pages enforce a meta-delivered Content Security Policy with `default-src 'self'`, `script-src 'self'`, `style-src 'self'`, `img-src 'self' blob: data:`, `connect-src 'none'`, `object-src 'none'`, `frame-src 'none'`, `base-uri 'self'`, and `form-action 'self'`. No `unsafe-inline` or `unsafe-eval` exception is used.
+
+The early theme bootstrap and GitHub Pages 404 base-path bootstrap are same-origin files under `js/`; production HTML contains no inline script or style blocks. Blob and data image sources are allowed only for local image previews and image/PDF preparation. Normal user navigation to GitHub links is not a network API connection and remains available.
+
+Images to PDF uses layered validation:
+
+1. pre-decode file and queue resource limits;
+2. JPEG, PNG, or WebP magic-byte recognition from a 12-byte local slice;
+3. browser decoding; and
+4. post-decode dimension and pixel-count checks before canvas conversion.
+
+The obsolete `image2pdf_proto.html` prototype was removed from the deployed tree; Git history preserves it. `tests/security-hardening.test.mjs` verifies the pinned dependency, limits and boundaries, signatures and spoofing cases, safe filename DOM sinks, CSP coverage, inline-code absence, prototype removal, and absence of first-party runtime network APIs.
+
 python -m http.server 8000
 ```
 
@@ -176,7 +194,7 @@ Run the complete local and CI validation entry point with:
 node tests/run-all.mjs
 ```
 
-It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, category route, i18n, static resource, privacy/network, ZIP, and CI workflow regression coverage. All PDF fixtures are generated deterministically during tests; CI never processes real user files.
+It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, category route, i18n, static resource, privacy/network, security-hardening, ZIP, and CI workflow regression coverage. All PDF fixtures are generated deterministically during tests; CI never processes real user files.
 
 ## Continuous integration
 
@@ -215,8 +233,7 @@ Relative links keep the site compatible with the `/Secure_Tools/` project subpat
 
 Production routes load only same-origin HTML, CSS, JavaScript, and vendored libraries. They make no analytics, font, file-upload, embed, or API requests. GitHub is contacted only after a user follows a source link.
 
-The unlinked `image2pdf_proto.html` remains a historical reference and is not production code. It still contains external and injected prototype markup; production routes neither load nor copy those dependencies.
-
+The historical prototype is absent from the deployed tree. External URLs in documentation, licenses, and source links are informational or user-initiated; no production processing dependency is fetched remotely.
 ## Deferred work
 
 - PDF rotate, compression, and encryption tools
@@ -224,7 +241,6 @@ The unlinked `image2pdf_proto.html` remains a historical reference and is not pr
 - Metadata inspection and cleaning
 - Scan/OCR and media tools
 - Offline/PWA support
-- Eventual removal or archival of the unlinked prototype
 
 ## License
 
