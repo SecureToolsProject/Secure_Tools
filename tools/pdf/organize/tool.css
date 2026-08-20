@@ -11,7 +11,7 @@
 .page-card[draggable="true"] { cursor: grab; }
 .page-card[data-dragging="true"] { opacity: .55; }
 .page-card[data-drop-target="true"] { border-color: var(--accent); background: var(--accent-soft); }
-.page-preview { display: grid; min-height: 12rem; place-items: center; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-sm); background: #d7d8da; }
+.page-preview { display: grid; min-height: 12rem; place-items: center; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--preview-backdrop); }
 .page-preview canvas { display: block; width: min(100%, 12.5rem); max-height: 17rem; object-fit: contain; background: #fff; box-shadow: 0 1px 4px rgb(0 0 0 / .18); }
 .page-label { display: flex; justify-content: space-between; gap: var(--space-2); margin: var(--space-3) 0; font-size: .78rem; }
 .page-label strong { overflow-wrap: anywhere; }
