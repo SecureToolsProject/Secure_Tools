@@ -4,7 +4,7 @@
 .organizer-toolbar__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-2); align-items: center; }
 .source-empty, .source-summary { margin: 0; color: var(--text-secondary); }
 .source-empty[hidden], .source-summary[hidden], .dirty-state[hidden] { display: none; }
-.dirty-state { padding: .45rem .65rem; border: 1px solid var(--accent); border-radius: 999px; color: var(--accent); font-size: .75rem; font-weight: 750; }
+.dirty-state { padding: .45rem .65rem; border: 1px solid var(--accent); border-radius: 999px; color: var(--accent); font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); }
 .page-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--space-4); margin: var(--space-5) 0 0; padding: 0; list-style: none; }
 .page-card { min-width: 0; padding: var(--space-3); border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-primary); transition: border-color var(--transition-fast), background-color var(--transition-fast), opacity var(--transition-fast); }
 .page-card:focus-within { border-color: var(--accent); }

@@ -123,10 +123,16 @@ function testMultilingualLayoutFoundation() {
     .map((file) => fs.readFileSync(path.join(root, "css", file), "utf8"))
     .join("\n");
   assert.doesNotMatch(css, /word-break:\s*break-all/);
-  assert.match(css, /Malgun Gothic/);
-  assert.match(css, /Hiragino Kaku Gothic ProN/);
-  assert.match(css, /html:lang\(ko\)[^{]*\{[^}]*word-break:\s*keep-all/);
-  assert.match(css, /html:lang\(ja\)[^{]*\{[^}]*line-break:\s*strict/);
+  assert.match(css, /--font-sans:\s*system-ui/);
+  assert.doesNotMatch(css, /\bInter\b|@font-face|fonts\.(?:googleapis|gstatic)\.com/);
+  assert.match(css, /html:lang\(ko\)\s*\{[^}]*Malgun Gothic/);
+  assert.match(css, /html:lang\(ja\)\s*\{[^}]*Hiragino Sans[^}]*Yu Gothic UI/);
+  assert.match(css, /html:lang\(ko\) :is\([^}]+word-break:\s*keep-all/);
+  assert.doesNotMatch(css, /html:lang\(ko\) body\s*\{[^}]*word-break:\s*keep-all/);
+  assert.match(css, /html:lang\(ja\)\s*\{[^}]*line-break:\s*strict/);
+  assert.match(css, /--line-height-heading:/);
+  assert.match(css, /--font-weight-bold:/);
+  assert.match(css, /body, button, input, select, textarea\s*\{\s*font:\s*inherit/);
   assert.match(css, /min-width:\s*0/);
   assert.match(css, /@media \(max-width:\s*68rem\)/);
   assert.match(css, /control\[data-language-select\][^{]*\{[^}]*width:\s*9rem/);
