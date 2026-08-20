@@ -4,7 +4,7 @@ This record describes the structured source-level copy review completed for Spri
 
 ## Catalog controls
 
-- [x] Every catalog contains the same 525 leaf keys as English.
+- [x] Every catalog contains the same 522 leaf keys as English after retiring three homepage-only keys.
 - [x] Every interpolation placeholder matches the English source key.
 - [x] No catalog contains `TODO`, `TRANSLATE`, `TBD`, or `[English]` draft markers.
 - [x] Production HTML references resolve to catalog keys.
@@ -12,7 +12,7 @@ This record describes the structured source-level copy review completed for Spri
 
 ## Korean review
 
-All 525 Korean production strings were inspected by namespace against their English meaning and their binding context. The review covered:
+All 522 Korean production strings were inspected by namespace against their English meaning and their binding context. The review covered:
 
 - [x] Global navigation, theme, language, and shared privacy controls
 - [x] Homepage hero, directory, principles, verification, and source sections
@@ -50,12 +50,16 @@ Initial drafts for these four catalogs were machine-assisted during development,
 
 ## Layout and behavior review
 
+The reviewed Korean, Japanese, Spanish, German, and French corrections supplied before Sprint 10.5 are stored directly in the runtime-imported locale modules. English remains the reference catalog and was not rewritten during the typography pass.
+
 - [x] Native language names are used without flag-only identification.
 - [x] The shared selector contains exactly `en`, `ko`, `ja`, `es`, `de`, and `fr` on every production page.
-- [x] Korean uses phrase-preserving line breaks and Japanese uses strict line-breaking behavior.
-- [x] Latin, Hangul, and Japanese system-font fallbacks are present; no remote font was added.
+- [x] Korean phrase-preserving breaks are scoped to headings, short descriptions, labels, badges, and controls; filenames and technical values remain free to wrap safely.
+- [x] Japanese uses the browser's natural wrapping with strict line-breaking behavior and does not inherit Korean `keep-all`.
+- [x] Latin languages share a system-first stack; Korean and Japanese add deliberate installed-font fallbacks. No font file, remote stylesheet, or runtime font request was added.
+- [x] Shared heading, body, control, size, and weight tokens avoid unsupported intermediate weights that can synthesize inconsistently across system fonts.
 - [x] Flex and grid children that carry localized text can shrink, and the header wraps before controls collide.
-- [x] Narrow-screen controls stack without truncating critical action text.
+- [x] German and French long labels wrap or stack at narrow widths without global `nowrap`, `break-all`, or text-scaling workarounds.
 - [x] Changing languages re-renders dynamic tools without clearing their application state.
 - [x] The selected language persists and overrides browser detection.
 - [x] `<html lang>` and localized metadata update on every language change.

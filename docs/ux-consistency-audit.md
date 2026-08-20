@@ -48,6 +48,22 @@ Sprint 10 audited the homepage, About, Privacy, all five category hubs, the PDF 
 - Tools continue to save through the established picker/download fallback. A separate “Ready to save” panel would add a second action without improving the existing flow.
 - Category navigation may scroll horizontally on very narrow screens by design; the page body itself must not overflow.
 
+## Sprint 10.5 homepage and typography follow-up
+
+- The duplicate **Ready to use / Available now** homepage block was removed. The homepage now flows from Hero to Tool Categories, Why Secure Tools, Verify Privacy, Open Source, and Footer, with category cards as its single tool-entry model.
+- The three retired homepage-only locale keys and all associated DOM and CSS rules were deleted from every catalog and source surface.
+- Typography is system-first. Latin languages use `system-ui`, Apple, BlinkMacSystemFont, and Segoe UI fallbacks; Korean adds Apple SD Gothic Neo, Malgun Gothic, and Noto Sans KR; Japanese adds Hiragino Sans, Yu Gothic UI/Yu Gothic, Meiryo, and Noto Sans JP.
+- No external font, local webfont, font CDN, `@font-face`, framework, build dependency, or CSP exception was introduced.
+- Shared typography tokens now define common size, line-height, letter-spacing, and supported weight steps. Buttons, inputs, selects, and textareas inherit the active locale stack and line height.
+- Korean `keep-all` is limited to short editorial UI text. Filenames, metadata, URLs, and technical values retain safe overflow behavior.
+- Japanese keeps natural wrapping with strict line-breaking behavior rather than inheriting the Korean policy.
+- Header links, category tabs, cards, controls, settings, statuses, Metadata values, and Organizer actions can shrink, wrap, or stack for German and French long copy without arbitrary font reduction.
+- Category-tab horizontal scrolling and white PDF preview canvases remain intentional exceptions.
+
+Structural tests cover the category-first homepage, dead-key removal, six-locale parity and placeholders, system font stacks, CJK wrapping scope, long-copy layout invariants, control inheritance, and remote-font absence.
+
+Browser automation remained unavailable because the Windows helper failed under the known sandbox ACL restriction. Automated DOM/CSS checks were strengthened, but human review at 320, 360, 390, 768, 1024, and 1280+ CSS pixels—including German/French at 320 and Korean/Japanese at 360—remains required before v1.0.0.
+
 ## Validation boundary
 
 Automated checks cover architecture, semantics, resources, six-language keys, known overflow anti-patterns, CSP, and functional regressions. Browser automation remained subject to the known Windows sandbox ACL limitation during this Sprint. If visual control is unavailable, real human browser review at 360, 390, 768, 1024, and 1440 CSS pixels in Light/Dark themes remains required before v1.0.0 release approval.
