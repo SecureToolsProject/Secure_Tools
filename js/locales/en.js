@@ -9,6 +9,7 @@ export const en = {
     splitPdf: { title: "Split PDF — Secure Tools", description: "Extract or split PDF pages locally in your browser without uploading the source." },
     organizePdf: { title: "Organize PDF — Secure Tools", description: "Reorder, rotate, and remove PDF pages locally in your browser." },
     pdfToImages: { title: "PDF to Images — Secure Tools", description: "Convert PDF pages to PNG, JPEG, or WebP images locally in your browser." },
+    pdfMetadata: { title: "PDF Metadata Inspector & Cleaner — Secure Tools", description: "Inspect and remove supported PDF metadata locally in your browser." },
     pdfCategory: { title: "PDF tools — Secure Tools", description: "Create and organize PDF documents locally in your browser." },
     imageCategory: { title: "Image tools — Secure Tools", description: "Private image tools designed to run locally in your browser." },
     privacyCategory: { title: "Privacy tools — Secure Tools", description: "Inspect and remove hidden file details without uploading the source file." },
@@ -34,7 +35,7 @@ export const en = {
     categoryDescriptions: { pdf: "Create, combine, and organize documents.", image: "Convert and prepare everyday images.", privacy: "Inspect and clean hidden file details.", scan: "Turn scans into useful documents.", media: "Work with audio and video locally." },
     browseCategory: "Browse category →", availableEyebrow: "Ready to use", availableTitle: "Available now",
     availableDescription: "Production tools that keep file processing on your device.",
-    imagesToPdf: "Images to PDF", mergePdf: "Merge PDF", splitPdf: "Split PDF", organizePdf: "Organize PDF", pdfToImages: "PDF to Images", imageConverter: "Image Converter",
+    imagesToPdf: "Images to PDF", mergePdf: "Merge PDF", splitPdf: "Split PDF", organizePdf: "Organize PDF", pdfToImages: "PDF to Images", pdfMetadata: "PDF Metadata", imageConverter: "Image Converter",
     imageCompressor: "Image Compressor", imageResizer: "Image Resizer", metadataInspector: "Metadata Inspector", metadataCleaner: "Metadata Cleaner",
     available: "Available", comingSoon: "Coming soon",
   },
@@ -49,6 +50,7 @@ export const en = {
       split: "Extract selected pages or divide a document into local files.", rotateTitle: "Rotate PDF", rotate: "Correct page orientation without changing document quality.",
       organize: "Preview, reorder, rotate, and remove pages from one PDF.",
       toImages: "Convert ordered PDF pages to PNG, JPEG, or WebP images.",
+      metadata: "Inspect common document metadata and create a verified cleaned copy.",
     },
     image: {
       title: "Image tools", description: "Prepare everyday images privately in your browser.",
@@ -174,6 +176,27 @@ export const en = {
       unsupported: "Choose JPEG, PNG, or WebP image files.", noFiles: "Add at least one image before generating a PDF.", decode: "Could not read {name}. The file may be damaged or unsupported by this browser.",
       fileTooLarge: "This image exceeds the 50 MiB per-file limit.", queueFiles: "You can add up to 100 images.", queueBytes: "The image queue exceeds the 500 MiB total limit.", dimension: "This image exceeds the 16,384 pixel dimension limit.", pixels: "This image exceeds the 50 megapixel limit.", signature: "The file content is not a valid JPEG, PNG, or WebP image.",
       imageExport: "An image was too large or could not be prepared for the PDF.", canvas: "This browser cannot prepare images for PDF generation.", library: "The local PDF library could not be loaded.", generation: "The PDF could not be generated. Try fewer or smaller images.", save: "The save location could not be opened. Please try again.",
+    },
+  },
+  pdfMetadata: {
+    eyebrow: "PDF privacy tool", title: "PDF Metadata Inspector & Cleaner", description: "Review common document metadata and create a cleaned copy without uploading your PDF.",
+    scope: { title: "Supported scope", body: "This tool covers the standard document-info fields shown below. It is not a forensic scrubber and does not claim to remove XMP packets, attachments, annotations, hidden content, or every identifying structure." },
+    drop: { title: "Add one PDF", description: "Drop a PDF here or use the picker. Choosing another file replaces the current source.", choose: "Choose PDF", localTitle: "Processed locally.", localBody: "Your PDF never leaves this device.", privacyLink: "How privacy works" },
+    source: { title: "Source PDF", empty: "No PDF selected yet.", summary: "{name} · {size} · {pages} page(s) · {fields} supported field(s) present" },
+    inspector: {
+      title: "Detected document metadata", help: "Select the fields to remove. Creator, producer, author, and date values may identify a person, device, or application.", caption: "Supported metadata fields found in the PDF",
+      remove: "Remove", field: "Field", value: "Current value", notSet: "Not set", removeField: "Remove {field}", truncated: "Display shortened; cleaning still uses the complete stored value.",
+    },
+    fields: { title: "Title", author: "Author", subject: "Subject", keywords: "Keywords", creator: "Creator application", producer: "PDF producer", creationDate: "Creation date", modificationDate: "Modification date" },
+    output: { title: "Create cleaned copy", description: "The original stays unchanged. The saved copy is re-opened and checked before success is reported.", filename: "Output filename", filenameHelp: "A .pdf extension is added automatically.", pdfFile: "PDF document" },
+    actions: { clearSource: "Clear PDF", selectAll: "Select all present", clearSelection: "Clear selection", clean: "Clean and save PDF" },
+    comparison: { title: "Verified before and after", before: "Before", after: "After saved copy", cleared: "Verified: {count} selected field(s) are absent from the serialized copy.", retained: "Warning: {count} selected field(s) remain in the serialized copy." },
+    status: {
+      reading: "Reading metadata locally…", loaded: "Found {count} supported metadata field(s) across a {pages}-page PDF.", noneFound: "No supported document-info metadata was found in this {pages}-page PDF.", cleared: "Source PDF cleared.",
+      cleaning: "Removing selected metadata and verifying the saved bytes…", saved: "Saved {name}; verified {count} field(s) removed.", downloaded: "Downloaded {name}; verified {count} field(s) removed.", partiallyCleaned: "Saved {name}, but verification found {count} selected field(s) still present.", cancelled: "Save cancelled. No file was written.",
+    },
+    errors: {
+      oneFile: "Choose one PDF at a time.", unsupported: "Choose a PDF file.", protected: "This PDF is password-protected or encrypted and cannot be inspected.", unreadable: "This PDF is damaged or unreadable.", noSelection: "Select at least one present metadata field to remove.", pagesChanged: "The cleaned copy did not preserve every page dimension and rotation, so it was not saved.", failure: "The PDF metadata could not be processed safely.", save: "The save location could not be opened. Please try again.",
     },
   },
   pdfToImages: {

@@ -9,6 +9,7 @@ export const ko = {
     splitPdf: { title: "PDF 나누기 — Secure Tools", description: "원본을 업로드하지 않고 브라우저에서 PDF 페이지를 추출하거나 나누세요." },
     organizePdf: { title: "PDF 정리 — Secure Tools", description: "PDF 페이지를 브라우저에서 로컬로 재정렬하고 회전하고 제거하세요." },
     pdfToImages: { title: "PDF 이미지 변환 — Secure Tools", description: "PDF 페이지를 브라우저에서 로컬로 PNG, JPEG 또는 WebP 이미지로 변환하세요." },
+    pdfMetadata: { title: "PDF 메타데이터 확인 및 제거 — Secure Tools", description: "지원되는 PDF 메타데이터를 브라우저에서 로컬로 확인하고 제거하세요." },
     pdfCategory: { title: "PDF 도구 — Secure Tools", description: "브라우저에서 PDF 문서를 로컬로 만들고 정리하세요." },
     imageCategory: { title: "이미지 도구 — Secure Tools", description: "브라우저에서 로컬로 작동하도록 설계된 프라이빗 이미지 도구입니다." },
     privacyCategory: { title: "개인정보 보호 도구 — Secure Tools", description: "원본 파일을 업로드하지 않고 숨겨진 파일 정보를 확인하고 제거하세요." },
@@ -29,7 +30,7 @@ export const ko = {
     categories: { pdf: "PDF", image: "이미지", privacy: "개인정보 보호", scan: "스캔 및 OCR", media: "미디어" },
     categoryDescriptions: { pdf: "문서를 만들고 합치고 정리합니다.", image: "일상 이미지를 변환하고 준비합니다.", privacy: "숨겨진 파일 정보를 확인하고 정리합니다.", scan: "스캔을 유용한 문서로 바꿉니다.", media: "오디오와 비디오를 로컬에서 다룹니다." },
     browseCategory: "카테고리 보기 →", availableEyebrow: "바로 사용", availableTitle: "지금 사용 가능", availableDescription: "파일을 기기에서 처리하는 완성된 도구입니다.",
-    imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", organizePdf: "PDF 정리", pdfToImages: "PDF를 이미지로", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
+    imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", organizePdf: "PDF 정리", pdfToImages: "PDF를 이미지로", pdfMetadata: "PDF 메타데이터", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
     available: "사용 가능", comingSoon: "준비 중",
   },
   categories: {
@@ -43,6 +44,7 @@ export const ko = {
       split: "선택한 페이지를 추출하거나 문서를 로컬 파일로 나눕니다.", rotateTitle: "PDF 회전", rotate: "문서 품질을 바꾸지 않고 페이지 방향을 바로잡습니다.",
       organize: "PDF 하나의 페이지를 미리 보고 재정렬하고 회전하거나 제거합니다.",
       toImages: "PDF 페이지를 입력 순서대로 PNG, JPEG 또는 WebP 이미지로 변환합니다.",
+      metadata: "일반 문서 메타데이터를 확인하고 검증된 정리 사본을 만듭니다.",
     },
     image: {
       title: "이미지 도구", description: "일상 이미지 파일을 브라우저에서 비공개로 준비하세요.",
@@ -155,6 +157,27 @@ export const ko = {
       unsupported: "JPEG, PNG 또는 WebP 이미지 파일을 선택하세요.", noFiles: "PDF를 생성하기 전에 이미지를 하나 이상 추가하세요.", decode: "{name} 파일을 읽을 수 없습니다. 파일이 손상되었거나 이 브라우저에서 지원하지 않을 수 있습니다.",
       fileTooLarge: "이미지 한 개의 50 MiB 제한을 초과했습니다.", queueFiles: "이미지는 최대 100개까지 추가할 수 있습니다.", queueBytes: "이미지 목록의 전체 500 MiB 제한을 초과했습니다.", dimension: "이미지의 한 변이 16,384픽셀 제한을 초과했습니다.", pixels: "이미지가 5천만 픽셀 제한을 초과했습니다.", signature: "파일 내용이 올바른 JPEG, PNG 또는 WebP 이미지가 아닙니다.",
       imageExport: "이미지가 너무 크거나 PDF용으로 준비할 수 없습니다.", canvas: "이 브라우저에서는 PDF용 이미지를 준비할 수 없습니다.", library: "로컬 PDF 라이브러리를 불러오지 못했습니다.", generation: "PDF를 생성하지 못했습니다. 이미지 수나 크기를 줄여 다시 시도하세요.", save: "저장 위치를 열 수 없습니다. 다시 시도하세요.",
+    },
+  },
+  pdfMetadata: {
+    eyebrow: "PDF 개인정보 보호 도구", title: "PDF 메타데이터 확인 및 제거", description: "PDF를 업로드하지 않고 일반 문서 메타데이터를 확인하고 정리된 사본을 만드세요.",
+    scope: { title: "지원 범위", body: "이 도구는 아래에 표시된 표준 문서 정보 필드를 처리합니다. 포렌식 삭제 도구가 아니며 XMP 패킷, 첨부 파일, 주석, 숨겨진 콘텐츠 또는 모든 식별 정보를 제거한다고 주장하지 않습니다." },
+    drop: { title: "PDF 하나 추가", description: "PDF를 여기에 놓거나 선택기를 사용하세요. 다른 파일을 선택하면 현재 원본을 교체합니다.", choose: "PDF 선택", localTitle: "로컬에서 처리됩니다.", localBody: "PDF는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
+    source: { title: "원본 PDF", empty: "아직 선택한 PDF가 없습니다.", summary: "{name} · {size} · {pages}페이지 · 지원 필드 {fields}개 있음" },
+    inspector: {
+      title: "감지된 문서 메타데이터", help: "제거할 필드를 선택하세요. 작성자, 생성 프로그램, PDF 생성기 및 날짜 값은 사람, 기기 또는 앱을 식별할 수 있습니다.", caption: "PDF에서 발견된 지원 메타데이터 필드",
+      remove: "제거", field: "필드", value: "현재 값", notSet: "설정되지 않음", removeField: "{field} 제거", truncated: "표시만 줄였습니다. 정리에는 저장된 전체 값을 사용합니다.",
+    },
+    fields: { title: "제목", author: "작성자", subject: "주제", keywords: "키워드", creator: "생성 프로그램", producer: "PDF 생성기", creationDate: "생성 날짜", modificationDate: "수정 날짜" },
+    output: { title: "정리된 사본 만들기", description: "원본은 변경되지 않습니다. 저장된 사본을 다시 열어 확인한 뒤 성공을 알립니다.", filename: "출력 파일명", filenameHelp: ".pdf 확장자는 자동으로 추가됩니다.", pdfFile: "PDF 문서" },
+    actions: { clearSource: "PDF 비우기", selectAll: "있는 필드 모두 선택", clearSelection: "선택 해제", clean: "PDF 정리 및 저장" },
+    comparison: { title: "검증된 전후 비교", before: "이전", after: "저장된 사본", cleared: "검증 완료: 선택한 필드 {count}개가 직렬화된 사본에 없습니다.", retained: "경고: 선택한 필드 {count}개가 직렬화된 사본에 남아 있습니다." },
+    status: {
+      reading: "메타데이터를 로컬에서 읽는 중…", loaded: "{pages}페이지 PDF에서 지원 메타데이터 필드 {count}개를 찾았습니다.", noneFound: "이 {pages}페이지 PDF에서 지원되는 문서 정보 메타데이터를 찾지 못했습니다.", cleared: "원본 PDF를 비웠습니다.",
+      cleaning: "선택한 메타데이터를 제거하고 저장된 바이트를 검증하는 중…", saved: "{name} 저장 완료, 필드 {count}개 제거를 검증했습니다.", downloaded: "{name} 다운로드 완료, 필드 {count}개 제거를 검증했습니다.", partiallyCleaned: "{name} 파일을 저장했지만 선택한 필드 {count}개가 남아 있음을 확인했습니다.", cancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
+    },
+    errors: {
+      oneFile: "PDF는 한 번에 하나만 선택하세요.", unsupported: "PDF 파일을 선택하세요.", protected: "암호로 보호되거나 암호화된 PDF는 확인할 수 없습니다.", unreadable: "PDF가 손상되었거나 읽을 수 없습니다.", noSelection: "제거할 메타데이터 필드를 하나 이상 선택하세요.", pagesChanged: "정리된 사본에서 모든 페이지 크기와 회전이 유지되지 않아 저장하지 않았습니다.", failure: "PDF 메타데이터를 안전하게 처리하지 못했습니다.", save: "저장 위치를 열 수 없습니다. 다시 시도하세요.",
     },
   },
   pdfToImages: {

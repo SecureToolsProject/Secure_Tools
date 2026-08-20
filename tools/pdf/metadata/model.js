@@ -1,14 +1,14 @@
 export const MAX_METADATA_DISPLAY_LENGTH = 2000;
 
 export const SUPPORTED_METADATA_FIELDS = Object.freeze([
-  { key: "title", labelKey: "tools.pdfMetadata.fields.title", getter: "getTitle", pdfName: "Title", type: "string" },
-  { key: "author", labelKey: "tools.pdfMetadata.fields.author", getter: "getAuthor", pdfName: "Author", type: "string" },
-  { key: "subject", labelKey: "tools.pdfMetadata.fields.subject", getter: "getSubject", pdfName: "Subject", type: "string" },
-  { key: "keywords", labelKey: "tools.pdfMetadata.fields.keywords", getter: "getKeywords", pdfName: "Keywords", type: "string" },
-  { key: "creator", labelKey: "tools.pdfMetadata.fields.creator", getter: "getCreator", pdfName: "Creator", type: "string" },
-  { key: "producer", labelKey: "tools.pdfMetadata.fields.producer", getter: "getProducer", pdfName: "Producer", type: "string" },
-  { key: "creationDate", labelKey: "tools.pdfMetadata.fields.creationDate", getter: "getCreationDate", pdfName: "CreationDate", type: "date" },
-  { key: "modificationDate", labelKey: "tools.pdfMetadata.fields.modificationDate", getter: "getModificationDate", pdfName: "ModDate", type: "date" },
+  { key: "title", labelKey: "pdfMetadata.fields.title", getter: "getTitle", pdfName: "Title", type: "string" },
+  { key: "author", labelKey: "pdfMetadata.fields.author", getter: "getAuthor", pdfName: "Author", type: "string" },
+  { key: "subject", labelKey: "pdfMetadata.fields.subject", getter: "getSubject", pdfName: "Subject", type: "string" },
+  { key: "keywords", labelKey: "pdfMetadata.fields.keywords", getter: "getKeywords", pdfName: "Keywords", type: "string" },
+  { key: "creator", labelKey: "pdfMetadata.fields.creator", getter: "getCreator", pdfName: "Creator", type: "string" },
+  { key: "producer", labelKey: "pdfMetadata.fields.producer", getter: "getProducer", pdfName: "Producer", type: "string" },
+  { key: "creationDate", labelKey: "pdfMetadata.fields.creationDate", getter: "getCreationDate", pdfName: "CreationDate", type: "date" },
+  { key: "modificationDate", labelKey: "pdfMetadata.fields.modificationDate", getter: "getModificationDate", pdfName: "ModDate", type: "date" },
 ]);
 
 const SUPPORTED_KEYS = new Set(SUPPORTED_METADATA_FIELDS.map(({ key }) => key));
