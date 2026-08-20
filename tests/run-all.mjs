@@ -33,6 +33,7 @@ for (const test of [
   "tests/pdf-organizer.test.mjs",
   "tests/pdf-metadata.test.mjs",
   "tests/i18n-quality.test.mjs",
+  "tests/ux-consistency.test.mjs",
   "tests/ci-foundation.test.mjs",
 ]) {
   runNode([test], test);
