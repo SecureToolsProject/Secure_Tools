@@ -1,74 +1,74 @@
 export const ja = {
   "metadata": {
     "home": {
-      "title": "安全なツール — 日常的なファイルのためのプライベート ツール",
-      "description": "ブラウザでファイルをプライベートに変換、検査、処理します。アップロード、アカウント、分析、追跡はありません。"
+      "title": "Secure Tools — 日常のファイルを安全に扱うプライバシーツール",
+      "description": "ファイルをアップロードせず、ブラウザ上で変換・確認・処理できます。アカウント、アクセス解析、追跡はありません。"
     },
     "privacy": {
-      "title": "プライバシー — 安全なツール",
-      "description": "Secure Tools がファイル処理をローカルに維持し、追跡を回避し、ローカル ストレージを環境設定のみに使用する方法。"
+      "title": "プライバシー — Secure Tools",
+      "description": "Secure Toolsがファイルを端末内で処理し、追跡を行わず、言語とテーマの設定だけを保存する仕組みを紹介します。"
     },
     "about": {
-      "title": "について — 安全なツール",
-      "description": "Secure Tools が、単に信頼するだけでなく検査できるオープンなローカルファーストのファイル ユーティリティを構築する理由。"
+      "title": "Secure Toolsについて",
+      "description": "Secure Toolsが、ただ信頼するのではなく自分で確認できるオープンソースのローカルファイルツールを目指す理由を紹介します。"
     },
     "notFound": {
-      "title": "ページが見つかりません — 安全なツール",
-      "description": "要求されたセキュア ツール ページが見つかりませんでした。"
+      "title": "ページが見つかりません — Secure Tools",
+      "description": "指定されたSecure Toolsのページが見つかりません。"
     },
     "imageToPdf": {
-      "title": "画像を PDF に変換 — 安全なツール",
-      "description": "JPEG、PNG、WebP 画像をブラウザ内で完全に PDF に結合します。"
+      "title": "画像をPDFに変換 — Secure Tools",
+      "description": "JPEG、PNG、WebP画像を端末内で処理し、1つのPDFにまとめます。"
     },
     "mergePdf": {
-      "title": "PDF を結合 — 安全なツール",
-      "description": "PDF ファイルをアップロードせずにブラウザ内で完全に配置および結合します。"
+      "title": "PDFを結合 — Secure Tools",
+      "description": "PDFをアップロードせず、選んだ順番で1つのPDFに結合します。"
     },
     "splitPdf": {
-      "title": "PDF の分割 — 安全なツール",
-      "description": "ソースをアップロードせずに、ブラウザーでローカルに PDF ページを抽出または分割します。"
+      "title": "PDFを分割 — Secure Tools",
+      "description": "PDFをアップロードせず、必要なページの抽出や分割を端末内で行います。"
     },
     "organizePdf": {
-      "title": "PDF を整理する — 安全なツール",
-      "description": "PDF ページをブラウザーでローカルに並べ替え、回転、削除します。"
+      "title": "PDFを整理 — Secure Tools",
+      "description": "PDFページの並べ替え、回転、削除を端末内で行います。"
     },
     "pdfToImages": {
-      "title": "PDF から画像へ — 安全なツール",
-      "description": "ブラウザーでローカルに PDF ページを PNG、JPEG、または WebP 画像に変換します。"
+      "title": "PDFを画像に変換 — Secure Tools",
+      "description": "PDFページをPNG、JPEG、WebP画像に端末内で変換します。"
     },
     "pdfMetadata": {
-      "title": "PDF メタデータ インスペクター & クリーナー — 安全なツール",
-      "description": "サポートされている PDF メタデータをブラウザーでローカルに検査して削除します。"
+      "title": "PDFメタデータの確認・削除 — Secure Tools",
+      "description": "対応しているPDFメタデータを端末内で確認し、選んで削除できます。"
     },
     "pdfCategory": {
-      "title": "PDF ツール — 安全なツール",
-      "description": "ブラウザーでローカルに PDF ドキュメントを作成および整理します。"
+      "title": "PDFツール — Secure Tools",
+      "description": "PDFの作成・結合・分割・整理を端末内で行えます。"
     },
     "imageCategory": {
-      "title": "画像ツール — 安全なツール",
-      "description": "ブラウザ内でローカルに実行するように設計されたプライベート イメージ ツール。"
+      "title": "画像ツール — Secure Tools",
+      "description": "ブラウザ上で端末内処理する、プライバシー重視の画像ツールです。"
     },
     "privacyCategory": {
-      "title": "プライバシー ツール — 安全なツール",
-      "description": "ソース ファイルをアップロードせずに、隠しファイルの詳細を検査して削除します。"
+      "title": "プライバシーツール — Secure Tools",
+      "description": "元のファイルをアップロードせず、ファイルに含まれる情報を確認・削除します。"
     },
     "scanCategory": {
-      "title": "スキャンおよび OCR ツール — 安全なツール",
-      "description": "プライベート文書用のローカル スキャンおよびテキスト認識ツール。"
+      "title": "スキャン・OCRツール — Secure Tools",
+      "description": "個人文書を端末内で扱うスキャン・文字認識ツールです。"
     },
     "mediaCategory": {
-      "title": "メディア ツール — 安全なツール",
-      "description": "Secure Tools のローカル オーディオおよびビデオ ユーティリティ。"
+      "title": "メディアツール — Secure Tools",
+      "description": "音声や動画を端末内で処理するSecure Toolsのユーティリティです。"
     }
   },
   "common": {
-    "skip": "メインコンテンツにスキップ",
-    "brandTagline": "プライベート ユーティリティ、デバイス上で処理されます",
+    "skip": "メインコンテンツへ移動",
+    "brandTagline": "端末内で処理するプライバシーツール",
     "nav": {
       "tools": "ツール",
       "privacy": "プライバシー",
-      "source": "ソース",
-      "about": "について"
+      "source": "ソースコード",
+      "about": "概要"
     },
     "language": "言語",
     "theme": "テーマ",
@@ -77,335 +77,335 @@ export const ja = {
       "light": "ライト",
       "dark": "ダーク"
     },
-    "footerStatement": "ファイルが外部へ送信されることはありません。"
+    "footerStatement": "ファイルはこの端末の外へ送信されません"
   },
   "hero": {
-    "eyebrow": "ローカルファーストのファイルユーティリティ",
-    "title": "日常のファイルのためのプライベートツール。",
-    "description": "デバイス上でファイルを直接変換、検査、処理します。アップロードはありません。アカウントがありません。追跡はありません。",
-    "primary": "探索ツール",
-    "secondary": "プライバシーを確認する",
-    "trust": "ローカル処理 · オープンソース · 追跡なし",
-    "proofLabel": "デバイスに残ったもの",
-    "proofValue": "何もありません",
-    "proofNote": "コアツールはブラウザメモリ内のファイルコンテンツを処理します。"
+    "eyebrow": "ローカルファーストのファイルツール",
+    "title": "日常のファイルを、もっと安全に",
+    "description": "ファイルをこの端末上で変換・確認・処理できます。アップロードも、アカウントも、追跡もありません",
+    "primary": "ツールを見る",
+    "secondary": "プライバシーを確認",
+    "trust": "端末内処理 · オープンソース · 追跡なし",
+    "proofLabel": "端末の外へ送信されるファイル",
+    "proofValue": "なし",
+    "proofNote": "主要なツールはブラウザのメモリ上でファイルを処理します"
   },
   "tools": {
     "eyebrow": "ツール",
-    "title": "取り組むべきことから始めましょう。",
-    "description": "焦点を当てたカテゴリを参照して、ツールを選択します。可用性は常に明確に表示されます。",
+    "title": "必要な作業からツールを選べます",
+    "description": "カテゴリから目的に合うツールを選んでください。利用できる機能はわかりやすく表示します",
     "categories": {
       "pdf": "PDF",
       "image": "画像",
       "privacy": "プライバシー",
-      "scan": "スキャンと OCR",
+      "scan": "スキャン・OCR",
       "media": "メディア"
     },
     "categoryDescriptions": {
-      "pdf": "ドキュメントを作成、結合、整理します。",
-      "image": "日常の画像を変換して準備します。",
-      "privacy": "隠しファイルの詳細を検査して消去します。",
-      "scan": "スキャンを有用なドキュメントに変換します。",
-      "media": "オーディオとビデオをローカルで操作します。"
+      "pdf": "PDFの作成・結合・整理",
+      "image": "画像の変換や調整",
+      "privacy": "ファイルに含まれる情報の確認・削除",
+      "scan": "スキャン画像を使いやすい文書へ変換",
+      "media": "音声や動画を端末内で処理"
     },
-    "browseCategory": "カテゴリを見る→",
-    "availableEyebrow": "すぐに使用できます",
-    "availableTitle": "発売中",
-    "availableDescription": "デバイス上でファイル処理を続ける制作ツール。",
-    "imagesToPdf": "画像を PDF に変換",
-    "mergePdf": "PDF を結合",
-    "splitPdf": "PDFの分割",
-    "organizePdf": "PDF を整理する",
-    "pdfToImages": "PDF から画像へ",
-    "pdfMetadata": "PDF メタデータ",
-    "imageConverter": "画像コンバーター",
-    "imageCompressor": "画像圧縮器",
-    "imageResizer": "画像リサイザー",
-    "metadataInspector": "メタデータインスペクター",
-    "metadataCleaner": "メタデータ クリーナー",
-    "available": "在庫あり",
-    "comingSoon": "近日公開予定"
+    "browseCategory": "ツールを見る →",
+    "availableEyebrow": "すぐ使えるツール",
+    "availableTitle": "利用可能",
+    "availableDescription": "ファイルを外部へ送らず、この端末上で処理します",
+    "imagesToPdf": "画像をPDFに",
+    "mergePdf": "PDFを結合",
+    "splitPdf": "PDFを分割",
+    "organizePdf": "PDFを整理",
+    "pdfToImages": "PDFを画像に",
+    "pdfMetadata": "PDFメタデータ",
+    "imageConverter": "画像変換",
+    "imageCompressor": "画像圧縮",
+    "imageResizer": "画像サイズ変更",
+    "metadataInspector": "メタデータ確認",
+    "metadataCleaner": "メタデータ削除",
+    "available": "利用可能",
+    "comingSoon": "準備中"
   },
   "categories": {
-    "eyebrow": "工具カテゴリ",
+    "eyebrow": "ツールカテゴリ",
     "nav": {
       "pdf": "PDF",
       "image": "画像",
       "privacy": "プライバシー",
-      "scan": "スキャンと OCR",
+      "scan": "スキャン・OCR",
       "media": "メディア"
     },
-    "localNote": "利用可能なツールは、ブラウザのメモリ内のファイルの内容を処理します。計画された項目は明確にマークされます。",
-    "plannedNote": "このカテゴリーは企画中です。使用できないアイテムは動作しているものとして表示されません。",
+    "localNote": "利用可能なツールはブラウザのメモリ上でファイルを処理します。準備中の機能は別に表示します。",
+    "plannedNote": "このカテゴリは準備中です。まだ利用できない機能は「準備中」と表示します。",
     "pdf": {
-      "title": "PDF ツール",
-      "description": "プライベート ファイルをアップロードせずに、PDF ドキュメントをローカルで作成および整理します。",
-      "imagesToPdf": "JPEG、PNG、WebP 画像を 1 つの PDF に配置します。",
-      "merge": "PDF ファイルを選択した順序で結合します。",
-      "split": "選択したページを抽出するか、ドキュメントをローカル ファイルに分割します。",
-      "rotateTitle": "PDF を回転",
-      "rotate": "ドキュメントの品質を変更せずにページの向きを修正します。",
-      "organize": "1 つの PDF からページをプレビュー、並べ替え、回転、削除します。",
-      "toImages": "注文した PDF ページを PNG、JPEG、または WebP 画像に変換します。",
-      "metadata": "共通のドキュメントのメタデータを検査し、検証済みのクリーンなコピーを作成します。"
+      "title": "PDFツール",
+      "description": "個人ファイルをアップロードせず、PDFを端末内で作成・整理できます",
+      "imagesToPdf": "JPEG、PNG、WebP画像を好きな順番で1つのPDFにまとめます",
+      "merge": "PDFを選んだ順番で1つに結合します",
+      "split": "必要なページを抽出したり、PDFを複数のファイルに分割したりできます",
+      "rotateTitle": "PDFを回転",
+      "rotate": "画質を変えずにページの向きを調整します",
+      "organize": "PDFのページをプレビューし、並べ替え・回転・削除できます",
+      "toImages": "PDFページをPNG、JPEG、WebP画像に変換します",
+      "metadata": "一般的な文書メタデータを確認し、削除後の内容を検証したコピーを作成します"
     },
     "image": {
       "title": "画像ツール",
-      "description": "日常の画像をブラウザ上でプライベートに準備します。",
-      "convert": "一般的な画像形式をローカルで変換します。",
-      "compress": "明確な品質管理によりファイル サイズを削減します。",
-      "resize": "画像のサイズを正確なピクセル寸法に変更します。"
+      "description": "画像ファイルをブラウザ上でプライベートに処理します",
+      "convert": "一般的な画像形式を端末内で変換します",
+      "compress": "画質を調整しながらファイルサイズを小さくします",
+      "resize": "画像を指定したピクセルサイズに変更します"
     },
     "privacy": {
-      "title": "プライバシー ツール",
-      "description": "ソースファイルを共有せずに、隠しファイルの詳細を検査して削除します。",
-      "inspect": "ファイルにどのような識別情報が含まれているかを確認します。",
-      "clean": "サポートされているメタデータを削除してコピーを作成します。"
+      "title": "プライバシーツール",
+      "description": "元のファイルを共有せず、ファイルに含まれる情報を確認・削除します",
+      "inspect": "ファイルに含まれる識別情報を確認します",
+      "clean": "対応しているメタデータを削除したコピーを作成します"
     },
     "scan": {
-      "title": "スキャンおよび OCR ツール",
-      "description": "ソース素材をデバイスに保存しながら、スキャンを有用なドキュメントに変換します。",
-      "ocrTitle": "画像をテキストに変換",
-      "ocr": "画像からテキストをローカルで認識します。",
-      "documentTitle": "ドキュメントスキャナー",
-      "document": "撮影したドキュメントをトリミングしてクリーニングします。"
+      "title": "スキャン・OCRツール",
+      "description": "元の資料を端末内に保ったまま、スキャン画像を使いやすい文書に変換します",
+      "ocrTitle": "画像からテキスト",
+      "ocr": "画像内の文字を端末内で認識します",
+      "documentTitle": "文書スキャナー",
+      "document": "撮影した文書を切り抜き、見やすく補正します"
     },
     "media": {
       "title": "メディアツール",
-      "description": "ローカル処理用に設計された小さなオーディオおよびビデオ ユーティリティ。",
-      "audioTitle": "オーディオコンバータ",
-      "audio": "デバイス上の一般的なオーディオ形式を変換します。",
-      "videoTitle": "ビデオトリム",
-      "video": "サーバーに送信せずにクリップをトリミングします。"
+      "description": "音声や動画を端末内で処理するシンプルなツールです",
+      "audioTitle": "音声変換",
+      "audio": "一般的な音声形式を端末内で変換します",
+      "videoTitle": "動画をトリミング",
+      "video": "サーバーへ送信せず、必要な区間を切り出します"
     }
   },
   "why": {
-    "eyebrow": "ツールを安全にする理由",
-    "title": "よりシンプルなプライバシー モデル。",
-    "description": "Secure Tools は、コアのファイル処理ワークフローからサーバーを削除することで、信頼する必要があるものを最小限に抑えます。",
+    "eyebrow": "Secure Toolsを選ぶ理由",
+    "title": "シンプルで透明なプライバシー設計",
+    "description": "主要なファイル処理からサーバーを外し、信頼しなければならない対象を減らしています",
     "local": {
-      "title": "ローカル処理",
-      "body": "ファイルはデバイスのブラウザ内で処理されます。"
+      "title": "端末内処理",
+      "body": "ファイルはブラウザを使って、この端末上で処理されます"
     },
     "accounts": {
-      "title": "アカウントがありません",
-      "body": "基本的なユーティリティは、登録や個人プロファイルなしで動作します。"
+      "title": "アカウント不要",
+      "body": "登録や個人プロフィールを作らなくても基本ツールを利用できます"
     },
     "tracking": {
       "title": "追跡なし",
-      "body": "分析、行動追跡、広告ピクセルはありません。"
+      "body": "アクセス解析、行動トラッキング、広告用ピクセルは使用しません"
     },
     "network": {
-      "title": "最小限のネットワーク依存性",
-      "body": "コア処理は外部ランタイム サービスに依存しません。"
+      "title": "ネットワーク依存を最小限に",
+      "body": "主要な処理は外部の実行サービスに依存しません"
     }
   },
   "verify": {
-    "eyebrow": "プライバシーを確認する",
-    "title": "私たちの言葉を鵜呑みにしないでください。",
-    "description": "ネットワークアクティビティを自分で検査し、ファイルがデバイスから決して流出していないことを確認できます。",
-    "step1": "ブラウザの開発者ツールを開きます。",
-    "step2": "[ネットワーク]タブを選択します。",
-    "step3": "サンプル ファイルを使用して安全なツールを実行します。",
-    "step4": "ファイルがアップロードされていないことを確認してください。",
-    "source": "ソースを見る",
-    "architecture": "プライバシー アーキテクチャ"
+    "eyebrow": "プライバシーを確認",
+    "title": "自分で確認できます",
+    "description": "ブラウザのネットワーク通信を確認すれば、ファイルが外部へ送信されていないことを自分で確かめられます",
+    "step1": "ブラウザの開発者ツールを開きます",
+    "step2": "「ネットワーク」タブを開きます",
+    "step3": "サンプルファイルでSecure Toolsを実行します",
+    "step4": "ファイルをアップロードする通信がないことを確認します",
+    "source": "ソースコードを見る",
+    "architecture": "プライバシー設計"
   },
   "openSource": {
     "eyebrow": "オープンソース",
-    "title": "設計によりオープンします。",
-    "description": "セキュア ツールは、単に信頼するのではなく、プライバシーの主張を検査できるように構築されています。",
-    "action": "ソースを参照する"
+    "title": "設計からオープンに",
+    "description": "Secure Toolsのプライバシー設計は、ソースコードを見て自分で確認できます",
+    "action": "ソースコードを見る"
   },
   "privacy": {
     "eyebrow": "プライバシーモデル",
-    "title": "プライバシーはアーキテクチャ上の選択です。",
-    "intro": "Secure Tools は、ファイルの内容をブラウザ内でローカルに処理するように設計されています。このページでは現在の技術モデルについて説明しており、未完成の機能について約束するものではありません。",
-    "localTitle": "ローカルファイル処理",
-    "localBody": "サポートされているツールは、ブラウザーのメモリ内のファイルを読み取り、変換します。ファイルの内容は Secure Tools サーバーには送信されません。",
-    "collectionTitle": "アカウントも分析もありません",
-    "collectionBody": "Web ハブには、ユーザー アカウント、分析、行動追跡、広告、または追跡ピクセルがありません。",
-    "storageTitle": "優先ストレージ",
-    "storageBody": "localStorage は、このデバイスでの言語とテーマの選択を記憶するためにのみ使用されます。",
+    "title": "プライバシーは設計から",
+    "intro": "Secure Toolsは、ファイル内容をブラウザ上で端末内処理するよう設計されています。このページでは、未提供の機能ではなく現在の技術的な仕組みを説明します。",
+    "localTitle": "端末内でファイルを処理",
+    "localBody": "対応しているツールはブラウザのメモリ上でファイルを読み込み、変換します。ファイル内容がSecure Toolsのサーバーへ送信されることはありません。",
+    "collectionTitle": "アカウントもアクセス解析もなし",
+    "collectionBody": "ユーザーアカウント、アクセス解析、行動追跡、広告、トラッキングピクセルは使用しません。",
+    "storageTitle": "設定の保存",
+    "storageBody": "localStorageは、この端末で選んだ言語とテーマを記憶するためだけに使用します。",
     "linksTitle": "外部リンク",
-    "linksBody": "GitHub などの外部リンクをたどると、Secure Tools から離れ、そのサービス独自のポリシーによって管理されます。"
+    "linksBody": "GitHubなどの外部リンクを開くとSecure Toolsを離れ、以降はリンク先サービスのポリシーが適用されます。"
   },
   "about": {
-    "eyebrow": "について",
-    "title": "小さな工具。検査可能な信頼。",
-    "intro": "Secure Tools は、ブラウザ内でローカルに実行するように構築された、プライバシーを最優先した日常的なファイル ユーティリティのコレクションです。",
-    "purposeTitle": "存在理由",
-    "purposeBody": "一般的なファイルタスクでは、個人文書を未知のサーバーにアップロードしたり、アカウントを作成したりする必要があってはなりません。",
-    "philosophyTitle": "ローカルファーストでオープンな",
-    "philosophyBody": "このプロジェクトは、ソースとネットワークの検査を通じて誰でも検証できる、静的で理解しやすいコードとプライバシー モデルを優先します。"
+    "eyebrow": "Secure Toolsについて",
+    "title": "小さなツール、確かめられる信頼",
+    "intro": "Secure Toolsは、日常のファイルをブラウザ上で端末内処理する、プライバシー重視のツール集です。",
+    "purposeTitle": "作った理由",
+    "purposeBody": "ちょっとしたファイル作業のために、個人文書を知らないサーバーへアップロードしたり、アカウントを作ったりする必要はないと考えています。",
+    "philosophyTitle": "ローカルファーストと透明性",
+    "philosophyBody": "ソースコードやネットワーク通信を誰でも確認できるよう、シンプルな静的構成と透明なプライバシー設計を大切にしています。"
   },
   "splitPdf": {
     "eyebrow": "PDFツール",
-    "title": "PDFの分割",
-    "description": "選択したページを抽出するか、1 つの PDF を予測可能なローカル ファイルに分割します。",
+    "title": "PDFを分割",
+    "description": "必要なページを抽出したり、PDFを複数のローカルファイルに分割したりできます",
     "drop": {
-      "title": "PDF を 1 つ追加",
-      "description": "PDF をここにドロップするか、ピッカーを使用します。このデバイスではソースは読み取り専用です。",
-      "choose": "PDF を選択してください",
-      "localTitle": "このデバイス上で処理します。",
-      "localBody": "PDFが外部へ送信されることはありません。",
+      "title": "PDFを追加",
+      "description": "PDFをここにドロップするか、ファイルを選択してください。元のファイルはこの端末内でのみ読み取られます",
+      "choose": "PDFを選択",
+      "localTitle": "この端末で処理します",
+      "localBody": "PDFは外部へ送信されません",
       "privacyLink": "プライバシーの仕組み"
     },
     "source": {
-      "title": "ソース PDF",
-      "empty": "PDF がまだ選択されていません。",
-      "meta": "{size} · {pages} ページ",
-      "remove": "ソース PDF を削除"
+      "title": "元のPDF",
+      "empty": "PDFが選択されていません",
+      "meta": "{size} · {pages}ページ",
+      "remove": "元のPDFを削除"
     },
     "modes": {
-      "title": "スプリットモード",
-      "legend": "PDF の分割方法を選択します",
+      "title": "分割方法",
+      "legend": "PDFの分割方法を選択",
       "extract": {
-        "title": "ページ範囲の抽出",
-        "body": "入力されたページ順序どおりに 1 つの PDF を作成します。"
+        "title": "ページを指定して抽出",
+        "body": "入力した順番でページをまとめ、1つのPDFを作成します"
       },
       "every": {
-        "title": "ページごとに分割",
-        "body": "ZIP アーカイブ内のページごとに 1 つの PDF を作成します。"
+        "title": "1ページずつ分割",
+        "body": "各ページを1つずつPDFにしてZIPファイルにまとめます"
       },
       "interval": {
-        "title": "一定間隔",
-        "body": "固定ページ数でグループ化された PDF を作成します。"
+        "title": "指定ページ数ごとに分割",
+        "body": "指定したページ数ごとにPDFを作成します"
       }
     },
     "range": {
       "label": "抽出するページ",
-      "help": "例: 1-3、5、2、4、7、または 5、1、3。重複は保存されます。"
+      "help": "例：1-3, 5, 2,4,7 または 5,1,3。重複したページもそのまま残ります"
     },
     "interval": {
-      "label": "ファイルあたりのページ数",
-      "help": "最終ファイルには残りのページが含まれます。"
+      "label": "1ファイルあたりのページ数",
+      "help": "余ったページは最後のファイルに含まれます"
     },
     "settings": {
       "title": "出力設定",
-      "filename": "出力ベース名",
-      "filenameHelp": "拡張子とソート可能なページ番号は自動的に追加されます。",
-      "autoDownload": "分割後自動ダウンロード",
-      "clearAfterSave": "保存後にソースファイル参照をクリアします",
+      "filename": "出力ファイルの基本名",
+      "filenameHelp": "拡張子と並べ替えやすいページ番号は自動で追加されます",
+      "autoDownload": "分割後に自動でダウンロード",
+      "clearAfterSave": "保存後に元のファイル情報を消去",
       "pdfFile": "PDFドキュメント",
-      "zipFile": "ZIP アーカイブ"
+      "zipFile": "ZIPファイル"
     },
     "actions": {
       "split": "分割して保存",
-      "clear": "ソースをクリア"
+      "clear": "PDFを消去"
     },
     "status": {
-      "reading": "PDF をローカルで読んでいます…",
-      "loaded": "PDF が準備完了: {pages} ページ。",
-      "cleared": "ソース PDF がクリアされました。",
-      "preparing": "ページを準備しています…",
-      "archive": "ZIP アーカイブを作成しています…",
-      "progress": "{total} のファイル {completed} を作成しています…",
+      "reading": "PDFを読み込み中…",
+      "loaded": "PDFの準備ができました：{pages}ページ",
+      "cleared": "PDFを消去しました",
+      "preparing": "ページを準備中…",
+      "archive": "ZIPファイルを作成中…",
+      "progress": "{total}個中{completed}個目のファイルを作成中…",
       "progressLabel": "PDF 分割の進行状況",
-      "saved": "{name} を {count} 出力ファイルとともに保存しました。",
-      "downloaded": "{name} を {count} 出力ファイルとともにダウンロードしました。",
-      "savedAndCleared": "分割結果が保存され、ソース参照がクリアされました。",
-      "saveCancelled": "保存がキャンセルされました。ファイルは書き込まれませんでした。"
+      "saved": "{count}個の出力ファイルを含む{name}を保存しました",
+      "downloaded": "{count}個の出力ファイルを含む{name}をダウンロードしました",
+      "savedAndCleared": "分割結果を保存し、元のファイル情報を消去しました",
+      "saveCancelled": "保存をキャンセルしました。ファイルは作成されていません"
     },
     "errors": {
-      "oneFile": "一度に 1 つの PDF を選択します。",
-      "unsupported": "PDF ファイルを選択してください。 .pdf 拡張子は、ブラウザがファイル タイプを提供しない場合にのみ受け入れられます。",
-      "noFile": "分割する前に PDF を 1 つ追加します。",
-      "protected": "{name} は暗号化またはパスワードで保護されている可能性があり、分割できません。",
-      "unreadable": "{name} を読み取れませんでした。 PDF が破損しているか、サポートされていない可能性があります。",
-      "pdfLibrary": "ローカル PDF ライブラリをロードできませんでした。",
-      "archiveLibrary": "ローカル アーカイブ ライブラリをロードできませんでした。",
-      "generation": "PDF ページを作成できませんでした。小さいドキュメントを試してください。",
-      "archive": "ZIP アーカイブを作成できませんでした。",
-      "noPages": "PDF にはページが含まれていません。",
-      "rangeRequired": "少なくとも 1 ページまたは範囲を入力してください。",
-      "rangeInvalid": "ページ番号と昇順の範囲をカンマで区切って使用します。",
-      "rangeOutOfBounds": "すべてのページは 1 から {pages} まででなければなりません。",
-      "rangeReversed": "範囲は下位ページから上位ページまで続く必要があります。",
-      "intervalInvalid": "ファイルごとのページ数には 1 以上の整数を入力してください。",
-      "mode": "有効な分割モードを選択してください。",
-      "save": "保存場所を開けませんでした。もう一度試してください。"
+      "oneFile": "PDFは1回につき1つ選択してください",
+      "unsupported": "PDFファイルを選択してください。ブラウザからファイル形式を取得できない場合のみ、.pdf拡張子をPDFとして扱います",
+      "noFile": "分割する前にPDFを追加してください",
+      "protected": "{name}は暗号化またはパスワード保護されているため、分割できない可能性があります",
+      "unreadable": "{name}を読み込めません。PDFが破損しているか、対応していない可能性があります",
+      "pdfLibrary": "ローカルPDFライブラリを読み込めませんでした",
+      "archiveLibrary": "ローカル圧縮ライブラリを読み込めませんでした",
+      "generation": "PDFを作成できませんでした。より小さい文書で試してください",
+      "archive": "ZIPファイルを作成できませんでした",
+      "noPages": "PDFにページがありません",
+      "rangeRequired": "ページまたは範囲を1つ以上入力してください",
+      "rangeInvalid": "ページ番号と昇順の範囲をカンマ区切りで入力してください",
+      "rangeOutOfBounds": "ページ番号は1〜{pages}の範囲で指定してください",
+      "rangeReversed": "範囲は小さいページ番号から大きいページ番号の順で指定してください",
+      "intervalInvalid": "1ファイルあたりのページ数は1以上の整数で入力してください",
+      "mode": "分割方法を選択してください",
+      "save": "保存先を開けませんでした。もう一度試してください"
     }
   },
   "mergePdf": {
     "eyebrow": "PDFツール",
-    "title": "PDF を結合",
-    "description": "PDF ファイルを配置し、各ページを 1 つのドキュメントに結合します。ファイルはこのデバイス上に残ります。",
+    "title": "PDFを結合",
+    "description": "PDFの順番を並べ替え、すべてのページを1つの文書にまとめます。ファイルはこの端末内で処理されます。",
     "drop": {
-      "title": "PDF を追加します",
-      "description": "PDF ファイルをここにドロップするか、ピッカーを使用します。キューの順序がドキュメントの順序になります。",
-      "choose": "PDF を選択してください",
-      "localTitle": "このデバイス上で処理します。",
-      "localBody": "PDFが外部へ送信されることはありません。",
+      "title": "PDFを追加",
+      "description": "PDFをここにドロップするか、ファイルを選択してください。リストの順番で結合します",
+      "choose": "PDFを選択",
+      "localTitle": "この端末で処理します",
+      "localBody": "PDFは外部へ送信されません",
       "privacyLink": "プライバシーの仕組み"
     },
     "queue": {
-      "title": "PDF注文",
+      "title": "PDFの順番",
       "count": "PDF: {count}",
-      "empty": "PDFはまだ追加されていません。",
-      "meta": "{size} · {pages} ページ",
+      "empty": "PDFが追加されていません",
+      "meta": "{size} · {pages}ページ",
       "moveUp": "PDF を上に移動",
       "moveDown": "PDF を下に移動",
       "remove": "PDF を削除"
     },
     "settings": {
-      "title": "マージ設定",
+      "title": "結合設定",
       "filename": "出力ファイル名",
-      "filenameHelp": ".pdf 拡張子が自動的に追加されます。",
-      "autoDownload": "マージ後に自動的にダウンロード",
-      "clearAfterSave": "保存後にファイル参照をクリアします",
+      "filenameHelp": ".pdf拡張子は自動で追加されます",
+      "autoDownload": "結合後に自動でダウンロード",
+      "clearAfterSave": "保存後にファイル情報を消去",
       "pdfFile": "PDFドキュメント"
     },
     "actions": {
-      "merge": "PDF を結合して保存",
-      "add": "PDF をさらに追加",
-      "clear": "すべてクリア"
+      "merge": "PDFを結合して保存",
+      "add": "PDFを追加",
+      "clear": "すべて消去"
     },
     "status": {
-      "validating": "PDF をローカルでチェックしています…",
-      "added": "{count} PDF ファイルを追加しました。",
-      "addedWithRejected": "{added} PDF ファイルを追加しました。 {rejected} のサポートされていないファイルまたは読み取り不可能なファイルがスキップされました。",
-      "removed": "PDF が削除されました。",
-      "reordered": "PDF注文が更新されました。",
-      "cleared": "PDF リストがクリアされました。",
-      "merging": "PDF をローカルで結合しています…",
-      "progress": "ファイル {completed} と {total} を結合しています…",
+      "validating": "PDFを確認中…",
+      "added": "PDFを{count}個追加しました",
+      "addedWithRejected": "PDFを{added}個追加し、対応していないか読み込めないファイル{rejected}個を除外しました",
+      "removed": "PDFを削除しました",
+      "reordered": "PDFの順番を変更しました",
+      "cleared": "PDFリストを消去しました",
+      "merging": "PDFを結合中…",
+      "progress": "{total}個中{completed}個目のPDFを結合中…",
       "progressLabel": "PDF 結合の進行状況",
-      "saved": "{pages} ページの PDF を保存しました。",
-      "downloaded": "{name} を {pages} ページとともにダウンロードしました。",
-      "savedAndCleared": "PDF が保存され、ファイル参照が消去されました。",
-      "saveCancelled": "保存がキャンセルされました。ファイルは書き込まれませんでした。"
+      "saved": "{pages}ページのPDFを保存しました",
+      "downloaded": "{pages}ページの{name}をダウンロードしました",
+      "savedAndCleared": "PDFを保存し、ファイル情報を消去しました",
+      "saveCancelled": "保存をキャンセルしました。ファイルは作成されていません"
     },
     "errors": {
-      "unsupported": "PDF ファイルを選択してください。ブラウザーがファイルの種類を提供しない場合は、.pdf 拡張子が受け入れられます。",
-      "noFiles": "結合する前に少なくとも 1 つの PDF を追加してください。",
-      "encrypted": "{name} は暗号化またはパスワードで保護されているため、マージできません。",
-      "unreadable": "{name} を読み取れませんでした。 PDF が破損しているか、サポートされていない可能性があります。",
-      "library": "ローカル PDF ライブラリをロードできませんでした。",
-      "generation": "PDF を結合できませんでした。ファイルの数を減らすか、サイズを小さくしてみてください。",
-      "save": "保存場所を開けませんでした。もう一度試してください。"
+      "unsupported": "PDFファイルを選択してください。ブラウザからファイル形式を取得できない場合は.pdf拡張子をPDFとして扱います",
+      "noFiles": "結合する前にPDFを1つ以上追加してください",
+      "encrypted": "{name}は暗号化またはパスワード保護されているため結合できません",
+      "unreadable": "{name}を読み込めません。PDFが破損しているか、対応していない可能性があります",
+      "library": "ローカルPDFライブラリを読み込めませんでした",
+      "generation": "PDFを結合できませんでした。ファイルの数やサイズを減らして試してください",
+      "save": "保存先を開けませんでした。もう一度試してください"
     }
   },
   "imageToPdf": {
     "eyebrow": "画像ツール",
-    "title": "画像を PDF に変換",
-    "description": "JPEG、PNG、WebP 画像を並べて 1 つの PDF として保存します。すべてがこのデバイス上で起こります。",
+    "title": "画像をPDFに変換",
+    "description": "JPEG、PNG、WebP画像を好きな順番に並べ、1つのPDFとして保存します。すべてこの端末上で処理されます。",
     "drop": {
-      "title": "画像を追加してください",
-      "description": "ここにファイルをドロップするか、ピッカーを使用します。 JPEG、PNG、WebP を混在させることができます。",
-      "choose": "画像を選択してください",
-      "localTitle": "このデバイス上で処理します。",
-      "localBody": "画像が外部へ送信されることはありません。",
+      "title": "画像を追加",
+      "description": "画像をここにドロップするか、ファイルを選択してください。JPEG、PNG、WebPを混在させられます",
+      "choose": "画像を選択",
+      "localTitle": "この端末で処理します",
+      "localBody": "画像は外部へ送信されません",
       "privacyLink": "プライバシーの仕組み"
     },
     "queue": {
-      "title": "画像順",
+      "title": "画像の順番",
       "count": "画像: {count}",
-      "empty": "画像はまだ追加されていません。",
+      "empty": "画像が追加されていません",
       "previewAlt": "{name} のプレビュー",
-      "meta": "{size} · ページ {page}",
-      "moveUp": "画像を上に移動",
-      "moveDown": "画像を下に移動します",
+      "meta": "{size} · {page}ページ目",
+      "moveUp": "画像を上へ移動",
+      "moveDown": "画像を下へ移動",
       "remove": "画像を削除"
     },
     "settings": {
@@ -414,306 +414,306 @@ export const ja = {
       "filenameHelp": ".pdf 拡張子が自動的に追加されます。",
       "pageSize": "ページサイズ",
       "a4": "A4",
-      "letter": "手紙",
-      "imageSize": "試合イメージ",
-      "orientation": "方向",
+      "letter": "Letter",
+      "imageSize": "画像サイズに合わせる",
+      "orientation": "ページの向き",
       "auto": "自動",
-      "portrait": "ポートレート",
-      "landscape": "風景",
-      "fit": "画像フィット",
-      "contain": "画像全体を合わせる",
-      "cover": "ページを埋める",
-      "margin": "マージン(mm)",
+      "portrait": "縦",
+      "landscape": "横",
+      "fit": "画像の配置",
+      "contain": "画像全体を表示",
+      "cover": "ページ全体に表示",
+      "margin": "余白（mm）",
       "quality": "画質",
-      "qualityBest": "ベスト",
-      "qualityHigh": "高い",
-      "qualityBalanced": "バランス調整済み",
-      "qualitySmall": "小さいファイル",
-      "autoDownload": "生成後に自動的にダウンロード",
-      "clearAfterSave": "保存後に画像参照をクリアする",
+      "qualityBest": "最高",
+      "qualityHigh": "高",
+      "qualityBalanced": "標準",
+      "qualitySmall": "容量を抑える",
+      "autoDownload": "作成後に自動でダウンロード",
+      "clearAfterSave": "保存後に画像情報を消去",
       "pdfFile": "PDFドキュメント"
     },
     "actions": {
       "generate": "PDFを作成",
       "add": "画像を追加",
-      "clear": "すべてクリア"
+      "clear": "すべて消去"
     },
     "status": {
-      "added": "{count} 画像を追加しました。",
-      "addedWithRejected": "{added} がサポートする画像を追加しました。 {rejected} 個のサポートされていないファイルがスキップされました。",
-      "addedWithReasons": "{added} 画像を追加しました。拒否されました: {reasons}",
+      "added": "画像を{count}枚追加しました",
+      "addedWithRejected": "対応している画像を{added}枚追加し、対応していないファイル{rejected}個を除外しました",
+      "addedWithReasons": "画像を{added}枚追加しました。除外したファイル：{reasons}",
       "rejectedItem": "{name}: {reason}",
-      "removed": "画像が削除されました。",
-      "reordered": "画像の順番を更新しました。",
-      "cleared": "画像リストがクリアされました。",
-      "generating": "PDF をローカルで生成しています…",
-      "progress": "{total} のページ {completed} を処理中…",
+      "removed": "画像を削除しました",
+      "reordered": "画像の順番を変更しました",
+      "cleared": "画像リストを消去しました",
+      "generating": "PDFを作成中…",
+      "progress": "{total}ページ中{completed}ページを処理中…",
       "progressLabel": "PDF 生成の進行状況",
-      "saved": "{count} ページの PDF を保存しました。",
-      "downloaded": "{name} をダウンロードしました。",
-      "savedAndCleared": "PDF が保存され、画像参照が消去されました。",
-      "saveCancelled": "保存がキャンセルされました。ファイルは書き込まれませんでした。"
+      "saved": "{count}ページのPDFを保存しました",
+      "downloaded": "{name}をダウンロードしました",
+      "savedAndCleared": "PDFを保存し、画像情報を消去しました",
+      "saveCancelled": "保存をキャンセルしました。ファイルは作成されていません"
     },
     "errors": {
-      "unsupported": "JPEG、PNG、または WebP 画像ファイルを選択します。",
-      "noFiles": "PDF を生成する前に、少なくとも 1 つの画像を追加します。",
-      "decode": "{name} を読み取れませんでした。ファイルが破損しているか、このブラウザでサポートされていない可能性があります。",
-      "fileTooLarge": "この画像はファイルあたり 50 MiB の制限を超えています。",
-      "queueFiles": "画像は100枚まで追加できます。",
-      "queueBytes": "画像キューが合計制限 500 MiB を超えています。",
-      "dimension": "この画像は 16,384 ピクセルの寸法制限を超えています。",
-      "pixels": "この画像は 50 メガピクセルの制限を超えています。",
-      "signature": "ファイルのコンテンツは有効な JPEG、PNG、または WebP 画像ではありません。",
-      "imageExport": "画像が大きすぎるか、PDF 用に準備できませんでした。",
-      "canvas": "このブラウザでは PDF 生成用の画像を準備できません。",
-      "library": "ローカル PDF ライブラリをロードできませんでした。",
-      "generation": "PDF を生成できませんでした。画像の数を減らすか、小さい画像を試してください。",
-      "save": "保存場所を開けませんでした。もう一度試してください。"
+      "unsupported": "JPEG、PNG、WebP画像を選択してください",
+      "noFiles": "PDFを作成する前に画像を1枚以上追加してください",
+      "decode": "{name}を読み込めません。ファイルが破損しているか、このブラウザで対応していない可能性があります",
+      "fileTooLarge": "画像1枚あたりの上限50 MiBを超えています",
+      "queueFiles": "画像は最大100枚まで追加できます",
+      "queueBytes": "画像全体の上限500 MiBを超えています",
+      "dimension": "画像の一辺が16,384ピクセルの上限を超えています",
+      "pixels": "画像が5,000万ピクセルの上限を超えています",
+      "signature": "ファイル内容が正しいJPEG、PNG、WebP画像ではありません",
+      "imageExport": "画像が大きすぎるか、PDF用に処理できませんでした",
+      "canvas": "このブラウザではPDF用の画像を準備できません",
+      "library": "ローカルPDFライブラリを読み込めませんでした",
+      "generation": "PDFを作成できませんでした。画像の数やサイズを減らして試してください",
+      "save": "保存先を開けませんでした。もう一度試してください"
     }
   },
   "pdfMetadata": {
-    "eyebrow": "PDF プライバシー ツール",
-    "title": "PDF メタデータ インスペクターおよびクリーナー",
-    "description": "一般的なドキュメントのメタデータを確認し、PDF をアップロードせずにクリーンなコピーを作成します。",
+    "eyebrow": "PDF プライバシーツール",
+    "title": "PDFメタデータの確認・削除",
+    "description": "PDFをアップロードせず、一般的な文書メタデータを確認し、必要な項目を削除したコピーを作成します",
     "scope": {
-      "title": "サポート範囲",
-      "body": "このツールは、以下に示す標準の文書情報フィールドをカバーします。これは法医学的スクラバーではなく、XMP パケット、添付ファイル、注釈、隠しコンテンツ、またはあらゆる識別構造を削除するとは主張しません。",
-      "cleaning": "クリーニングでは、上記のサポートされているドキュメント メタデータのみが削除されます。"
+      "title": "対応範囲",
+      "body": "このツールが扱うのは、下に表示される標準的な文書情報だけです。完全なフォレンジック消去を行うものではなく、XMP、添付ファイル、注釈、非表示コンテンツなど、あらゆる識別情報を削除するものではありません。",
+      "cleaning": "削除できるのは、上に表示された対応メタデータ項目だけです"
     },
     "drop": {
-      "title": "PDF を 1 つ追加",
-      "description": "PDF をここにドロップするか、ピッカーを使用します。別のファイルを選択すると、現在のソースが置き換えられます。",
-      "choose": "PDF を選択してください",
-      "localTitle": "このデバイス上で処理します。",
-      "localBody": "PDFが外部へ送信されることはありません。",
+      "title": "PDFを追加",
+      "description": "PDFをここにドロップするか、ファイルを選択してください。別のPDFを選ぶと現在のファイルが置き換わります",
+      "choose": "PDFを選択",
+      "localTitle": "この端末で処理します",
+      "localBody": "PDFは外部へ送信されません",
       "privacyLink": "プライバシーの仕組み"
     },
     "source": {
-      "title": "ソース PDF",
-      "empty": "PDF がまだ選択されていません。",
-      "summary": "{name} · {size} · {pages} ページ · {fields} サポートされるフィールドが存在します"
+      "title": "元のPDF",
+      "empty": "PDFが選択されていません",
+      "summary": "{name} · {size} · {pages}ページ · 対応項目{fields}件"
     },
     "inspector": {
-      "title": "ドキュメントのメタデータが検出されました",
-      "help": "削除するフィールドを選択します。作成者、製作者、作成者、および日付の値は、個人、デバイス、またはアプリケーションを識別する場合があります。",
-      "caption": "PDF で見つかったサポートされているメタデータ フィールド",
+      "title": "確認された文書メタデータ",
+      "help": "削除する項目を選択してください。作成者、使用アプリ、PDF生成ソフト、日時などから、個人・端末・アプリに関する情報がわかる場合があります。",
+      "caption": "PDF内で確認された対応メタデータ",
       "remove": "削除",
-      "field": "フィールド",
-      "value": "現在値",
+      "field": "項目",
+      "value": "現在の値",
       "notSet": "未設定",
-      "removeField": "{field} を削除",
-      "truncated": "表示が短縮されました。クリーニングでは、保存されている完全な値が引き続き使用されます。"
+      "removeField": "{field}を削除",
+      "truncated": "表示のみ短くしています。削除処理では保存されている値全体を使用します。"
     },
     "fields": {
       "title": "タイトル",
-      "author": "著者",
+      "author": "作成者",
       "subject": "件名",
       "keywords": "キーワード",
-      "creator": "クリエイターアプリ",
-      "producer": "PDF プロデューサー",
-      "creationDate": "作成日",
-      "modificationDate": "更新日"
+      "creator": "作成アプリ",
+      "producer": "PDF生成ソフト",
+      "creationDate": "作成日時",
+      "modificationDate": "更新日時"
     },
     "output": {
-      "title": "クリーンなコピーを作成する",
-      "description": "オリジナルのままです。保存されたコピーは再度開かれ、成功が報告される前にチェックされます。",
+      "title": "メタデータを削除したコピーを作成",
+      "description": "元のPDFは変更しません。保存するPDFをもう一度読み込み、実際に削除されたことを確認してから完了を表示します。",
       "filename": "出力ファイル名",
       "filenameHelp": ".pdf 拡張子が自動的に追加されます。",
       "pdfFile": "PDFドキュメント"
     },
     "actions": {
-      "clearSource": "クリアPDF",
-      "selectAll": "存在するものをすべて選択",
-      "clearSelection": "選択をクリア",
+      "clearSource": "PDFを消去",
+      "selectAll": "すべて選択",
+      "clearSelection": "選択解除",
       "removeAll": "対応項目をすべて削除",
-      "clean": "PDF をクリーンアップして保存"
+      "clean": "削除して保存"
     },
     "comparison": {
-      "title": "前後で検証済み",
-      "before": "前",
-      "after": "コピーを保存した後",
-      "cleared": "検証済み: {count} の選択されたフィールドがシリアル化されたコピーに存在しません。",
-      "retained": "警告: {count} 個の選択されたフィールドがシリアル化されたコピーに残ります。"
+      "title": "保存結果を確認",
+      "before": "変更前",
+      "after": "保存後",
+      "cleared": "確認済み：選択した{count}項目は保存後のPDFから削除されています",
+      "retained": "警告：選択した{count}項目が保存後のPDFに残っています"
     },
     "status": {
-      "reading": "メタデータをローカルで読み取り中…",
-      "loaded": "{pages} ページ PDF 全体で、{count} がサポートするメタデータ フィールドが見つかりました。",
-      "noneFound": "この {pages} ページ PDF には、サポートされているドキュメント情報メタデータが見つかりませんでした。",
-      "cleared": "ソース PDF がクリアされました。",
-      "cleaning": "選択したメタデータを削除し、保存されたバイトを確認しています…",
-      "saved": "{name} を保存しました。検証済みの {count} フィールドが削除されました。",
-      "downloaded": "{name} をダウンロードしました。検証済みの {count} フィールドが削除されました。",
-      "partiallyCleaned": "{name} は保存されましたが、検証の結果、選択された {count} フィールドがまだ存在していることが判明しました。",
-      "cancelled": "保存がキャンセルされました。ファイルは書き込まれませんでした。"
+      "reading": "メタデータを読み込み中…",
+      "loaded": "{pages}ページのPDFから対応メタデータを{count}件確認しました",
+      "noneFound": "この{pages}ページのPDFには、対応している文書メタデータが見つかりませんでした",
+      "cleared": "PDFを消去しました",
+      "cleaning": "選択したメタデータを削除し、保存結果を確認中…",
+      "saved": "{name}を保存しました。{count}項目の削除を確認しました",
+      "downloaded": "{name}をダウンロードしました。{count}項目の削除を確認しました",
+      "partiallyCleaned": "{name}を保存しましたが、選択した{count}項目が残っていることを確認しました",
+      "cancelled": "保存をキャンセルしました。ファイルは作成されていません"
     },
     "errors": {
-      "oneFile": "一度に 1 つの PDF を選択します。",
-      "unsupported": "PDF ファイルを選択してください。",
-      "protected": "この PDF はパスワードで保護または暗号化されているため、検査できません。",
-      "unreadable": "この PDF は破損しているか、読み取ることができません。",
-      "noSelection": "削除する現在のメタデータ フィールドを少なくとも 1 つ選択します。",
-      "pagesChanged": "クリーンアップされたコピーは、すべてのページの寸法と回転を保持していないため、保存されませんでした。",
-      "failure": "PDF メタデータを安全に処理できませんでした。",
-      "save": "保存場所を開けませんでした。もう一度試してください。"
+      "oneFile": "PDFは1回につき1つ選択してください",
+      "unsupported": "PDFファイルを選択してください",
+      "protected": "パスワード保護または暗号化されたPDFは確認できません",
+      "unreadable": "PDFが破損しているか、読み込めません",
+      "noSelection": "削除するメタデータ項目を1つ以上選択してください",
+      "pagesChanged": "処理後のPDFでページサイズまたは回転が保持されなかったため、保存を中止しました",
+      "failure": "PDFメタデータを安全に処理できませんでした",
+      "save": "保存先を開けませんでした。もう一度試してください"
     }
   },
   "pdfToImages": {
     "eyebrow": "PDFツール",
-    "title": "PDF から画像へ",
-    "description": "ドキュメントをアップロードせずに、PDF ページを PNG、JPEG、または WebP ファイルに変換します。",
+    "title": "PDFを画像に変換",
+    "description": "PDFをアップロードせず、ページをPNG、JPEG、WebP画像に変換します",
     "drop": {
-      "title": "PDF を 1 つ追加",
-      "description": "PDF をここにドロップするか、ピッカーを使用します。新しい PDF を選択すると、現在のソースが安全に置き換えられます。",
-      "choose": "PDF を選択してください",
-      "localTitle": "このデバイス上で処理します。",
-      "localBody": "PDFが外部へ送信されることはありません。",
+      "title": "PDFを追加",
+      "description": "PDFをここにドロップするか、ファイルを選択してください。別のPDFを選ぶと現在のファイルが置き換わります",
+      "choose": "PDFを選択",
+      "localTitle": "この端末で処理します",
+      "localBody": "PDFは外部へ送信されません",
       "privacyLink": "プライバシーの仕組み"
     },
     "source": {
-      "title": "ソース PDF",
-      "empty": "PDF がまだ選択されていません。",
-      "meta": "{size} · {pages} ページ",
-      "remove": "ソース PDF を削除"
+      "title": "元のPDF",
+      "empty": "PDFが選択されていません",
+      "meta": "{size} · {pages}ページ",
+      "remove": "元のPDFを削除"
     },
     "pages": {
       "title": "変換するページ",
-      "legend": "変換するページを選択してください",
+      "legend": "変換するページを選択",
       "all": {
-        "title": "全ページ",
-        "body": "すべてのページをソース順に変換します。"
+        "title": "すべてのページ",
+        "body": "元の順番ですべてのページを変換します"
       },
       "selected": {
-        "title": "選択したページ",
-        "body": "ページ番号とページ範囲は、入力した順序どおりに使用してください。"
+        "title": "指定したページ",
+        "body": "入力したページ番号と範囲を、その順番のまま変換します"
       },
-      "rangeLabel": "ページ選択",
-      "rangeHelp": "例: 1-3、5、8-10 または 5、1、3。順序と重複は保持されます。"
+      "rangeLabel": "ページ指定",
+      "rangeHelp": "例：1-3,5,8-10 または 5,1,3。順番と重複はそのまま保持されます"
     },
     "settings": {
       "title": "画像設定",
-      "filename": "出力ベース名",
-      "filenameHelp": "ページ番号とファイル拡張子は自動的に追加されます。",
-      "format": "画像フォーマット",
+      "filename": "出力ファイルの基本名",
+      "filenameHelp": "ページ番号と拡張子は自動で追加されます",
+      "format": "画像形式",
       "quality": "画質",
-      "qualityHelp": "JPEG と WebP で利用できます。",
-      "scale": "出力スケール",
-      "scaleHelp": "スケールが大きくなると、より多くのメモリが使用され、より大きなファイルが作成されます。",
+      "qualityHelp": "JPEGとWebPで設定できます",
+      "scale": "出力倍率",
+      "scaleHelp": "倍率を上げるほどメモリ使用量とファイルサイズが大きくなります",
       "imageFile": "画像ファイル",
-      "zipFile": "ZIP アーカイブ"
+      "zipFile": "ZIPファイル"
     },
     "actions": {
-      "convert": "変換して保存",
+      "convert": "画像に変換",
       "cancel": "キャンセル",
-      "clear": "ソースをクリア"
+      "clear": "PDFを消去"
     },
     "status": {
-      "reading": "PDF をローカルで読んでいます…",
-      "loaded": "PDF が準備完了: {pages} ページ。",
-      "rendering": "選択したページをローカルでレンダリングしています…",
-      "progress": "{total} のレンダリング出力 {completed} (ソース ページ {page})…",
+      "reading": "PDFを読み込み中…",
+      "loaded": "PDFの準備ができました：{pages}ページ",
+      "rendering": "選択したページを変換中…",
+      "progress": "{total}件中{completed}件目を処理中（元の{page}ページ）…",
       "progressLabel": "PDF 画像変換の進行状況",
-      "archive": "ZIP アーカイブを準備しています…",
-      "saving": "画像を準備しています…",
-      "saved": "{name} を {count} 画像とともに保存しました。",
-      "downloaded": "{name} と {count} 画像をダウンロードしました。",
-      "saveCancelled": "保存がキャンセルされました。ファイルは書き込まれませんでした。",
-      "cancelled": "変換がキャンセルされました。ファイルは書き込まれませんでした。",
-      "cleared": "ソース PDF がクリアされました。"
+      "archive": "ZIPファイルを作成中…",
+      "saving": "画像を準備中…",
+      "saved": "画像{count}枚を含む{name}を保存しました",
+      "downloaded": "画像{count}枚を含む{name}をダウンロードしました",
+      "saveCancelled": "保存をキャンセルしました。ファイルは作成されていません",
+      "cancelled": "変換をキャンセルしました。ファイルは作成されていません",
+      "cleared": "PDFを消去しました"
     },
     "errors": {
-      "oneFile": "一度に 1 つの PDF を選択します。",
-      "unsupported": "PDF ファイルを選択してください。",
-      "noFile": "変換する前に PDF を 1 つ追加します。",
-      "protected": "この PDF はパスワードで保護または暗号化されているため、変換できません。",
-      "unreadable": "この PDF は破損しているか、読み取ることができません。",
-      "noPages": "この PDF にはページが含まれていません。",
-      "rangeRequired": "少なくとも 1 ページまたは範囲を入力してください。",
-      "rangeInvalid": "ページ番号と昇順の範囲をカンマで区切って使用します。",
-      "rangeOutOfBounds": "すべてのページは 1 から {pages} まででなければなりません。",
-      "rangeReversed": "範囲は下位ページから上位ページまで続く必要があります。",
-      "format": "PNG、JPEG、または WebP を選択します。",
-      "scale": "サポートされている出力スケールを選択します。",
-      "dimension": "レンダリングされたページは、16,384 ピクセルの寸法制限を超えます。",
-      "pixels": "レンダリングされたページは 50 メガピクセルの制限を超えます。",
-      "canvas": "このブラウザでは画像キャンバスを作成できません。",
-      "encoder": "このブラウザは、選択された画像形式をエンコードできませんでした。",
-      "render": "PDF ページを安全にレンダリングできませんでした。",
-      "archiveLibrary": "ローカル アーカイブ ライブラリをロードできませんでした。",
-      "archive": "ZIP アーカイブを作成できませんでした。",
-      "failure": "PDF を変換できませんでした。ページ数を減らすか、規模を小さくしてみてください。",
-      "save": "保存場所を開けませんでした。もう一度試してください。"
+      "oneFile": "PDFは1回につき1つ選択してください",
+      "unsupported": "PDFファイルを選択してください",
+      "noFile": "変換する前にPDFを追加してください",
+      "protected": "パスワード保護または暗号化されたPDFは変換できません",
+      "unreadable": "PDFが破損しているか、読み込めません",
+      "noPages": "PDFにページがありません",
+      "rangeRequired": "ページまたは範囲を1つ以上入力してください",
+      "rangeInvalid": "ページ番号と昇順の範囲をカンマ区切りで入力してください",
+      "rangeOutOfBounds": "ページ番号は1〜{pages}の範囲で指定してください",
+      "rangeReversed": "範囲は小さいページ番号から大きいページ番号の順で指定してください",
+      "format": "PNG、JPEG、WebPのいずれかを選択してください",
+      "scale": "対応している出力倍率を選択してください",
+      "dimension": "変換後のページが16,384ピクセルの上限を超えます",
+      "pixels": "変換後のページが5,000万ピクセルの上限を超えます",
+      "canvas": "このブラウザでは画像用キャンバスを作成できません",
+      "encoder": "このブラウザでは選択した画像形式に変換できません",
+      "render": "PDFページを安全に画像化できませんでした",
+      "archiveLibrary": "ローカル圧縮ライブラリを読み込めませんでした",
+      "archive": "ZIPファイルを作成できませんでした",
+      "failure": "PDFを変換できませんでした。ページ数を減らすか、倍率を下げて試してください",
+      "save": "保存先を開けませんでした。もう一度試してください"
     }
   },
   "organizePdf": {
     "eyebrow": "PDFツール",
-    "title": "PDF を整理する",
-    "description": "元の PDF を変更せずに、ページの並べ替え、回転、または削除を行います。すべてがこのデバイス上に残ります。",
+    "title": "PDFを整理",
+    "description": "元のPDFを変更せず、ページの並べ替え・回転・削除ができます。すべてこの端末内で処理されます。",
     "drop": {
-      "title": "PDF を 1 つ追加",
-      "description": "PDF をここにドロップするか、ピッカーを使用します。",
-      "choose": "PDF を選択してください",
-      "localTitle": "このデバイス上で処理します。",
-      "localBody": "PDFが外部へ送信されることはありません。",
+      "title": "PDFを追加",
+      "description": "PDFをここにドロップするか、ファイルを選択してください",
+      "choose": "PDFを選択",
+      "localTitle": "この端末で処理します",
+      "localBody": "PDFは外部へ送信されません",
       "privacyLink": "プライバシーの仕組み"
     },
     "workspace": {
-      "title": "ページワークスペース",
-      "empty": "PDF がまだ選択されていません。",
-      "summary": "{name} · 残り {pages} ページ · {size}",
-      "changed": "保存されていない変更",
-      "gridLabel": "PDFページ"
+      "title": "ページ編集",
+      "empty": "PDFが選択されていません",
+      "summary": "{name} · 残り{pages}ページ · {size}",
+      "changed": "未保存の変更あり",
+      "gridLabel": "PDFページ一覧"
     },
     "page": {
-      "preview": "元のページ {page} のプレビュー",
-      "position": "位置 {position} · 元のページ {page}",
-      "moveEarlier": "ページ {page} を前に移動します",
-      "moveLater": "ページ {page} を後で移動します",
-      "rotateLeft": "ページ {page} を反時計回りに回転します",
-      "rotateRight": "ページ {page} を時計回りに回転します",
-      "remove": "ページ {page} を削除",
+      "preview": "元の{page}ページのプレビュー",
+      "position": "{position}番目 · 元の{page}ページ",
+      "moveEarlier": "{page}ページを前へ移動",
+      "moveLater": "{page}ページを後ろへ移動",
+      "rotateLeft": "{page}ページを左に90°回転",
+      "rotateRight": "{page}ページを右に90°回転",
+      "remove": "{page}ページを削除",
       "removeText": "削除"
     },
     "output": {
-      "title": "PDFを保存",
-      "description": "元の PDF は変更されません。エクスポートは、上に示した順序でページをコピーします。",
+      "title": "整理したPDFを保存",
+      "description": "元のPDFは変更されません。上に表示されている順番でページをコピーして保存します",
       "filename": "出力ファイル名",
-      "filenameHelp": ".pdf 拡張子が自動的に追加されます。",
+      "filenameHelp": ".pdf拡張子は自動で追加されます",
       "pdfFile": "PDFドキュメント"
     },
     "actions": {
-      "reset": "変更をリセットする",
-      "clear": "クリアPDF",
+      "reset": "変更をリセット",
+      "clear": "PDFを消去",
       "export": "PDFを保存"
     },
     "status": {
-      "loading": "PDF をローカルにロードしています…",
-      "preparing": "{total} のページ {completed} を準備中…",
+      "loading": "PDFを読み込み中…",
+      "preparing": "{total}ページ中{completed}ページを準備中…",
       "progressLabel": "サムネイル作成進捗状況",
-      "ready": "PDF が準備完了: {pages} ページ。",
-      "moved": "ページ {page} が移動されました。",
-      "rotated": "ページ {page} が回転されました。",
-      "removed": "ページ {page} が削除されました。",
-      "reset": "元のページ順序と回転が復元されました。",
-      "cleared": "ソース PDF がクリアされました。",
-      "exporting": "整理された PDF をローカルで作成しています…",
-      "saved": "{name} を保存しました。",
-      "downloaded": "{name} をダウンロードしました。",
-      "cancelled": "保存がキャンセルされました。ファイルは書き込まれませんでした。"
+      "ready": "PDFの準備ができました：{pages}ページ",
+      "moved": "{page}ページを移動しました",
+      "rotated": "{page}ページを回転しました",
+      "removed": "{page}ページを削除しました",
+      "reset": "元のページ順と回転に戻しました",
+      "cleared": "PDFを消去しました",
+      "exporting": "整理したPDFを作成中…",
+      "saved": "{name}を保存しました",
+      "downloaded": "{name}をダウンロードしました",
+      "cancelled": "保存をキャンセルしました。ファイルは作成されていません"
     },
     "errors": {
-      "oneFile": "一度に 1 つの PDF を選択します。",
-      "unsupported": "PDF ファイルを選択してください。",
-      "protected": "この PDF はパスワードで保護または暗号化されているため、整理できません。",
-      "unreadable": "この PDF は破損しているか、読み取ることができません。",
-      "noPages": "エクスポートする前に少なくとも 1 ページを保存してください。",
-      "failure": "PDF を安全にロードまたは処理できませんでした。",
-      "save": "保存場所を開けませんでした。もう一度試してください。"
+      "oneFile": "PDFは1回につき1つ選択してください",
+      "unsupported": "PDFファイルを選択してください",
+      "protected": "パスワード保護または暗号化されたPDFは整理できません",
+      "unreadable": "PDFが破損しているか、読み込めません",
+      "noPages": "保存するには1ページ以上残してください",
+      "failure": "PDFを安全に読み込み、処理できませんでした",
+      "save": "保存先を開けませんでした。もう一度試してください"
     }
   },
   "notFound": {
     "eyebrow": "404",
-    "title": "このページはここではありません。",
-    "description": "住所が古いか、タイプミスされている可能性があります。",
-    "action": "帰宅"
+    "title": "ページが見つかりません",
+    "description": "URLが古いか、入力が間違っている可能性があります",
+    "action": "ホームへ戻る"
   }
 };
