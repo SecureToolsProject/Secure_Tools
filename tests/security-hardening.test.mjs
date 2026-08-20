@@ -72,6 +72,9 @@ assert.equal(fs.existsSync(path.join(root, "image2pdf_proto.html")), false);
 const app = read("tools/pdf/images-to-pdf/app.js");
 assert.match(app, /name\.textContent\s*=\s*item\.file\.name/);
 assert.doesNotMatch(app, /innerHTML\s*=.*file\.name/);
+assert.match(app, /function setStatus[\s\S]*?dataset\.tone = tone;\s*}/);
+assert.match(app, /function rejectionReason/);
+assert.match(app, /function errorMessage[\s\S]*?IMAGE_DIMENSION_EXCEEDED[\s\S]*?IMAGE_PIXELS_EXCEEDED/);
 assert.match(app, /IMAGE_SIGNATURE_INVALID/);
 assert.match(app, /setRejectedStatus/);
 

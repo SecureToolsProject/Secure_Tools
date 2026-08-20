@@ -35,6 +35,8 @@ const message = (key, values = {}) => Object.entries(values).reduce(
 function setStatus(key, values = {}, tone = "neutral") {
   state.status = key ? { key, values, tone } : null;
   elements.status.textContent = key ? message(key, values) : "";
+  elements.status.dataset.tone = tone;
+}
 function rejectionReason(code) {
   const keyByCode = {
     UNSUPPORTED_IMAGE: "imageToPdf.errors.unsupported",
@@ -54,8 +56,6 @@ function setRejectedStatus(added, rejected) {
   })).join("; ");
   elements.status.textContent = message("imageToPdf.status.addedWithReasons", { added, reasons });
   elements.status.dataset.tone = "warning";
-}
-  elements.status.dataset.tone = tone;
 }
 
 function createActionButton(action, labelKey, symbol, disabled = false) {
@@ -150,9 +150,6 @@ function moveItem(index, offset) {
 function clearItems(statusKey = "imageToPdf.status.cleared") {
   state.items.forEach((item) => URL.revokeObjectURL(item.url));
   state.items.length = 0;
-    IMAGE_DIMENSION_EXCEEDED: "imageToPdf.errors.dimension",
-    IMAGE_SIGNATURE_INVALID: "imageToPdf.errors.signature",
-    IMAGE_PIXELS_EXCEEDED: "imageToPdf.errors.pixels",
   elements.input.value = "";
   setStatus(statusKey, {}, "neutral");
   renderQueue();
@@ -176,6 +173,9 @@ function errorMessage(error) {
     NO_FILES: "imageToPdf.errors.noFiles",
     UNSUPPORTED_IMAGE: "imageToPdf.errors.unsupported",
     IMAGE_DECODE_FAILED: "imageToPdf.errors.decode",
+    IMAGE_DIMENSION_EXCEEDED: "imageToPdf.errors.dimension",
+    IMAGE_SIGNATURE_INVALID: "imageToPdf.errors.signature",
+    IMAGE_PIXELS_EXCEEDED: "imageToPdf.errors.pixels",
     IMAGE_EXPORT_FAILED: "imageToPdf.errors.imageExport",
     CANVAS_UNAVAILABLE: "imageToPdf.errors.canvas",
     PDF_LIBRARY_UNAVAILABLE: "imageToPdf.errors.library",
