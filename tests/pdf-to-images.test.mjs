@@ -111,6 +111,8 @@ function testArchitectureAndUi() {
   assert.match(html, /value="png"[\s\S]*value="jpeg"[\s\S]*value="webp"/);
   assert.match(html, /value="1"[\s\S]*value="1\.5"[\s\S]*value="2"[\s\S]*value="3"/);
   assert.match(html, /aria-describedby="range-help range-error"/);
+  assert.match(app, /if \(state\.loading\) return;/);
+  assert.match(app, /elements\.input\.disabled = state\.loading/);
   assert.match(html, /<progress[^>]+data-i18n-aria-label=/);
   assert.match(app, /stopActiveJob\(\)/);
   assert.match(app, /state\.controller\?\.abort\(\)/);

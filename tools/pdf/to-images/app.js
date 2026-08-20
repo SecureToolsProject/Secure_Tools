@@ -15,7 +15,7 @@ const elements = {
   progress: document.querySelector("#conversion-progress"), status: document.querySelector("#tool-status"),
 };
 
-const state = { source: null, busy: false, controller: null, job: null, status: null, session: 0 };
+const state = { source: null, busy: false, loading: false, controller: null, job: null, status: null, session: 0 };
 const message = (key, values = {}) => Object.entries(values).reduce((text, [name, value]) => text.replaceAll(`{${name}}`, String(value)), t(key));
 
 function setStatus(key, values = {}, tone = "neutral") {
@@ -32,8 +32,9 @@ function renderState() {
   elements.sourceEmpty.hidden = hasSource;
   elements.sourceCard.hidden = !hasSource;
   elements.convert.disabled = state.busy || !hasSource;
-  elements.clear.disabled = state.busy || !hasSource;
-  elements.remove.disabled = state.busy;
+  elements.input.disabled = state.loading;
+  elements.clear.disabled = state.busy || state.loading || !hasSource;
+  elements.remove.disabled = state.busy || state.loading;
   elements.cancel.hidden = !state.busy;
   elements.filename.disabled = state.busy || !hasSource;
   for (const input of elements.form.elements) input.disabled = state.busy || (input.dataset.requiresSource === "true" && !hasSource);
@@ -84,12 +85,15 @@ async function stopActiveJob() {
   state.controller?.abort();
   await state.job?.catch(() => {});
 }
+  if (state.loading) return;
 
 async function addSource(files) {
   if (!files.length) return;
   await stopActiveJob();
   if (files.length !== 1) { setStatus("pdfToImages.errors.oneFile", {}, "error"); return; }
   const file = files[0];
+  state.loading = true;
+  renderState();
   if (!isSupportedPdf(file)) { setStatus("pdfToImages.errors.unsupported", {}, "error"); return; }
   const session = ++state.session;
   setStatus("pdfToImages.status.reading");
@@ -104,6 +108,7 @@ async function addSource(files) {
     setStatus(null);
     elements.status.textContent = errorMessage(error);
     elements.status.dataset.tone = "error";
+    state.loading = false;
   } finally {
     elements.input.value = "";
     renderState();
