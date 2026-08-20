@@ -109,9 +109,6 @@ export const fr = {
       "media": "Travaillez avec l'audio et la vidéo localement."
     },
     "browseCategory": "Voir la catégorie →",
-    "availableEyebrow": "Disponible maintenant",
-    "availableTitle": "Disponible maintenant",
-    "availableDescription": "Outils qui traitent les fichiers directement sur votre appareil",
     "imagesToPdf": "Images au format PDF",
     "mergePdf": "Fusionner le PDF",
     "splitPdf": "Diviser le PDF",

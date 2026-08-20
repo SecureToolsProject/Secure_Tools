@@ -109,9 +109,6 @@ export const ja = {
       "media": "音声や動画を端末内で処理"
     },
     "browseCategory": "ツールを見る →",
-    "availableEyebrow": "すぐ使えるツール",
-    "availableTitle": "利用可能",
-    "availableDescription": "ファイルを外部へ送らず、この端末上で処理します",
     "imagesToPdf": "画像をPDFに",
     "mergePdf": "PDFを結合",
     "splitPdf": "PDFを分割",
