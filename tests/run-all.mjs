@@ -23,7 +23,12 @@ const sourceFiles = ["js", "tools", "tests"]
 
 for (const file of sourceFiles) runNode(["--check", file], `Syntax check for ${path.relative(root, file)}`);
 
-for (const test of ["tests/image-to-pdf.test.mjs", "tests/pdf-merge-and-categories.test.mjs"]) {
+for (const test of [
+  "tests/image-to-pdf.test.mjs",
+  "tests/pdf-merge-and-categories.test.mjs",
+  "tests/pdf-split.test.mjs",
+  "tests/ci-foundation.test.mjs",
+]) {
   runNode([test], test);
 }
 
