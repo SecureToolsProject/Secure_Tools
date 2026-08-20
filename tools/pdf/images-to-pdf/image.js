@@ -18,6 +18,7 @@ export function isSupportedImage(file) {
   if (!(file instanceof Blob)) return false;
   if (SUPPORTED_MIME_TYPES.has(file.type.toLowerCase())) return true;
   return !file.type && SUPPORTED_EXTENSIONS.test(file.name || "");
+}
 export function detectImageFormat(bytes) {
   if (!(bytes instanceof Uint8Array)) bytes = new Uint8Array(bytes || 0);
   if (bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return "jpeg";
@@ -39,7 +40,6 @@ export async function validateImageSignature(file) {
   return format;
 }
 
-}
 
 export async function selectImageQueueFiles(existingFiles, candidates) {
   const accepted = [];
