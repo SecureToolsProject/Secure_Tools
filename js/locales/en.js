@@ -135,7 +135,7 @@ export const en = {
     eyebrow: "PDF tool", title: "Merge PDF", description: "Arrange PDF files and combine every page into one document. Files stay on this device.",
     drop: { title: "Add your PDFs", description: "Drop PDF files here or use the picker. The queue order becomes the document order.", choose: "Choose PDFs", localTitle: "Processed locally.", localBody: "Your PDFs never leave this device.", privacyLink: "How privacy works" },
     queue: {
-      title: "PDF order", count: "PDFs: {count}", empty: "No PDFs selected yet. Added files will be merged from top to bottom.",
+      title: "PDF order", count: "PDFs: {count}", empty: "No PDFs added yet.",
       meta: "{size} · {pages} page(s)", moveUp: "Move PDF up", moveDown: "Move PDF down", remove: "Remove PDF",
     },
     settings: {
@@ -159,7 +159,7 @@ export const en = {
     eyebrow: "Image tool", title: "Images to PDF",
     description: "Arrange JPEG, PNG, and WebP images and save them as one PDF. Everything happens on this device.",
     drop: { title: "Add your images", description: "Drop files here or use the picker. JPEG, PNG, and WebP can be mixed.", choose: "Choose images", localTitle: "Processed locally.", localBody: "Your images never leave this device.", privacyLink: "How privacy works" },
-    queue: { title: "Image order", count: "Images: {count}", empty: "No images selected yet. Added images will appear here in PDF page order.", previewAlt: "Preview of {name}", meta: "{size} · page {page}", moveUp: "Move image up", moveDown: "Move image down", remove: "Remove image" },
+    queue: { title: "Image order", count: "Images: {count}", empty: "No images added yet.", previewAlt: "Preview of {name}", meta: "{size} · page {page}", moveUp: "Move image up", moveDown: "Move image down", remove: "Remove image" },
     settings: {
       title: "PDF settings", filename: "Output filename", filenameHelp: "A .pdf extension is added automatically.", pageSize: "Page size", a4: "A4", letter: "Letter", imageSize: "Match image",
       orientation: "Orientation", auto: "Automatic", portrait: "Portrait", landscape: "Landscape", fit: "Image fit", contain: "Fit entire image", cover: "Fill page",

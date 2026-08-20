@@ -342,7 +342,7 @@ export const fr = {
     "queue": {
       "title": "Commande PDF",
       "count": "PDF : {count}",
-      "empty": "Aucun PDF sélectionné pour le moment. Les fichiers ajoutés seront fusionnés de haut en bas.",
+      "empty": "Aucun PDF ajouté.",
       "meta": "{size} · Pages {pages}",
       "moveUp": "Déplacer le PDF vers le haut",
       "moveDown": "Déplacer le PDF vers le bas",
@@ -401,7 +401,7 @@ export const fr = {
     "queue": {
       "title": "Ordre des images",
       "count": "Images : {count}",
-      "empty": "Aucune image sélectionnée pour le moment. Les images ajoutées apparaîtront ici dans l’ordre des pages PDF.",
+      "empty": "Aucune image ajoutée.",
       "previewAlt": "Aperçu de {name}",
       "meta": "{size} · page {page}",
       "moveUp": "Déplacer l'image vers le haut",

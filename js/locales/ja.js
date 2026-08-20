@@ -342,7 +342,7 @@ export const ja = {
     "queue": {
       "title": "PDF注文",
       "count": "PDF: {count}",
-      "empty": "PDF がまだ選択されていません。追加されたファイルは上から下にマージされます。",
+      "empty": "PDFはまだ追加されていません。",
       "meta": "{size} · {pages} ページ",
       "moveUp": "PDF を上に移動",
       "moveDown": "PDF を下に移動",
@@ -401,7 +401,7 @@ export const ja = {
     "queue": {
       "title": "画像順",
       "count": "画像: {count}",
-      "empty": "画像がまだ選択されていません。追加された画像は PDF ページ順にここに表示されます。",
+      "empty": "画像はまだ追加されていません。",
       "previewAlt": "{name} のプレビュー",
       "meta": "{size} · ページ {page}",
       "moveUp": "画像を上に移動",
