@@ -133,6 +133,19 @@ PDF Split is available at `/tools/pdf/split/` and accepts one source PDF at a ti
 
 A single extracted PDF uses the existing save-picker/download fallback. Multi-output modes save one predictable ZIP archive.
 
+## PDF Organizer
+
+PDF Organizer is available at `/tools/pdf/organize/` for one local source PDF at a time.
+
+- An explicit page model tracks original page identity, current order, absolute rotation, and removal state independently of the DOM.
+- PDF.js renders bounded 200 CSS-pixel thumbnails with at most two concurrent render tasks. Its same-origin module and worker run with optional network-fetched assets and WASM disabled.
+- Pointer dragging and semantic move-earlier/move-later buttons provide equivalent ordering paths.
+- Rotation uses normalized 0/90/180/270-degree state. Reset recreates the original order, rotations, and page set without rereading the source.
+- Export uses `pdf-lib.copyPages` and page rotation metadata; it never uses thumbnail canvases, so original vector content, selectable text, embedded images, and page dimensions remain intact.
+- Replacing or clearing a source cancels render tasks, destroys the PDF.js document/worker, clears thumbnail canvases, and releases retained source references.
+
+The original source file is never modified. The File System Access save picker is used when available, with the shared Blob-download fallback elsewhere.
+
 ## Local processing dependencies
 
 All processing libraries are pinned and served as same-origin static files. Production pages do not load a CDN.
@@ -160,6 +173,15 @@ All processing libraries are pinned and served as same-origin static files. Prod
 - Package: `jszip@3.10.1` from npm
 - License choice: MIT
 - Details and hashes: [assets/vendor/jszip/README.md](./assets/vendor/jszip/README.md)
+
+### PDF.js
+
+- Version: `6.2.108`
+- Purpose: local PDF Organizer page-thumbnail rendering
+- Package: `pdfjs-dist@6.2.108` from npm
+- License: Apache-2.0
+- Main module and worker: same-origin files under `assets/vendor/pdfjs/`
+- Details and hashes: [assets/vendor/pdfjs/README.md](./assets/vendor/pdfjs/README.md)
 
 Each dependency keeps its license and package metadata beside the vendored browser build.
 
@@ -194,7 +216,7 @@ Run the complete local and CI validation entry point with:
 node tests/run-all.mjs
 ```
 
-It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, category route, i18n, static resource, privacy/network, security-hardening, ZIP, and CI workflow regression coverage. All PDF fixtures are generated deterministically during tests; CI never processes real user files.
+It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, PDF Organizer, category route, i18n, static resource, privacy/network, security-hardening, ZIP, and CI workflow regression coverage. All PDF fixtures are generated deterministically during tests; CI never processes real user files.
 
 ## Continuous integration
 
