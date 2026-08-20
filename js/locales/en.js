@@ -7,6 +7,7 @@ export const en = {
     imageToPdf: { title: "Images to PDF — Secure Tools", description: "Combine JPEG, PNG, and WebP images into a PDF entirely in your browser." },
     mergePdf: { title: "Merge PDF — Secure Tools", description: "Arrange and merge PDF files entirely in your browser without uploading them." },
     splitPdf: { title: "Split PDF — Secure Tools", description: "Extract or split PDF pages locally in your browser without uploading the source." },
+    organizePdf: { title: "Organize PDF — Secure Tools", description: "Reorder, rotate, and remove PDF pages locally in your browser." },
     pdfCategory: { title: "PDF tools — Secure Tools", description: "Create and organize PDF documents locally in your browser." },
     imageCategory: { title: "Image tools — Secure Tools", description: "Private image tools designed to run locally in your browser." },
     privacyCategory: { title: "Privacy tools — Secure Tools", description: "Inspect and remove hidden file details without uploading the source file." },
@@ -32,7 +33,7 @@ export const en = {
     categoryDescriptions: { pdf: "Create, combine, and organize documents.", image: "Convert and prepare everyday images.", privacy: "Inspect and clean hidden file details.", scan: "Turn scans into useful documents.", media: "Work with audio and video locally." },
     browseCategory: "Browse category →", availableEyebrow: "Ready to use", availableTitle: "Available now",
     availableDescription: "Production tools that keep file processing on your device.",
-    imagesToPdf: "Images to PDF", mergePdf: "Merge PDF", splitPdf: "Split PDF", imageConverter: "Image Converter",
+    imagesToPdf: "Images to PDF", mergePdf: "Merge PDF", splitPdf: "Split PDF", organizePdf: "Organize PDF", imageConverter: "Image Converter",
     imageCompressor: "Image Compressor", imageResizer: "Image Resizer", metadataInspector: "Metadata Inspector", metadataCleaner: "Metadata Cleaner",
     available: "Available", comingSoon: "Coming soon",
   },
@@ -45,6 +46,7 @@ export const en = {
       title: "PDF tools", description: "Create and organize PDF documents locally, without uploading private files.",
       imagesToPdf: "Arrange JPEG, PNG, and WebP images into one PDF.", merge: "Combine PDF files in the order you choose.",
       split: "Extract selected pages or divide a document into local files.", rotateTitle: "Rotate PDF", rotate: "Correct page orientation without changing document quality.",
+      organize: "Preview, reorder, rotate, and remove pages from one PDF.",
     },
     image: {
       title: "Image tools", description: "Prepare everyday images privately in your browser.",
@@ -171,6 +173,28 @@ export const en = {
       fileTooLarge: "This image exceeds the 50 MiB per-file limit.", queueFiles: "You can add up to 100 images.", queueBytes: "The image queue exceeds the 500 MiB total limit.", dimension: "This image exceeds the 16,384 pixel dimension limit.", pixels: "This image exceeds the 50 megapixel limit.", signature: "The file content is not a valid JPEG, PNG, or WebP image.",
       imageExport: "An image was too large or could not be prepared for the PDF.", canvas: "This browser cannot prepare images for PDF generation.", library: "The local PDF library could not be loaded.", generation: "The PDF could not be generated. Try fewer or smaller images.", save: "The save location could not be opened. Please try again.",
     },
+  organizePdf: {
+    eyebrow: "PDF tool", title: "Organize PDF", description: "Reorder, rotate, or remove pages without changing the original PDF. Everything stays on this device.",
+    drop: { title: "Add one PDF", description: "Drop a PDF here or use the picker.", choose: "Choose PDF", localTitle: "Processed locally.", localBody: "Your PDF never leaves this device.", privacyLink: "How privacy works" },
+    workspace: { title: "Page workspace", empty: "No PDF selected yet.", summary: "{name} · {pages} page(s) remaining · {size}", changed: "Unsaved changes", gridLabel: "PDF pages" },
+    page: {
+      preview: "Preview of original page {page}", position: "Position {position} · original page {page}",
+      moveEarlier: "Move page {page} earlier", moveLater: "Move page {page} later",
+      rotateLeft: "Rotate page {page} counterclockwise", rotateRight: "Rotate page {page} clockwise",
+      remove: "Remove page {page}", removeText: "Remove",
+    },
+    output: { title: "Export organized PDF", description: "The original PDF is unchanged. Export copies its pages in the order shown above.", filename: "Output filename", filenameHelp: "A .pdf extension is added automatically.", pdfFile: "PDF document" },
+    actions: { reset: "Reset changes", clear: "Clear PDF", export: "Export organized PDF" },
+    status: {
+      loading: "Loading PDF locally…", preparing: "Preparing page {completed} of {total}…", progressLabel: "Thumbnail preparation progress",
+      ready: "PDF ready: {pages} page(s).", moved: "Page {page} moved.", rotated: "Page {page} rotated.", removed: "Page {page} removed.", reset: "Original page order and rotations restored.",
+      cleared: "Source PDF cleared.", exporting: "Creating the organized PDF locally…", saved: "Saved {name}.", downloaded: "Downloaded {name}.", cancelled: "Save cancelled. No file was written.",
+    },
+    errors: {
+      oneFile: "Choose one PDF at a time.", unsupported: "Choose a PDF file.", protected: "This PDF is password-protected or encrypted and cannot be organized.", unreadable: "This PDF is damaged or unreadable.",
+      noPages: "Keep at least one page before exporting.", failure: "The PDF could not be loaded or processed safely.", save: "The save location could not be opened. Please try again.",
+    },
+  },
   },
   notFound: { eyebrow: "404", title: "This page is not here.", description: "The address may be outdated or mistyped.", action: "Return home" },
 };

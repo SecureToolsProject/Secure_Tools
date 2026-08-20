@@ -7,6 +7,7 @@ export const ko = {
     imageToPdf: { title: "이미지를 PDF로 — Secure Tools", description: "JPEG, PNG, WebP 이미지를 브라우저에서만 처리해 하나의 PDF로 만드세요." },
     mergePdf: { title: "PDF 합치기 — Secure Tools", description: "PDF 파일을 업로드하지 않고 브라우저에서 원하는 순서로 합치세요." },
     splitPdf: { title: "PDF 나누기 — Secure Tools", description: "원본을 업로드하지 않고 브라우저에서 PDF 페이지를 추출하거나 나누세요." },
+    organizePdf: { title: "PDF 정리 — Secure Tools", description: "PDF 페이지를 브라우저에서 로컬로 재정렬하고 회전하고 제거하세요." },
     pdfCategory: { title: "PDF 도구 — Secure Tools", description: "브라우저에서 PDF 문서를 로컬로 만들고 정리하세요." },
     imageCategory: { title: "이미지 도구 — Secure Tools", description: "브라우저에서 로컬로 작동하도록 설계된 프라이빗 이미지 도구입니다." },
     privacyCategory: { title: "개인정보 보호 도구 — Secure Tools", description: "원본 파일을 업로드하지 않고 숨겨진 파일 정보를 확인하고 제거하세요." },
@@ -27,7 +28,7 @@ export const ko = {
     categories: { pdf: "PDF", image: "이미지", privacy: "개인정보 보호", scan: "스캔 및 OCR", media: "미디어" },
     categoryDescriptions: { pdf: "문서를 만들고 합치고 정리합니다.", image: "일상 이미지를 변환하고 준비합니다.", privacy: "숨겨진 파일 정보를 확인하고 정리합니다.", scan: "스캔을 유용한 문서로 바꿉니다.", media: "오디오와 비디오를 로컬에서 다룹니다." },
     browseCategory: "카테고리 보기 →", availableEyebrow: "바로 사용", availableTitle: "지금 사용 가능", availableDescription: "파일을 기기에서 처리하는 완성된 도구입니다.",
-    imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
+    imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", organizePdf: "PDF 정리", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
     available: "사용 가능", comingSoon: "준비 중",
   },
   categories: {
@@ -39,6 +40,7 @@ export const ko = {
       title: "PDF 도구", description: "개인 파일을 업로드하지 않고 PDF 문서를 로컬에서 만들고 정리하세요.",
       imagesToPdf: "JPEG, PNG, WebP 이미지를 원하는 순서로 하나의 PDF로 만듭니다.", merge: "선택한 순서대로 PDF 파일을 합칩니다.",
       split: "선택한 페이지를 추출하거나 문서를 로컬 파일로 나눕니다.", rotateTitle: "PDF 회전", rotate: "문서 품질을 바꾸지 않고 페이지 방향을 바로잡습니다.",
+      organize: "PDF 하나의 페이지를 미리 보고 재정렬하고 회전하거나 제거합니다.",
     },
     image: {
       title: "이미지 도구", description: "일상 이미지 파일을 브라우저에서 비공개로 준비하세요.",
@@ -152,6 +154,28 @@ export const ko = {
       fileTooLarge: "이미지 한 개의 50 MiB 제한을 초과했습니다.", queueFiles: "이미지는 최대 100개까지 추가할 수 있습니다.", queueBytes: "이미지 목록의 전체 500 MiB 제한을 초과했습니다.", dimension: "이미지의 한 변이 16,384픽셀 제한을 초과했습니다.", pixels: "이미지가 5천만 픽셀 제한을 초과했습니다.", signature: "파일 내용이 올바른 JPEG, PNG 또는 WebP 이미지가 아닙니다.",
       imageExport: "이미지가 너무 크거나 PDF용으로 준비할 수 없습니다.", canvas: "이 브라우저에서는 PDF용 이미지를 준비할 수 없습니다.", library: "로컬 PDF 라이브러리를 불러오지 못했습니다.", generation: "PDF를 생성하지 못했습니다. 이미지 수나 크기를 줄여 다시 시도하세요.", save: "저장 위치를 열 수 없습니다. 다시 시도하세요.",
     },
+  organizePdf: {
+    eyebrow: "PDF 도구", title: "PDF 정리", description: "원본 PDF를 변경하지 않고 페이지를 재정렬하고 회전하거나 제거하세요. 모든 처리는 이 기기에서 이루어집니다.",
+    drop: { title: "PDF 하나 추가", description: "PDF를 여기에 놓거나 선택기를 사용하세요.", choose: "PDF 선택", localTitle: "로컬에서 처리됩니다.", localBody: "PDF는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
+    workspace: { title: "페이지 작업 공간", empty: "아직 선택한 PDF가 없습니다.", summary: "{name} · 남은 페이지 {pages}개 · {size}", changed: "저장하지 않은 변경", gridLabel: "PDF 페이지" },
+    page: {
+      preview: "원본 {page}페이지 미리보기", position: "{position}번째 · 원본 {page}페이지",
+      moveEarlier: "{page}페이지를 앞으로 이동", moveLater: "{page}페이지를 뒤로 이동",
+      rotateLeft: "{page}페이지를 반시계 방향으로 회전", rotateRight: "{page}페이지를 시계 방향으로 회전",
+      remove: "{page}페이지 제거", removeText: "제거",
+    },
+    output: { title: "정리한 PDF 내보내기", description: "원본 PDF는 변경되지 않습니다. 위에 표시된 순서로 페이지를 복사해 내보냅니다.", filename: "출력 파일명", filenameHelp: ".pdf 확장자는 자동으로 추가됩니다.", pdfFile: "PDF 문서" },
+    actions: { reset: "변경 초기화", clear: "PDF 비우기", export: "정리한 PDF 내보내기" },
+    status: {
+      loading: "기기에서 PDF를 불러오고 있습니다…", preparing: "{total}페이지 중 {completed}페이지 준비 중…", progressLabel: "미리보기 준비 진행률",
+      ready: "PDF 준비 완료: {pages}페이지.", moved: "{page}페이지를 이동했습니다.", rotated: "{page}페이지를 회전했습니다.", removed: "{page}페이지를 제거했습니다.", reset: "원래 페이지 순서와 회전을 복원했습니다.",
+      cleared: "원본 PDF를 비웠습니다.", exporting: "기기에서 정리한 PDF를 만들고 있습니다…", saved: "{name} 파일을 저장했습니다.", downloaded: "{name} 파일을 다운로드했습니다.", cancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
+    },
+    errors: {
+      oneFile: "PDF는 한 번에 하나만 선택하세요.", unsupported: "PDF 파일을 선택하세요.", protected: "암호로 보호되거나 암호화된 PDF는 정리할 수 없습니다.", unreadable: "PDF가 손상되었거나 읽을 수 없습니다.",
+      noPages: "내보내기 전에 페이지를 하나 이상 남겨 주세요.", failure: "PDF를 안전하게 불러오거나 처리하지 못했습니다.", save: "저장 위치를 열 수 없습니다. 다시 시도하세요.",
+    },
+  },
   },
   notFound: { eyebrow: "404", title: "이 페이지는 존재하지 않습니다.", description: "주소가 오래되었거나 잘못 입력되었을 수 있습니다.", action: "홈으로 돌아가기" },
 };
