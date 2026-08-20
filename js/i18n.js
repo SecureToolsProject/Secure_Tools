@@ -1,8 +1,12 @@
 import { en } from "./locales/en.js";
 import { ko } from "./locales/ko.js";
+import { ja } from "./locales/ja.js";
+import { es } from "./locales/es.js";
+import { de } from "./locales/de.js";
+import { fr } from "./locales/fr.js";
 
 const STORAGE_KEY = "secure-tools-language";
-const translations = { en, ko };
+export const translations = { en, ko, ja, es, de, fr };
 
 export function resolveLanguage(value, availableLanguages = Object.keys(translations)) {
   const normalized = String(value || "").trim().toLowerCase();
