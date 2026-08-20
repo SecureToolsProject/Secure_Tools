@@ -143,11 +143,11 @@ async function addSource(files) {
     await destroyCurrent();
     const source = await readOrganizerSource(file, window.PDFLib?.PDFDocument);
     const renderer = new PdfThumbnailRenderer(source.bytes);
+    state.renderer = renderer;
     const renderedPages = await renderer.load();
     if (renderedPages !== source.pageCount) throw new Error("PAGE_COUNT_MISMATCH");
     state.source = { file, bytes: source.bytes };
     state.pages = createPageState(source.pageCount, source.rotations);
-    state.renderer = renderer;
     elements.filename.value = `${sourceBaseName(file.name)}_organized`;
     renderGrid();
     await renderThumbnails();
@@ -230,7 +230,7 @@ elements.input.addEventListener("change", (event) => addSource([...event.target.
 elements.reset.addEventListener("click", resetChanges);
 elements.clear.addEventListener("click", clearSource);
 elements.export.addEventListener("click", exportPdf);
-elements.grid.addEventListener("click", (event) => { const button = event.target.closest("button[data-action]"); const card = button?.closest("[data-original-index]"); if (button && card && !state.busy) applyAction(button.dataset.action, Number(card.dataset.originalIndex)); });
+elements.grid.addEventListener("click", (event) => { const button = event.target.closest("button[data-action]"); const card = button?.closest("[data-original-index]"); if (button && card && !state.busy) applyAction(button.dataset.action, Number(card.dataset.originalIndex)).catch((error) => { console.error("PDF Organizer action failed", error?.name || error?.code || "error"); setStatus(errorKey(error), {}, "error"); }); });
 for (const type of ["dragenter", "dragover"]) elements.dropZone.addEventListener(type, (event) => { event.preventDefault(); if (!state.busy) elements.dropZone.dataset.dragging = "true"; });
 for (const type of ["dragleave", "drop"]) elements.dropZone.addEventListener(type, (event) => { event.preventDefault(); delete elements.dropZone.dataset.dragging; });
 elements.dropZone.addEventListener("drop", (event) => { if (!state.busy) addSource([...event.dataTransfer.files]); });

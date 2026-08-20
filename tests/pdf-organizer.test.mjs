@@ -104,6 +104,8 @@ function testArchitectureAndUi() {
   assert.match(app, /securetools:languagechange/);
   assert.match(app, /renderer\.destroy\(\)/);
   assert.match(app, /canvas\.width = 1/);
+  assert.match(app, /state\.renderer = renderer;[\s\S]*?await renderer\.load\(\)/);
+  assert.match(app, /applyAction\([^;]+\.catch\(/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(read("tools/pdf/index.html"), /href="\.\/organize\/"/);
 }
