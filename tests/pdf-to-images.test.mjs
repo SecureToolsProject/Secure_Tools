@@ -95,7 +95,7 @@ function testArchitectureAndUi() {
   const sharedRenderer = read("tools/shared/pdf-renderer.js");
   const app = read("tools/pdf/to-images/app.js");
   const html = read("tools/pdf/to-images/index.html");
-  const css = read("tools/pdf/to-images/tool.css");
+  const css = `${read("tools/shared/tool.css")}\n${read("tools/pdf/to-images/tool.css")}`;
   assert.match(converter, /canvas\.toBlob\(/);
   assert.doesNotMatch(converter, /toDataURL|base64/i);
   assert.match(converter, /canvas\.width = 1;[\s\S]*canvas\.height = 1/);
