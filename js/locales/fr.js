@@ -2,7 +2,7 @@ export const fr = {
   "metadata": {
     "home": {
       "title": "Secure Tools — Outils privés pour les fichiers du quotidien",
-      "description": "Convertissez, inspectez et traitez les fichiers en privé dans votre navigateur. Aucun téléchargement, compte, analyse ou suivi."
+      "description": "Convertissez, inspectez et traitez les fichiers en privé dans votre navigateur. Aucun envoi de fichier, compte, analyse ou suivi."
     },
     "privacy": {
       "title": "Confidentialité — Secure Tools",
@@ -22,7 +22,7 @@ export const fr = {
     },
     "mergePdf": {
       "title": "Fusionner des PDF — Secure Tools",
-      "description": "Organisez et fusionnez entièrement les fichiers PDF dans votre navigateur sans les télécharger."
+      "description": "Organisez et fusionnez entièrement les fichiers PDF dans votre navigateur sans les envoyer."
     },
     "splitPdf": {
       "title": "Fractionner un PDF — Secure Tools",
@@ -63,7 +63,7 @@ export const fr = {
   },
   "common": {
     "skip": "Passer au contenu principal",
-    "brandTagline": "Utilitaires privés, traités sur votre appareil",
+    "brandTagline": "Outils privés, traités sur votre appareil",
     "nav": {
       "tools": "Outils",
       "privacy": "Confidentialité",
@@ -80,9 +80,9 @@ export const fr = {
     "footerStatement": "Les fichiers ne sont pas envoyés hors de l’appareil."
   },
   "hero": {
-    "eyebrow": "Utilitaires de fichiers locaux d'abord",
-    "title": "Outils privés pour les fichiers du quotidien.",
-    "description": "Convertissez, inspectez et traitez les fichiers directement sur votre appareil. Aucun téléchargement. Aucun compte. Aucun suivi.",
+    "eyebrow": "Outils de fichiers locaux",
+    "title": "Des outils privés pour vos fichiers",
+    "description": "Convertissez, vérifiez et traitez vos fichiers directement sur votre appareil. Aucun envoi, aucun compte, aucun suivi",
     "primary": "Explorer les outils",
     "secondary": "Vérifier la confidentialité",
     "trust": "Traitement local · Open source · Pas de suivi",
@@ -92,8 +92,8 @@ export const fr = {
   },
   "tools": {
     "eyebrow": "Outils",
-    "title": "Commencez par ce sur quoi vous devez travailler.",
-    "description": "Parcourez les catégories ciblées, puis choisissez un outil. La disponibilité est toujours clairement indiquée.",
+    "title": "Choisissez le type de fichier à traiter",
+    "description": "Parcourez les catégories puis choisissez un outil. La disponibilité est indiquée clairement",
     "categories": {
       "pdf": "PDF",
       "image": "Image",
@@ -108,10 +108,7 @@ export const fr = {
       "scan": "Transformez les numérisations en documents utiles.",
       "media": "Travaillez avec l'audio et la vidéo localement."
     },
-    "browseCategory": "Parcourir la catégorie →",
-    "availableEyebrow": "Prêt à l'emploi",
-    "availableTitle": "Disponible maintenant",
-    "availableDescription": "Outils de production qui maintiennent le traitement des fichiers sur votre appareil.",
+    "browseCategory": "Voir la catégorie →",
     "imagesToPdf": "Images au format PDF",
     "mergePdf": "Fusionner le PDF",
     "splitPdf": "Diviser le PDF",
@@ -180,9 +177,9 @@ export const fr = {
     }
   },
   "why": {
-    "eyebrow": "Pourquoi sécuriser les outils",
-    "title": "Un modèle de confidentialité plus simple.",
-    "description": "Secure Tools minimise ce qui doit être fiable en supprimant le serveur des flux de travail de traitement de fichiers principaux.",
+    "eyebrow": "Pourquoi Secure Tools",
+    "title": "Un modèle de confidentialité plus simple",
+    "description": "Secure Tools réduit ce qui doit être digne de confiance en retirant le serveur du traitement principal des fichiers",
     "local": {
       "title": "Traitement local",
       "body": "Les fichiers sont traités sur votre appareil, dans le navigateur."
@@ -202,8 +199,8 @@ export const fr = {
   },
   "verify": {
     "eyebrow": "Vérifier la confidentialité",
-    "title": "Ne nous croyez pas sur parole.",
-    "description": "Vous pouvez inspecter vous-même l'activité du réseau et confirmer qu'un fichier ne quitte jamais votre appareil.",
+    "title": "Vérifiez par vous-même",
+    "description": "Vous pouvez examiner l’activité réseau et confirmer que vos fichiers ne quittent pas l’appareil",
     "step1": "Ouvrez les outils de développement de votre navigateur.",
     "step2": "Sélectionnez l'onglet Réseau.",
     "step3": "Exécutez un outil sécurisé avec un exemple de fichier.",
@@ -212,10 +209,10 @@ export const fr = {
     "architecture": "Architecture de confidentialité"
   },
   "openSource": {
-    "eyebrow": "Source ouverte",
-    "title": "Ouvert par conception.",
-    "description": "Secure Tools est conçu de manière à ce que ses déclarations de confidentialité puissent être inspectées plutôt que simplement fiables.",
-    "action": "Parcourir la source"
+    "eyebrow": "Open source",
+    "title": "Ouvert par conception",
+    "description": "Les garanties de confidentialité de Secure Tools peuvent être vérifiées dans le code source, plutôt que simplement acceptées",
+    "action": "Voir le code source"
   },
   "privacy": {
     "eyebrow": "Modèle de confidentialité",
@@ -225,18 +222,18 @@ export const fr = {
     "localBody": "Les outils pris en charge lisent et transforment les fichiers dans la mémoire du navigateur. Le contenu du fichier n'est pas envoyé à un serveur Secure Tools.",
     "collectionTitle": "Aucun compte ni analyse",
     "collectionBody": "Le hub Web n'a pas de comptes d'utilisateurs, d'analyses, de suivi comportemental, de publicité ou de pixels de suivi.",
-    "storageTitle": "Stockage des préférences",
+    "storageTitle": "Préférences enregistrées",
     "storageBody": "localStorage est utilisé uniquement pour mémoriser vos sélections de langue et de thème sur cet appareil.",
     "linksTitle": "Liens externes",
     "linksBody": "Suivre un lien externe, tel que GitHub, quitte Secure Tools et est régi par les propres politiques de ce service."
   },
   "about": {
     "eyebrow": "À propos",
-    "title": "Petits outils. Une confiance inspectable.",
+    "title": "De petits outils, une confiance vérifiable",
     "intro": "Secure Tools est une collection d'utilitaires de fichiers quotidiens axés sur la confidentialité, conçus pour s'exécuter localement dans le navigateur.",
     "purposeTitle": "Pourquoi ça existe",
     "purposeBody": "Les tâches de fichiers courantes ne devraient pas nécessiter le téléchargement de documents personnels sur un serveur inconnu ou la création d'un compte.",
-    "philosophyTitle": "Local d'abord et ouvert",
+    "philosophyTitle": "Local et ouvert par conception",
     "philosophyBody": "Le projet privilégie un code statique et compréhensible et un modèle de confidentialité que tout le monde peut vérifier via une inspection des sources et du réseau."
   },
   "splitPdf": {
@@ -246,9 +243,9 @@ export const fr = {
     "drop": {
       "title": "Ajouter un PDF",
       "description": "Déposez un PDF ici ou utilisez le sélecteur. La source est en lecture seule sur cet appareil.",
-      "choose": "Choisir PDF",
-      "localTitle": "Traitement sur cet appareil.",
-      "localBody": "Le PDF n’est pas envoyé hors de l’appareil.",
+      "choose": "Choisir un PDF",
+      "localTitle": "Traité sur cet appareil",
+      "localBody": "Le PDF ne quitte pas cet appareil",
       "privacyLink": "Comment fonctionne la confidentialité"
     },
     "source": {
@@ -258,7 +255,7 @@ export const fr = {
       "remove": "Supprimer le PDF source"
     },
     "modes": {
-      "title": "Mode partagé",
+      "title": "Mode de division",
       "legend": "Choisissez comment diviser le PDF",
       "extract": {
         "title": "Extraire la plage de pages",
@@ -283,7 +280,7 @@ export const fr = {
     },
     "settings": {
       "title": "Paramètres de sortie",
-      "filename": "Nom de la base de sortie",
+      "filename": "Nom de base",
       "filenameHelp": "Les extensions et les numéros de page triables sont ajoutés automatiquement.",
       "autoDownload": "Téléchargement automatique après le fractionnement",
       "clearAfterSave": "Effacer la référence du fichier source après l'enregistrement",
@@ -292,18 +289,18 @@ export const fr = {
     },
     "actions": {
       "split": "Diviser et enregistrer",
-      "clear": "Effacer la source"
+      "clear": "Retirer le PDF"
     },
     "status": {
       "reading": "Lecture du PDF localement…",
-      "loaded": "PDF prêt : page(s) {pages}.",
+      "loaded": "PDF prêt : pages {pages}.",
       "cleared": "PDF source effacé.",
       "preparing": "Préparation des pages…",
       "archive": "Création de l'archive ZIP…",
       "progress": "Création du fichier {completed} de {total}…",
       "progressLabel": "Progression du fractionnement du PDF",
-      "saved": "{name} enregistré avec le(s) fichier(s) de sortie {count}.",
-      "downloaded": "{name} téléchargé avec le(s) fichier(s) de sortie {count}.",
+      "saved": "{name} enregistré avec le(s) fichiers de sortie {count}.",
+      "downloaded": "{name} téléchargé avec le(s) fichiers de sortie {count}.",
       "savedAndCleared": "Résultat du fractionnement enregistré et référence source effacée.",
       "saveCancelled": "Sauvegarde annulée. Aucun fichier n'a été écrit."
     },
@@ -332,15 +329,15 @@ export const fr = {
     "title": "Fusionner le PDF",
     "description": "Organisez les fichiers PDF et combinez chaque page en un seul document. Les fichiers restent sur cet appareil.",
     "drop": {
-      "title": "Ajoutez vos PDF",
+      "title": "Ajouter des PDF",
       "description": "Déposez les fichiers PDF ici ou utilisez le sélecteur. L'ordre de la file d'attente devient l'ordre des documents.",
-      "choose": "Choisir les PDF",
-      "localTitle": "Traitement sur cet appareil.",
-      "localBody": "Les PDF ne sont pas envoyés hors de l’appareil.",
+      "choose": "Choisir des PDF",
+      "localTitle": "Traité sur cet appareil",
+      "localBody": "Les PDF ne quittent pas cet appareil",
       "privacyLink": "Comment fonctionne la confidentialité"
     },
     "queue": {
-      "title": "Commande PDF",
+      "title": "Ordre des PDF",
       "count": "PDF : {count}",
       "empty": "Aucun PDF ajouté.",
       "meta": "{size} · Pages {pages}",
@@ -349,7 +346,7 @@ export const fr = {
       "remove": "Supprimer le PDF"
     },
     "settings": {
-      "title": "Fusionner les paramètres",
+      "title": "Options de fusion",
       "filename": "Nom du fichier de sortie",
       "filenameHelp": "Une extension .pdf est ajoutée automatiquement.",
       "autoDownload": "Télécharger automatiquement après la fusion",
@@ -359,12 +356,12 @@ export const fr = {
     "actions": {
       "merge": "Fusionner et enregistrer le PDF",
       "add": "Ajouter plus de PDF",
-      "clear": "Tout effacer"
+      "clear": "Tout retirer"
     },
     "status": {
       "validating": "Vérification des PDF localement…",
       "added": "Ajout du ou des fichiers PDF {count}.",
-      "addedWithRejected": "Ajout du ou des fichiers PDF {added} ; fichier(s) {rejected} ignoré(s) non pris en charge ou illisibles.",
+      "addedWithRejected": "Ajout du ou des fichiers PDF {added} ; fichiers {rejected} ignoré(s) non pris en charge ou illisibles.",
       "removed": "PDF supprimé.",
       "reordered": "Commande PDF mise à jour.",
       "cleared": "Liste PDF effacée.",
@@ -391,11 +388,11 @@ export const fr = {
     "title": "Images au format PDF",
     "description": "Organisez les images JPEG, PNG et WebP et enregistrez-les en un seul PDF. Tout se passe sur cet appareil.",
     "drop": {
-      "title": "Ajoutez vos images",
+      "title": "Ajouter des images",
       "description": "Déposez les fichiers ici ou utilisez le sélecteur. JPEG, PNG et WebP peuvent être mélangés.",
       "choose": "Choisir des images",
-      "localTitle": "Traitement sur cet appareil.",
-      "localBody": "Les images ne sont pas envoyées hors de l’appareil.",
+      "localTitle": "Traité sur cet appareil",
+      "localBody": "Les images ne quittent pas cet appareil",
       "privacyLink": "Comment fonctionne la confidentialité"
     },
     "queue": {
@@ -436,11 +433,11 @@ export const fr = {
     "actions": {
       "generate": "Générer et enregistrer un PDF",
       "add": "Ajouter plus d'images",
-      "clear": "Tout effacer"
+      "clear": "Tout retirer"
     },
     "status": {
       "added": "Ajout d'images {count}.",
-      "addedWithRejected": "Ajout d'images prises en charge par {added} ; fichier(s) non pris en charge {rejected} ignoré.",
+      "addedWithRejected": "Ajout d'images prises en charge par {added} ; fichiers non pris en charge {rejected} ignoré.",
       "addedWithReasons": "Ajout d'une ou plusieurs images {added}. Rejeté : {reasons}",
       "rejectedItem": "{name} : {reason}",
       "removed": "Image supprimée.",
@@ -473,28 +470,28 @@ export const fr = {
   },
   "pdfMetadata": {
     "eyebrow": "Outil de confidentialité PDF",
-    "title": "Inspecteur et nettoyeur de métadonnées PDF",
+    "title": "Métadonnées PDF",
     "description": "Examinez les métadonnées courantes du document et créez une copie nettoyée sans télécharger votre PDF.",
     "scope": {
-      "title": "Portée prise en charge",
-      "body": "Cet outil couvre les champs d'informations sur le document standard indiqués ci-dessous. Il ne s'agit pas d'un épurateur médico-légal et ne prétend pas supprimer les paquets XMP, les pièces jointes, les annotations, le contenu caché ou toute structure d'identification.",
+      "title": "Périmètre pris en charge",
+      "body": "Cet outil couvre les champs standard d’informations du document affichés ci-dessous. Il ne s’agit pas d’un outil de nettoyage forensique complet et il ne prétend pas supprimer les données XMP, les pièces jointes, les annotations, le contenu masqué ni toute autre information potentiellement identifiable.",
       "cleaning": "Le nettoyage supprime uniquement les métadonnées de document prises en charge répertoriées ci-dessus."
     },
     "drop": {
       "title": "Ajouter un PDF",
       "description": "Déposez un PDF ici ou utilisez le sélecteur. Le choix d'un autre fichier remplace la source actuelle.",
-      "choose": "Choisir PDF",
-      "localTitle": "Traitement sur cet appareil.",
-      "localBody": "Le PDF n’est pas envoyé hors de l’appareil.",
+      "choose": "Choisir un PDF",
+      "localTitle": "Traité sur cet appareil",
+      "localBody": "Le PDF ne quitte pas cet appareil",
       "privacyLink": "Comment fonctionne la confidentialité"
     },
     "source": {
       "title": "PDF source",
       "empty": "Aucun PDF sélectionné pour le moment.",
-      "summary": "{name} · {size} · Page(s) {pages} · Champ(s) pris en charge {fields} présent(s)"
+      "summary": "{name} · {size} · Pages {pages} · champs pris en charge {fields} présent(s)"
     },
     "inspector": {
-      "title": "Métadonnées du document détectées",
+      "title": "Métadonnées détectées",
       "help": "Sélectionnez les champs à supprimer. Les valeurs de créateur, de producteur, d'auteur et de date peuvent identifier une personne, un appareil ou une application.",
       "caption": "Champs de métadonnées pris en charge trouvés dans le PDF",
       "remove": "Supprimer",
@@ -509,8 +506,8 @@ export const fr = {
       "author": "Auteur",
       "subject": "Sujet",
       "keywords": "Mots-clés",
-      "creator": "Application Créateur",
-      "producer": "Producteur de PDF",
+      "creator": "Application de création",
+      "producer": "Producteur PDF",
       "creationDate": "Date de création",
       "modificationDate": "Date de modification"
     },
@@ -522,22 +519,22 @@ export const fr = {
       "pdfFile": "Document PDF"
     },
     "actions": {
-      "clearSource": "Effacer le PDF",
-      "selectAll": "Sélectionner tous les présents",
-      "clearSelection": "Effacer la sélection",
+      "clearSource": "Retirer le PDF",
+      "selectAll": "Tout sélectionner",
+      "clearSelection": "Désélectionner",
       "removeAll": "Supprimer tous les champs pris en charge",
-      "clean": "Nettoyer et enregistrer le PDF"
+      "clean": "Nettoyer et enregistrer"
     },
     "comparison": {
-      "title": "Vérifié avant et après",
+      "title": "Résultat vérifié",
       "before": "Avant",
-      "after": "Après copie enregistrée",
-      "cleared": "Vérifié : les champs sélectionnés {count} sont absents de la copie sérialisée.",
-      "retained": "Avertissement : les champs sélectionnés {count} restent dans la copie sérialisée."
+      "after": "Copie enregistrée",
+      "cleared": "Vérifié : les champs sélectionnés {count} sont absents de la copie enregistrée.",
+      "retained": "Avertissement : les champs sélectionnés {count} restent dans la copie enregistrée."
     },
     "status": {
       "reading": "Lecture des métadonnées localement…",
-      "loaded": "Champ(s) de métadonnées pris en charge par {count} trouvé(s) dans un PDF de page {pages}.",
+      "loaded": "champs de métadonnées pris en charge par {count} trouvé(s) dans un PDF de page {pages}.",
       "noneFound": "Aucune métadonnée d'informations sur le document prise en charge n'a été trouvée dans ce PDF de page {pages}.",
       "cleared": "PDF source effacé.",
       "cleaning": "Suppression des métadonnées sélectionnées et vérification des octets enregistrés…",
@@ -564,9 +561,9 @@ export const fr = {
     "drop": {
       "title": "Ajouter un PDF",
       "description": "Déposez un PDF ici ou utilisez le sélecteur. Choisir un nouveau PDF remplace en toute sécurité la source actuelle.",
-      "choose": "Choisir PDF",
-      "localTitle": "Traitement sur cet appareil.",
-      "localBody": "Le PDF n’est pas envoyé hors de l’appareil.",
+      "choose": "Choisir un PDF",
+      "localTitle": "Traité sur cet appareil",
+      "localBody": "Le PDF ne quitte pas cet appareil",
       "privacyLink": "Comment fonctionne la confidentialité"
     },
     "source": {
@@ -591,7 +588,7 @@ export const fr = {
     },
     "settings": {
       "title": "Paramètres d'image",
-      "filename": "Nom de la base de sortie",
+      "filename": "Nom de base",
       "filenameHelp": "Les numéros de page et les extensions de fichiers sont ajoutés automatiquement.",
       "format": "Format d'image",
       "quality": "Qualité d'image",
@@ -604,11 +601,11 @@ export const fr = {
     "actions": {
       "convert": "Convertir et enregistrer",
       "cancel": "Annuler",
-      "clear": "Effacer la source"
+      "clear": "Retirer le PDF"
     },
     "status": {
       "reading": "Lecture du PDF localement…",
-      "loaded": "PDF prêt : page(s) {pages}.",
+      "loaded": "PDF prêt : pages {pages}.",
       "rendering": "Rendu local des pages sélectionnées…",
       "progress": "Sortie de rendu {completed} de {total} (page source {page})…",
       "progressLabel": "Progression de la conversion de l'image PDF",
@@ -651,15 +648,15 @@ export const fr = {
     "drop": {
       "title": "Ajouter un PDF",
       "description": "Déposez un PDF ici ou utilisez le sélecteur.",
-      "choose": "Choisir PDF",
-      "localTitle": "Traitement sur cet appareil.",
-      "localBody": "Le PDF n’est pas envoyé hors de l’appareil.",
+      "choose": "Choisir un PDF",
+      "localTitle": "Traité sur cet appareil",
+      "localBody": "Le PDF ne quitte pas cet appareil",
       "privacyLink": "Comment fonctionne la confidentialité"
     },
     "workspace": {
-      "title": "Espace de travail des pages",
+      "title": "Espace de travail",
       "empty": "Aucun PDF sélectionné pour le moment.",
-      "summary": "{name} · {pages} page(s) restante(s) · {size}",
+      "summary": "{name} · {pages} pages restante(s) · {size}",
       "changed": "Modifications non enregistrées",
       "gridLabel": "Pages PDF"
     },
@@ -682,14 +679,14 @@ export const fr = {
     },
     "actions": {
       "reset": "Réinitialiser les modifications",
-      "clear": "Effacer le PDF",
+      "clear": "Retirer le PDF",
       "export": "Exporter un PDF organisé"
     },
     "status": {
       "loading": "Chargement du PDF localement…",
       "preparing": "Préparation de la page {completed} de {total}…",
       "progressLabel": "Progression de la préparation des vignettes",
-      "ready": "PDF prêt : page(s) {pages}.",
+      "ready": "PDF prêt : pages {pages}.",
       "moved": "Page {page} déplacée.",
       "rotated": "Page {page} pivotée.",
       "removed": "Page {page} supprimée.",
@@ -712,8 +709,8 @@ export const fr = {
   },
   "notFound": {
     "eyebrow": "404",
-    "title": "Cette page n'est pas ici.",
-    "description": "L'adresse est peut-être obsolète ou mal saisie.",
+    "title": "Cette page n’existe pas",
+    "description": "L’adresse est peut-être obsolète ou comporte une erreur",
     "action": "Retour à la maison"
   }
 };

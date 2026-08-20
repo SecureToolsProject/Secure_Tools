@@ -63,7 +63,7 @@ export const de = {
   },
   "common": {
     "skip": "Zum Hauptinhalt springen",
-    "brandTagline": "Private Dienstprogramme, verarbeitet auf Ihrem Gerät",
+    "brandTagline": "Private Dateitools, direkt auf Ihrem Gerät",
     "nav": {
       "tools": "Werkzeuge",
       "privacy": "Datenschutz",
@@ -80,10 +80,10 @@ export const de = {
     "footerStatement": "Dateien werden nicht vom Gerät übertragen."
   },
   "hero": {
-    "eyebrow": "Dienstprogramme für lokale Dateien",
-    "title": "Private Tools für alltägliche Dateien.",
-    "description": "Konvertieren, prüfen und verarbeiten Sie Dateien direkt auf Ihrem Gerät. Keine Uploads. Keine Konten. Keine Nachverfolgung.",
-    "primary": "Entdecken Sie Tools",
+    "eyebrow": "Lokale Dateitools",
+    "title": "Private Tools für alltägliche Dateien",
+    "description": "Dateien direkt auf Ihrem Gerät konvertieren, prüfen und verarbeiten. Keine Uploads, Konten oder Nachverfolgung",
+    "primary": "Tools entdecken",
     "secondary": "Datenschutz überprüfen",
     "trust": "Lokale Verarbeitung · Open Source · Kein Tracking",
     "proofLabel": "Was Ihr Gerät verlässt",
@@ -92,8 +92,8 @@ export const de = {
   },
   "tools": {
     "eyebrow": "Werkzeuge",
-    "title": "Beginnen Sie mit dem, woran Sie arbeiten müssen.",
-    "description": "Durchsuchen Sie gezielte Kategorien und wählen Sie dann ein Werkzeug aus. Die Verfügbarkeit wird immer deutlich angezeigt.",
+    "title": "Wählen Sie, womit Sie arbeiten möchten",
+    "description": "Öffnen Sie eine Kategorie und wählen Sie das passende Tool. Verfügbarkeit wird klar angezeigt",
     "categories": {
       "pdf": "PDF",
       "image": "Bild",
@@ -108,10 +108,7 @@ export const de = {
       "scan": "Verwandeln Sie Scans in nützliche Dokumente.",
       "media": "Lokal mit Audio und Video arbeiten."
     },
-    "browseCategory": "Kategorie durchsuchen →",
-    "availableEyebrow": "Gebrauchsfertig",
-    "availableTitle": "Jetzt verfügbar",
-    "availableDescription": "Produktionstools, die die Dateiverarbeitung auf Ihrem Gerät beibehalten.",
+    "browseCategory": "Kategorie öffnen →",
     "imagesToPdf": "Bilder in PDF",
     "mergePdf": "PDF zusammenführen",
     "splitPdf": "PDF teilen",
@@ -180,9 +177,9 @@ export const de = {
     }
   },
   "why": {
-    "eyebrow": "Warum sichere Tools",
-    "title": "Ein einfacheres Datenschutzmodell.",
-    "description": "Secure Tools minimiert das, was vertrauenswürdig sein muss, indem es den Server aus den zentralen Dateiverarbeitungs-Workflows entfernt.",
+    "eyebrow": "Warum Secure Tools",
+    "title": "Ein einfacheres Datenschutzmodell",
+    "description": "Secure Tools reduziert die nötige Vertrauensbasis, indem die zentrale Dateiverarbeitung ohne Server auskommt",
     "local": {
       "title": "Lokale Verarbeitung",
       "body": "Dateien werden auf Ihrem Gerät im Browser verarbeitet."
@@ -202,8 +199,8 @@ export const de = {
   },
   "verify": {
     "eyebrow": "Datenschutz überprüfen",
-    "title": "Vertrauen Sie uns nicht beim Wort.",
-    "description": "Sie können die Netzwerkaktivität selbst überprüfen und bestätigen, dass eine Datei Ihr Gerät nie verlässt.",
+    "title": "Prüfen Sie es selbst",
+    "description": "Über die Netzwerkaktivität können Sie selbst nachvollziehen, dass Dateien das Gerät nicht verlassen",
     "step1": "Öffnen Sie die Entwicklertools Ihres Browsers.",
     "step2": "Wählen Sie die Registerkarte Netzwerk.",
     "step3": "Führen Sie ein sicheres Tool mit einer Beispieldatei aus.",
@@ -213,9 +210,9 @@ export const de = {
   },
   "openSource": {
     "eyebrow": "Open Source",
-    "title": "Offen durch Design.",
-    "description": "Secure Tools ist so konzipiert, dass seine Datenschutzansprüche überprüft und nicht einfach nur als vertrauenswürdig eingestuft werden können.",
-    "action": "Durchsuchen Sie die Quelle"
+    "title": "Offen by Design",
+    "description": "Die Datenschutzversprechen von Secure Tools lassen sich im Quellcode überprüfen, statt nur geglaubt werden zu müssen",
+    "action": "Quellcode ansehen"
   },
   "privacy": {
     "eyebrow": "Datenschutzmodell",
@@ -225,18 +222,18 @@ export const de = {
     "localBody": "Unterstützte Tools lesen und transformieren Dateien im Browserspeicher. Dateiinhalte werden nicht an einen Secure Tools-Server gesendet.",
     "collectionTitle": "Keine Konten oder Analysen",
     "collectionBody": "Der Web-Hub verfügt über keine Benutzerkonten, Analysen, Verhaltensverfolgung, Werbung oder Tracking-Pixel.",
-    "storageTitle": "Bevorzugter Speicher",
+    "storageTitle": "Gespeicherte Einstellungen",
     "storageBody": "localStorage wird nur verwendet, um Ihre Sprach- und Themenauswahl auf diesem Gerät zu speichern.",
     "linksTitle": "Externe Links",
     "linksBody": "Wenn Sie einem externen Link wie GitHub folgen, verlassen Sie Secure Tools und unterliegen den eigenen Richtlinien dieses Dienstes."
   },
   "about": {
     "eyebrow": "Über",
-    "title": "Kleine Werkzeuge. Überprüfbares Vertrauen.",
+    "title": "Kleine Tools, überprüfbares Vertrauen",
     "intro": "Secure Tools ist eine datenschutzorientierte Sammlung alltäglicher Dateidienstprogramme, die für die lokale Ausführung im Browser entwickelt wurden.",
     "purposeTitle": "Warum es existiert",
     "purposeBody": "Für allgemeine Dateiaufgaben sollte es nicht erforderlich sein, persönliche Dokumente auf einen unbekannten Server hochzuladen oder ein Konto zu erstellen.",
-    "philosophyTitle": "Lokal zuerst und offen",
+    "philosophyTitle": "Lokal und offen by Design",
     "philosophyBody": "Das Projekt bevorzugt statischen, verständlichen Code und ein Datenschutzmodell, das jeder durch Quellen- und Netzwerkinspektion überprüfen kann."
   },
   "splitPdf": {
@@ -244,21 +241,21 @@ export const de = {
     "title": "PDF teilen",
     "description": "Extrahieren Sie ausgewählte Seiten oder teilen Sie eine PDF-Datei in vorhersehbare lokale Dateien auf.",
     "drop": {
-      "title": "Fügen Sie ein PDF hinzu",
+      "title": "PDF hinzufügen",
       "description": "Legen Sie hier ein PDF ab oder verwenden Sie die Auswahl. Die Quelle ist auf diesem Gerät schreibgeschützt.",
-      "choose": "Wählen Sie PDF",
-      "localTitle": "Auf diesem Gerät verarbeitet.",
-      "localBody": "Das PDF wird nicht vom Gerät übertragen.",
+      "choose": "PDF auswählen",
+      "localTitle": "Direkt auf diesem Gerät verarbeitet",
+      "localBody": "Das PDF verlässt dieses Gerät nicht",
       "privacyLink": "So funktioniert Datenschutz"
     },
     "source": {
       "title": "Quell-PDF",
       "empty": "Noch kein PDF ausgewählt.",
-      "meta": "{size} · {pages} Seite(n)",
+      "meta": "{size} · {pages} Seiten",
       "remove": "Quell-PDF entfernen"
     },
     "modes": {
-      "title": "Split-Modus",
+      "title": "Teilungsmodus",
       "legend": "Wählen Sie aus, wie das PDF geteilt werden soll",
       "extract": {
         "title": "Seitenbereich extrahieren",
@@ -283,20 +280,20 @@ export const de = {
     },
     "settings": {
       "title": "Ausgabeeinstellungen",
-      "filename": "Basisname ausgeben",
+      "filename": "Basisname",
       "filenameHelp": "Erweiterungen und sortierbare Seitenzahlen werden automatisch hinzugefügt.",
       "autoDownload": "Automatischer Download nach der Aufteilung",
-      "clearAfterSave": "Löschen Sie den Quelldateiverweis nach dem Speichern",
+      "clearAfterSave": "Löschen Sie den Quelldatei nach dem Speichern",
       "pdfFile": "PDF-Dokument",
       "zipFile": "ZIP-Archiv"
     },
     "actions": {
       "split": "Teilen und speichern",
-      "clear": "Quelle löschen"
+      "clear": "PDF entfernen"
     },
     "status": {
       "reading": "Das PDF lokal lesen…",
-      "loaded": "PDF bereit: {pages} Seite(n).",
+      "loaded": "PDF bereit: {pages} Seiten.",
       "cleared": "Quell-PDF gelöscht.",
       "preparing": "Seiten werden vorbereitet…",
       "archive": "Erstellen des ZIP-Archivs…",
@@ -332,39 +329,39 @@ export const de = {
     "title": "PDF zusammenführen",
     "description": "Ordnen Sie PDF-Dateien an und kombinieren Sie jede Seite in einem Dokument. Dateien bleiben auf diesem Gerät.",
     "drop": {
-      "title": "Fügen Sie Ihre PDFs hinzu",
+      "title": "PDFs hinzufügen",
       "description": "Legen Sie PDF-Dateien hier ab oder verwenden Sie die Auswahl. Die Warteschlangenreihenfolge wird zur Dokumentenreihenfolge.",
-      "choose": "Wählen Sie PDFs",
-      "localTitle": "Auf diesem Gerät verarbeitet.",
-      "localBody": "PDF-Dateien werden nicht vom Gerät übertragen.",
+      "choose": "PDFs auswählen",
+      "localTitle": "Direkt auf diesem Gerät verarbeitet",
+      "localBody": "Die PDFs verlassen dieses Gerät nicht",
       "privacyLink": "So funktioniert Datenschutz"
     },
     "queue": {
-      "title": "PDF-Bestellung",
+      "title": "PDF-Reihenfolge",
       "count": "PDFs: {count}",
       "empty": "Noch keine PDFs hinzugefügt.",
-      "meta": "{size} · {pages} Seite(n)",
+      "meta": "{size} · {pages} Seiten",
       "moveUp": "PDF nach oben verschieben",
       "moveDown": "PDF nach unten verschieben",
       "remove": "PDF entfernen"
     },
     "settings": {
-      "title": "Einstellungen zusammenführen",
+      "title": "Optionen zum Zusammenführen",
       "filename": "Name der Ausgabedatei",
       "filenameHelp": "Eine .pdf-Erweiterung wird automatisch hinzugefügt.",
       "autoDownload": "Nach dem Zusammenführen automatisch herunterladen",
-      "clearAfterSave": "Dateiverweise nach dem Speichern löschen",
+      "clearAfterSave": "Dateiliste nach dem Speichern löschen",
       "pdfFile": "PDF-Dokument"
     },
     "actions": {
       "merge": "PDF zusammenführen und speichern",
       "add": "Weitere PDFs hinzufügen",
-      "clear": "Alles löschen"
+      "clear": "Alles entfernen"
     },
     "status": {
       "validating": "PDFs lokal prüfen…",
-      "added": "{count} PDF-Datei(en) hinzugefügt.",
-      "addedWithRejected": "{added} PDF-Datei(en) hinzugefügt; übersprungene {rejected} nicht unterstützte oder nicht lesbare Datei(en).",
+      "added": "{count} PDF-Dateien hinzugefügt.",
+      "addedWithRejected": "{added} PDF-Dateien hinzugefügt; übersprungene {rejected} nicht unterstützte oder nicht lesbare Dateien.",
       "removed": "PDF entfernt.",
       "reordered": "PDF-Bestellung aktualisiert.",
       "cleared": "PDF-Liste gelöscht.",
@@ -372,8 +369,8 @@ export const de = {
       "progress": "Datei {completed} von {total} wird zusammengeführt…",
       "progressLabel": "PDF-Zusammenführungsfortschritt",
       "saved": "Ein {pages}-Seiten-PDF gespeichert.",
-      "downloaded": "{name} mit {pages}-Seite(n) heruntergeladen.",
-      "savedAndCleared": "PDF gespeichert und Dateiverweise gelöscht.",
+      "downloaded": "{name} mit {pages}-Seiten heruntergeladen.",
+      "savedAndCleared": "PDF gespeichert und Dateiliste gelöscht.",
       "saveCancelled": "Speichern abgebrochen. Es wurde keine Datei geschrieben."
     },
     "errors": {
@@ -391,11 +388,11 @@ export const de = {
     "title": "Bilder in PDF",
     "description": "Ordnen Sie JPEG-, PNG- und WebP-Bilder an und speichern Sie sie als ein PDF. Alles passiert auf diesem Gerät.",
     "drop": {
-      "title": "Fügen Sie Ihre Bilder hinzu",
+      "title": "Bilder hinzufügen",
       "description": "Legen Sie Dateien hier ab oder verwenden Sie die Auswahl. JPEG, PNG und WebP können gemischt werden.",
-      "choose": "Wählen Sie Bilder aus",
-      "localTitle": "Auf diesem Gerät verarbeitet.",
-      "localBody": "Bilder werden nicht vom Gerät übertragen.",
+      "choose": "Bilder auswählen",
+      "localTitle": "Direkt auf diesem Gerät verarbeitet",
+      "localBody": "Die Bilder verlassen dieses Gerät nicht",
       "privacyLink": "So funktioniert Datenschutz"
     },
     "queue": {
@@ -414,33 +411,33 @@ export const de = {
       "filenameHelp": "Eine .pdf-Erweiterung wird automatisch hinzugefügt.",
       "pageSize": "Seitengröße",
       "a4": "A4",
-      "letter": "Brief",
-      "imageSize": "Bild anpassen",
+      "letter": "Letter",
+      "imageSize": "Bildgröße übernehmen",
       "orientation": "Ausrichtung",
       "auto": "Automatisch",
-      "portrait": "Porträt",
-      "landscape": "Landschaft",
+      "portrait": "Hochformat",
+      "landscape": "Querformat",
       "fit": "Bildanpassung",
       "contain": "Gesamtes Bild anpassen",
       "cover": "Seite füllen",
       "margin": "Rand (mm)",
       "quality": "Bildqualität",
-      "qualityBest": "Am besten",
+      "qualityBest": "Beste",
       "qualityHigh": "Hoch",
-      "qualityBalanced": "Ausgeglichen",
+      "qualityBalanced": "Ausgewogen",
       "qualitySmall": "Kleinere Datei",
       "autoDownload": "Nach der Generierung automatisch herunterladen",
-      "clearAfterSave": "Bildreferenzen nach dem Speichern löschen",
+      "clearAfterSave": "Bildliste nach dem Speichern löschen",
       "pdfFile": "PDF-Dokument"
     },
     "actions": {
       "generate": "PDF generieren und speichern",
       "add": "Weitere Bilder hinzufügen",
-      "clear": "Alles löschen"
+      "clear": "Alles entfernen"
     },
     "status": {
       "added": "{count}-Bilder hinzugefügt.",
-      "addedWithRejected": "Von {added} unterstützte Bilder hinzugefügt; {rejected} nicht unterstützte Datei(en) übersprungen.",
+      "addedWithRejected": "Von {added} unterstützte Bilder hinzugefügt; {rejected} nicht unterstützte Dateien übersprungen.",
       "addedWithReasons": "{added}-Bilder hinzugefügt. Abgelehnt: {reasons}",
       "rejectedItem": "{name}: {reason}",
       "removed": "Bild entfernt.",
@@ -473,28 +470,28 @@ export const de = {
   },
   "pdfMetadata": {
     "eyebrow": "PDF-Datenschutztool",
-    "title": "PDF-Metadaten-Inspektor und -Reiniger",
+    "title": "PDF-Metadaten prüfen und entfernen",
     "description": "Überprüfen Sie allgemeine Dokumentmetadaten und erstellen Sie eine bereinigte Kopie, ohne Ihr PDF hochzuladen.",
     "scope": {
-      "title": "Unterstützter Bereich",
-      "body": "Dieses Tool deckt die unten gezeigten Standard-Dokumentinfofelder ab. Es ist kein forensischer Scrubber und erhebt nicht den Anspruch, XMP-Pakete, Anhänge, Anmerkungen, versteckte Inhalte oder jede identifizierende Struktur zu entfernen.",
+      "title": "Unterstützter Umfang",
+      "body": "Dieses Tool deckt die unten aufgeführten Standardfelder der Dokumentinformationen ab. Es ist kein vollständiges forensisches Bereinigungswerkzeug und entfernt nicht zwangsläufig XMP-Daten, Anhänge, Anmerkungen, versteckte Inhalte oder jede andere identifizierende Struktur.",
       "cleaning": "Beim Bereinigen werden nur die oben aufgeführten unterstützten Dokumentmetadaten entfernt."
     },
     "drop": {
-      "title": "Fügen Sie ein PDF hinzu",
+      "title": "PDF hinzufügen",
       "description": "Legen Sie hier ein PDF ab oder verwenden Sie die Auswahl. Durch die Auswahl einer anderen Datei wird die aktuelle Quelle ersetzt.",
-      "choose": "Wählen Sie PDF",
-      "localTitle": "Auf diesem Gerät verarbeitet.",
-      "localBody": "Das PDF wird nicht vom Gerät übertragen.",
+      "choose": "PDF auswählen",
+      "localTitle": "Direkt auf diesem Gerät verarbeitet",
+      "localBody": "Das PDF verlässt dieses Gerät nicht",
       "privacyLink": "So funktioniert Datenschutz"
     },
     "source": {
       "title": "Quell-PDF",
       "empty": "Noch kein PDF ausgewählt.",
-      "summary": "{name} · {size} · {pages} Seite(n) · {fields} unterstützte Felder vorhanden"
+      "summary": "{name} · {size} · {pages} Seiten · {fields} unterstützte Felder vorhanden"
     },
     "inspector": {
-      "title": "Dokumentmetadaten erkannt",
+      "title": "Gefundene Dokumentmetadaten",
       "help": "Wählen Sie die zu entfernenden Felder aus. Die Werte „Ersteller“, „Produzent“, „Autor“ und „Datum“ können eine Person, ein Gerät oder eine Anwendung identifizieren.",
       "caption": "Unterstützte Metadatenfelder im PDF gefunden",
       "remove": "Entfernen",
@@ -509,8 +506,8 @@ export const de = {
       "author": "Autor",
       "subject": "Betreff",
       "keywords": "Schlüsselwörter",
-      "creator": "Creator-Anwendung",
-      "producer": "PDF-Ersteller",
+      "creator": "Erstellende Anwendung",
+      "producer": "PDF-Produzent",
       "creationDate": "Erstellungsdatum",
       "modificationDate": "Änderungsdatum"
     },
@@ -522,18 +519,18 @@ export const de = {
       "pdfFile": "PDF-Dokument"
     },
     "actions": {
-      "clearSource": "PDF löschen",
-      "selectAll": "Alle Anwesenden auswählen",
-      "clearSelection": "Auswahl löschen",
+      "clearSource": "PDF entfernen",
+      "selectAll": "Alle vorhandenen auswählen",
+      "clearSelection": "Auswahl aufheben",
       "removeAll": "Alle unterstützten Felder entfernen",
-      "clean": "PDF bereinigen und speichern"
+      "clean": "Bereinigen und speichern"
     },
     "comparison": {
-      "title": "Vorher und nachher überprüft",
+      "title": "Geprüftes Ergebnis",
       "before": "Vorher",
-      "after": "Nach gespeicherter Kopie",
-      "cleared": "Verifiziert: {count} ausgewählte Felder fehlen in der serialisierten Kopie.",
-      "retained": "Warnung: {count} ausgewählte Felder verbleiben in der serialisierten Kopie."
+      "after": "Gespeicherte Kopie",
+      "cleared": "Verifiziert: {count} ausgewählte Felder fehlen in der gespeicherten Kopie.",
+      "retained": "Warnung: {count} ausgewählte Felder verbleiben in der gespeicherten Kopie."
     },
     "status": {
       "reading": "Metadaten lokal lesen…",
@@ -541,8 +538,8 @@ export const de = {
       "noneFound": "In dieser {pages}-Seiten-PDF wurden keine unterstützten Dokumentinfo-Metadaten gefunden.",
       "cleared": "Quell-PDF gelöscht.",
       "cleaning": "Ausgewählte Metadaten entfernen und die gespeicherten Bytes überprüfen…",
-      "saved": "Gespeichert {name}; Verifiziertes {count}-Feld(er) entfernt.",
-      "downloaded": "Heruntergeladen {name}; Verifiziertes {count}-Feld(er) entfernt.",
+      "saved": "Gespeichert {name}; Verifiziertes {count}-Felder entfernt.",
+      "downloaded": "Heruntergeladen {name}; Verifiziertes {count}-Felder entfernt.",
       "partiallyCleaned": "{name} gespeichert, aber bei der Überprüfung wurde festgestellt, dass die ausgewählten {count}-Felder noch vorhanden sind.",
       "cancelled": "Speichern abgebrochen. Es wurde keine Datei geschrieben."
     },
@@ -562,17 +559,17 @@ export const de = {
     "title": "PDF in Bilder",
     "description": "Konvertieren Sie PDF-Seiten in PNG-, JPEG- oder WebP-Dateien, ohne das Dokument hochzuladen.",
     "drop": {
-      "title": "Fügen Sie ein PDF hinzu",
+      "title": "PDF hinzufügen",
       "description": "Legen Sie hier ein PDF ab oder verwenden Sie die Auswahl. Durch die Auswahl einer neuen PDF-Datei wird die aktuelle Quelle sicher ersetzt.",
-      "choose": "Wählen Sie PDF",
-      "localTitle": "Auf diesem Gerät verarbeitet.",
-      "localBody": "Das PDF wird nicht vom Gerät übertragen.",
+      "choose": "PDF auswählen",
+      "localTitle": "Direkt auf diesem Gerät verarbeitet",
+      "localBody": "Das PDF verlässt dieses Gerät nicht",
       "privacyLink": "So funktioniert Datenschutz"
     },
     "source": {
       "title": "Quell-PDF",
       "empty": "Noch kein PDF ausgewählt.",
-      "meta": "{size} · {pages} Seite(n)",
+      "meta": "{size} · {pages} Seiten",
       "remove": "Quell-PDF entfernen"
     },
     "pages": {
@@ -591,7 +588,7 @@ export const de = {
     },
     "settings": {
       "title": "Bildeinstellungen",
-      "filename": "Basisname ausgeben",
+      "filename": "Basisname",
       "filenameHelp": "Seitenzahlen und Dateierweiterungen werden automatisch hinzugefügt.",
       "format": "Bildformat",
       "quality": "Bildqualität",
@@ -604,18 +601,18 @@ export const de = {
     "actions": {
       "convert": "Konvertieren und speichern",
       "cancel": "Abbrechen",
-      "clear": "Quelle löschen"
+      "clear": "PDF entfernen"
     },
     "status": {
       "reading": "Das PDF lokal lesen…",
-      "loaded": "PDF bereit: {pages} Seite(n).",
+      "loaded": "PDF bereit: {pages} Seiten.",
       "rendering": "Ausgewählte Seiten lokal rendern…",
       "progress": "Rendering-Ausgabe {completed} von {total} (Quellenseite {page})…",
       "progressLabel": "Fortschritt der PDF-Bildkonvertierung",
       "archive": "Vorbereiten des ZIP-Archivs…",
       "saving": "Das Bild wird vorbereitet…",
-      "saved": "{name} mit {count}-Bild(ern) gespeichert.",
-      "downloaded": "{name} mit {count}-Bild(ern) heruntergeladen.",
+      "saved": "{name} mit {count}-Bildern gespeichert.",
+      "downloaded": "{name} mit {count}-Bildern heruntergeladen.",
       "saveCancelled": "Speichern abgebrochen. Es wurde keine Datei geschrieben.",
       "cancelled": "Konvertierung abgebrochen. Es wurde keine Datei geschrieben.",
       "cleared": "Quell-PDF gelöscht."
@@ -649,17 +646,17 @@ export const de = {
     "title": "PDF organisieren",
     "description": "Seiten neu anordnen, drehen oder entfernen, ohne das Original-PDF zu ändern. Alles bleibt auf diesem Gerät.",
     "drop": {
-      "title": "Fügen Sie ein PDF hinzu",
+      "title": "PDF hinzufügen",
       "description": "Legen Sie hier ein PDF ab oder verwenden Sie die Auswahl.",
-      "choose": "Wählen Sie PDF",
-      "localTitle": "Auf diesem Gerät verarbeitet.",
-      "localBody": "Das PDF wird nicht vom Gerät übertragen.",
+      "choose": "PDF auswählen",
+      "localTitle": "Direkt auf diesem Gerät verarbeitet",
+      "localBody": "Das PDF verlässt dieses Gerät nicht",
       "privacyLink": "So funktioniert Datenschutz"
     },
     "workspace": {
-      "title": "Seitenarbeitsbereich",
+      "title": "Seitenübersicht",
       "empty": "Noch kein PDF ausgewählt.",
-      "summary": "{name} · {pages} verbleibende Seite(n) · {size}",
+      "summary": "{name} · {pages} verbleibende Seiten · {size}",
       "changed": "Nicht gespeicherte Änderungen",
       "gridLabel": "PDF-Seiten"
     },
@@ -682,14 +679,14 @@ export const de = {
     },
     "actions": {
       "reset": "Änderungen zurücksetzen",
-      "clear": "PDF löschen",
+      "clear": "PDF entfernen",
       "export": "Organisiertes PDF exportieren"
     },
     "status": {
       "loading": "PDF wird lokal geladen…",
       "preparing": "Seite {completed} von {total} wird vorbereitet…",
       "progressLabel": "Fortschritt der Miniaturbildvorbereitung",
-      "ready": "PDF bereit: {pages} Seite(n).",
+      "ready": "PDF bereit: {pages} Seiten.",
       "moved": "Seite {page} verschoben.",
       "rotated": "Seite {page} gedreht.",
       "removed": "Seite {page} entfernt.",
@@ -712,8 +709,8 @@ export const de = {
   },
   "notFound": {
     "eyebrow": "404",
-    "title": "Diese Seite ist nicht hier.",
-    "description": "Die Adresse ist möglicherweise veraltet oder hat einen Tippfehler.",
+    "title": "Diese Seite gibt es nicht",
+    "description": "Die Adresse ist möglicherweise veraltet oder falsch eingegeben",
     "action": "Rückkehr nach Hause"
   }
 };

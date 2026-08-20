@@ -96,16 +96,18 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │   └── pdf-lib/
 └── tests/
     ├── ci-foundation.test.mjs
+    ├── home-structure.test.mjs
     ├── image-to-pdf.test.mjs
     ├── pdf-merge-and-categories.test.mjs
     ├── pdf-split.test.mjs
     ├── pdf-metadata.test.mjs
+    ├── typography-i18n-layout.test.mjs
     └── run-all.mjs
 ```
 
 `js/main.js` initializes shared theme and internationalization behavior. `js/theme.js` owns Light, Dark, and System selection, OS color-scheme observation, and persistence. `js/i18n.js` resolves all six supported languages from browser preferences, applies `data-i18n` bindings without reloading, updates metadata and `<html lang>`, and gives persisted manual selection precedence. Repository links are centralized in `js/config.js`.
 
-The concise [UX consistency audit](./docs/ux-consistency-audit.md) records the shared interaction patterns, resolved drift, and intentional tool-specific exceptions established before v1.0.0 hardening.
+The concise [UX consistency audit](./docs/ux-consistency-audit.md) records the shared interaction patterns, category-first homepage follow-up, multilingual typography policy, resolved drift, and intentional tool-specific exceptions established before v1.0.0 hardening.
 
 The category hubs are:
 
@@ -261,7 +263,7 @@ Run the complete local and CI validation entry point with:
 node tests/run-all.mjs
 ```
 
-It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category route, six-language catalog parity, locale detection and persistence, selector and layout safeguards, static resource, privacy/network, security-hardening, ZIP, and CI workflow regression coverage. PDF fixtures are generated deterministically during tests; CI never processes real user files.
+It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category-first homepage, system typography, CJK wrapping, long-copy layout, six-language catalog parity and placeholders, locale detection and persistence, static resource, privacy/network, security-hardening, ZIP, and CI workflow regression coverage. PDF fixtures are generated deterministically during tests; CI never processes real user files.
 
 ## Production security controls
 

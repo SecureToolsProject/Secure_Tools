@@ -37,7 +37,7 @@ export const es = {
       "description": "Convierta páginas PDF a imágenes PNG, JPEG o WebP localmente en su navegador."
     },
     "pdfMetadata": {
-      "title": "Inspector y limpiador de metadatos de PDF: Secure Tools",
+      "title": "Metadatos del PDF — Secure Tools",
       "description": "Inspeccione y elimine metadatos PDF compatibles localmente en su navegador."
     },
     "pdfCategory": {
@@ -63,7 +63,7 @@ export const es = {
   },
   "common": {
     "skip": "Saltar al contenido principal",
-    "brandTagline": "Servicios públicos privados, procesados en tu dispositivo",
+    "brandTagline": "Herramientas privadas, procesadas en tu dispositivo",
     "nav": {
       "tools": "Herramientas",
       "privacy": "Privacidad",
@@ -80,9 +80,9 @@ export const es = {
     "footerStatement": "Los archivos permanecen en el dispositivo."
   },
   "hero": {
-    "eyebrow": "Utilidades de archivos locales primero",
-    "title": "Herramientas privadas para archivos cotidianos.",
-    "description": "Convierta, inspeccione y procese archivos directamente en su dispositivo. Sin cargas. Sin cuentas. Sin seguimiento.",
+    "eyebrow": "Herramientas de archivos locales",
+    "title": "Herramientas privadas para tus archivos",
+    "description": "Convierte, revisa y procesa archivos directamente en tu dispositivo. Sin subidas, cuentas ni seguimiento",
     "primary": "Explorar herramientas",
     "secondary": "Verificar privacidad",
     "trust": "Procesamiento local · Código abierto · Sin seguimiento",
@@ -92,8 +92,8 @@ export const es = {
   },
   "tools": {
     "eyebrow": "Herramientas",
-    "title": "Comience con lo que necesita trabajar.",
-    "description": "Explore las categorías enfocadas y luego elija una herramienta. La disponibilidad siempre se muestra claramente.",
+    "title": "Elige el tipo de archivo con el que quieres trabajar",
+    "description": "Explora las categorías y elige una herramienta. La disponibilidad se muestra de forma clara",
     "categories": {
       "pdf": "PDF",
       "image": "Imagen",
@@ -108,10 +108,7 @@ export const es = {
       "scan": "Convierta los escaneos en documentos útiles.",
       "media": "Trabaja con audio y video localmente."
     },
-    "browseCategory": "Buscar categoría →",
-    "availableEyebrow": "Listo para usar",
-    "availableTitle": "Disponible ahora",
-    "availableDescription": "Herramientas de producción que mantienen el procesamiento de archivos en su dispositivo.",
+    "browseCategory": "Ver categoría →",
     "imagesToPdf": "Imágenes a PDF",
     "mergePdf": "Fusionar PDF",
     "splitPdf": "Dividir PDF",
@@ -180,9 +177,9 @@ export const es = {
     }
   },
   "why": {
-    "eyebrow": "¿Por qué proteger las herramientas?",
-    "title": "Un modelo de privacidad más simple.",
-    "description": "Secure Tools minimiza lo que se debe confiar al eliminar el servidor de los flujos de trabajo principales de procesamiento de archivos.",
+    "eyebrow": "Por qué Secure Tools",
+    "title": "Un modelo de privacidad más simple",
+    "description": "Secure Tools reduce lo que necesitas confiar al mantener el servidor fuera del procesamiento principal de archivos",
     "local": {
       "title": "Procesamiento local",
       "body": "Los archivos se procesan en su dispositivo, dentro del navegador."
@@ -202,8 +199,8 @@ export const es = {
   },
   "verify": {
     "eyebrow": "Verificar privacidad",
-    "title": "No confíe en nuestra palabra.",
-    "description": "Puede inspeccionar la actividad de la red usted mismo y confirmar que un archivo nunca sale de su dispositivo.",
+    "title": "Compruébalo tú mismo",
+    "description": "Puedes revisar la actividad de red y confirmar que tus archivos no salen del dispositivo",
     "step1": "Abra las Herramientas de desarrollo de su navegador.",
     "step2": "Seleccione la pestaña Red.",
     "step3": "Ejecute una herramienta segura con un archivo de muestra.",
@@ -213,15 +210,15 @@ export const es = {
   },
   "openSource": {
     "eyebrow": "Código abierto",
-    "title": "Abierto por diseño.",
-    "description": "Secure Tools está diseñado para que sus afirmaciones de privacidad puedan ser inspeccionadas en lugar de simplemente confiar en ellas.",
-    "action": "Explorar la fuente"
+    "title": "Abierto por diseño",
+    "description": "Secure Tools está pensado para que sus garantías de privacidad puedan comprobarse, no solo darse por sentadas",
+    "action": "Ver código fuente"
   },
   "privacy": {
     "eyebrow": "Modelo de privacidad",
     "title": "La privacidad es una elección arquitectónica.",
     "intro": "Secure Tools está diseñado para procesar el contenido de los archivos localmente en su navegador. Esta página describe el modelo técnico actual, no es una promesa sobre características inacabadas.",
-    "localTitle": "Procesamiento de archivos locales",
+    "localTitle": "Procesamiento local de archivos",
     "localBody": "Las herramientas compatibles leen y transforman archivos en la memoria del navegador. El contenido del archivo no se envía a un servidor de Secure Tools.",
     "collectionTitle": "Sin cuentas ni análisis",
     "collectionBody": "El centro web no tiene cuentas de usuario, análisis, seguimiento de comportamiento, publicidad ni píxeles de seguimiento.",
@@ -232,11 +229,11 @@ export const es = {
   },
   "about": {
     "eyebrow": "Acerca de",
-    "title": "Pequeñas herramientas. Confianza inspeccionable.",
+    "title": "Herramientas pequeñas, confianza verificable",
     "intro": "Secure Tools es una colección de utilidades de archivos cotidianos que prioriza la privacidad y está diseñada para ejecutarse localmente en el navegador.",
     "purposeTitle": "Por qué existe",
     "purposeBody": "Las tareas de archivos comunes no deberían requerir cargar documentos personales a un servidor desconocido o crear una cuenta.",
-    "philosophyTitle": "Local primero y abierto",
+    "philosophyTitle": "Local y abierto por diseño",
     "philosophyBody": "El proyecto favorece el código estático y comprensible y un modelo de privacidad que cualquiera puede verificar mediante la inspección de fuentes y redes."
   },
   "splitPdf": {
@@ -244,21 +241,21 @@ export const es = {
     "title": "Dividir PDF",
     "description": "Extraiga páginas seleccionadas o divida un PDF en archivos locales predecibles.",
     "drop": {
-      "title": "Agregar un PDF",
+      "title": "Añadir PDF",
       "description": "Suelta un PDF aquí o usa el selector. La fuente es de solo lectura en este dispositivo.",
-      "choose": "Elija PDF",
-      "localTitle": "Procesado en el dispositivo.",
-      "localBody": "El PDF no se envía fuera del dispositivo.",
+      "choose": "Elegir PDF",
+      "localTitle": "Procesado en este dispositivo",
+      "localBody": "El PDF no sale de este dispositivo",
       "privacyLink": "Cómo funciona la privacidad"
     },
     "source": {
-      "title": "Código fuente PDF",
+      "title": "PDF de origen",
       "empty": "Aún no se ha seleccionado ningún PDF.",
-      "meta": "{size} · {pages} página(s)",
+      "meta": "{size} · {pages} páginas",
       "remove": "Eliminar PDF fuente"
     },
     "modes": {
-      "title": "Modo dividido",
+      "title": "Modo de división",
       "legend": "Elige cómo dividir el PDF",
       "extract": {
         "title": "Extraer rango de páginas",
@@ -283,7 +280,7 @@ export const es = {
     },
     "settings": {
       "title": "Configuración de salida",
-      "filename": "Nombre base de salida",
+      "filename": "Nombre base",
       "filenameHelp": "Las extensiones y los números de página ordenables se agregan automáticamente.",
       "autoDownload": "Descargar automáticamente después de dividir",
       "clearAfterSave": "Borrar la referencia del archivo fuente después de guardar",
@@ -292,17 +289,17 @@ export const es = {
     },
     "actions": {
       "split": "Dividir y guardar",
-      "clear": "Borrar fuente"
+      "clear": "Quitar PDF"
     },
     "status": {
       "reading": "Leyendo el PDF localmente…",
-      "loaded": "PDF listo: página(s) {pages}.",
+      "loaded": "PDF listo: páginas {pages}.",
       "cleared": "PDF fuente borrado.",
       "preparing": "Preparando páginas…",
       "archive": "Creando el archivo ZIP…",
       "progress": "Creando archivo {completed} de {total}…",
       "progressLabel": "Progreso de división de PDF",
-      "saved": "{name} guardado con archivo(s) de salida {count}.",
+      "saved": "{name} guardado con archivos de salida {count}.",
       "downloaded": "Se descargó {name} con archivos de salida {count}.",
       "savedAndCleared": "Se guardó el resultado dividido y se borró la referencia de origen.",
       "saveCancelled": "Guardado cancelado. No se escribió ningún archivo."
@@ -324,7 +321,7 @@ export const es = {
       "rangeReversed": "Los rangos deben ir desde una página inferior a una página superior.",
       "intervalInvalid": "Ingrese un número entero de al menos 1 para páginas por archivo.",
       "mode": "Elija un modo de división válido.",
-      "save": "No se pudo abrir la ubicación para guardar. Por favor inténtalo de nuevo."
+      "save": "No se pudo abrir la ubicación para guardar. Inténtelo de nuevo."
     }
   },
   "mergePdf": {
@@ -332,24 +329,24 @@ export const es = {
     "title": "Fusionar PDF",
     "description": "Organice archivos PDF y combine cada página en un solo documento. Los archivos permanecen en este dispositivo.",
     "drop": {
-      "title": "Añade tus archivos PDF",
+      "title": "Añadir PDF",
       "description": "Suelte archivos PDF aquí o use el selector. El orden de la cola se convierte en el orden de los documentos.",
-      "choose": "Elija archivos PDF",
-      "localTitle": "Procesado en el dispositivo.",
-      "localBody": "Los PDF no se envían fuera del dispositivo.",
+      "choose": "Elegir PDF",
+      "localTitle": "Procesado en este dispositivo",
+      "localBody": "Los PDF no salen de este dispositivo",
       "privacyLink": "Cómo funciona la privacidad"
     },
     "queue": {
-      "title": "Pedido PDF",
+      "title": "Orden de los PDF",
       "count": "PDF: {count}",
       "empty": "Aún no hay archivos PDF.",
-      "meta": "{size} · {pages} página(s)",
+      "meta": "{size} · {pages} páginas",
       "moveUp": "Mover PDF hacia arriba",
       "moveDown": "Mover PDF hacia abajo",
       "remove": "Eliminar PDF"
     },
     "settings": {
-      "title": "Fusionar configuraciones",
+      "title": "Opciones de fusión",
       "filename": "Nombre del archivo de salida",
       "filenameHelp": "Se agrega automáticamente una extensión .pdf.",
       "autoDownload": "Descargar automáticamente después de fusionar",
@@ -359,7 +356,7 @@ export const es = {
     "actions": {
       "merge": "Fusionar y guardar PDF",
       "add": "Agregar más archivos PDF",
-      "clear": "Borrar todo"
+      "clear": "Vaciar todo"
     },
     "status": {
       "validating": "Comprobando archivos PDF localmente…",
@@ -372,7 +369,7 @@ export const es = {
       "progress": "Fusionando el archivo {completed} de {total}…",
       "progressLabel": "Progreso de fusión de PDF",
       "saved": "Se guardó un PDF de página {pages}.",
-      "downloaded": "Descargado {name} con página(s) {pages}.",
+      "downloaded": "Descargado {name} con páginas {pages}.",
       "savedAndCleared": "PDF guardado y referencias de archivos borradas.",
       "saveCancelled": "Guardado cancelado. No se escribió ningún archivo."
     },
@@ -383,7 +380,7 @@ export const es = {
       "unreadable": "No se pudo leer {name}. El PDF puede estar dañado o no ser compatible.",
       "library": "No se pudo cargar la biblioteca PDF local.",
       "generation": "El PDF no se pudo fusionar. Pruebe con menos archivos o más pequeños.",
-      "save": "No se pudo abrir la ubicación para guardar. Por favor inténtalo de nuevo."
+      "save": "No se pudo abrir la ubicación para guardar. Inténtelo de nuevo."
     }
   },
   "imageToPdf": {
@@ -391,11 +388,11 @@ export const es = {
     "title": "Imágenes a PDF",
     "description": "Organice imágenes JPEG, PNG y WebP y guárdelas como un PDF. Todo sucede en este dispositivo.",
     "drop": {
-      "title": "Añade tus imágenes",
+      "title": "Añadir imágenes",
       "description": "Suelta archivos aquí o usa el selector. Se pueden combinar JPEG, PNG y WebP.",
-      "choose": "Elige imágenes",
-      "localTitle": "Procesado en el dispositivo.",
-      "localBody": "Las imágenes no se envían fuera del dispositivo.",
+      "choose": "Elegir imágenes",
+      "localTitle": "Procesado en este dispositivo",
+      "localBody": "Las imágenes no salen de este dispositivo",
       "privacyLink": "Cómo funciona la privacidad"
     },
     "queue": {
@@ -436,7 +433,7 @@ export const es = {
     "actions": {
       "generate": "Generar y guardar PDF",
       "add": "Agregar más imágenes",
-      "clear": "Borrar todo"
+      "clear": "Vaciar todo"
     },
     "status": {
       "added": "Se agregaron imágenes {count}.",
@@ -468,33 +465,33 @@ export const es = {
       "canvas": "Este navegador no puede preparar imágenes para la generación de PDF.",
       "library": "No se pudo cargar la biblioteca PDF local.",
       "generation": "No se pudo generar el PDF. Pruebe con menos imágenes o más pequeñas.",
-      "save": "No se pudo abrir la ubicación para guardar. Por favor inténtalo de nuevo."
+      "save": "No se pudo abrir la ubicación para guardar. Inténtelo de nuevo."
     }
   },
   "pdfMetadata": {
     "eyebrow": "Herramienta de privacidad de PDF",
-    "title": "Inspector y limpiador de metadatos PDF",
+    "title": "Metadatos del PDF",
     "description": "Revise los metadatos de documentos comunes y cree una copia limpia sin cargar su PDF.",
     "scope": {
-      "title": "Alcance admitido",
-      "body": "Esta herramienta cubre los campos estándar de información del documento que se muestran a continuación. No es un depurador forense y no pretende eliminar paquetes XMP, archivos adjuntos, anotaciones, contenido oculto o cualquier estructura de identificación.",
+      "title": "Alcance compatible",
+      "body": "Esta herramienta cubre los campos estándar de información del documento que se muestran abajo. No es una herramienta de limpieza forense completa y no pretende eliminar XMP, archivos adjuntos, anotaciones, contenido oculto ni cualquier otro identificador posible.",
       "cleaning": "La limpieza elimina solo los metadatos de documentos admitidos enumerados anteriormente."
     },
     "drop": {
-      "title": "Agregar un PDF",
+      "title": "Añadir PDF",
       "description": "Suelta un PDF aquí o usa el selector. Elegir otro archivo reemplaza la fuente actual.",
-      "choose": "Elija PDF",
-      "localTitle": "Procesado en el dispositivo.",
-      "localBody": "El PDF no se envía fuera del dispositivo.",
+      "choose": "Elegir PDF",
+      "localTitle": "Procesado en este dispositivo",
+      "localBody": "El PDF no sale de este dispositivo",
       "privacyLink": "Cómo funciona la privacidad"
     },
     "source": {
-      "title": "Código fuente PDF",
+      "title": "PDF de origen",
       "empty": "Aún no se ha seleccionado ningún PDF.",
-      "summary": "{name} · {size} · Página(s) {pages} · Campo(s) compatible(s) {fields} presentes"
+      "summary": "{name} · {size} · Páginas {pages} · campos compatible(s) {fields} presentes"
     },
     "inspector": {
-      "title": "Metadatos del documento detectado",
+      "title": "Metadatos encontrados",
       "help": "Seleccione los campos a eliminar. Los valores de creador, productor, autor y fecha pueden identificar a una persona, dispositivo o aplicación.",
       "caption": "Campos de metadatos admitidos que se encuentran en el PDF",
       "remove": "Eliminar",
@@ -509,8 +506,8 @@ export const es = {
       "author": "Autor",
       "subject": "Asunto",
       "keywords": "Palabras clave",
-      "creator": "Aplicación de creador",
-      "producer": "Productor de PDF",
+      "creator": "Aplicación de creación",
+      "producer": "Productor PDF",
       "creationDate": "Fecha de creación",
       "modificationDate": "Fecha de modificación"
     },
@@ -522,18 +519,18 @@ export const es = {
       "pdfFile": "Documento PDF"
     },
     "actions": {
-      "clearSource": "Borrar PDF",
-      "selectAll": "Seleccionar todos los presentes",
-      "clearSelection": "Borrar selección",
+      "clearSource": "Quitar PDF",
+      "selectAll": "Seleccionar los presentes",
+      "clearSelection": "Deseleccionar",
       "removeAll": "Eliminar todos los campos compatibles",
-      "clean": "Limpiar y guardar PDF"
+      "clean": "Limpiar y guardar"
     },
     "comparison": {
-      "title": "Verificado antes y después",
+      "title": "Resultado verificado",
       "before": "Antes",
-      "after": "Después de la copia guardada",
-      "cleared": "Verificado: {count} los campos seleccionados no están en la copia serializada.",
-      "retained": "Advertencia: Los campos seleccionados de {count} permanecen en la copia serializada."
+      "after": "Copia guardada",
+      "cleared": "Verificado: {count} los campos seleccionados no están en la copia guardada.",
+      "retained": "Advertencia: Los campos seleccionados de {count} permanecen en la copia guardada."
     },
     "status": {
       "reading": "Leyendo metadatos localmente…",
@@ -549,12 +546,12 @@ export const es = {
     "errors": {
       "oneFile": "Elija un PDF a la vez.",
       "unsupported": "Elija un archivo PDF.",
-      "protected": "Este PDF está protegido con contraseña o encriptado y no se puede inspeccionar.",
+      "protected": "Este PDF está protegido con contraseña o cifrado y no se puede inspeccionar.",
       "unreadable": "Este PDF está dañado o es ilegible.",
       "noSelection": "Seleccione al menos un campo de metadatos actual para eliminar.",
       "pagesChanged": "La copia limpiada no conservó todas las dimensiones y rotación de la página, por lo que no se guardó.",
       "failure": "Los metadatos del PDF no se pudieron procesar de forma segura.",
-      "save": "No se pudo abrir la ubicación para guardar. Por favor inténtalo de nuevo."
+      "save": "No se pudo abrir la ubicación para guardar. Inténtelo de nuevo."
     }
   },
   "pdfToImages": {
@@ -562,17 +559,17 @@ export const es = {
     "title": "PDF a imágenes",
     "description": "Convierta páginas PDF a archivos PNG, JPEG o WebP sin cargar el documento.",
     "drop": {
-      "title": "Agregar un PDF",
+      "title": "Añadir PDF",
       "description": "Suelta un PDF aquí o usa el selector. Elegir un nuevo PDF reemplaza de forma segura la fuente actual.",
-      "choose": "Elija PDF",
-      "localTitle": "Procesado en el dispositivo.",
-      "localBody": "El PDF no se envía fuera del dispositivo.",
+      "choose": "Elegir PDF",
+      "localTitle": "Procesado en este dispositivo",
+      "localBody": "El PDF no sale de este dispositivo",
       "privacyLink": "Cómo funciona la privacidad"
     },
     "source": {
-      "title": "Código fuente PDF",
+      "title": "PDF de origen",
       "empty": "Aún no se ha seleccionado ningún PDF.",
-      "meta": "{size} · {pages} página(s)",
+      "meta": "{size} · {pages} páginas",
       "remove": "Eliminar PDF fuente"
     },
     "pages": {
@@ -591,7 +588,7 @@ export const es = {
     },
     "settings": {
       "title": "Configuración de imagen",
-      "filename": "Nombre base de salida",
+      "filename": "Nombre base",
       "filenameHelp": "Los números de página y las extensiones de archivo se agregan automáticamente.",
       "format": "Formato de imagen",
       "quality": "Calidad de imagen",
@@ -604,13 +601,13 @@ export const es = {
     "actions": {
       "convert": "Convertir y guardar",
       "cancel": "Cancelar",
-      "clear": "Borrar fuente"
+      "clear": "Quitar PDF"
     },
     "status": {
       "reading": "Leyendo el PDF localmente…",
-      "loaded": "PDF listo: página(s) {pages}.",
-      "rendering": "Representando páginas seleccionadas localmente…",
-      "progress": "Renderizado de salida {completed} de {total} (página fuente {page})…",
+      "loaded": "PDF listo: páginas {pages}.",
+      "rendering": "Convirtiendo las páginas seleccionadas…",
+      "progress": "Convirtiendo {completed} de {total} (página {page})…",
       "progressLabel": "Progreso de conversión de imágenes PDF",
       "archive": "Preparando el archivo ZIP…",
       "saving": "Preparando la imagen…",
@@ -624,7 +621,7 @@ export const es = {
       "oneFile": "Elija un PDF a la vez.",
       "unsupported": "Elija un archivo PDF.",
       "noFile": "Agregue un PDF antes de convertir.",
-      "protected": "Este PDF está protegido con contraseña o encriptado y no se puede convertir.",
+      "protected": "Este PDF está protegido con contraseña o cifrado y no se puede convertir.",
       "unreadable": "Este PDF está dañado o es ilegible.",
       "noPages": "Este PDF no contiene ninguna página.",
       "rangeRequired": "Ingrese al menos una página o rango.",
@@ -635,13 +632,13 @@ export const es = {
       "scale": "Elija una escala de salida compatible.",
       "dimension": "Una página renderizada excedería el límite de dimensión de 16,384 píxeles.",
       "pixels": "Una página renderizada excedería el límite de 50 megapíxeles.",
-      "canvas": "Este navegador no puede crear el lienzo de imágenes.",
+      "canvas": "Este navegador no puede crear el lienzo necesario para la imagen.",
       "encoder": "Este navegador no pudo codificar el formato de imagen seleccionado.",
       "render": "No se pudo procesar una página PDF de forma segura.",
       "archiveLibrary": "No se pudo cargar la biblioteca de archivos local.",
       "archive": "No se pudo crear el archivo ZIP.",
       "failure": "No se pudo convertir el PDF. Pruebe con menos páginas o una escala más pequeña.",
-      "save": "No se pudo abrir la ubicación para guardar. Por favor inténtalo de nuevo."
+      "save": "No se pudo abrir la ubicación para guardar. Inténtelo de nuevo."
     }
   },
   "organizePdf": {
@@ -649,15 +646,15 @@ export const es = {
     "title": "Organizar PDF",
     "description": "Reordene, gire o elimine páginas sin cambiar el PDF original. Todo queda en este dispositivo.",
     "drop": {
-      "title": "Agregar un PDF",
+      "title": "Añadir PDF",
       "description": "Suelta un PDF aquí o usa el selector.",
-      "choose": "Elija PDF",
-      "localTitle": "Procesado en el dispositivo.",
-      "localBody": "El PDF no se envía fuera del dispositivo.",
+      "choose": "Elegir PDF",
+      "localTitle": "Procesado en este dispositivo",
+      "localBody": "El PDF no sale de este dispositivo",
       "privacyLink": "Cómo funciona la privacidad"
     },
     "workspace": {
-      "title": "Espacio de trabajo de página",
+      "title": "Espacio de trabajo",
       "empty": "Aún no se ha seleccionado ningún PDF.",
       "summary": "{name} · {pages} páginas restantes · {size}",
       "changed": "Cambios no guardados",
@@ -682,14 +679,14 @@ export const es = {
     },
     "actions": {
       "reset": "Restablecer cambios",
-      "clear": "Borrar PDF",
+      "clear": "Quitar PDF",
       "export": "Exportar PDF organizado"
     },
     "status": {
       "loading": "Cargando PDF localmente…",
       "preparing": "Preparando la página {completed} de {total}…",
       "progressLabel": "Progreso de preparación de miniaturas",
-      "ready": "PDF listo: página(s) {pages}.",
+      "ready": "PDF listo: páginas {pages}.",
       "moved": "Página {page} movida.",
       "rotated": "Página {page} rotada.",
       "removed": "Página {page} eliminada.",
@@ -703,17 +700,17 @@ export const es = {
     "errors": {
       "oneFile": "Elija un PDF a la vez.",
       "unsupported": "Elija un archivo PDF.",
-      "protected": "Este PDF está protegido con contraseña o encriptado y no se puede organizar.",
+      "protected": "Este PDF está protegido con contraseña o cifrado y no se puede organizar.",
       "unreadable": "Este PDF está dañado o es ilegible.",
       "noPages": "Conserve al menos una página antes de exportar.",
       "failure": "El PDF no se pudo cargar ni procesar de forma segura.",
-      "save": "No se pudo abrir la ubicación para guardar. Por favor inténtalo de nuevo."
+      "save": "No se pudo abrir la ubicación para guardar. Inténtelo de nuevo."
     }
   },
   "notFound": {
     "eyebrow": "404",
-    "title": "Esta página no está aquí.",
-    "description": "La dirección puede estar desactualizada o mal escrita.",
-    "action": "Regreso a casa"
+    "title": "Esta página no existe",
+    "description": "La dirección puede estar desactualizada o contener un error",
+    "action": "Volver al inicio"
   }
 };
