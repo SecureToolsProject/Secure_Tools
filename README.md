@@ -2,13 +2,15 @@
 
 Secure Tools is a privacy-first web hub for everyday file utilities. Production tools process file contents locally in the browser instead of uploading them to a server.
 
-Sprint 4 adds a minimal Pull Request/main CI gate and the third production PDF tool, PDF Split. The category-first architecture remains the stable navigation layer.
+The project uses a category-first architecture, a Pull Request/main CI gate, and static GitHub Pages deployment.
 
 ## Available tools
 
 - [Images to PDF](./tools/pdf/images-to-pdf/) — arrange JPEG, PNG, and WebP images and save them as one PDF.
 - [Merge PDF](./tools/pdf/merge/) — validate, order, and combine PDF pages without rasterizing them.
 - [Split PDF](./tools/pdf/split/) — extract ordered page ranges or create predictable per-page and fixed-interval archives.
+- [Organize PDF](./tools/pdf/organize/) — preview, reorder, rotate, remove, and export pages without rasterizing them.
+- [PDF to Images](./tools/pdf/to-images/) — convert ordered pages to PNG, JPEG, or WebP files and local ZIP archives.
 
 The homepage and category hubs clearly distinguish production tools from planned work.
 
@@ -133,8 +135,23 @@ PDF Split is available at `/tools/pdf/split/` and accepts one source PDF at a ti
 
 A single extracted PDF uses the existing save-picker/download fallback. Multi-output modes save one predictable ZIP archive.
 
-## PDF Organizer
+## PDF to Images
 
+PDF to Images is available at `/tools/pdf/to-images/` for one local PDF at a time.
+
+- All-pages mode follows source order. Selected-pages mode reuses the PDF Split parser, preserving explicit order and duplicate references.
+- PDF.js `6.2.108` and its worker are reused through `tools/shared/pdf-renderer.js`; both runtime files remain same-origin with network-fetched assets, WASM, and evaluation disabled.
+- PNG uses lossless canvas encoding. JPEG and WebP expose quality from `0.5` to `1.0`, defaulting to `0.92`; unsupported WebP encoding fails with a localized error.
+- Output scale is limited to `1×`, `1.5×`, `2×`, or `3×`. Every rendered page is capped at 16,384 pixels per dimension and 50,000,000 pixels total.
+- At most two pages render concurrently. Each page canvas is encoded with `canvas.toBlob()`, reset to `1×1`, and its PDF.js page resources are cleaned before the queue advances.
+- One selected page saves directly. Multiple images are converted to `Uint8Array` entries and added in selection order to one JSZip `3.10.1` archive without base64 conversion or multiple downloads.
+- Names use the shared sanitizer and source page numbers, such as `report_page_005.png`. Repeated source pages receive deterministic suffixes such as `report_page_005_2.png` so ZIP entries are not overwritten.
+- An `AbortController` cancels active rendering. Replacing the source first stops the current job, while a separate loading state prevents overlapping PDF inspection reads.
+
+The File System Access save picker is used when available, with the shared Blob-download fallback elsewhere. The source PDF remains unchanged.
+
+
+## PDF Organizer
 PDF Organizer is available at `/tools/pdf/organize/` for one local source PDF at a time.
 
 - An explicit page model tracks original page identity, current order, absolute rotation, and removal state independently of the DOM.
@@ -169,7 +186,7 @@ All processing libraries are pinned and served as same-origin static files. Prod
 ### JSZip
 
 - Version: `3.10.1`
-- Purpose: local multi-file PDF Split archives
+- Purpose: local multi-file PDF Split and PDF to Images archives
 - Package: `jszip@3.10.1` from npm
 - License choice: MIT
 - Details and hashes: [assets/vendor/jszip/README.md](./assets/vendor/jszip/README.md)
@@ -177,7 +194,7 @@ All processing libraries are pinned and served as same-origin static files. Prod
 ### PDF.js
 
 - Version: `6.2.108`
-- Purpose: local PDF Organizer page-thumbnail rendering
+- Purpose: local PDF Organizer thumbnails and PDF to Images page rendering
 - Package: `pdfjs-dist@6.2.108` from npm
 - License: Apache-2.0
 - Main module and worker: same-origin files under `assets/vendor/pdfjs/`
@@ -190,9 +207,23 @@ Each dependency keeps its license and package metadata beside the vendored brows
 Serve the repository over HTTP so ES Modules load correctly:
 
 ```bash
+python -m http.server 8000
+```
+
+Then open [http://localhost:8000](http://localhost:8000). Do not use a `file://` URL.
+
+Run the complete local and CI validation entry point with:
+
+```bash
+node tests/run-all.mjs
+```
+
+It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, category route, i18n, static resource, privacy/network, security-hardening, ZIP, and CI workflow regression coverage. PDF fixtures are generated deterministically during tests; CI never processes real user files.
+
 ## Production security controls
 
 Secure Tools remains a static, local-processing application. Production pages enforce a meta-delivered Content Security Policy with `default-src 'self'`, `script-src 'self'`, `style-src 'self'`, `img-src 'self' blob: data:`, `connect-src 'none'`, `object-src 'none'`, `frame-src 'none'`, `base-uri 'self'`, and `form-action 'self'`. No `unsafe-inline` or `unsafe-eval` exception is used.
+
 
 The early theme bootstrap and GitHub Pages 404 base-path bootstrap are same-origin files under `js/`; production HTML contains no inline script or style blocks. Blob and data image sources are allowed only for local image previews and image/PDF preparation. Normal user navigation to GitHub links is not a network API connection and remains available.
 
@@ -205,18 +236,6 @@ Images to PDF uses layered validation:
 
 The obsolete `image2pdf_proto.html` prototype was removed from the deployed tree; Git history preserves it. `tests/security-hardening.test.mjs` verifies the pinned dependency, limits and boundaries, signatures and spoofing cases, safe filename DOM sinks, CSP coverage, inline-code absence, prototype removal, and absence of first-party runtime network APIs.
 
-python -m http.server 8000
-```
-
-Then open [http://localhost:8000](http://localhost:8000). Do not use a `file://` URL.
-
-Run the complete local and CI validation entry point with:
-
-```bash
-node tests/run-all.mjs
-```
-
-It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, PDF Organizer, category route, i18n, static resource, privacy/network, security-hardening, ZIP, and CI workflow regression coverage. All PDF fixtures are generated deterministically during tests; CI never processes real user files.
 
 ## Continuous integration
 
