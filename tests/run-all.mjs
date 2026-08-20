@@ -32,6 +32,7 @@ for (const test of [
   "tests/pdf-to-images.test.mjs",
   "tests/pdf-organizer.test.mjs",
   "tests/pdf-metadata.test.mjs",
+  "tests/i18n-quality.test.mjs",
   "tests/ci-foundation.test.mjs",
 ]) {
   runNode([test], test);
