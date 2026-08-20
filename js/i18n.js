@@ -4,19 +4,36 @@ import { ko } from "./locales/ko.js";
 const STORAGE_KEY = "secure-tools-language";
 const translations = { en, ko };
 
-const getStoredLanguage = () => {
+export function resolveLanguage(value, availableLanguages = Object.keys(translations)) {
+  const normalized = String(value || "").trim().toLowerCase();
+  if (!normalized) return "en";
+  if (availableLanguages.includes(normalized)) return normalized;
+  const primary = normalized.split("-")[0];
+  return availableLanguages.includes(primary) ? primary : "en";
+}
+
+export function getStoredLanguage(storage = globalThis.localStorage, availableLanguages = Object.keys(translations)) {
   try {
-    const value = localStorage.getItem(STORAGE_KEY);
-    return value in translations ? value : null;
+    const value = storage?.getItem(STORAGE_KEY);
+    if (!value || !availableLanguages.includes(String(value).toLowerCase())) return null;
+    return resolveLanguage(value, availableLanguages);
   } catch {
     return null;
   }
-};
+}
 
-const detectLanguage = () => {
-  const browserLanguage = navigator.language?.toLowerCase() || "en";
-  return browserLanguage.startsWith("ko") ? "ko" : "en";
-};
+export function detectLanguage(navigatorObject = globalThis.navigator, availableLanguages = Object.keys(translations)) {
+  const candidates = [navigatorObject?.language, ...(navigatorObject?.languages || [])].filter(Boolean);
+  for (const candidate of candidates) {
+    const resolved = resolveLanguage(candidate, availableLanguages);
+    if (resolved !== "en" || String(candidate).toLowerCase().startsWith("en")) return resolved;
+  }
+  return "en";
+}
+
+export function selectInitialLanguage({ storage = globalThis.localStorage, navigatorObject = globalThis.navigator } = {}) {
+  return getStoredLanguage(storage) || detectLanguage(navigatorObject);
+}
 
 const getValue = (language, key) => key.split(".").reduce(
   (value, part) => value?.[part],
@@ -54,7 +71,7 @@ const translateDocument = () => {
 };
 
 export function initializeI18n() {
-  currentLanguage = getStoredLanguage() || detectLanguage();
+  currentLanguage = selectInitialLanguage();
   translateDocument();
 
   document.querySelectorAll("[data-language-select]").forEach((select) => {
