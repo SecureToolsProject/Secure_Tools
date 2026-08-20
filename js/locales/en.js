@@ -168,7 +168,7 @@ export const en = {
     },
     errors: {
       unsupported: "Choose JPEG, PNG, or WebP image files.", noFiles: "Add at least one image before generating a PDF.", decode: "Could not read {name}. The file may be damaged or unsupported by this browser.",
-      fileTooLarge: "This image exceeds the 50 MiB per-file limit.", queueFiles: "You can add up to 100 images.", queueBytes: "The image queue exceeds the 500 MiB total limit.", dimension: "This image exceeds the 16,384 pixel dimension limit.", pixels: "This image exceeds the 50 megapixel limit.",
+      fileTooLarge: "This image exceeds the 50 MiB per-file limit.", queueFiles: "You can add up to 100 images.", queueBytes: "The image queue exceeds the 500 MiB total limit.", dimension: "This image exceeds the 16,384 pixel dimension limit.", pixels: "This image exceeds the 50 megapixel limit.", signature: "The file content is not a valid JPEG, PNG, or WebP image.",
       imageExport: "An image was too large or could not be prepared for the PDF.", canvas: "This browser cannot prepare images for PDF generation.", library: "The local PDF library could not be loaded.", generation: "The PDF could not be generated. Try fewer or smaller images.", save: "The save location could not be opened. Please try again.",
     },
   },

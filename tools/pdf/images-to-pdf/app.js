@@ -40,6 +40,7 @@ function rejectionReason(code) {
     UNSUPPORTED_IMAGE: "imageToPdf.errors.unsupported",
     IMAGE_FILE_TOO_LARGE: "imageToPdf.errors.fileTooLarge",
     IMAGE_QUEUE_FILES_EXCEEDED: "imageToPdf.errors.queueFiles",
+    IMAGE_SIGNATURE_INVALID: "imageToPdf.errors.signature",
     IMAGE_QUEUE_BYTES_EXCEEDED: "imageToPdf.errors.queueBytes",
   };
   return message(keyByCode[code] || "imageToPdf.errors.unsupported");
@@ -114,8 +115,8 @@ function renderQueue() {
   });
 }
 
-function addFiles(files) {
-  const { accepted, rejected } = selectImageQueueFiles(state.items.map((item) => item.file), files);
+async function addFiles(files) {
+  const { accepted, rejected } = await selectImageQueueFiles(state.items.map((item) => item.file), files);
 
   accepted.forEach((file) => {
     state.items.push({
@@ -150,6 +151,7 @@ function clearItems(statusKey = "imageToPdf.status.cleared") {
   state.items.forEach((item) => URL.revokeObjectURL(item.url));
   state.items.length = 0;
     IMAGE_DIMENSION_EXCEEDED: "imageToPdf.errors.dimension",
+    IMAGE_SIGNATURE_INVALID: "imageToPdf.errors.signature",
     IMAGE_PIXELS_EXCEEDED: "imageToPdf.errors.pixels",
   elements.input.value = "";
   setStatus(statusKey, {}, "neutral");

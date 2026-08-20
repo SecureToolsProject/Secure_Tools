@@ -18,9 +18,30 @@ export function isSupportedImage(file) {
   if (!(file instanceof Blob)) return false;
   if (SUPPORTED_MIME_TYPES.has(file.type.toLowerCase())) return true;
   return !file.type && SUPPORTED_EXTENSIONS.test(file.name || "");
+export function detectImageFormat(bytes) {
+  if (!(bytes instanceof Uint8Array)) bytes = new Uint8Array(bytes || 0);
+  if (bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return "jpeg";
+  const png = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+  if (bytes.length >= png.length && png.every((value, index) => bytes[index] === value)) return "png";
+  if (
+    bytes.length >= 12
+    && String.fromCharCode(...bytes.slice(0, 4)) === "RIFF"
+    && String.fromCharCode(...bytes.slice(8, 12)) === "WEBP"
+  ) return "webp";
+  return null;
 }
 
-export function selectImageQueueFiles(existingFiles, candidates) {
+export async function validateImageSignature(file) {
+  if (!(file instanceof Blob)) throw imageError("UNSUPPORTED_IMAGE");
+  const bytes = new Uint8Array(await file.slice(0, 12).arrayBuffer());
+  const format = detectImageFormat(bytes);
+  if (!format) throw imageError("IMAGE_SIGNATURE_INVALID");
+  return format;
+}
+
+}
+
+export async function selectImageQueueFiles(existingFiles, candidates) {
   const accepted = [];
   const rejected = [];
   let count = existingFiles.length;
@@ -28,10 +49,14 @@ export function selectImageQueueFiles(existingFiles, candidates) {
 
   for (const file of candidates) {
     let code = null;
-    if (!isSupportedImage(file)) code = "UNSUPPORTED_IMAGE";
+    if (!(file instanceof Blob)) code = "UNSUPPORTED_IMAGE";
     else if (file.size > MAX_FILE_SIZE) code = "IMAGE_FILE_TOO_LARGE";
     else if (count >= MAX_QUEUE_FILES) code = "IMAGE_QUEUE_FILES_EXCEEDED";
     else if (bytes + file.size > MAX_QUEUE_BYTES) code = "IMAGE_QUEUE_BYTES_EXCEEDED";
+    else {
+      try { await validateImageSignature(file); }
+      catch (error) { code = error.code || "IMAGE_SIGNATURE_INVALID"; }
+    }
 
     if (code) rejected.push({ file, code });
     else {
@@ -79,8 +104,8 @@ async function decodeWithImageElement(file) {
 }
 
 export async function decodeImage(file) {
-  if (!isSupportedImage(file)) throw imageError("UNSUPPORTED_IMAGE");
   if (file.size > MAX_FILE_SIZE) throw imageError("IMAGE_FILE_TOO_LARGE");
+  await validateImageSignature(file);
 
   if ("createImageBitmap" in window) {
     try {
