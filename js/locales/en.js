@@ -162,11 +162,13 @@ export const en = {
     },
     actions: { generate: "Generate and save PDF", add: "Add more images", clear: "Clear all" },
     status: {
-      added: "Added {count} image(s).", addedWithRejected: "Added {added} supported image(s); skipped {rejected} unsupported file(s).", removed: "Image removed.", reordered: "Image order updated.", cleared: "Image list cleared.",
+      added: "Added {count} image(s).", addedWithRejected: "Added {added} supported image(s); skipped {rejected} unsupported file(s).", addedWithReasons: "Added {added} image(s). Rejected: {reasons}",
+      rejectedItem: "{name}: {reason}", removed: "Image removed.", reordered: "Image order updated.", cleared: "Image list cleared.",
       generating: "Generating the PDF locally…", progress: "Processing page {completed} of {total}…", progressLabel: "PDF generation progress", saved: "Saved a {count}-page PDF.", downloaded: "Downloaded {name}.", savedAndCleared: "PDF saved and image references cleared.", saveCancelled: "Save cancelled. No file was written.",
     },
     errors: {
       unsupported: "Choose JPEG, PNG, or WebP image files.", noFiles: "Add at least one image before generating a PDF.", decode: "Could not read {name}. The file may be damaged or unsupported by this browser.",
+      fileTooLarge: "This image exceeds the 50 MiB per-file limit.", queueFiles: "You can add up to 100 images.", queueBytes: "The image queue exceeds the 500 MiB total limit.", dimension: "This image exceeds the 16,384 pixel dimension limit.", pixels: "This image exceeds the 50 megapixel limit.",
       imageExport: "An image was too large or could not be prepared for the PDF.", canvas: "This browser cannot prepare images for PDF generation.", library: "The local PDF library could not be loaded.", generation: "The PDF could not be generated. Try fewer or smaller images.", save: "The save location could not be opened. Please try again.",
     },
   },
