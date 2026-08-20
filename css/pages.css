@@ -7,6 +7,7 @@
 .prose a { color: var(--accent); font-weight: 700; }
 
 .hero { display: grid; min-height: min(48rem, calc(100vh - 4.5rem)); grid-template-columns: minmax(0, 1.55fr) minmax(17rem, 0.65fr); align-items: center; gap: clamp(3rem, 8vw, 8rem); padding-block: clamp(5rem, 11vw, 9rem); }
+.hero > *, .section-heading > *, .available-tools > *, .principles-layout > *, .verify-layout > *, .open-source-layout > * { min-width: 0; }
 .hero h1 { max-width: 12ch; margin-bottom: var(--space-5); }
 .hero-description { max-width: 41rem; margin-bottom: var(--space-6); color: var(--text-secondary); font-size: clamp(1.05rem, 2vw, 1.25rem); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
@@ -21,7 +22,7 @@
 .section-heading h2 { max-width: 14ch; margin-bottom: 0; }
 .section-heading > p { margin-bottom: 0; color: var(--text-secondary); }
 .category-directory { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-4); }
-.category-card { display: flex; min-height: 15rem; grid-column: span 2; flex-direction: column; align-items: flex-start; padding: var(--space-5); color: inherit; text-decoration: none; transition: border-color var(--transition-fast), transform var(--transition-fast); }
+.category-card { display: flex; min-width: 0; min-height: 15rem; grid-column: span 2; flex-direction: column; align-items: flex-start; padding: var(--space-5); color: inherit; text-decoration: none; transition: border-color var(--transition-fast), transform var(--transition-fast); }
 .category-card:nth-child(4) { grid-column: 2 / span 2; }
 .category-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
 .category-card__index { color: var(--accent); font-size: 0.75rem; font-weight: 750; }
@@ -33,9 +34,10 @@
 .available-tools .tool-list { padding-inline: var(--space-5); }
 .tool-list { margin: 0; padding: 0; list-style: none; }
 .tool-list li + li { border-top: 1px solid var(--border); }
-.tool-row { display: flex; min-height: 3.8rem; align-items: center; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-3); text-decoration: none; }
+.tool-row { display: flex; min-width: 0; min-height: 3.8rem; align-items: center; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-3); text-decoration: none; }
 a.tool-row:hover { color: var(--accent); }
 
+.tool-row > :first-child { min-width: 0; overflow-wrap: anywhere; }
 .principles-layout { display: grid; grid-template-columns: minmax(17rem, 0.7fr) minmax(0, 1fr); gap: clamp(3rem, 9vw, 9rem); }
 .section-intro h2 { max-width: 10ch; }
 .section-intro p:last-child { max-width: 30rem; }

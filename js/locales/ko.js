@@ -1,8 +1,8 @@
 export const ko = {
   metadata: {
-    home: { title: "Secure Tools — 일상 파일을 위한 프라이빗 도구", description: "파일을 업로드하지 않고 브라우저에서 비공개로 변환, 확인, 처리하세요. 계정, 분석, 추적이 없습니다." },
-    privacy: { title: "개인정보 보호 — Secure Tools", description: "Secure Tools가 파일을 로컬에서 처리하고 추적을 배제하며 환경설정에만 로컬 저장소를 사용하는 방식입니다." },
-    about: { title: "소개 — Secure Tools", description: "Secure Tools가 단순히 믿는 대신 직접 검증할 수 있는 오픈 소스 로컬 우선 파일 도구를 만드는 이유입니다." },
+    home: { title: "Secure Tools — 일상 파일을 위한 개인정보 보호 도구", description: "파일을 업로드하지 않고 브라우저에서 바로 변환하고 확인하세요. 계정도, 분석도, 추적도 없습니다." },
+    privacy: { title: "개인정보 보호 — Secure Tools", description: "Secure Tools가 파일을 기기에서 처리하고, 추적 없이 언어와 테마 설정만 저장하는 방식을 알아보세요." },
+    about: { title: "소개 — Secure Tools", description: "Secure Tools가 누구나 검증할 수 있는 오픈 소스 로컬 우선 파일 도구를 만드는 이유를 소개합니다." },
     notFound: { title: "페이지를 찾을 수 없음 — Secure Tools", description: "요청한 Secure Tools 페이지를 찾을 수 없습니다." },
     imageToPdf: { title: "이미지를 PDF로 — Secure Tools", description: "JPEG, PNG, WebP 이미지를 브라우저에서만 처리해 하나의 PDF로 만드세요." },
     mergePdf: { title: "PDF 합치기 — Secure Tools", description: "PDF 파일을 업로드하지 않고 브라우저에서 원하는 순서로 합치세요." },
@@ -17,27 +17,27 @@ export const ko = {
     mediaCategory: { title: "미디어 도구 — Secure Tools", description: "Secure Tools의 로컬 오디오 및 비디오 유틸리티입니다." },
   },
   common: {
-    skip: "본문으로 건너뛰기", brandTagline: "기기에서 처리되는 프라이빗 유틸리티",
+    skip: "본문으로 바로가기", brandTagline: "기기에서 바로 처리하는 개인정보 보호 도구",
     nav: { tools: "도구", privacy: "개인정보 보호", source: "소스", about: "소개" },
-    language: "언어", theme: "테마", themes: { system: "시스템", light: "라이트", dark: "다크" }, footerStatement: "파일은 사용자의 기기에 머뭅니다.",
+    language: "언어", theme: "테마", themes: { system: "시스템", light: "라이트", dark: "다크" }, footerStatement: "파일은 이 기기 밖으로 전송되지 않습니다.",
   },
   hero: {
-    eyebrow: "로컬 우선 파일 유틸리티", title: "일상 파일을 위한 프라이빗 도구.", description: "파일을 기기에서 직접 변환하고 확인하고 처리하세요. 업로드, 계정, 추적이 없습니다.",
-    primary: "도구 살펴보기", secondary: "개인정보 보호 확인", trust: "로컬 처리 · 오픈 소스 · 추적 없음", proofLabel: "기기 밖으로 나가는 것", proofValue: "없음", proofNote: "핵심 도구는 브라우저 메모리에서 파일 내용을 처리합니다.",
+    eyebrow: "로컬 우선 파일 도구", title: "일상 파일을 더 안전하게 다루세요.", description: "파일을 이 기기에서 바로 변환하고 확인하세요. 업로드도, 계정도, 추적도 없습니다.",
+    primary: "도구 보기", secondary: "개인정보 보호 확인", trust: "기기 내 처리 · 오픈 소스 · 추적 없음", proofLabel: "기기 밖으로 전송되는 파일", proofValue: "없음", proofNote: "핵심 도구는 브라우저 메모리에서 파일을 처리합니다.",
   },
   tools: {
-    eyebrow: "도구", title: "작업할 파일 종류부터 선택하세요.", description: "필요한 카테고리를 둘러본 뒤 도구를 선택하세요. 사용 가능 여부를 항상 명확히 표시합니다.",
+    eyebrow: "도구", title: "파일 종류에 맞는 도구를 선택하세요.", description: "카테고리에서 필요한 도구를 찾아보세요. 지금 사용할 수 있는 기능을 명확히 표시합니다.",
     categories: { pdf: "PDF", image: "이미지", privacy: "개인정보 보호", scan: "스캔 및 OCR", media: "미디어" },
     categoryDescriptions: { pdf: "문서를 만들고 합치고 정리합니다.", image: "일상 이미지를 변환하고 준비합니다.", privacy: "숨겨진 파일 정보를 확인하고 정리합니다.", scan: "스캔을 유용한 문서로 바꿉니다.", media: "오디오와 비디오를 로컬에서 다룹니다." },
-    browseCategory: "카테고리 보기 →", availableEyebrow: "바로 사용", availableTitle: "지금 사용 가능", availableDescription: "파일을 기기에서 처리하는 완성된 도구입니다.",
+    browseCategory: "도구 보기 →", availableEyebrow: "바로 사용", availableTitle: "사용 가능한 도구", availableDescription: "파일을 외부로 보내지 않고 이 기기에서 처리합니다.",
     imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", organizePdf: "PDF 정리", pdfToImages: "PDF를 이미지로", pdfMetadata: "PDF 메타데이터", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
     available: "사용 가능", comingSoon: "준비 중",
   },
   categories: {
     eyebrow: "도구 카테고리",
     nav: { pdf: "PDF", image: "이미지", privacy: "개인정보 보호", scan: "스캔 및 OCR", media: "미디어" },
-    localNote: "사용 가능한 도구는 브라우저 메모리에서 파일 내용을 처리합니다. 예정된 항목은 명확히 표시됩니다.",
-    plannedNote: "이 카테고리는 준비 중입니다. 사용할 수 없는 항목을 작동하는 것처럼 표시하지 않습니다.",
+    localNote: "사용 가능한 도구는 브라우저 메모리에서 파일을 처리합니다. 준비 중인 기능은 따로 표시합니다.",
+    plannedNote: "이 카테고리는 준비 중입니다. 아직 사용할 수 없는 기능은 별도로 표시합니다.",
     pdf: {
       title: "PDF 도구", description: "개인 파일을 업로드하지 않고 PDF 문서를 로컬에서 만들고 정리하세요.",
       imagesToPdf: "JPEG, PNG, WebP 이미지를 원하는 순서로 하나의 PDF로 만듭니다.", merge: "선택한 순서대로 PDF 파일을 합칩니다.",
@@ -64,25 +64,25 @@ export const ko = {
     },
   },
   why: {
-    eyebrow: "Secure Tools를 선택하는 이유", title: "더 단순한 개인정보 보호 모델.", description: "Secure Tools는 핵심 파일 처리 과정에서 서버를 제외해 신뢰해야 할 대상을 줄입니다.",
-    local: { title: "로컬 처리", body: "파일은 브라우저 안에서 사용자의 기기로 처리됩니다." }, accounts: { title: "계정 없음", body: "기본 도구는 가입이나 개인 프로필 없이 작동합니다." }, tracking: { title: "추적 없음", body: "분석, 행동 추적기, 광고 픽셀이 없습니다." }, network: { title: "최소한의 네트워크 의존", body: "핵심 처리는 외부 런타임 서비스에 의존하지 않습니다." },
+    eyebrow: "Secure Tools를 선택하는 이유", title: "단순하고 투명한 개인정보 보호.", description: "핵심 파일 처리에서 서버를 제외해 사용자가 신뢰해야 할 대상을 줄였습니다.",
+    local: { title: "기기 내 처리", body: "파일은 브라우저를 통해 이 기기에서 바로 처리됩니다." }, accounts: { title: "계정 불필요", body: "가입하거나 개인 프로필을 만들지 않아도 기본 도구를 사용할 수 있습니다." }, tracking: { title: "추적 없음", body: "분석 도구, 행동 추적기, 광고 픽셀을 사용하지 않습니다." }, network: { title: "최소한의 네트워크 의존", body: "핵심 파일 처리는 외부 실행 서비스에 의존하지 않습니다." },
   },
   verify: {
-    eyebrow: "개인정보 보호 확인", title: "저희 말을 그대로 믿지 마세요.", description: "네트워크 활동을 직접 살펴보고 파일이 기기 밖으로 나가지 않는지 확인할 수 있습니다.",
-    step1: "브라우저 개발자 도구를 엽니다.", step2: "네트워크 탭을 선택합니다.", step3: "샘플 파일로 Secure Tool을 실행합니다.", step4: "파일이 업로드되지 않는지 확인합니다.", source: "소스 보기", architecture: "개인정보 보호 구조",
+    eyebrow: "개인정보 보호 확인", title: "직접 확인해 보세요.", description: "브라우저의 네트워크 활동을 살펴보면 파일이 외부로 전송되지 않는지 확인할 수 있습니다.",
+    step1: "브라우저 개발자 도구를 엽니다.", step2: "네트워크 탭을 선택합니다.", step3: "샘플 파일로 Secure Tools 기능을 실행합니다.", step4: "파일 업로드 요청이 없는지 확인합니다.", source: "소스 보기", architecture: "개인정보 보호 구조",
   },
-  openSource: { eyebrow: "오픈 소스", title: "처음부터 열려 있습니다.", description: "Secure Tools는 개인정보 보호 주장을 단순히 믿는 대신 직접 살펴볼 수 있도록 만들어집니다.", action: "소스 둘러보기" },
+  openSource: { eyebrow: "오픈 소스", title: "설계부터 투명하게.", description: "Secure Tools의 개인정보 보호 방식은 소스 코드에서 직접 확인할 수 있습니다.", action: "소스 보기" },
   privacy: {
-    eyebrow: "개인정보 보호 모델", title: "개인정보 보호는 구조적 선택입니다.", intro: "Secure Tools는 파일 내용을 브라우저에서 로컬로 처리하도록 설계되었습니다. 이 페이지는 미완성 기능에 대한 약속이 아닌 현재의 기술 모델을 설명합니다.",
-    localTitle: "로컬 파일 처리", localBody: "지원되는 도구는 브라우저 메모리에서 파일을 읽고 변환합니다. 파일 내용은 Secure Tools 서버로 전송되지 않습니다.", collectionTitle: "계정과 분석 없음", collectionBody: "이 웹 허브에는 사용자 계정, 분석, 행동 추적, 광고, 추적 픽셀이 없습니다.", storageTitle: "환경설정 저장", storageBody: "localStorage는 이 기기에서 선택한 언어와 테마를 기억하는 용도로만 사용됩니다.", linksTitle: "외부 링크", linksBody: "GitHub 같은 외부 링크를 열면 Secure Tools를 벗어나며 해당 서비스의 정책이 적용됩니다.",
+    eyebrow: "개인정보 보호 모델", title: "개인정보 보호는 설계에서 시작합니다.", intro: "Secure Tools는 파일을 브라우저에서 처리하도록 설계했습니다. 이 페이지에서는 아직 제공하지 않는 기능이 아니라 현재 적용된 기술 구조를 설명합니다.",
+    localTitle: "기기 내 파일 처리", localBody: "지원되는 도구는 브라우저 메모리에서 파일을 읽고 변환합니다. 파일 내용은 Secure Tools 서버로 전송되지 않습니다.", collectionTitle: "계정과 분석 도구 없음", collectionBody: "사용자 계정, 이용 분석, 행동 추적, 광고, 추적 픽셀을 사용하지 않습니다.", storageTitle: "환경설정 저장", storageBody: "localStorage는 이 기기에서 선택한 언어와 테마를 기억하는 데만 사용합니다.", linksTitle: "외부 링크", linksBody: "GitHub 같은 외부 링크를 열면 Secure Tools를 벗어나며, 이후에는 해당 서비스의 정책이 적용됩니다.",
   },
   about: {
-    eyebrow: "소개", title: "작은 도구, 검증 가능한 신뢰.", intro: "Secure Tools는 브라우저에서 로컬로 작동하는 일상 파일 도구를 모은 개인정보 보호 중심 프로젝트입니다.",
-    purposeTitle: "만든 이유", purposeBody: "일상적인 파일 작업 때문에 개인 문서를 알 수 없는 서버에 올리거나 계정을 만들 필요는 없어야 합니다.", philosophyTitle: "로컬 우선, 그리고 개방성", philosophyBody: "이 프로젝트는 누구나 소스와 네트워크 검사를 통해 검증할 수 있는 정적이고 이해하기 쉬운 코드와 개인정보 보호 모델을 지향합니다.",
+    eyebrow: "소개", title: "작은 도구, 직접 확인하는 신뢰.", intro: "Secure Tools는 일상 파일을 브라우저에서 바로 처리하는 개인정보 보호 중심 도구 모음입니다.",
+    purposeTitle: "만든 이유", purposeBody: "간단한 파일 작업 때문에 개인 문서를 알 수 없는 서버에 업로드하거나 계정을 만들 필요는 없습니다.", philosophyTitle: "로컬 우선과 투명성", philosophyBody: "누구나 소스 코드와 네트워크 활동을 확인할 수 있도록 단순한 정적 구조와 투명한 개인정보 보호 모델을 지향합니다.",
   },
   splitPdf: {
     eyebrow: "PDF 도구", title: "PDF 나누기", description: "선택한 페이지를 추출하거나 하나의 PDF를 예측 가능한 로컬 파일로 나누세요.",
-    drop: { title: "PDF 하나 추가", description: "PDF를 여기에 놓거나 선택기를 사용하세요. 원본은 이 기기에서만 읽습니다.", choose: "PDF 선택", localTitle: "로컬에서 처리됩니다.", localBody: "PDF는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
+    drop: { title: "PDF 추가", description: "PDF를 여기에 놓거나 파일 선택 버튼을 누르세요. 원본은 이 기기에서만 읽습니다.", choose: "PDF 선택", localTitle: "이 기기에서 바로 처리합니다.", localBody: "PDF는 외부로 전송되지 않습니다.", privacyLink: "개인정보 보호 방식" },
     source: { title: "원본 PDF", empty: "아직 선택한 PDF가 없습니다.", meta: "{size} · {pages}페이지", remove: "원본 PDF 제거" },
     modes: {
       title: "나누기 방식", legend: "PDF를 나눌 방식을 선택하세요",
@@ -94,13 +94,13 @@ export const ko = {
     interval: { label: "파일당 페이지 수", help: "남은 페이지는 마지막 파일에 포함됩니다." },
     settings: {
       title: "출력 설정", filename: "출력 기본 이름", filenameHelp: "확장자와 정렬 가능한 페이지 번호가 자동으로 추가됩니다.",
-      autoDownload: "나눈 뒤 자동 다운로드", clearAfterSave: "저장 후 원본 파일 참조 정리",
+      autoDownload: "분할 후 자동 다운로드", clearAfterSave: "저장 후 원본 목록 비우기",
       pdfFile: "PDF 문서", zipFile: "ZIP 압축 파일",
     },
-    actions: { split: "나누기 및 저장", clear: "원본 비우기" },
+    actions: { split: "분할하기", clear: "PDF 비우기" },
     status: {
-      reading: "PDF를 기기에서 읽고 있습니다…", loaded: "PDF 준비 완료: {pages}페이지.", cleared: "원본 PDF를 비웠습니다.", preparing: "페이지를 준비하고 있습니다…",
-      archive: "ZIP 압축 파일을 만들고 있습니다…", progress: "{total}개 파일 중 {completed}개 생성 중…", progressLabel: "PDF 나누기 진행률",
+      reading: "PDF 읽는 중…", loaded: "PDF 준비 완료: {pages}페이지", cleared: "PDF를 비웠습니다.", preparing: "페이지 준비 중…",
+      archive: "ZIP 파일 만드는 중…", progress: "{total}개 중 {completed}개 파일 만드는 중…", progressLabel: "PDF 분할 진행률",
       saved: "출력 파일 {count}개가 포함된 {name} 파일을 저장했습니다.", downloaded: "출력 파일 {count}개가 포함된 {name} 파일을 다운로드했습니다.",
       savedAndCleared: "나누기 결과를 저장하고 원본 참조를 정리했습니다.", saveCancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
     },
@@ -116,19 +116,19 @@ export const ko = {
   },
   mergePdf: {
     eyebrow: "PDF 도구", title: "PDF 합치기", description: "PDF 파일의 순서를 정하고 모든 페이지를 하나의 문서로 합치세요. 파일은 이 기기에 머뭅니다.",
-    drop: { title: "PDF 추가", description: "PDF 파일을 여기에 놓거나 선택기를 사용하세요. 대기열 순서대로 문서가 합쳐집니다.", choose: "PDF 선택", localTitle: "로컬에서 처리됩니다.", localBody: "PDF는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
+    drop: { title: "PDF 추가", description: "PDF를 여기에 놓거나 파일 선택 버튼을 누르세요. 목록 순서대로 합칩니다.", choose: "PDF 선택", localTitle: "이 기기에서 바로 처리합니다.", localBody: "PDF는 외부로 전송되지 않습니다.", privacyLink: "개인정보 보호 방식" },
     queue: {
       title: "PDF 순서", count: "PDF: {count}개", empty: "아직 선택한 PDF가 없습니다. 추가한 파일은 위에서 아래 순서로 합쳐집니다.",
       meta: "{size} · {pages}페이지", moveUp: "PDF를 위로 이동", moveDown: "PDF를 아래로 이동", remove: "PDF 제거",
     },
     settings: {
       title: "합치기 설정", filename: "출력 파일명", filenameHelp: ".pdf 확장자는 자동으로 추가됩니다.",
-      autoDownload: "합친 뒤 자동 다운로드", clearAfterSave: "저장 후 파일 참조 정리", pdfFile: "PDF 문서",
+      autoDownload: "병합 후 자동 다운로드", clearAfterSave: "저장 후 파일 목록 비우기", pdfFile: "PDF 문서",
     },
-    actions: { merge: "PDF 합치기 및 저장", add: "PDF 더 추가", clear: "전체 비우기" },
+    actions: { merge: "병합하기", add: "PDF 추가", clear: "모두 비우기" },
     status: {
-      validating: "PDF를 기기에서 확인하고 있습니다…", added: "PDF 파일 {count}개를 추가했습니다.", addedWithRejected: "PDF 파일 {added}개를 추가하고 지원하지 않거나 읽을 수 없는 파일 {rejected}개를 건너뛰었습니다.",
-      removed: "PDF를 제거했습니다.", reordered: "PDF 순서를 변경했습니다.", cleared: "PDF 목록을 비웠습니다.", merging: "기기에서 PDF를 합치고 있습니다…",
+      validating: "PDF 확인 중…", added: "PDF {count}개를 추가했습니다.", addedWithRejected: "PDF {added}개를 추가하고 지원하지 않거나 읽을 수 없는 파일 {rejected}개는 제외했습니다.",
+      removed: "PDF를 제거했습니다.", reordered: "PDF 순서를 바꿨습니다.", cleared: "PDF 목록을 비웠습니다.", merging: "PDF 병합 중…",
       progress: "{total}개 파일 중 {completed}개를 합치는 중…", progressLabel: "PDF 합치기 진행률", saved: "{pages}페이지 PDF를 저장했습니다.",
       downloaded: "{pages}페이지인 {name} 파일을 다운로드했습니다.", savedAndCleared: "PDF를 저장하고 파일 참조를 정리했습니다.", saveCancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
     },
@@ -140,18 +140,18 @@ export const ko = {
   },
   imageToPdf: {
     eyebrow: "이미지 도구", title: "이미지를 PDF로", description: "JPEG, PNG, WebP 이미지를 원하는 순서로 정리해 하나의 PDF로 저장하세요. 모든 처리는 이 기기에서 이루어집니다.",
-    drop: { title: "이미지 추가", description: "파일을 여기에 놓거나 선택기를 사용하세요. JPEG, PNG, WebP를 함께 추가할 수 있습니다.", choose: "이미지 선택", localTitle: "로컬에서 처리됩니다.", localBody: "이미지는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
+    drop: { title: "이미지 추가", description: "파일을 여기에 놓거나 파일 선택 버튼을 누르세요. JPEG, PNG, WebP를 함께 추가할 수 있습니다.", choose: "이미지 선택", localTitle: "이 기기에서 바로 처리합니다.", localBody: "이미지는 외부로 전송되지 않습니다.", privacyLink: "개인정보 보호 방식" },
     queue: { title: "이미지 순서", count: "이미지: {count}개", empty: "아직 선택한 이미지가 없습니다. 추가한 순서대로 PDF 페이지가 만들어집니다.", previewAlt: "{name} 미리보기", meta: "{size} · {page}페이지", moveUp: "이미지를 위로 이동", moveDown: "이미지를 아래로 이동", remove: "이미지 제거" },
     settings: {
       title: "PDF 설정", filename: "출력 파일명", filenameHelp: ".pdf 확장자는 자동으로 추가됩니다.", pageSize: "페이지 크기", a4: "A4", letter: "Letter", imageSize: "이미지 크기에 맞춤",
       orientation: "페이지 방향", auto: "자동", portrait: "세로", landscape: "가로", fit: "이미지 맞춤", contain: "전체 이미지 표시", cover: "페이지 채우기", margin: "여백 (mm)",
-      quality: "이미지 품질", qualityBest: "최고", qualityHigh: "높음", qualityBalanced: "균형", qualitySmall: "용량 절약", autoDownload: "생성 후 자동 다운로드", clearAfterSave: "저장 후 이미지 참조 정리", pdfFile: "PDF 문서",
+      quality: "이미지 품질", qualityBest: "최고", qualityHigh: "높음", qualityBalanced: "균형", qualitySmall: "용량 절약", autoDownload: "완료 후 자동 다운로드", clearAfterSave: "저장 후 이미지 목록 비우기", pdfFile: "PDF 문서",
     },
-    actions: { generate: "PDF 생성 및 저장", add: "이미지 더 추가", clear: "전체 비우기" },
+    actions: { generate: "PDF 만들기", add: "이미지 추가", clear: "모두 비우기" },
     status: {
-      added: "이미지 {count}개를 추가했습니다.", addedWithRejected: "지원되는 이미지 {added}개를 추가하고 지원하지 않는 파일 {rejected}개를 건너뛰었습니다.", addedWithReasons: "이미지 {added}개를 추가했습니다. 거부됨: {reasons}",
+      added: "이미지 {count}개를 추가했습니다.", addedWithRejected: "이미지 {added}개를 추가하고 지원하지 않는 파일 {rejected}개는 제외했습니다.", addedWithReasons: "이미지 {added}개를 추가했습니다. 제외된 파일: {reasons}",
       rejectedItem: "{name}: {reason}", removed: "이미지를 제거했습니다.", reordered: "이미지 순서를 변경했습니다.", cleared: "이미지 목록을 비웠습니다.",
-      generating: "기기에서 PDF를 생성하고 있습니다…", progress: "{total}페이지 중 {completed}페이지 처리 중…", progressLabel: "PDF 생성 진행률", saved: "{count}페이지 PDF를 저장했습니다.", downloaded: "{name} 파일을 다운로드했습니다.", savedAndCleared: "PDF를 저장하고 이미지 참조를 정리했습니다.", saveCancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
+      generating: "PDF 만드는 중…", progress: "{total}페이지 중 {completed}페이지 처리 중…", progressLabel: "PDF 생성 진행률", saved: "{count}페이지 PDF를 저장했습니다.", downloaded: "{name} 파일을 다운로드했습니다.", savedAndCleared: "PDF를 저장하고 이미지 목록을 비웠습니다.", saveCancelled: "저장을 취소했습니다. 파일은 저장되지 않았습니다.",
     },
     errors: {
       unsupported: "JPEG, PNG 또는 WebP 이미지 파일을 선택하세요.", noFiles: "PDF를 생성하기 전에 이미지를 하나 이상 추가하세요.", decode: "{name} 파일을 읽을 수 없습니다. 파일이 손상되었거나 이 브라우저에서 지원하지 않을 수 있습니다.",
@@ -162,7 +162,7 @@ export const ko = {
   pdfMetadata: {
     eyebrow: "PDF 개인정보 보호 도구", title: "PDF 메타데이터 확인 및 제거", description: "PDF를 업로드하지 않고 일반 문서 메타데이터를 확인하고 정리된 사본을 만드세요.",
     scope: { title: "지원 범위", body: "이 도구는 아래에 표시된 표준 문서 정보 필드를 처리합니다. 포렌식 삭제 도구가 아니며 XMP 패킷, 첨부 파일, 주석, 숨겨진 콘텐츠 또는 모든 식별 정보를 제거한다고 주장하지 않습니다.", cleaning: "정리는 위에 나열된 지원 문서 메타데이터만 제거합니다." },
-    drop: { title: "PDF 하나 추가", description: "PDF를 여기에 놓거나 선택기를 사용하세요. 다른 파일을 선택하면 현재 원본을 교체합니다.", choose: "PDF 선택", localTitle: "로컬에서 처리됩니다.", localBody: "PDF는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
+    drop: { title: "PDF 추가", description: "PDF를 여기에 놓거나 파일 선택 버튼을 누르세요. 새 파일을 선택하면 현재 PDF를 바꿉니다.", choose: "PDF 선택", localTitle: "이 기기에서 바로 처리합니다.", localBody: "PDF는 외부로 전송되지 않습니다.", privacyLink: "개인정보 보호 방식" },
     source: { title: "원본 PDF", empty: "아직 선택한 PDF가 없습니다.", summary: "{name} · {size} · {pages}페이지 · 지원 필드 {fields}개 있음" },
     inspector: {
       title: "감지된 문서 메타데이터", help: "제거할 필드를 선택하세요. 작성자, 생성 프로그램, PDF 생성기 및 날짜 값은 사람, 기기 또는 앱을 식별할 수 있습니다.", caption: "PDF에서 발견된 지원 메타데이터 필드",
@@ -170,7 +170,7 @@ export const ko = {
     },
     fields: { title: "제목", author: "작성자", subject: "주제", keywords: "키워드", creator: "생성 프로그램", producer: "PDF 생성기", creationDate: "생성 날짜", modificationDate: "수정 날짜" },
     output: { title: "정리된 사본 만들기", description: "원본은 변경되지 않습니다. 저장된 사본을 다시 열어 확인한 뒤 성공을 알립니다.", filename: "출력 파일명", filenameHelp: ".pdf 확장자는 자동으로 추가됩니다.", pdfFile: "PDF 문서" },
-    actions: { clearSource: "PDF 비우기", selectAll: "있는 필드 모두 선택", clearSelection: "선택 해제", removeAll: "지원 메타데이터 모두 제거", clean: "PDF 정리 및 저장" },
+    actions: { clearSource: "PDF 비우기", selectAll: "모두 선택", clearSelection: "선택 해제", removeAll: "지원 항목 모두 제거", clean: "정리 후 저장" },
     comparison: { title: "검증된 전후 비교", before: "이전", after: "저장된 사본", cleared: "검증 완료: 선택한 필드 {count}개가 직렬화된 사본에 없습니다.", retained: "경고: 선택한 필드 {count}개가 직렬화된 사본에 남아 있습니다." },
     status: {
       reading: "메타데이터를 로컬에서 읽는 중…", loaded: "{pages}페이지 PDF에서 지원 메타데이터 필드 {count}개를 찾았습니다.", noneFound: "이 {pages}페이지 PDF에서 지원되는 문서 정보 메타데이터를 찾지 못했습니다.", cleared: "원본 PDF를 비웠습니다.",
@@ -182,7 +182,7 @@ export const ko = {
   },
   pdfToImages: {
     eyebrow: "PDF 도구", title: "PDF를 이미지로", description: "문서를 업로드하지 않고 PDF 페이지를 PNG, JPEG 또는 WebP 파일로 변환하세요.",
-    drop: { title: "PDF 하나 추가", description: "PDF를 여기에 놓거나 선택기를 사용하세요. 새 PDF를 선택하면 현재 원본을 안전하게 교체합니다.", choose: "PDF 선택", localTitle: "로컬에서 처리됩니다.", localBody: "PDF는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
+    drop: { title: "PDF 추가", description: "PDF를 여기에 놓거나 파일 선택 버튼을 누르세요. 새 파일을 선택하면 현재 PDF를 바꿉니다.", choose: "PDF 선택", localTitle: "이 기기에서 바로 처리합니다.", localBody: "PDF는 외부로 전송되지 않습니다.", privacyLink: "개인정보 보호 방식" },
     source: { title: "원본 PDF", empty: "아직 선택한 PDF가 없습니다.", meta: "{size} · {pages}페이지", remove: "원본 PDF 제거" },
     pages: {
       title: "변환할 페이지", legend: "변환할 페이지 선택",
@@ -195,11 +195,11 @@ export const ko = {
       format: "이미지 형식", quality: "이미지 품질", qualityHelp: "JPEG와 WebP에서 사용할 수 있습니다.", scale: "출력 배율", scaleHelp: "배율이 클수록 메모리를 더 사용하고 파일 크기가 커집니다.",
       imageFile: "이미지 파일", zipFile: "ZIP 압축 파일",
     },
-    actions: { convert: "변환 및 저장", cancel: "취소", clear: "원본 비우기" },
+    actions: { convert: "변환하기", cancel: "취소", clear: "PDF 비우기" },
     status: {
-      reading: "PDF를 로컬에서 읽는 중…", loaded: "PDF 준비 완료: {pages}페이지.", rendering: "선택한 페이지를 로컬에서 렌더링하는 중…",
-      progress: "{total}개 중 {completed}번째 출력 렌더링 중(원본 {page}페이지)…", progressLabel: "PDF 이미지 변환 진행률",
-      archive: "ZIP 압축 파일 준비 중…", saving: "이미지 준비 중…", saved: "이미지 {count}개가 포함된 {name} 파일을 저장했습니다.",
+      reading: "PDF 읽는 중…", loaded: "PDF 준비 완료: {pages}페이지", rendering: "선택한 페이지 변환 중…",
+      progress: "{total}개 중 {completed}개 처리 중(원본 {page}페이지)…", progressLabel: "PDF 이미지 변환 진행률",
+      archive: "ZIP 파일 만드는 중…", saving: "이미지 준비 중…", saved: "이미지 {count}개가 담긴 {name} 파일을 저장했습니다.",
       downloaded: "이미지 {count}개가 포함된 {name} 파일을 다운로드했습니다.", saveCancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
       cancelled: "변환을 취소했습니다. 파일은 기록되지 않았습니다.", cleared: "원본 PDF를 비웠습니다.",
     },
@@ -212,7 +212,7 @@ export const ko = {
   },
   organizePdf: {
     eyebrow: "PDF 도구", title: "PDF 정리", description: "원본 PDF를 변경하지 않고 페이지를 재정렬하고 회전하거나 제거하세요. 모든 처리는 이 기기에서 이루어집니다.",
-    drop: { title: "PDF 하나 추가", description: "PDF를 여기에 놓거나 선택기를 사용하세요.", choose: "PDF 선택", localTitle: "로컬에서 처리됩니다.", localBody: "PDF는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
+    drop: { title: "PDF 추가", description: "PDF를 여기에 놓거나 파일 선택 버튼을 누르세요.", choose: "PDF 선택", localTitle: "이 기기에서 바로 처리합니다.", localBody: "PDF는 외부로 전송되지 않습니다.", privacyLink: "개인정보 보호 방식" },
     workspace: { title: "페이지 작업 공간", empty: "아직 선택한 PDF가 없습니다.", summary: "{name} · 남은 페이지 {pages}개 · {size}", changed: "저장하지 않은 변경", gridLabel: "PDF 페이지" },
     page: {
       preview: "원본 {page}페이지 미리보기", position: "{position}번째 · 원본 {page}페이지",
@@ -221,11 +221,11 @@ export const ko = {
       remove: "{page}페이지 제거", removeText: "제거",
     },
     output: { title: "정리한 PDF 내보내기", description: "원본 PDF는 변경되지 않습니다. 위에 표시된 순서로 페이지를 복사해 내보냅니다.", filename: "출력 파일명", filenameHelp: ".pdf 확장자는 자동으로 추가됩니다.", pdfFile: "PDF 문서" },
-    actions: { reset: "변경 초기화", clear: "PDF 비우기", export: "정리한 PDF 내보내기" },
+    actions: { reset: "변경 초기화", clear: "PDF 비우기", export: "PDF 저장하기" },
     status: {
-      loading: "기기에서 PDF를 불러오고 있습니다…", preparing: "{total}페이지 중 {completed}페이지 준비 중…", progressLabel: "미리보기 준비 진행률",
+      loading: "PDF 읽는 중…", preparing: "{total}페이지 중 {completed}페이지 준비 중…", progressLabel: "미리보기 준비 진행률",
       ready: "PDF 준비 완료: {pages}페이지.", moved: "{page}페이지를 이동했습니다.", rotated: "{page}페이지를 회전했습니다.", removed: "{page}페이지를 제거했습니다.", reset: "원래 페이지 순서와 회전을 복원했습니다.",
-      cleared: "원본 PDF를 비웠습니다.", exporting: "기기에서 정리한 PDF를 만들고 있습니다…", saved: "{name} 파일을 저장했습니다.", downloaded: "{name} 파일을 다운로드했습니다.", cancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
+      cleared: "PDF를 비웠습니다.", exporting: "정리한 PDF 만드는 중…", saved: "{name} 파일을 저장했습니다.", downloaded: "{name} 파일을 다운로드했습니다.", cancelled: "저장을 취소했습니다. 파일은 저장되지 않았습니다.",
     },
     errors: {
       oneFile: "PDF는 한 번에 하나만 선택하세요.", unsupported: "PDF 파일을 선택하세요.", protected: "암호로 보호되거나 암호화된 PDF는 정리할 수 없습니다.", unreadable: "PDF가 손상되었거나 읽을 수 없습니다.",

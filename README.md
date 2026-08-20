@@ -15,6 +15,23 @@ The project uses a category-first architecture, a Pull Request/main CI gate, and
 
 The homepage and category hubs clearly distinguish production tools from planned work.
 
+## Interface languages
+
+Secure Tools ships complete, same-origin interface catalogs for:
+
+- English (`en`)
+- 한국어 (`ko`)
+- 日本語 (`ja`)
+- Español (`es`)
+- Deutsch (`de`)
+- Français (`fr`)
+
+The first visit resolves a supported browser locale by its primary language subtag, so values such as `ja-JP`, `es-MX`, `de-DE`, `fr-CA`, and `ko-KR` select the matching catalog. Unsupported languages fall back to English. A manual selection is stored locally and takes precedence on later visits. Each switch updates visible copy, accessibility labels, document metadata, and the document's `<html lang>` value without reloading or resetting tool state.
+
+Locale modules are bundled with the static site. Secure Tools does not call a translation API, download runtime locale data, or add a remote font dependency. Metadata dates continue to use the selected document language through `Intl.DateTimeFormat`.
+
+The [i18n copy-review record](./docs/i18n-copy-review.md) documents the source-level Korean review and the checks applied to new catalogs. These translations have not been certified by professional native-language reviewers.
+
 ## Privacy principles
 
 - File contents are processed on the user's device by production tools.
@@ -48,7 +65,11 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │   ├── theme.js
 │   └── locales/
 │       ├── en.js
-│       └── ko.js
+│       ├── ko.js
+│       ├── ja.js
+│       ├── es.js
+│       ├── de.js
+│       └── fr.js
 ├── tools/
 │   ├── shared/
 │   │   ├── file.js
@@ -81,7 +102,7 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
     └── run-all.mjs
 ```
 
-`js/main.js` initializes shared theme and internationalization behavior. `js/theme.js` owns Light, Dark, and System selection, OS color-scheme observation, and persistence. `js/i18n.js` detects English or Korean, applies `data-i18n` bindings without reloading, updates metadata and `<html lang>`, and persists manual selection. Repository links are centralized in `js/config.js`.
+`js/main.js` initializes shared theme and internationalization behavior. `js/theme.js` owns Light, Dark, and System selection, OS color-scheme observation, and persistence. `js/i18n.js` resolves all six supported languages from browser preferences, applies `data-i18n` bindings without reloading, updates metadata and `<html lang>`, and gives persisted manual selection precedence. Repository links are centralized in `js/config.js`.
 
 The category hubs are:
 
@@ -237,7 +258,7 @@ Run the complete local and CI validation entry point with:
 node tests/run-all.mjs
 ```
 
-It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category route, i18n, static resource, privacy/network, security-hardening, ZIP, and CI workflow regression coverage. PDF fixtures are generated deterministically during tests; CI never processes real user files.
+It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category route, six-language catalog parity, locale detection and persistence, selector and layout safeguards, static resource, privacy/network, security-hardening, ZIP, and CI workflow regression coverage. PDF fixtures are generated deterministically during tests; CI never processes real user files.
 
 ## Production security controls
 
