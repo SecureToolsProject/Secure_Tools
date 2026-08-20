@@ -44,7 +44,7 @@ export const en = {
     pdf: {
       title: "PDF tools", description: "Create and organize PDF documents locally, without uploading private files.",
       imagesToPdf: "Arrange JPEG, PNG, and WebP images into one PDF.", merge: "Combine PDF files in the order you choose.",
-      split: "Extract selected pages into a new document.", rotateTitle: "Rotate PDF", rotate: "Correct page orientation without changing document quality.",
+      split: "Extract selected pages or divide a document into local files.", rotateTitle: "Rotate PDF", rotate: "Correct page orientation without changing document quality.",
     },
     image: {
       title: "Image tools", description: "Prepare everyday images privately in your browser.",
