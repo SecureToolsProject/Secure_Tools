@@ -342,7 +342,7 @@ export const de = {
     "queue": {
       "title": "PDF-Bestellung",
       "count": "PDFs: {count}",
-      "empty": "Noch keine PDFs ausgewählt. Hinzugefügte Dateien werden von oben nach unten zusammengeführt.",
+      "empty": "Noch keine PDFs hinzugefügt.",
       "meta": "{size} · {pages} Seite(n)",
       "moveUp": "PDF nach oben verschieben",
       "moveDown": "PDF nach unten verschieben",
@@ -401,7 +401,7 @@ export const de = {
     "queue": {
       "title": "Bildreihenfolge",
       "count": "Bilder: {count}",
-      "empty": "Noch keine Bilder ausgewählt. Hinzugefügte Bilder werden hier in der Reihenfolge der PDF-Seiten angezeigt.",
+      "empty": "Noch keine Bilder hinzugefügt.",
       "previewAlt": "Vorschau von {name}",
       "meta": "{size} · Seite {page}",
       "moveUp": "Bild nach oben verschieben",

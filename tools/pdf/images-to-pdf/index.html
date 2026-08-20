@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../../css/components.css">
     <link rel="stylesheet" href="../../../css/pages.css">
     <link rel="stylesheet" href="../../../css/categories.css">
-    <link rel="stylesheet" href="./tool.css">
+    <link rel="stylesheet" href="../../shared/tool.css">
   </head>
   <body class="page-shell" data-page="imageToPdf">
     <a class="skip-link" href="#main" data-i18n="common.skip">Skip to main content</a>
@@ -49,7 +49,7 @@
             <section id="drop-zone" class="drop-zone" aria-labelledby="drop-title">
               <h2 id="drop-title" data-i18n="imageToPdf.drop.title">Add your images</h2>
               <p id="drop-description" data-i18n="imageToPdf.drop.description">Drop files here or use the picker. JPEG, PNG, and WebP can be mixed.</p>
-              <input id="file-input" class="visually-hidden" type="file" multiple aria-describedby="drop-description">
+              <input id="file-input" class="visually-hidden" type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple aria-describedby="drop-description">
               <label class="drop-zone__picker" for="file-input"><span class="visually-hidden" data-i18n="imageToPdf.drop.choose">Choose images</span></label>
               <span class="button button--primary" aria-hidden="true" data-i18n="imageToPdf.drop.choose">Choose images</span>
               <p class="local-note"><strong data-i18n="imageToPdf.drop.localTitle">Processed locally.</strong> <span data-i18n="imageToPdf.drop.localBody">Your images never leave this device.</span> <a href="../../../privacy/" data-i18n="imageToPdf.drop.privacyLink">How privacy works</a></p>
@@ -57,8 +57,8 @@
 
             <section class="queue surface" aria-labelledby="queue-title">
               <div class="queue-header"><h2 id="queue-title" data-i18n="imageToPdf.queue.title">Image order</h2><span id="image-count">0 images</span></div>
-              <p id="queue-empty" class="queue-empty" data-i18n="imageToPdf.queue.empty">No images selected yet. Added images will appear here in PDF page order.</p>
-              <ol id="image-list" class="image-list"></ol>
+              <p id="queue-empty" class="queue-empty" data-i18n="imageToPdf.queue.empty">No images added yet.</p>
+              <ol id="image-list" class="file-list"></ol>
             </section>
           </div>
 
@@ -105,7 +105,7 @@
       </div>
     </main>
 
-    <footer class="site-footer"><div class="container footer-inner"><div><a class="brand" href="../../../"><span class="brand-mark" aria-hidden="true"></span><span>Secure Tools</span></a><p data-i18n="common.footerStatement">Your files stay on your device.</p></div><nav aria-label="Footer navigation"><a href="../../../#tools" data-i18n="common.nav.tools">Tools</a><a href="../../../privacy/" data-i18n="common.nav.privacy">Privacy</a><a href="../../../about/" data-i18n="common.nav.about">About</a><a href="https://github.com/maruson08/Secure_Tools" data-repository-link target="_blank" rel="noreferrer" data-i18n="common.nav.source">Source</a></nav></div></footer>
+    <footer class="site-footer"><div class="container footer-inner"><div><a class="brand" href="../../../" aria-label="Secure Tools home"><span class="brand-mark" aria-hidden="true"></span><span>Secure Tools</span></a><p data-i18n="common.footerStatement">Your files stay on your device.</p></div><nav aria-label="Footer navigation"><a href="../../../#tools" data-i18n="common.nav.tools">Tools</a><a href="../../../privacy/" data-i18n="common.nav.privacy">Privacy</a><a href="../../../about/" data-i18n="common.nav.about">About</a><a href="https://github.com/maruson08/Secure_Tools" data-repository-link target="_blank" rel="noreferrer" data-i18n="common.nav.source">Source</a></nav></div></footer>
     <script src="../../../assets/vendor/jspdf/jspdf.umd.min.js"></script>
     <script type="module" src="../../../js/main.js"></script>
     <script type="module" src="./app.js"></script>

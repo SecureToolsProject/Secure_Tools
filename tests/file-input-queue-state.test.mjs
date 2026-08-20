@@ -68,13 +68,12 @@ for (const tool of tools) {
   testStateContract(tool);
 }
 
-const sharedCss = read("tools/pdf/images-to-pdf/tool.css");
+const sharedCss = read("tools/shared/tool.css");
 assert.match(sharedCss, /\.drop-zone__picker\s*\{[^}]*position:\s*absolute;[^}]*inset:\s*0;/s, "Picker label does not cover the complete drop zone");
 assert.match(sharedCss, /\.drop-zone:has\(#file-input:focus-visible\)\s*\{[^}]*outline:/s, "Keyboard focus is not visible on the drop zone");
 assert.match(sharedCss, /\.local-note a\s*\{[^}]*z-index:\s*2;/s, "Privacy link is not isolated from picker activation");
 assert.match(sharedCss, /\.queue-empty\[hidden\]\s*\{\s*display:\s*none;/, "Queue hidden state can be overridden by authored display styles");
 
-const splitCss = read("tools/pdf/split/tool.css");
-assert.match(splitCss, /\.source-empty\[hidden\]\s*\{\s*display:\s*none;/, "Split source hidden state can be overridden by authored display styles");
+assert.match(sharedCss, /\.source-empty\[hidden\][^{]*\{\s*display:\s*none;/, "Source hidden state can be overridden by authored display styles");
 
 console.log("File input and queue state regression checks passed.");

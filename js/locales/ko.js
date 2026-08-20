@@ -118,7 +118,7 @@ export const ko = {
     eyebrow: "PDF 도구", title: "PDF 합치기", description: "PDF 파일의 순서를 정하고 모든 페이지를 하나의 문서로 합치세요. 파일은 이 기기에 머뭅니다.",
     drop: { title: "PDF 추가", description: "PDF를 여기에 놓거나 파일 선택 버튼을 누르세요. 목록 순서대로 합칩니다.", choose: "PDF 선택", localTitle: "이 기기에서 바로 처리합니다.", localBody: "PDF는 외부로 전송되지 않습니다.", privacyLink: "개인정보 보호 방식" },
     queue: {
-      title: "PDF 순서", count: "PDF: {count}개", empty: "아직 선택한 PDF가 없습니다. 추가한 파일은 위에서 아래 순서로 합쳐집니다.",
+      title: "PDF 순서", count: "PDF: {count}개", empty: "추가된 PDF가 없습니다.",
       meta: "{size} · {pages}페이지", moveUp: "PDF를 위로 이동", moveDown: "PDF를 아래로 이동", remove: "PDF 제거",
     },
     settings: {
@@ -141,7 +141,7 @@ export const ko = {
   imageToPdf: {
     eyebrow: "이미지 도구", title: "이미지를 PDF로", description: "JPEG, PNG, WebP 이미지를 원하는 순서로 정리해 하나의 PDF로 저장하세요. 모든 처리는 이 기기에서 이루어집니다.",
     drop: { title: "이미지 추가", description: "파일을 여기에 놓거나 파일 선택 버튼을 누르세요. JPEG, PNG, WebP를 함께 추가할 수 있습니다.", choose: "이미지 선택", localTitle: "이 기기에서 바로 처리합니다.", localBody: "이미지는 외부로 전송되지 않습니다.", privacyLink: "개인정보 보호 방식" },
-    queue: { title: "이미지 순서", count: "이미지: {count}개", empty: "아직 선택한 이미지가 없습니다. 추가한 순서대로 PDF 페이지가 만들어집니다.", previewAlt: "{name} 미리보기", meta: "{size} · {page}페이지", moveUp: "이미지를 위로 이동", moveDown: "이미지를 아래로 이동", remove: "이미지 제거" },
+    queue: { title: "이미지 순서", count: "이미지: {count}개", empty: "추가된 이미지가 없습니다.", previewAlt: "{name} 미리보기", meta: "{size} · {page}페이지", moveUp: "이미지를 위로 이동", moveDown: "이미지를 아래로 이동", remove: "이미지 제거" },
     settings: {
       title: "PDF 설정", filename: "출력 파일명", filenameHelp: ".pdf 확장자는 자동으로 추가됩니다.", pageSize: "페이지 크기", a4: "A4", letter: "Letter", imageSize: "이미지 크기에 맞춤",
       orientation: "페이지 방향", auto: "자동", portrait: "세로", landscape: "가로", fit: "이미지 맞춤", contain: "전체 이미지 표시", cover: "페이지 채우기", margin: "여백 (mm)",

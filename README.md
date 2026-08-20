@@ -74,6 +74,7 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │   ├── shared/
 │   │   ├── file.js
 │   │   ├── pdf.js
+│   │   ├── tool.css
 │   │   └── save.js
 │   ├── pdf/
 │   │   ├── index.html
@@ -103,6 +104,8 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 ```
 
 `js/main.js` initializes shared theme and internationalization behavior. `js/theme.js` owns Light, Dark, and System selection, OS color-scheme observation, and persistence. `js/i18n.js` resolves all six supported languages from browser preferences, applies `data-i18n` bindings without reloading, updates metadata and `<html lang>`, and gives persisted manual selection precedence. Repository links are centralized in `js/config.js`.
+
+The concise [UX consistency audit](./docs/ux-consistency-audit.md) records the shared interaction patterns, resolved drift, and intentional tool-specific exceptions established before v1.0.0 hardening.
 
 The category hubs are:
 

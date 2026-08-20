@@ -15,6 +15,7 @@
   --focus: #1673c9;
   --status-muted: #74766f;
   --shadow-sm: 0 1px 2px rgb(23 24 22 / 5%);
+  --preview-backdrop: #d7d8da;
   --radius-sm: 0.4rem;
   --radius-md: 0.75rem;
   --radius-lg: 1.15rem;
@@ -48,6 +49,7 @@
   --focus: #66b5ff;
   --status-muted: #9b9e96;
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 20%);
+  --preview-backdrop: #2b2e29;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
