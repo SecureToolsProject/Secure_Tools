@@ -29,6 +29,7 @@ for (const test of [
   "tests/file-input-queue-state.test.mjs",
   "tests/pdf-split.test.mjs",
   "tests/security-hardening.test.mjs",
+  "tests/pdf-to-images.test.mjs",
   "tests/pdf-organizer.test.mjs",
   "tests/ci-foundation.test.mjs",
 ]) {

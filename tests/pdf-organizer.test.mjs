@@ -77,6 +77,7 @@ async function testExport() {
 }
 
 function testArchitectureAndUi() {
+  const sharedRenderer = read("tools/shared/pdf-renderer.js");
   const html = read("tools/pdf/organize/index.html");
   const app = read("tools/pdf/organize/app.js");
   const model = read("tools/pdf/organize/model.js");
@@ -85,11 +86,12 @@ function testArchitectureAndUi() {
   const css = read("tools/pdf/organize/tool.css");
   const vendor = JSON.parse(read("assets/vendor/pdfjs/package.json"));
   assert.equal(vendor.version, "6.2.108");
-  assert.match(renderer, /assets\/vendor\/pdfjs\/pdf\.min\.mjs/);
-  assert.match(renderer, /assets\/vendor\/pdfjs\/pdf\.worker\.min\.mjs/);
-  assert.match(renderer, /useWorkerFetch:\s*false/);
-  assert.match(renderer, /useWasm:\s*false/);
-  assert.match(renderer, /RENDER_CONCURRENCY\s*=\s*2/);
+  assert.match(sharedRenderer, /assets\/vendor\/pdfjs\/pdf\.min\.mjs/);
+  assert.match(sharedRenderer, /assets\/vendor\/pdfjs\/pdf\.worker\.min\.mjs/);
+  assert.doesNotMatch(sharedRenderer, /https?:|unpkg|jsdelivr|cdnjs/i);
+  assert.match(sharedRenderer, /useWorkerFetch:\s*false/);
+  assert.match(sharedRenderer, /useWasm:\s*false/);
+  assert.match(sharedRenderer, /PDF_RENDER_CONCURRENCY\s*=\s*2/);
   assert.doesNotMatch(renderer, /https?:|unpkg|jsdelivr|cdnjs/i);
   assert.match(pdf, /copyPages\(/);
   assert.match(pdf, /setRotation\(/);
