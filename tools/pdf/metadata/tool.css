@@ -19,6 +19,7 @@
 .metadata-comparison p { color: var(--text-secondary); }
 .metadata-toolbar,
 .inspector-heading,
+.metadata-toolbar > *, .inspector-heading > *, .selection-actions > *, .comparison-grid > * { min-width: 0; }
 .selection-actions { flex-wrap: wrap; justify-content: flex-end; }
 .metadata-toolbar, .inspector-heading { display: flex; justify-content: space-between; gap: var(--space-4); }
 .selection-actions { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
@@ -27,7 +28,7 @@
 .metadata-table { width: 100%; border-collapse: collapse; text-align: left; }
 .metadata-table th,
 .metadata-table td { padding: var(--space-3); border-bottom: 1px solid var(--border); vertical-align: top; }
-.metadata-table thead th { color: var(--text-secondary); font-size: .8rem; }
+.metadata-table thead th { color: var(--text-secondary); font-size: .8rem; overflow-wrap: anywhere; }
 .metadata-table tbody td:first-child { width: 5rem; text-align: center; }
 .metadata-table input { width: 1.25rem; height: 1.25rem; accent-color: var(--accent); }
 .metadata-table input:focus-visible { outline: .18rem solid var(--focus); outline-offset: .18rem; }
@@ -39,7 +40,7 @@
 .comparison-grid > div { padding: var(--space-4); border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-subtle); }
 .comparison-grid h3 { margin-top: 0; }
 .comparison-grid dl { margin-bottom: 0; }
-.comparison-grid dt { margin-top: var(--space-3); font-weight: 700; }
+.comparison-grid dt { margin-top: var(--space-3); font-weight: var(--font-weight-bold); overflow-wrap: anywhere; }
 .comparison-grid dd { margin: var(--space-1) 0 0; overflow-wrap: anywhere; white-space: pre-wrap; }
 .metadata-status { max-width: 60rem; }
 @media (prefers-reduced-motion: reduce) {
