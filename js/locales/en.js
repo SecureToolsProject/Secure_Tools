@@ -180,7 +180,7 @@ export const en = {
   },
   pdfMetadata: {
     eyebrow: "PDF privacy tool", title: "PDF Metadata Inspector & Cleaner", description: "Review common document metadata and create a cleaned copy without uploading your PDF.",
-    scope: { title: "Supported scope", body: "This tool covers the standard document-info fields shown below. It is not a forensic scrubber and does not claim to remove XMP packets, attachments, annotations, hidden content, or every identifying structure." },
+    scope: { title: "Supported scope", body: "This tool covers the standard document-info fields shown below. It is not a forensic scrubber and does not claim to remove XMP packets, attachments, annotations, hidden content, or every identifying structure.", cleaning: "Cleaning removes only the supported document metadata listed above." },
     drop: { title: "Add one PDF", description: "Drop a PDF here or use the picker. Choosing another file replaces the current source.", choose: "Choose PDF", localTitle: "Processed locally.", localBody: "Your PDF never leaves this device.", privacyLink: "How privacy works" },
     source: { title: "Source PDF", empty: "No PDF selected yet.", summary: "{name} · {size} · {pages} page(s) · {fields} supported field(s) present" },
     inspector: {
@@ -189,7 +189,7 @@ export const en = {
     },
     fields: { title: "Title", author: "Author", subject: "Subject", keywords: "Keywords", creator: "Creator application", producer: "PDF producer", creationDate: "Creation date", modificationDate: "Modification date" },
     output: { title: "Create cleaned copy", description: "The original stays unchanged. The saved copy is re-opened and checked before success is reported.", filename: "Output filename", filenameHelp: "A .pdf extension is added automatically.", pdfFile: "PDF document" },
-    actions: { clearSource: "Clear PDF", selectAll: "Select all present", clearSelection: "Clear selection", clean: "Clean and save PDF" },
+    actions: { clearSource: "Clear PDF", selectAll: "Select all present", clearSelection: "Clear selection", removeAll: "Remove all supported metadata", clean: "Clean and save PDF" },
     comparison: { title: "Verified before and after", before: "Before", after: "After saved copy", cleared: "Verified: {count} selected field(s) are absent from the serialized copy.", retained: "Warning: {count} selected field(s) remain in the serialized copy." },
     status: {
       reading: "Reading metadata locally…", loaded: "Found {count} supported metadata field(s) across a {pages}-page PDF.", noneFound: "No supported document-info metadata was found in this {pages}-page PDF.", cleared: "Source PDF cleared.",

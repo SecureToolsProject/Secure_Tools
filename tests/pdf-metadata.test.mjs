@@ -163,6 +163,9 @@ function testUiArchitectureAndScope() {
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(css, /overflow-wrap:\s*anywhere/);
   assert.match(css, /\.metadata-comparison\[hidden\]/);
+  assert.match(html, /id="remove-all"[^>]*data-i18n="pdfMetadata\.actions\.removeAll"/);
+  assert.match(css, /grid-template-columns:\s*2\.5rem minmax\(0, 1fr\)/);
+  assert.doesNotMatch(css, /\.metadata-table\s*\{\s*min-width/);
   assert.match(read("tools/pdf/index.html"), /href="\.\/metadata\/"/);
 }
 

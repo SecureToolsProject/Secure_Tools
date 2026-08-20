@@ -10,6 +10,7 @@ const elements = {
   empty: document.querySelector("#source-empty"), summary: document.querySelector("#source-summary"),
   clearSource: document.querySelector("#clear-source"), inspector: document.querySelector("#inspector"),
   body: document.querySelector("#metadata-body"), selectAll: document.querySelector("#select-all"),
+  removeAll: document.querySelector("#remove-all"),
   clearSelection: document.querySelector("#clear-selection"), filename: document.querySelector("#filename"),
   clean: document.querySelector("#clean-pdf"), comparison: document.querySelector("#comparison"),
   comparisonSummary: document.querySelector("#comparison-summary"), before: document.querySelector("#comparison-before"),
@@ -102,6 +103,7 @@ function render() {
   elements.input.disabled = state.busy;
   elements.clearSource.disabled = state.busy || !hasSource;
   elements.selectAll.disabled = state.busy || !present || selected === present;
+  elements.removeAll.disabled = state.busy || !present;
   elements.clearSelection.disabled = state.busy || !selected;
   elements.filename.disabled = state.busy || !hasSource;
   elements.clean.disabled = state.busy || !hasSource || !selected;
@@ -195,6 +197,7 @@ async function cleanAndSave() {
 elements.input.addEventListener("change", (event) => addSource([...event.target.files]));
 elements.clearSource.addEventListener("click", clearSource);
 elements.selectAll.addEventListener("click", () => { state.fields = selectAllPresentMetadata(state.fields); render(); });
+elements.removeAll.addEventListener("click", () => { state.fields = selectAllPresentMetadata(state.fields); cleanAndSave(); });
 elements.clearSelection.addEventListener("click", () => { state.fields = clearMetadataSelection(state.fields); render(); });
 elements.body.addEventListener("change", (event) => {
   const checkbox = event.target.closest("input[data-metadata-key]");

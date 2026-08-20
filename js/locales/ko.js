@@ -161,7 +161,7 @@ export const ko = {
   },
   pdfMetadata: {
     eyebrow: "PDF 개인정보 보호 도구", title: "PDF 메타데이터 확인 및 제거", description: "PDF를 업로드하지 않고 일반 문서 메타데이터를 확인하고 정리된 사본을 만드세요.",
-    scope: { title: "지원 범위", body: "이 도구는 아래에 표시된 표준 문서 정보 필드를 처리합니다. 포렌식 삭제 도구가 아니며 XMP 패킷, 첨부 파일, 주석, 숨겨진 콘텐츠 또는 모든 식별 정보를 제거한다고 주장하지 않습니다." },
+    scope: { title: "지원 범위", body: "이 도구는 아래에 표시된 표준 문서 정보 필드를 처리합니다. 포렌식 삭제 도구가 아니며 XMP 패킷, 첨부 파일, 주석, 숨겨진 콘텐츠 또는 모든 식별 정보를 제거한다고 주장하지 않습니다.", cleaning: "정리는 위에 나열된 지원 문서 메타데이터만 제거합니다." },
     drop: { title: "PDF 하나 추가", description: "PDF를 여기에 놓거나 선택기를 사용하세요. 다른 파일을 선택하면 현재 원본을 교체합니다.", choose: "PDF 선택", localTitle: "로컬에서 처리됩니다.", localBody: "PDF는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
     source: { title: "원본 PDF", empty: "아직 선택한 PDF가 없습니다.", summary: "{name} · {size} · {pages}페이지 · 지원 필드 {fields}개 있음" },
     inspector: {
@@ -170,7 +170,7 @@ export const ko = {
     },
     fields: { title: "제목", author: "작성자", subject: "주제", keywords: "키워드", creator: "생성 프로그램", producer: "PDF 생성기", creationDate: "생성 날짜", modificationDate: "수정 날짜" },
     output: { title: "정리된 사본 만들기", description: "원본은 변경되지 않습니다. 저장된 사본을 다시 열어 확인한 뒤 성공을 알립니다.", filename: "출력 파일명", filenameHelp: ".pdf 확장자는 자동으로 추가됩니다.", pdfFile: "PDF 문서" },
-    actions: { clearSource: "PDF 비우기", selectAll: "있는 필드 모두 선택", clearSelection: "선택 해제", clean: "PDF 정리 및 저장" },
+    actions: { clearSource: "PDF 비우기", selectAll: "있는 필드 모두 선택", clearSelection: "선택 해제", removeAll: "지원 메타데이터 모두 제거", clean: "PDF 정리 및 저장" },
     comparison: { title: "검증된 전후 비교", before: "이전", after: "저장된 사본", cleared: "검증 완료: 선택한 필드 {count}개가 직렬화된 사본에 없습니다.", retained: "경고: 선택한 필드 {count}개가 직렬화된 사본에 남아 있습니다." },
     status: {
       reading: "메타데이터를 로컬에서 읽는 중…", loaded: "{pages}페이지 PDF에서 지원 메타데이터 필드 {count}개를 찾았습니다.", noneFound: "이 {pages}페이지 PDF에서 지원되는 문서 정보 메타데이터를 찾지 못했습니다.", cleared: "원본 PDF를 비웠습니다.",
