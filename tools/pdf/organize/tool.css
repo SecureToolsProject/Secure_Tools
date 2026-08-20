@@ -1,6 +1,6 @@
 .organizer { margin-top: var(--space-5); padding: var(--space-5); }
 .organizer-toolbar { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); padding-bottom: var(--space-4); border-bottom: 1px solid var(--border); }
-.organizer-toolbar h2, .organizer-output h2 { margin: 0 0 var(--space-2); font-size: 1.35rem; }
+.organizer-toolbar h2 { margin: 0 0 var(--space-2); font-size: 1.35rem; }
 .organizer-toolbar__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-2); align-items: center; }
 .source-empty, .source-summary { margin: 0; color: var(--text-secondary); }
 .source-empty[hidden], .source-summary[hidden], .dirty-state[hidden] { display: none; }
@@ -19,12 +19,8 @@
 .page-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
 .page-action { min-height: 2.5rem; padding: .35rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-secondary); color: var(--text-primary); cursor: pointer; font-size: 1rem; }
 .page-action:hover:not(:disabled) { border-color: var(--border-strong); background: var(--bg-subtle); }
-.page-action:disabled { opacity: .35; cursor: not-allowed; }
+.page-action:disabled { border-color: var(--border); background: var(--bg-subtle); color: var(--status-muted); cursor: not-allowed; }
 .page-action--remove { grid-column: span 3; color: var(--tool-danger); }
-.organizer-output { display: grid; grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem) auto; align-items: end; gap: var(--space-5); margin-top: var(--space-5); padding: var(--space-5); }
-.organizer-output p { margin: 0; color: var(--text-secondary); }
-.organizer-output .field { margin: 0; }
 .organizer-status { max-width: 60rem; }
 @media (prefers-reduced-motion: reduce) { .page-card { transition: none; } }
-@media (max-width: 54rem) { .organizer-output { grid-template-columns: 1fr; align-items: stretch; } .organizer-output .button { width: 100%; } }
 @media (max-width: 38rem) { .organizer { padding: var(--space-4); } .organizer-toolbar { flex-direction: column; } .organizer-toolbar__actions { width: 100%; justify-content: stretch; } .organizer-toolbar__actions .button { flex: 1 1 9rem; } .page-grid { grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: var(--space-3); } .page-preview { min-height: 10rem; } }
