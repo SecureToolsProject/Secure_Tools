@@ -85,17 +85,15 @@ async function stopActiveJob() {
   state.controller?.abort();
   await state.job?.catch(() => {});
 }
-  if (state.loading) return;
-
 async function addSource(files) {
-  if (!files.length) return;
+  if (state.loading || !files.length) return;
   await stopActiveJob();
   if (files.length !== 1) { setStatus("pdfToImages.errors.oneFile", {}, "error"); return; }
   const file = files[0];
-  state.loading = true;
-  renderState();
   if (!isSupportedPdf(file)) { setStatus("pdfToImages.errors.unsupported", {}, "error"); return; }
   const session = ++state.session;
+  state.loading = true;
+  renderState();
   setStatus("pdfToImages.status.reading");
   try {
     const [{ pageCount }, bytes] = await Promise.all([inspectPdf(file, window.PDFLib?.PDFDocument), file.arrayBuffer()]);
@@ -108,9 +106,9 @@ async function addSource(files) {
     setStatus(null);
     elements.status.textContent = errorMessage(error);
     elements.status.dataset.tone = "error";
-    state.loading = false;
   } finally {
     elements.input.value = "";
+    state.loading = false;
     renderState();
     updateOptions();
   }
