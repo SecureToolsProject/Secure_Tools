@@ -12,11 +12,20 @@ export function downloadBlob(blob, filename, environment = {}) {
   schedule(() => urlObject.revokeObjectURL(url), 1500);
 }
 
-export async function requestPdfSaveHandle(windowObject, suggestedName, description) {
+export async function requestSaveHandle(windowObject, { suggestedName, description, mimeType, extension }) {
   if (!("showSaveFilePicker" in windowObject)) return null;
   return windowObject.showSaveFilePicker({
     suggestedName,
-    types: [{ description, accept: { "application/pdf": [".pdf"] } }],
+    types: [{ description, accept: { [mimeType]: [extension] } }],
+  });
+}
+
+export function requestPdfSaveHandle(windowObject, suggestedName, description) {
+  return requestSaveHandle(windowObject, {
+    suggestedName,
+    description,
+    mimeType: "application/pdf",
+    extension: ".pdf",
   });
 }
 
