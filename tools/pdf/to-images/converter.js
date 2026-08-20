@@ -130,8 +130,10 @@ export async function packageRenderedImages({ blobs, names, JSZip }) {
   if (blobs.length === 1) return { kind: "image", filename: names.entries[0], entries: names.entries, blob: blobs[0] };
   if (typeof JSZip !== "function") throw conversionError("ARCHIVE_LIBRARY_UNAVAILABLE");
   const archive = new JSZip();
-  const { LocalPdfRenderer, runRenderQueue } = await import("../../shared/pdf-renderer.js");
-  blobs.forEach((blob, index) => archive.file(names.entries[index], blob));
+  for (let index = 0; index < blobs.length; index += 1) {
+    const bytes = new Uint8Array(await blobs[index].arrayBuffer());
+    archive.file(names.entries[index], bytes);
+  }
   try {
     const blob = await archive.generateAsync({ type: "blob", compression: "STORE", streamFiles: true });
     return { kind: "zip", filename: names.archive, entries: names.entries, blob };
@@ -145,6 +147,7 @@ export async function convertPdfToImages({
   canvasFactory = () => document.createElement("canvas"), signal, onPhase = () => {}, onProgress = () => {},
 }) {
   const plan = createConversionPlan({ mode, selection, pageCount, format, quality, scale, baseName, sourceName });
+  const { LocalPdfRenderer, runRenderQueue } = await import("../../shared/pdf-renderer.js");
   const renderer = new LocalPdfRenderer(sourceBytes);
   const abort = () => { renderer.destroy().catch(() => {}); };
   signal?.addEventListener("abort", abort, { once: true });
