@@ -8,6 +8,7 @@ export const ko = {
     mergePdf: { title: "PDF 합치기 — Secure Tools", description: "PDF 파일을 업로드하지 않고 브라우저에서 원하는 순서로 합치세요." },
     splitPdf: { title: "PDF 나누기 — Secure Tools", description: "원본을 업로드하지 않고 브라우저에서 PDF 페이지를 추출하거나 나누세요." },
     organizePdf: { title: "PDF 정리 — Secure Tools", description: "PDF 페이지를 브라우저에서 로컬로 재정렬하고 회전하고 제거하세요." },
+    pdfToImages: { title: "PDF 이미지 변환 — Secure Tools", description: "PDF 페이지를 브라우저에서 로컬로 PNG, JPEG 또는 WebP 이미지로 변환하세요." },
     pdfCategory: { title: "PDF 도구 — Secure Tools", description: "브라우저에서 PDF 문서를 로컬로 만들고 정리하세요." },
     imageCategory: { title: "이미지 도구 — Secure Tools", description: "브라우저에서 로컬로 작동하도록 설계된 프라이빗 이미지 도구입니다." },
     privacyCategory: { title: "개인정보 보호 도구 — Secure Tools", description: "원본 파일을 업로드하지 않고 숨겨진 파일 정보를 확인하고 제거하세요." },
@@ -28,7 +29,7 @@ export const ko = {
     categories: { pdf: "PDF", image: "이미지", privacy: "개인정보 보호", scan: "스캔 및 OCR", media: "미디어" },
     categoryDescriptions: { pdf: "문서를 만들고 합치고 정리합니다.", image: "일상 이미지를 변환하고 준비합니다.", privacy: "숨겨진 파일 정보를 확인하고 정리합니다.", scan: "스캔을 유용한 문서로 바꿉니다.", media: "오디오와 비디오를 로컬에서 다룹니다." },
     browseCategory: "카테고리 보기 →", availableEyebrow: "바로 사용", availableTitle: "지금 사용 가능", availableDescription: "파일을 기기에서 처리하는 완성된 도구입니다.",
-    imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", organizePdf: "PDF 정리", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
+    imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", organizePdf: "PDF 정리", pdfToImages: "PDF를 이미지로", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
     available: "사용 가능", comingSoon: "준비 중",
   },
   categories: {
@@ -41,6 +42,7 @@ export const ko = {
       imagesToPdf: "JPEG, PNG, WebP 이미지를 원하는 순서로 하나의 PDF로 만듭니다.", merge: "선택한 순서대로 PDF 파일을 합칩니다.",
       split: "선택한 페이지를 추출하거나 문서를 로컬 파일로 나눕니다.", rotateTitle: "PDF 회전", rotate: "문서 품질을 바꾸지 않고 페이지 방향을 바로잡습니다.",
       organize: "PDF 하나의 페이지를 미리 보고 재정렬하고 회전하거나 제거합니다.",
+      toImages: "PDF 페이지를 입력 순서대로 PNG, JPEG 또는 WebP 이미지로 변환합니다.",
     },
     image: {
       title: "이미지 도구", description: "일상 이미지 파일을 브라우저에서 비공개로 준비하세요.",
@@ -153,6 +155,36 @@ export const ko = {
       unsupported: "JPEG, PNG 또는 WebP 이미지 파일을 선택하세요.", noFiles: "PDF를 생성하기 전에 이미지를 하나 이상 추가하세요.", decode: "{name} 파일을 읽을 수 없습니다. 파일이 손상되었거나 이 브라우저에서 지원하지 않을 수 있습니다.",
       fileTooLarge: "이미지 한 개의 50 MiB 제한을 초과했습니다.", queueFiles: "이미지는 최대 100개까지 추가할 수 있습니다.", queueBytes: "이미지 목록의 전체 500 MiB 제한을 초과했습니다.", dimension: "이미지의 한 변이 16,384픽셀 제한을 초과했습니다.", pixels: "이미지가 5천만 픽셀 제한을 초과했습니다.", signature: "파일 내용이 올바른 JPEG, PNG 또는 WebP 이미지가 아닙니다.",
       imageExport: "이미지가 너무 크거나 PDF용으로 준비할 수 없습니다.", canvas: "이 브라우저에서는 PDF용 이미지를 준비할 수 없습니다.", library: "로컬 PDF 라이브러리를 불러오지 못했습니다.", generation: "PDF를 생성하지 못했습니다. 이미지 수나 크기를 줄여 다시 시도하세요.", save: "저장 위치를 열 수 없습니다. 다시 시도하세요.",
+    },
+  },
+  pdfToImages: {
+    eyebrow: "PDF 도구", title: "PDF를 이미지로", description: "문서를 업로드하지 않고 PDF 페이지를 PNG, JPEG 또는 WebP 파일로 변환하세요.",
+    drop: { title: "PDF 하나 추가", description: "PDF를 여기에 놓거나 선택기를 사용하세요. 새 PDF를 선택하면 현재 원본을 안전하게 교체합니다.", choose: "PDF 선택", localTitle: "로컬에서 처리됩니다.", localBody: "PDF는 이 기기를 떠나지 않습니다.", privacyLink: "개인정보 보호 방식" },
+    source: { title: "원본 PDF", empty: "아직 선택한 PDF가 없습니다.", meta: "{size} · {pages}페이지", remove: "원본 PDF 제거" },
+    pages: {
+      title: "변환할 페이지", legend: "변환할 페이지 선택",
+      all: { title: "모든 페이지", body: "원본 순서대로 모든 페이지를 변환합니다." },
+      selected: { title: "선택한 페이지", body: "입력한 순서대로 페이지 번호와 범위를 사용합니다." },
+      rangeLabel: "페이지 선택", rangeHelp: "예: 1-3,5,8-10 또는 5,1,3. 순서와 중복을 유지합니다.",
+    },
+    settings: {
+      title: "이미지 설정", filename: "출력 기본 이름", filenameHelp: "페이지 번호와 파일 확장자는 자동으로 추가됩니다.",
+      format: "이미지 형식", quality: "이미지 품질", qualityHelp: "JPEG와 WebP에서 사용할 수 있습니다.", scale: "출력 배율", scaleHelp: "배율이 클수록 메모리를 더 사용하고 파일 크기가 커집니다.",
+      imageFile: "이미지 파일", zipFile: "ZIP 압축 파일",
+    },
+    actions: { convert: "변환 및 저장", cancel: "취소", clear: "원본 비우기" },
+    status: {
+      reading: "PDF를 로컬에서 읽는 중…", loaded: "PDF 준비 완료: {pages}페이지.", rendering: "선택한 페이지를 로컬에서 렌더링하는 중…",
+      progress: "{total}개 중 {completed}번째 출력 렌더링 중(원본 {page}페이지)…", progressLabel: "PDF 이미지 변환 진행률",
+      archive: "ZIP 압축 파일 준비 중…", saving: "이미지 준비 중…", saved: "이미지 {count}개가 포함된 {name} 파일을 저장했습니다.",
+      downloaded: "이미지 {count}개가 포함된 {name} 파일을 다운로드했습니다.", saveCancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
+      cancelled: "변환을 취소했습니다. 파일은 기록되지 않았습니다.", cleared: "원본 PDF를 비웠습니다.",
+    },
+    errors: {
+      oneFile: "PDF는 한 번에 하나만 선택하세요.", unsupported: "PDF 파일을 선택하세요.", noFile: "변환하기 전에 PDF 하나를 추가하세요.", protected: "암호로 보호되거나 암호화된 PDF는 변환할 수 없습니다.", unreadable: "PDF가 손상되었거나 읽을 수 없습니다.", noPages: "이 PDF에는 페이지가 없습니다.",
+      rangeRequired: "페이지나 범위를 하나 이상 입력하세요.", rangeInvalid: "쉼표로 구분한 페이지 번호와 오름차순 범위를 사용하세요.", rangeOutOfBounds: "모든 페이지는 1에서 {pages} 사이여야 합니다.", rangeReversed: "범위는 작은 페이지에서 큰 페이지 순서여야 합니다.",
+      format: "PNG, JPEG 또는 WebP를 선택하세요.", scale: "지원되는 출력 배율을 선택하세요.", dimension: "렌더링할 페이지가 16,384픽셀 크기 제한을 초과합니다.", pixels: "렌더링할 페이지가 5천만 픽셀 제한을 초과합니다.",
+      canvas: "이 브라우저에서 이미지 캔버스를 만들 수 없습니다.", encoder: "이 브라우저에서 선택한 이미지 형식을 인코딩할 수 없습니다.", render: "PDF 페이지를 안전하게 렌더링하지 못했습니다.", archiveLibrary: "로컬 압축 라이브러리를 불러오지 못했습니다.", archive: "ZIP 압축 파일을 만들지 못했습니다.", failure: "PDF를 변환하지 못했습니다. 페이지 수나 배율을 줄여 다시 시도하세요.", save: "저장 위치를 열 수 없습니다. 다시 시도하세요.",
     },
   },
   organizePdf: {
