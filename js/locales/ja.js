@@ -40,6 +40,10 @@ export const ja = {
       "title": "PDFメタデータの確認・削除 — Secure Tools",
       "description": "対応しているPDFメタデータを端末内で確認し、選んで削除できます。"
     },
+    "imageConverter": {
+      "title": "画像変換 — Secure Tools",
+      "description": "JPEG、PNG、WebP画像をブラウザ上で端末内変換します。"
+    },
     "pdfCategory": {
       "title": "PDFツール — Secure Tools",
       "description": "PDFの作成・結合・分割・整理を端末内で行えます。"
@@ -140,8 +144,6 @@ export const ja = {
       "imagesToPdf": "JPEG、PNG、WebP画像を好きな順番で1つのPDFにまとめます",
       "merge": "PDFを選んだ順番で1つに結合します",
       "split": "必要なページを抽出したり、PDFを複数のファイルに分割したりできます",
-      "rotateTitle": "PDFを回転",
-      "rotate": "画質を変えずにページの向きを調整します",
       "organize": "PDFのページをプレビューし、並べ替え・回転・削除できます",
       "toImages": "PDFページをPNG、JPEG、WebP画像に変換します",
       "metadata": "一般的な文書メタデータを確認し、削除後の内容を検証したコピーを作成します"
@@ -381,6 +383,45 @@ export const ja = {
       "library": "ローカルPDFライブラリを読み込めませんでした",
       "generation": "PDFを結合できませんでした。ファイルの数やサイズを減らして試してください",
       "save": "保存先を開けませんでした。もう一度試してください"
+    }
+  },
+  "imageConverter": {
+    "eyebrow": "画像ツール",
+    "title": "画像変換",
+    "description": "JPEG、PNG、WebP画像を端末内で変換します。複数のファイルは1つのZIPにまとめて保存されます。",
+    "queue": { "meta": "{size} · {position}番目" },
+    "settings": {
+      "title": "変換設定",
+      "format": "出力形式",
+      "jpeg": "JPEG",
+      "png": "PNG",
+      "webp": "WebP",
+      "quality": "品質",
+      "qualityHelp": "JPEGとWebPは非可逆圧縮の品質を使用します。PNGにはこの設定は適用されません。",
+      "outputHelp": "JPEGでは透明部分が白になります。Canvasで再エンコードするため、すべての出力から画像メタデータが削除されます。",
+      "imageFile": "変換済み画像",
+      "zipFile": "ZIPアーカイブ"
+    },
+    "actions": { "convert": "変換して保存" },
+    "status": {
+      "converting": "画像を端末内で変換しています…",
+      "progress": "{total}件中{completed}件目の画像を変換しています…",
+      "progressLabel": "画像変換の進行状況",
+      "archive": "ZIPアーカイブを作成しています…",
+      "saved": "変換済み画像{count}件を含む{name}を保存しました。",
+      "downloaded": "変換済み画像{count}件を含む{name}をダウンロードしました。",
+      "saveCancelled": "保存をキャンセルしました。ファイルは書き込まれていません。"
+    },
+    "errors": {
+      "noFiles": "変換する画像を1つ以上追加してください。",
+      "format": "JPEG、PNG、WebPのいずれかを選んでください。",
+      "jobPixels": "この処理はデコード後の合計2億ピクセル制限を超えます。一度に変換する画像を減らしてください。",
+      "canvas": "このブラウザでは画像用Canvasを作成できません。",
+      "encoder": "{name}を選択した形式でエンコードできませんでした。",
+      "archiveLibrary": "ローカルのアーカイブライブラリを読み込めませんでした。",
+      "archive": "ZIPアーカイブを作成できませんでした。",
+      "failure": "{name}を変換できませんでした。画像が破損しているか、このブラウザで対応していない可能性があります。",
+      "save": "保存先を開けませんでした。もう一度試してください。"
     }
   },
   "imageToPdf": {

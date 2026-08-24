@@ -1,0 +1,10 @@
+.quality-heading { display: flex; min-width: 0; align-items: baseline; justify-content: space-between; gap: var(--space-3); }
+.quality-heading label { min-width: 0; }
+.quality-heading output { color: var(--text-primary); font-size: 0.82rem; font-weight: var(--font-weight-bold); }
+.field[hidden] { display: none; }
+.converter-note { margin: var(--space-4) 0 0; padding: var(--space-4); border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-subtle); color: var(--text-secondary); font-size: 0.78rem; overflow-wrap: anywhere; }
+
+@media (max-width: 38rem) {
+  .settings { padding: var(--space-4); }
+  .quality-heading { align-items: flex-start; }
+}

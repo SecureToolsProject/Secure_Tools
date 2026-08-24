@@ -109,7 +109,7 @@ export async function decodeImage(file) {
 
   if ("createImageBitmap" in window) {
     try {
-      const bitmap = await createImageBitmap(file);
+      const bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
       try { validateImageDimensions(bitmap.width, bitmap.height); }
       catch (error) { bitmap.close(); throw error; }
       return { source: bitmap, width: bitmap.width, height: bitmap.height, close: () => bitmap.close() };

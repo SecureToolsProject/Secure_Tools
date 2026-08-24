@@ -4,10 +4,11 @@ Secure Tools is a privacy-first web hub for everyday file utilities. Production 
 
 The project uses a category-first architecture, a Pull Request/main CI gate, and static GitHub Pages deployment.
 
-Release-candidate context is recorded in the [v1.0.0 changelog](./CHANGELOG.md) and [release QA checklist](./docs/release-qa.md). The v1.0.0 Git tag and GitHub release are deliberate release-manager actions after manual sign-off; Sprint 11 does not create them.
+The v1 baseline is recorded in the [changelog](./CHANGELOG.md) and historical [v1.0.0 release QA checklist](./docs/release-qa.md). Sprint 12 begins the v2 cycle by expanding production tools into the Image category.
 
 ## Available tools
 
+- [Image Converter](./tools/image/converter/) — convert batches of JPEG, PNG, and WebP images locally with predictable names and ZIP output.
 - [Images to PDF](./tools/pdf/images-to-pdf/) — arrange JPEG, PNG, and WebP images and save them as one PDF.
 - [Merge PDF](./tools/pdf/merge/) — validate, order, and combine PDF pages without rasterizing them.
 - [Split PDF](./tools/pdf/split/) — extract ordered page ranges or create predictable per-page and fixed-interval archives.
@@ -75,6 +76,7 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 ├── tools/
 │   ├── shared/
 │   │   ├── file.js
+│   │   ├── image.js
 │   │   ├── pdf.js
 │   │   ├── tool.css
 │   │   └── save.js
@@ -87,6 +89,8 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │   │   ├── to-images/
 │   │   └── metadata/
 │   ├── image/
+│   │   ├── index.html
+│   │   └── converter/
 │   ├── privacy/
 │   ├── scan/
 │   ├── media/
@@ -101,6 +105,7 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
     ├── ci-foundation.test.mjs
     ├── home-structure.test.mjs
     ├── image-to-pdf.test.mjs
+    ├── image-converter.test.mjs
     ├── pdf-merge-and-categories.test.mjs
     ├── pdf-split.test.mjs
     ├── pdf-metadata.test.mjs
@@ -124,12 +129,26 @@ Categories are the stable navigation layer. Individual utilities can be added be
 
 `/tools/image-to-pdf/` is a lightweight static migration page with a meta refresh and visible fallback link to `/tools/pdf/images-to-pdf/`. It does not use JavaScript to redirect.
 
+## Image Converter
+
+Image Converter is available at `/tools/image/converter/`.
+
+- Accepts signature-validated JPEG, PNG, and WebP files and converts one or many sources sequentially with browser-native decode, canvas, and encode APIs.
+- Supports JPEG, PNG, and WebP output. JPEG and WebP expose a 50–100% lossy quality control; PNG hides that irrelevant setting.
+- Uses explicit browser orientation handling so normally displayed camera images are rendered in their intended orientation.
+- Flattens transparent pixels onto white for JPEG while PNG and WebP keep the canvas alpha channel.
+- Canvas re-encoding does not preserve EXIF or other embedded image metadata. The tool intentionally makes no configurable metadata-cleaning or preservation claim.
+- Replaces supported source extensions, preserves Unicode, limits output bases to 120 characters and 180 UTF-8 bytes, and adds deterministic suffixes for collisions.
+- Saves one converted image directly or packages multiple outputs into `converted_images.zip` with the existing same-origin JSZip build.
+- Reuses the existing 50 MiB file, 100-file queue, 500 MiB queue, 16,384-pixel dimension, and 50-megapixel per-image limits, plus a 200-megapixel aggregate decoded-work limit per conversion.
+- Keeps queued sources available after cancellation or recoverable decode, encode, archive, and save failures so the job can be retried without reloading.
+
 ## Images to PDF
 
 Images to PDF is available at `/tools/pdf/images-to-pdf/`.
 
 - `app.js` manages picker/drop input, duplicate-preserving queue state, ordering, removal, settings, progress, and save behavior.
-- `image.js` validates and decodes JPEG, PNG, and WebP using browser-local APIs.
+- `tools/shared/image.js` validates and decodes JPEG, PNG, and WebP using browser-local APIs shared with Image Converter.
 - `pdf.js` owns page geometry, image placement, sequential preparation, and jsPDF generation.
 - Preview object URLs and temporary download URLs are revoked when no longer needed.
 - File admission validates JPEG, PNG, and WebP signatures before browser decoding; a supported signature may override a misleading MIME type or extension.
@@ -234,7 +253,7 @@ All processing libraries are pinned and served as same-origin static files. Prod
 ### JSZip
 
 - Version: `3.10.1`
-- Purpose: local multi-file PDF Split and PDF to Images archives
+- Purpose: local multi-file Image Converter, PDF Split, and PDF to Images archives
 - Package: `jszip@3.10.1` from npm
 - License choice: MIT
 - Details and hashes: [assets/vendor/jszip/README.md](./assets/vendor/jszip/README.md)
@@ -266,7 +285,7 @@ Run the complete local and CI validation entry point with:
 node tests/run-all.mjs
 ```
 
-It checks JavaScript syntax and runs Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category-first homepage, system typography, CJK wrapping, long-copy layout, six-language catalog parity and placeholders, locale detection and persistence, static resource, privacy/network, security-hardening, dependency-integrity, save-path, ZIP, and CI workflow regression coverage. PDF fixtures are generated deterministically during tests; CI never processes real user files.
+It checks JavaScript syntax and runs Image Converter, Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category-first homepage, system typography, CJK wrapping, long-copy layout, six-language catalog parity and placeholders, locale detection and persistence, static resource, privacy/network, security-hardening, dependency-integrity, save-path, ZIP, and CI workflow regression coverage. Test fixtures are generated deterministically; CI never processes real user files.
 
 ## Production security controls
 
@@ -325,8 +344,8 @@ Production routes load only same-origin HTML, CSS, JavaScript, and vendored libr
 The historical prototype is absent from the deployed tree. External URLs in documentation, licenses, and source links are informational or user-initiated; no production processing dependency is fetched remotely.
 ## Deferred work
 
-- PDF rotate, compression, and encryption tools
-- Image conversion, compression, and resizing
+- Broader PDF modification, compression, and encryption workflows
+- Image resizing, compression, and dedicated metadata inspection/cleaning
 - Broader XMP and structural PDF metadata sanitization
 - Scan/OCR and media tools
 - Offline/PWA support

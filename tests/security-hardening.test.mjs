@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import {
   MAX_DIMENSION, MAX_FILE_SIZE, MAX_PIXELS, MAX_QUEUE_BYTES, MAX_QUEUE_FILES,
   detectImageFormat, selectImageQueueFiles, validateImageDimensions, validateImageSignature,
-} from "../tools/pdf/images-to-pdf/image.js";
+} from "../tools/shared/image.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
@@ -56,7 +56,7 @@ assert.doesNotMatch(imageHtml, /(?:unpkg|jsdelivr|cdnjs|https?:\/\/[^"']*jspdf)/
 
 const productionHtml = [
   "index.html", "404.html", "about/index.html", "privacy/index.html", "tools/image-to-pdf/index.html",
-  "tools/image/index.html", "tools/media/index.html", "tools/pdf/index.html", "tools/privacy/index.html", "tools/scan/index.html",
+  "tools/image/index.html", "tools/image/converter/index.html", "tools/media/index.html", "tools/pdf/index.html", "tools/privacy/index.html", "tools/scan/index.html",
   "tools/pdf/images-to-pdf/index.html", "tools/pdf/merge/index.html", "tools/pdf/split/index.html", "tools/pdf/organize/index.html", "tools/pdf/to-images/index.html", "tools/pdf/metadata/index.html",
 ];
 for (const relative of productionHtml) {

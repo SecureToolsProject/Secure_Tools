@@ -40,6 +40,10 @@ export const de = {
       "title": "PDF Metadata Inspector & Cleaner – Secure Tools",
       "description": "Überprüfen und entfernen Sie unterstützte PDF-Metadaten lokal in Ihrem Browser."
     },
+    "imageConverter": {
+      "title": "Bildkonverter – Secure Tools",
+      "description": "Konvertieren Sie JPEG-, PNG- und WebP-Bilder lokal in Ihrem Browser."
+    },
     "pdfCategory": {
       "title": "PDF-Tools – Secure Tools",
       "description": "Erstellen und organisieren Sie PDF-Dokumente lokal in Ihrem Browser."
@@ -140,8 +144,6 @@ export const de = {
       "imagesToPdf": "Ordnen Sie JPEG-, PNG- und WebP-Bilder in einem PDF an.",
       "merge": "Kombinieren Sie PDF-Dateien in der von Ihnen gewählten Reihenfolge.",
       "split": "Extrahieren Sie ausgewählte Seiten oder teilen Sie ein Dokument in lokale Dateien auf.",
-      "rotateTitle": "PDF drehen",
-      "rotate": "Korrigieren Sie die Seitenausrichtung, ohne die Dokumentqualität zu verändern.",
       "organize": "Sehen Sie sich eine Vorschau an, ordnen Sie sie neu an, drehen Sie sie und entfernen Sie Seiten aus einer PDF-Datei.",
       "toImages": "Konvertieren Sie geordnete PDF-Seiten in PNG-, JPEG- oder WebP-Bilder.",
       "metadata": "Überprüfen Sie allgemeine Dokumentmetadaten und erstellen Sie eine verifizierte, bereinigte Kopie."
@@ -380,6 +382,45 @@ export const de = {
       "unreadable": "{name} konnte nicht gelesen werden. Das PDF ist möglicherweise beschädigt oder wird nicht unterstützt.",
       "library": "Die lokale PDF-Bibliothek konnte nicht geladen werden.",
       "generation": "Das PDF konnte nicht zusammengeführt werden. Versuchen Sie es mit weniger oder kleineren Dateien.",
+      "save": "Der Speicherort konnte nicht geöffnet werden. Bitte versuchen Sie es erneut."
+    }
+  },
+  "imageConverter": {
+    "eyebrow": "Bildtool",
+    "title": "Bildkonverter",
+    "description": "Konvertieren Sie JPEG-, PNG- und WebP-Bilder lokal. Mehrere Dateien werden gemeinsam als ZIP gespeichert.",
+    "queue": { "meta": "{size} · Eintrag {position}" },
+    "settings": {
+      "title": "Konvertierungseinstellungen",
+      "format": "Ausgabeformat",
+      "jpeg": "JPEG",
+      "png": "PNG",
+      "webp": "WebP",
+      "quality": "Qualität",
+      "qualityHelp": "JPEG und WebP verwenden verlustbehaftete Qualität. PNG verwendet diese Einstellung nicht.",
+      "outputHelp": "Transparente Pixel werden in JPEG weiß. Die erneute Canvas-Kodierung entfernt eingebettete Bildmetadaten aus jeder Ausgabe.",
+      "imageFile": "Konvertiertes Bild",
+      "zipFile": "ZIP-Archiv"
+    },
+    "actions": { "convert": "Konvertieren und speichern" },
+    "status": {
+      "converting": "Bilder werden lokal konvertiert…",
+      "progress": "Bild {completed} von {total} wird konvertiert…",
+      "progressLabel": "Fortschritt der Bildkonvertierung",
+      "archive": "ZIP-Archiv wird vorbereitet…",
+      "saved": "{name} mit {count} konvertierten Bildern wurde gespeichert.",
+      "downloaded": "{name} mit {count} konvertierten Bildern wurde heruntergeladen.",
+      "saveCancelled": "Speichern abgebrochen. Es wurde keine Datei geschrieben."
+    },
+    "errors": {
+      "noFiles": "Fügen Sie vor der Konvertierung mindestens ein Bild hinzu.",
+      "format": "Wählen Sie JPEG, PNG oder WebP.",
+      "jobPixels": "Dieser Stapel überschreitet das kombinierte Limit von 200 Megapixeln für dekodierte Bilder. Konvertieren Sie weniger Bilder gleichzeitig.",
+      "canvas": "Dieser Browser kann die Bildzeichenfläche nicht erstellen.",
+      "encoder": "{name} konnte nicht in das ausgewählte Format kodiert werden.",
+      "archiveLibrary": "Die lokale Archivbibliothek konnte nicht geladen werden.",
+      "archive": "Das ZIP-Archiv konnte nicht erstellt werden.",
+      "failure": "{name} konnte nicht konvertiert werden. Das Bild ist möglicherweise beschädigt oder wird von diesem Browser nicht unterstützt.",
       "save": "Der Speicherort konnte nicht geöffnet werden. Bitte versuchen Sie es erneut."
     }
   },

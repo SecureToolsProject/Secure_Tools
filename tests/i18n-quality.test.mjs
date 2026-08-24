@@ -45,7 +45,7 @@ function placeholders(value) {
 function testCatalogParityAndQuality() {
   assert.deepEqual([...Object.keys(translations)], [...languageNames.keys()]);
   const english = flatten(translations.en);
-  assert.equal(english.size, 522);
+  assert.equal(english.size, 553);
 
   for (const [language, catalog] of Object.entries(translations)) {
     const flattened = flatten(catalog);
@@ -77,7 +77,7 @@ function testResolutionDetectionAndPersistence() {
 
 function testSelectorsAndDocumentTranslation() {
   const pages = listFiles(root, (file) => file.endsWith(".html") && fs.readFileSync(file, "utf8").includes("data-language-select"));
-  assert.equal(pages.length, 15, "Every production page with the shared header must expose the language selector");
+  assert.equal(pages.length, 16, "Every production page with the shared header must expose the language selector");
   for (const file of pages) {
     const html = fs.readFileSync(file, "utf8");
     const select = html.match(/<select[^>]*data-language-select[^>]*>([\s\S]*?)<\/select>/)?.[1];

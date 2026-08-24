@@ -7,6 +7,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 
 const fileTools = [
+  ["Image Converter", "tools/image/converter/index.html", "tools/image/converter/app.js", "image/"],
   ["Images to PDF", "tools/pdf/images-to-pdf/index.html", "tools/pdf/images-to-pdf/app.js", "image/"],
   ["Merge PDF", "tools/pdf/merge/index.html", "tools/pdf/merge/app.js", "pdf"],
   ["Split PDF", "tools/pdf/split/index.html", "tools/pdf/split/app.js", "pdf"],
@@ -19,7 +20,7 @@ const productionPages = [
   "index.html", "404.html", "about/index.html", "privacy/index.html",
   "tools/pdf/index.html", "tools/pdf/images-to-pdf/index.html", "tools/pdf/merge/index.html",
   "tools/pdf/split/index.html", "tools/pdf/organize/index.html", "tools/pdf/to-images/index.html",
-  "tools/pdf/metadata/index.html", "tools/image/index.html", "tools/privacy/index.html",
+  "tools/pdf/metadata/index.html", "tools/image/index.html", "tools/image/converter/index.html", "tools/privacy/index.html",
   "tools/scan/index.html", "tools/media/index.html",
 ];
 
@@ -92,7 +93,7 @@ function testResponsiveThemeAndMotionFoundation() {
   const base = read("css/base.css");
   const components = read("css/components.css");
   const categories = read("css/categories.css");
-  const toolCss = ["tools/shared/tool.css", "tools/pdf/merge/tool.css", "tools/pdf/split/tool.css",
+  const toolCss = ["tools/shared/tool.css", "tools/image/converter/tool.css", "tools/pdf/merge/tool.css", "tools/pdf/split/tool.css",
     "tools/pdf/organize/tool.css", "tools/pdf/to-images/tool.css", "tools/pdf/metadata/tool.css"]
     .map(read).join("\n");
   const css = `${base}\n${components}\n${categories}\n${toolCss}`;

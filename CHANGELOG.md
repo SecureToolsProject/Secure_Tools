@@ -1,8 +1,21 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Started the v2 cycle with a production Image category and local Image Converter.
+- Added JPEG, PNG, and WebP input/output, lossy quality controls for JPEG/WebP, deterministic white JPEG transparency, metadata-stripping canvas re-encoding, collision-safe Unicode names, and ZIP batch output.
+- Added per-file, queue, dimension, decoded-pixel, and 200-megapixel aggregate-work protections with recoverable errors.
+
+### Changed
+
+- Removed the standalone planned Rotate PDF card; page rotation remains available as part of PDF Organizer.
+- Moved shared browser image validation and decoding into `tools/shared/image.js` for PDF and Image tools.
+
 ## 1.0.0
 
-This section describes the planned v1.0.0 release candidate. The Git tag and GitHub release are intentionally separate release-manager actions and are not created by Sprint 11.
+Secure Tools v1.0.0 was published on 2026-08-24 after the Sprint 11 release-candidate hardening and manual release process.
 
 ### PDF tools
 

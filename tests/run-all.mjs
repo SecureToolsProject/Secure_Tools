@@ -25,6 +25,7 @@ for (const file of sourceFiles) runNode(["--check", file], `Syntax check for ${p
 
 for (const test of [
   "tests/image-to-pdf.test.mjs",
+  "tests/image-converter.test.mjs",
   "tests/pdf-merge-and-categories.test.mjs",
   "tests/file-input-queue-state.test.mjs",
   "tests/pdf-split.test.mjs",

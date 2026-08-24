@@ -8,6 +8,15 @@ const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 
 const tools = [
   {
+    name: "Image Converter",
+    html: read("tools/image/converter/index.html"),
+    app: read("tools/image/converter/app.js"),
+    chooseKey: "imageToPdf.drop.choose",
+    renderCall: "renderQueue()",
+    stateRule: /elements\.empty\.hidden\s*=\s*state\.items\.length\s*>\s*0/,
+    programmaticPickerCount: 1,
+  },
+  {
     name: "Images to PDF",
     html: read("tools/pdf/images-to-pdf/index.html"),
     app: read("tools/pdf/images-to-pdf/app.js"),
