@@ -11,6 +11,7 @@ import {
   convertImages,
   DEFAULT_QUALITY,
   IMAGE_FORMATS,
+  MAX_BASE_BYTES,
   MAX_JOB_PIXELS,
   normalizeFormat,
   normalizeQuality,
@@ -43,7 +44,9 @@ assert.equal(sourceBaseName(" photo.png "), "photo");
 assert.equal(sourceBaseName("한글 파일.webp"), "한글 파일");
 assert.equal(sourceBaseName("bad:name.jpg"), "bad_name");
 const veryLong = `${"가".repeat(200)}.png`;
-assert.equal(Array.from(sourceBaseName(veryLong)).length, 120);
+const shortened = sourceBaseName(veryLong);
+assert.ok(Array.from(shortened).length <= 120);
+assert.ok(new TextEncoder().encode(shortened).length <= MAX_BASE_BYTES);
 const named = createOutputNames([
   { name: "photo.png" }, { name: "photo.jpg" }, { name: "photo_2.webp" }, { name: "한글 파일.png" },
 ], "jpeg");

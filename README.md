@@ -138,7 +138,7 @@ Image Converter is available at `/tools/image/converter/`.
 - Uses explicit browser orientation handling so normally displayed camera images are rendered in their intended orientation.
 - Flattens transparent pixels onto white for JPEG while PNG and WebP keep the canvas alpha channel.
 - Canvas re-encoding does not preserve EXIF or other embedded image metadata. The tool intentionally makes no configurable metadata-cleaning or preservation claim.
-- Replaces supported source extensions, preserves Unicode, limits output bases to 120 characters, and adds deterministic suffixes for collisions.
+- Replaces supported source extensions, preserves Unicode, limits output bases to 120 characters and 180 UTF-8 bytes, and adds deterministic suffixes for collisions.
 - Saves one converted image directly or packages multiple outputs into `converted_images.zip` with the existing same-origin JSZip build.
 - Reuses the existing 50 MiB file, 100-file queue, 500 MiB queue, 16,384-pixel dimension, and 50-megapixel per-image limits, plus a 200-megapixel aggregate decoded-work limit per conversion.
 - Keeps queued sources available after cancellation or recoverable decode, encode, archive, and save failures so the job can be retried without reloading.

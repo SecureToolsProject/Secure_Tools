@@ -13,7 +13,8 @@ export const ARCHIVE_FILENAME = "converted_images.zip";
 
 const ILLEGAL_FILENAME_CHARACTERS = /[\\/:*?"<>|\u0000-\u001f]+/g;
 const INPUT_EXTENSION = /\.(?:jpe?g|png|webp)$/i;
-const MAX_BASE_CHARACTERS = 120;
+export const MAX_BASE_CHARACTERS = 120;
+export const MAX_BASE_BYTES = 180;
 
 function conversionError(code, cause) {
   const error = new Error(code, cause ? { cause } : undefined);
@@ -40,7 +41,16 @@ export function sourceBaseName(value, fallback = "image") {
     .replace(INPUT_EXTENSION, "")
     .replace(ILLEGAL_FILENAME_CHARACTERS, "_")
     .replace(/[. ]+$/g, "");
-  return Array.from(clean || fallback).slice(0, MAX_BASE_CHARACTERS).join("");
+  const encoder = new TextEncoder();
+  const output = [];
+  let bytes = 0;
+  for (const character of Array.from(clean || fallback).slice(0, MAX_BASE_CHARACTERS)) {
+    const characterBytes = encoder.encode(character).length;
+    if (bytes + characterBytes > MAX_BASE_BYTES) break;
+    output.push(character);
+    bytes += characterBytes;
+  }
+  return output.join("") || fallback;
 }
 
 export function createOutputNames(files, format) {
