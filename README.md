@@ -9,6 +9,7 @@ The v1 baseline is recorded in the [changelog](./CHANGELOG.md) and historical [v
 ## Available tools
 
 - [Image Converter](./tools/image/converter/) — convert batches of JPEG, PNG, and WebP images locally with predictable names and ZIP output.
+- [Image Resize](./tools/image/resize/) — resize image batches by pixels or percentage while preserving aspect ratio by default.
 - [Images to PDF](./tools/pdf/images-to-pdf/) — arrange JPEG, PNG, and WebP images and save them as one PDF.
 - [Merge PDF](./tools/pdf/merge/) — validate, order, and combine PDF pages without rasterizing them.
 - [Split PDF](./tools/pdf/split/) — extract ordered page ranges or create predictable per-page and fixed-interval archives.
@@ -142,6 +143,18 @@ Image Converter is available at `/tools/image/converter/`.
 - Saves one converted image directly or packages multiple outputs into `converted_images.zip` with the existing same-origin JSZip build.
 - Reuses the existing 50 MiB file, 100-file queue, 500 MiB queue, 16,384-pixel dimension, and 50-megapixel per-image limits, plus a 200-megapixel aggregate decoded-work limit per conversion.
 - Keeps queued sources available after cancellation or recoverable decode, encode, archive, and save failures so the job can be retried without reloading.
+
+## Image Resize
+
+Image Resize is available at `/tools/image/resize/` on the v2 integration branch.
+
+- Accepts signature-validated JPEG, PNG, and WebP images and processes batches sequentially without uploading file contents.
+- Supports pixel bounding dimensions and per-source percentage scaling. Aspect ratio is preserved by default, either dimension may remain automatic, and enlargement is disabled by default.
+- Supports Original format for mixed batches plus explicit JPEG, PNG, and WebP output. JPEG and WebP use one batch quality setting; PNG does not expose a meaningless quality control.
+- Preserves transparency for PNG/WebP and flattens it onto white for JPEG, matching Image Converter. Canvas re-encoding strips EXIF and other embedded metadata.
+- Uses `_resized` names with deterministic collision suffixes and the established Unicode character/byte limits. Multiple outputs are packaged in `resized_images.zip`.
+- Enforces the shared 50 MiB file, 100-file queue, 500 MiB queue, 16,384-pixel dimension, and 50-megapixel per-image limits, plus a 200-megapixel aggregate output-work limit.
+- Keeps the queue available after validation, decode, canvas, encoding, archive, save, or cancellation errors so settings can be corrected and retried.
 
 ## Images to PDF
 

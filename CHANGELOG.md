@@ -5,6 +5,8 @@
 ### Added
 
 - Started the v2 cycle with a production Image category and local Image Converter.
+- Added Image Resize with pixel and percentage modes, aspect-ratio preservation, optional enlargement, Original/JPEG/PNG/WebP output, and local batch ZIP saving.
+- Added per-image output dimension/pixel checks and a 200-megapixel aggregate resize-output workload limit.
 - Added JPEG, PNG, and WebP input/output, lossy quality controls for JPEG/WebP, deterministic white JPEG transparency, metadata-stripping canvas re-encoding, collision-safe Unicode names, and ZIP batch output.
 - Added per-file, queue, dimension, decoded-pixel, and 200-megapixel aggregate-work protections with recoverable errors.
 
