@@ -129,7 +129,7 @@ function testRoutesTranslationsAndPrivacy() {
   const routeFiles = [
     "index.html", "privacy/index.html", "about/index.html", "404.html", "tools/image-to-pdf/index.html",
     "tools/pdf/index.html", "tools/pdf/images-to-pdf/index.html", "tools/pdf/merge/index.html", "tools/pdf/split/index.html", "tools/pdf/organize/index.html", "tools/pdf/to-images/index.html", "tools/pdf/metadata/index.html",
-    "tools/image/index.html", "tools/privacy/index.html", "tools/scan/index.html", "tools/media/index.html",
+    "tools/image/index.html", "tools/image/converter/index.html", "tools/privacy/index.html", "tools/scan/index.html", "tools/media/index.html",
   ];
   const toImagesHtml = fs.readFileSync(path.join(root, "tools/pdf/to-images/index.html"), "utf8");
   assert.match(toImagesHtml, /assets\/vendor\/pdf-lib\/pdf-lib\.min\.js/);
