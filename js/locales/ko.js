@@ -41,7 +41,7 @@ export const ko = {
     pdf: {
       title: "PDF 도구", description: "개인 파일을 업로드하지 않고 PDF 문서를 로컬에서 만들고 정리하세요.",
       imagesToPdf: "JPEG, PNG, WebP 이미지를 원하는 순서로 하나의 PDF로 만듭니다.", merge: "선택한 순서대로 PDF 파일을 합칩니다.",
-      split: "선택한 페이지를 추출하거나 문서를 로컬 파일로 나눕니다.", rotateTitle: "PDF 회전", rotate: "문서 품질을 바꾸지 않고 페이지 방향을 바로잡습니다.",
+      split: "선택한 페이지를 추출하거나 문서를 로컬 파일로 나눕니다.",
       organize: "PDF 페이지를 미리 보고 재정렬하거나 회전·제거합니다",
       toImages: "PDF 페이지를 지정한 순서대로 PNG, JPEG 또는 WebP 이미지로 변환합니다",
       metadata: "일반 문서 메타데이터를 확인하고 정리한 사본을 만듭니다",

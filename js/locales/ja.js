@@ -140,8 +140,6 @@ export const ja = {
       "imagesToPdf": "JPEG、PNG、WebP画像を好きな順番で1つのPDFにまとめます",
       "merge": "PDFを選んだ順番で1つに結合します",
       "split": "必要なページを抽出したり、PDFを複数のファイルに分割したりできます",
-      "rotateTitle": "PDFを回転",
-      "rotate": "画質を変えずにページの向きを調整します",
       "organize": "PDFのページをプレビューし、並べ替え・回転・削除できます",
       "toImages": "PDFページをPNG、JPEG、WebP画像に変換します",
       "metadata": "一般的な文書メタデータを確認し、削除後の内容を検証したコピーを作成します"

@@ -140,8 +140,6 @@ export const de = {
       "imagesToPdf": "Ordnen Sie JPEG-, PNG- und WebP-Bilder in einem PDF an.",
       "merge": "Kombinieren Sie PDF-Dateien in der von Ihnen gewählten Reihenfolge.",
       "split": "Extrahieren Sie ausgewählte Seiten oder teilen Sie ein Dokument in lokale Dateien auf.",
-      "rotateTitle": "PDF drehen",
-      "rotate": "Korrigieren Sie die Seitenausrichtung, ohne die Dokumentqualität zu verändern.",
       "organize": "Sehen Sie sich eine Vorschau an, ordnen Sie sie neu an, drehen Sie sie und entfernen Sie Seiten aus einer PDF-Datei.",
       "toImages": "Konvertieren Sie geordnete PDF-Seiten in PNG-, JPEG- oder WebP-Bilder.",
       "metadata": "Überprüfen Sie allgemeine Dokumentmetadaten und erstellen Sie eine verifizierte, bereinigte Kopie."
