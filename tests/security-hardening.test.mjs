@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import {
   MAX_DIMENSION, MAX_FILE_SIZE, MAX_PIXELS, MAX_QUEUE_BYTES, MAX_QUEUE_FILES,
   detectImageFormat, selectImageQueueFiles, validateImageDimensions, validateImageSignature,
-} from "../tools/pdf/images-to-pdf/image.js";
+} from "../tools/shared/image.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");

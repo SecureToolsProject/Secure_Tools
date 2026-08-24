@@ -1,4 +1,4 @@
-import { decodeImage, imageToJpegData } from "./image.js";
+import { decodeImage, imageToJpegData } from "../../shared/image.js";
 import { sanitizePdfFilename } from "../../shared/file.js";
 
 const PAGE_SIZES = {

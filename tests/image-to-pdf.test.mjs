@@ -3,7 +3,7 @@ import { createRequire } from "node:module";
 import { File } from "node:buffer";
 import fs from "node:fs";
 
-import { isSupportedImage } from "../tools/pdf/images-to-pdf/image.js";
+import { isSupportedImage } from "../tools/shared/image.js";
 import {
   createPdfBlob,
   getImagePlacement,

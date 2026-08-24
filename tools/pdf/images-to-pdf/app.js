@@ -1,7 +1,7 @@
 import { t } from "../../../js/i18n.js";
 import { formatBytes, moveArrayItem } from "../../shared/file.js";
 import { downloadBlob, requestPdfSaveHandle, writeBlobToHandle } from "../../shared/save.js";
-import { ACCEPTED_IMAGE_TYPES, selectImageQueueFiles } from "./image.js";
+import { ACCEPTED_IMAGE_TYPES, selectImageQueueFiles } from "../../shared/image.js";
 import { createPdfBlob, sanitizeFilename } from "./pdf.js";
 
 const elements = {
