@@ -1,6 +1,6 @@
 import { t } from "../../../js/i18n.js";
 import { formatBytes, moveArrayItem } from "../../shared/file.js";
-import { ACCEPTED_IMAGE_TYPES, selectImageQueueFiles, validateImageSignature } from "../../shared/image.js";
+import { ACCEPTED_IMAGE_TYPES, decodeImage, selectImageQueueFiles, validateImageSignature } from "../../shared/image.js";
 import { IMAGE_FORMATS } from "../../shared/image-output.js";
 import { downloadBlob, requestSaveHandle, writeBlobToHandle } from "../../shared/save.js";
 import { createResizePlan, resizeImages } from "./resize.js";
@@ -29,7 +29,18 @@ function renderQueue() {
   updateControls();
 }
 
-async function addFiles(files) { const { accepted, rejected } = await selectImageQueueFiles(state.items.map((item) => item.file), files); for (const file of accepted) { const format = await validateImageSignature(file); state.items.push({ id: crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`, file, format, url: URL.createObjectURL(file) }); } clearResult(); if (rejected.length) setRejectedStatus(accepted.length, rejected); else if (accepted.length) setStatus("imageToPdf.status.added", { count: accepted.length }, "success"); else setStatus("imageToPdf.errors.unsupported", {}, "error"); renderQueue(); }
+async function addFiles(files) { const { accepted, rejected } = await selectImageQueueFiles(state.items.map((item) => item.file), files); let added = 0; for (const file of accepted) { let decoded; try { const format = await validateImageSignature(file); decoded = await decodeImage(file); state.items.push({ id: crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`, file, format, width: decoded.width, height: decoded.height, url: URL.createObjectURL(file) }); added += 1; } catch (error) { rejected.push({ file, code: error.code || "IMAGE_DECODE_FAILED" }); } finally { decoded?.close(); } } clearResult(); if (rejected.length) setRejectedStatus(added, rejected); else if (added) setStatus("imageToPdf.status.added", { count: added }, "success"); else setStatus("imageToPdf.errors.unsupported", {}, "error"); renderQueue(); }
+function syncSingleImageAspect(changed) {
+  if (!elements.lock.checked || selectedMode() !== "pixels" || state.items.length !== 1) return;
+  const item = state.items[0];
+  if (changed === elements.width) {
+    const width = Number(elements.width.value);
+    if (Number.isInteger(width) && width > 0) elements.height.value = String(Math.max(1, Math.round(width * item.height / item.width)));
+  } else if (changed === elements.height) {
+    const height = Number(elements.height.value);
+    if (Number.isInteger(height) && height > 0) elements.width.value = String(Math.max(1, Math.round(height * item.width / item.height)));
+  }
+}
 function removeItem(index) { const [item] = state.items.splice(index, 1); if (item) URL.revokeObjectURL(item.url); clearResult(); setStatus("imageToPdf.status.removed"); renderQueue(); }
 function moveItem(index, offset) { const next = moveArrayItem(state.items, index, offset); if (next < 0) return; clearResult(); setStatus("imageToPdf.status.reordered"); renderQueue(); elements.list.querySelector(`[data-id="${state.items[next].id}"] [data-action="${offset < 0 ? "up" : "down"}"]`)?.focus(); }
 function clearItems() { state.items.forEach((item) => URL.revokeObjectURL(item.url)); state.items.length = 0; elements.input.value = ""; clearResult(); setStatus("imageToPdf.status.cleared"); renderQueue(); }
@@ -50,6 +61,7 @@ async function resizeQueue() {
 
 elements.add.addEventListener("click", () => elements.input.click()); elements.input.addEventListener("change", (event) => { void addFiles([...event.target.files]); elements.input.value = ""; }); elements.clear.addEventListener("click", clearItems); elements.resize.addEventListener("click", resizeQueue); elements.quality.addEventListener("input", () => { elements.qualityValue.textContent = `${Math.round(Number(elements.quality.value) * 100)}%`; clearResult(true); });
 elements.form.addEventListener("change", (event) => { if (event.target !== elements.quality) clearResult(true); updateControls(); }); elements.form.addEventListener("input", (event) => { if ([elements.width, elements.height, elements.percentage].includes(event.target)) clearResult(true); });
+elements.form.addEventListener("input", (event) => { if ([elements.width, elements.height].includes(event.target)) syncSingleImageAspect(event.target); });
 elements.list.addEventListener("click", (event) => { const button = event.target.closest("button[data-action]"); if (!button) return; const index = state.items.findIndex((item) => item.id === button.closest("[data-id]").dataset.id); if (button.dataset.action === "remove") removeItem(index); if (button.dataset.action === "up") moveItem(index, -1); if (button.dataset.action === "down") moveItem(index, 1); });
 ["dragenter", "dragover"].forEach((type) => elements.dropZone.addEventListener(type, (event) => { event.preventDefault(); if (!state.busy) elements.dropZone.dataset.dragging = "true"; })); ["dragleave", "drop"].forEach((type) => elements.dropZone.addEventListener(type, (event) => { event.preventDefault(); delete elements.dropZone.dataset.dragging; })); elements.dropZone.addEventListener("drop", (event) => { if (!state.busy) void addFiles([...event.dataTransfer.files]); });
 document.addEventListener("securetools:languagechange", () => { renderQueue(); if (state.status?.rejected) setRejectedStatus(state.status.added, state.status.rejected); else if (state.status) setStatus(state.status.key, state.status.values, state.status.tone); }); window.addEventListener("beforeunload", () => state.items.forEach((item) => URL.revokeObjectURL(item.url)));
