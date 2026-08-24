@@ -5,13 +5,15 @@ import { es } from "./locales/es.js";
 import { de } from "./locales/de.js";
 import { fr } from "./locales/fr.js";
 import { imageResizeLocales } from "./locales/image-resize.js";
+import { imageCompressorLocales } from "./locales/image-compressor.js";
 
 const STORAGE_KEY = "secure-tools-language";
 const baseTranslations = { en, ko, ja, es, de, fr };
 export const translations = Object.fromEntries(Object.entries(baseTranslations).map(([language, catalog]) => [language, {
   ...catalog,
-  metadata: { ...catalog.metadata, imageResize: imageResizeLocales[language].metadata },
+  metadata: { ...catalog.metadata, imageResize: imageResizeLocales[language].metadata, imageCompressor: imageCompressorLocales[language].metadata },
   imageResize: imageResizeLocales[language].copy,
+  imageCompressor: imageCompressorLocales[language].copy,
 }]));
 
 export function resolveLanguage(value, availableLanguages = Object.keys(translations)) {

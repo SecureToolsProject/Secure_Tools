@@ -10,6 +10,7 @@ The v1 baseline is recorded in the [changelog](./CHANGELOG.md) and historical [v
 
 - [Image Converter](./tools/image/converter/) — convert batches of JPEG, PNG, and WebP images locally with predictable names and ZIP output.
 - [Image Resize](./tools/image/resize/) — resize image batches by pixels or percentage while preserving aspect ratio by default.
+- [Image Compressor](./tools/image/compress/) — quality-compress image batches locally and compare original and result sizes.
 - [Images to PDF](./tools/pdf/images-to-pdf/) — arrange JPEG, PNG, and WebP images and save them as one PDF.
 - [Merge PDF](./tools/pdf/merge/) — validate, order, and combine PDF pages without rasterizing them.
 - [Split PDF](./tools/pdf/split/) — extract ordered page ranges or create predictable per-page and fixed-interval archives.
@@ -155,6 +156,18 @@ Image Resize is available at `/tools/image/resize/` on the v2 integration branch
 - Uses `_resized` names with deterministic collision suffixes and the established Unicode character/byte limits. Multiple outputs are packaged in `resized_images.zip`.
 - Enforces the shared 50 MiB file, 100-file queue, 500 MiB queue, 16,384-pixel dimension, and 50-megapixel per-image limits, plus a 200-megapixel aggregate output-work limit.
 - Keeps the queue available after validation, decode, canvas, encoding, archive, save, or cancellation errors so settings can be corrected and retried.
+
+## Image Compressor
+
+Image Compressor is available at `/tools/image/compress/` on the v2 integration branch.
+
+- Accepts signature-validated JPEG, PNG, and WebP images and preserves their oriented pixel dimensions while processing sequentially in browser memory.
+- Defaults to Original format. JPEG and WebP use an explicit 50–100% quality setting; PNG is re-encoded without a fake lossy-quality control, so size reduction may be limited.
+- Reports original size, result size, byte difference, and signed percentage change for every file, plus aggregate batch totals. Larger results are kept and labeled as increases rather than savings.
+- Preserves alpha for PNG/WebP and flattens transparent pixels onto white for JPEG. Canvas re-encoding strips EXIF and other embedded metadata.
+- Uses collision-safe Unicode `_compressed` names and saves multiple outputs as `compressed_images.zip` through the same-origin JSZip dependency.
+- Reuses the established input, queue, dimension, 50-megapixel per-image, and 200-megapixel aggregate decoded-work limits. Queues remain available after recoverable failures or save cancellation.
+- Performs no target-size search, resizing, cropping, metadata editing, upload, analytics, telemetry, remote codec, or runtime network request.
 
 ## Images to PDF
 
