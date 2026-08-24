@@ -40,6 +40,10 @@ export const es = {
       "title": "Metadatos del PDF — Secure Tools",
       "description": "Inspeccione y elimine metadatos PDF compatibles localmente en su navegador."
     },
+    "imageConverter": {
+      "title": "Convertidor de imágenes — Secure Tools",
+      "description": "Convierta imágenes JPEG, PNG y WebP localmente en su navegador."
+    },
     "pdfCategory": {
       "title": "Herramientas PDF — Secure Tools",
       "description": "Cree y organice documentos PDF localmente en su navegador."
@@ -378,6 +382,45 @@ export const es = {
       "unreadable": "No se pudo leer {name}. El PDF puede estar dañado o no ser compatible.",
       "library": "No se pudo cargar la biblioteca PDF local.",
       "generation": "El PDF no se pudo fusionar. Pruebe con menos archivos o más pequeños.",
+      "save": "No se pudo abrir la ubicación para guardar. Inténtelo de nuevo."
+    }
+  },
+  "imageConverter": {
+    "eyebrow": "Herramienta de imagen",
+    "title": "Convertidor de imágenes",
+    "description": "Convierta imágenes JPEG, PNG y WebP localmente. Varios archivos se guardan juntos en un único ZIP.",
+    "queue": { "meta": "{size} · elemento {position}" },
+    "settings": {
+      "title": "Ajustes de conversión",
+      "format": "Formato de salida",
+      "jpeg": "JPEG",
+      "png": "PNG",
+      "webp": "WebP",
+      "quality": "Calidad",
+      "qualityHelp": "JPEG y WebP usan calidad con pérdida. PNG no utiliza este ajuste.",
+      "outputHelp": "Los píxeles transparentes se vuelven blancos en JPEG. La recodificación con canvas elimina los metadatos de imagen de cada salida.",
+      "imageFile": "Imagen convertida",
+      "zipFile": "Archivo ZIP"
+    },
+    "actions": { "convert": "Convertir y guardar" },
+    "status": {
+      "converting": "Convirtiendo imágenes localmente…",
+      "progress": "Convirtiendo imagen {completed} de {total}…",
+      "progressLabel": "Progreso de conversión de imágenes",
+      "archive": "Preparando el archivo ZIP…",
+      "saved": "Se guardó {name} con {count} imagen(es) convertida(s).",
+      "downloaded": "Se descargó {name} con {count} imagen(es) convertida(s).",
+      "saveCancelled": "Guardado cancelado. No se escribió ningún archivo."
+    },
+    "errors": {
+      "noFiles": "Añada al menos una imagen antes de convertir.",
+      "format": "Elija JPEG, PNG o WebP.",
+      "jobPixels": "Este lote supera el límite combinado de 200 megapíxeles decodificados. Convierta menos imágenes a la vez.",
+      "canvas": "Este navegador no puede crear el lienzo de imagen.",
+      "encoder": "No se pudo codificar {name} en el formato seleccionado.",
+      "archiveLibrary": "No se pudo cargar la biblioteca de archivos local.",
+      "archive": "No se pudo crear el archivo ZIP.",
+      "failure": "No se pudo convertir {name}. La imagen puede estar dañada o no ser compatible con este navegador.",
       "save": "No se pudo abrir la ubicación para guardar. Inténtelo de nuevo."
     }
   },

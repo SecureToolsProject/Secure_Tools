@@ -10,6 +10,7 @@ export const ko = {
     organizePdf: { title: "PDF 정리 — Secure Tools", description: "PDF 페이지를 브라우저에서 로컬로 재정렬하고 회전하고 제거하세요." },
     pdfToImages: { title: "PDF 이미지 변환 — Secure Tools", description: "PDF 페이지를 브라우저에서 로컬로 PNG, JPEG 또는 WebP 이미지로 변환하세요." },
     pdfMetadata: { title: "PDF 메타데이터 확인 및 제거 — Secure Tools", description: "지원되는 PDF 메타데이터를 브라우저에서 로컬로 확인하고 제거하세요." },
+    imageConverter: { title: "이미지 변환기 — Secure Tools", description: "JPEG, PNG, WebP 이미지를 브라우저에서 로컬로 변환하세요." },
     pdfCategory: { title: "PDF 도구 — Secure Tools", description: "브라우저에서 PDF 문서를 로컬로 만들고 정리하세요." },
     imageCategory: { title: "이미지 도구 — Secure Tools", description: "브라우저에서 로컬로 작동하도록 설계된 프라이빗 이미지 도구입니다." },
     privacyCategory: { title: "개인정보 보호 도구 — Secure Tools", description: "원본 파일을 업로드하지 않고 숨겨진 파일 정보를 확인하고 제거하세요." },
@@ -136,6 +137,29 @@ export const ko = {
       unsupported: "PDF 파일을 선택하세요. 브라우저가 파일 형식을 제공하지 않으면 .pdf 확장자를 허용합니다.", noFiles: "합치기 전에 PDF를 하나 이상 추가하세요.",
       encrypted: "{name} 파일은 암호화되었거나 비밀번호로 보호되어 합칠 수 없습니다.", unreadable: "{name} 파일을 읽을 수 없습니다. PDF가 손상되었거나 지원되지 않을 수 있습니다.",
       library: "로컬 PDF 라이브러리를 불러오지 못했습니다.", generation: "PDF를 합치지 못했습니다. 파일 수나 크기를 줄여 다시 시도하세요.", save: "저장 위치를 열 수 없습니다. 다시 시도하세요.",
+    },
+  },
+  imageConverter: {
+    eyebrow: "이미지 도구", title: "이미지 변환기", description: "JPEG, PNG, WebP 이미지를 기기에서 변환하세요. 여러 파일은 하나의 ZIP으로 저장됩니다.",
+    queue: { meta: "{size} · {position}번째" },
+    settings: {
+      title: "변환 설정", format: "출력 형식", jpeg: "JPEG", png: "PNG", webp: "WebP", quality: "품질",
+      qualityHelp: "JPEG와 WebP는 손실 품질을 사용합니다. PNG에는 이 설정이 적용되지 않습니다.",
+      outputHelp: "JPEG에서는 투명한 영역이 흰색으로 바뀝니다. 캔버스로 다시 인코딩하므로 모든 출력에서 이미지 메타데이터가 제거됩니다.",
+      imageFile: "변환한 이미지", zipFile: "ZIP 압축 파일",
+    },
+    actions: { convert: "변환하고 저장" },
+    status: {
+      converting: "이미지를 기기에서 변환하는 중…", progress: "{total}개 중 {completed}번째 이미지 변환 중…", progressLabel: "이미지 변환 진행률",
+      archive: "ZIP 압축 파일 만드는 중…", saved: "변환한 이미지 {count}개가 담긴 {name} 파일을 저장했습니다.", downloaded: "변환한 이미지 {count}개가 담긴 {name} 파일을 다운로드했습니다.",
+      saveCancelled: "저장을 취소했습니다. 파일은 기록되지 않았습니다.",
+    },
+    errors: {
+      noFiles: "변환하기 전에 이미지를 하나 이상 추가하세요.", format: "JPEG, PNG 또는 WebP를 선택하세요.",
+      jobPixels: "이 작업은 디코딩된 이미지 합계 2억 픽셀 제한을 초과합니다. 한 번에 변환할 이미지 수를 줄이세요.",
+      canvas: "이 브라우저에서 이미지 캔버스를 만들 수 없습니다.", encoder: "{name} 파일을 선택한 형식으로 인코딩하지 못했습니다.",
+      archiveLibrary: "로컬 압축 라이브러리를 불러오지 못했습니다.", archive: "ZIP 압축 파일을 만들지 못했습니다.",
+      failure: "{name} 파일을 변환하지 못했습니다. 이미지가 손상되었거나 이 브라우저에서 지원하지 않을 수 있습니다.", save: "저장 위치를 열 수 없습니다. 다시 시도하세요.",
     },
   },
   imageToPdf: {

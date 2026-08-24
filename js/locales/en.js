@@ -10,6 +10,7 @@ export const en = {
     organizePdf: { title: "Organize PDF — Secure Tools", description: "Reorder, rotate, and remove PDF pages locally in your browser." },
     pdfToImages: { title: "PDF to Images — Secure Tools", description: "Convert PDF pages to PNG, JPEG, or WebP images locally in your browser." },
     pdfMetadata: { title: "PDF Metadata Inspector & Cleaner — Secure Tools", description: "Inspect and remove supported PDF metadata locally in your browser." },
+    imageConverter: { title: "Image Converter — Secure Tools", description: "Convert JPEG, PNG, and WebP images locally in your browser." },
     pdfCategory: { title: "PDF tools — Secure Tools", description: "Create and organize PDF documents locally in your browser." },
     imageCategory: { title: "Image tools — Secure Tools", description: "Private image tools designed to run locally in your browser." },
     privacyCategory: { title: "Privacy tools — Secure Tools", description: "Inspect and remove hidden file details without uploading the source file." },
@@ -152,6 +153,29 @@ export const en = {
       unsupported: "Choose PDF files. A .pdf extension is accepted when the browser does not provide a file type.", noFiles: "Add at least one PDF before merging.",
       encrypted: "{name} is encrypted or password protected and cannot be merged.", unreadable: "Could not read {name}. The PDF may be damaged or unsupported.",
       library: "The local PDF library could not be loaded.", generation: "The PDF could not be merged. Try fewer or smaller files.", save: "The save location could not be opened. Please try again.",
+    },
+  },
+  imageConverter: {
+    eyebrow: "Image tool", title: "Image Converter", description: "Convert JPEG, PNG, and WebP images locally. Multiple files are saved together as one ZIP archive.",
+    queue: { meta: "{size} · item {position}" },
+    settings: {
+      title: "Conversion settings", format: "Output format", jpeg: "JPEG", png: "PNG", webp: "WebP", quality: "Quality",
+      qualityHelp: "JPEG and WebP use lossy quality. PNG does not use this setting.",
+      outputHelp: "Transparent pixels become white in JPEG. Canvas re-encoding removes embedded image metadata from every output.",
+      imageFile: "Converted image", zipFile: "ZIP archive",
+    },
+    actions: { convert: "Convert and save" },
+    status: {
+      converting: "Converting images locally…", progress: "Converting image {completed} of {total}…", progressLabel: "Image conversion progress",
+      archive: "Preparing the ZIP archive…", saved: "Saved {name} with {count} converted image(s).", downloaded: "Downloaded {name} with {count} converted image(s).",
+      saveCancelled: "Save cancelled. No file was written.",
+    },
+    errors: {
+      noFiles: "Add at least one image before converting.", format: "Choose JPEG, PNG, or WebP.",
+      jobPixels: "This batch exceeds the 200 megapixel combined decoded-work limit. Convert fewer images at once.",
+      canvas: "This browser cannot create the image canvas.", encoder: "{name} could not be encoded in the selected format.",
+      archiveLibrary: "The local archive library could not be loaded.", archive: "The ZIP archive could not be created.",
+      failure: "{name} could not be converted. The image may be damaged or unsupported by this browser.", save: "The save location could not be opened. Please try again.",
     },
   },
   imageToPdf: {

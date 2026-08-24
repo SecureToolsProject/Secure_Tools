@@ -40,6 +40,10 @@ export const fr = {
       "title": "Inspecteur et nettoyeur de métadonnées PDF – Secure Tools",
       "description": "Inspectez et supprimez les métadonnées PDF prises en charge localement dans votre navigateur."
     },
+    "imageConverter": {
+      "title": "Convertisseur d'images — Secure Tools",
+      "description": "Convertissez des images JPEG, PNG et WebP localement dans votre navigateur."
+    },
     "pdfCategory": {
       "title": "Outils PDF — Secure Tools",
       "description": "Créez et organisez des documents PDF localement dans votre navigateur."
@@ -378,6 +382,45 @@ export const fr = {
       "unreadable": "Impossible de lire {name}. Le PDF est peut-être endommagé ou non pris en charge.",
       "library": "La bibliothèque PDF locale n'a pas pu être chargée.",
       "generation": "Le PDF n'a pas pu être fusionné. Essayez moins de fichiers ou des fichiers plus petits.",
+      "save": "L'emplacement de sauvegarde n'a pas pu être ouvert. Veuillez réessayer."
+    }
+  },
+  "imageConverter": {
+    "eyebrow": "Outil Image",
+    "title": "Convertisseur d'images",
+    "description": "Convertissez localement des images JPEG, PNG et WebP. Plusieurs fichiers sont enregistrés ensemble dans une seule archive ZIP.",
+    "queue": { "meta": "{size} · élément {position}" },
+    "settings": {
+      "title": "Paramètres de conversion",
+      "format": "Format de sortie",
+      "jpeg": "JPEG",
+      "png": "PNG",
+      "webp": "WebP",
+      "quality": "Qualité",
+      "qualityHelp": "JPEG et WebP utilisent une compression avec perte. Ce réglage ne s'applique pas au PNG.",
+      "outputHelp": "Les pixels transparents deviennent blancs en JPEG. Le réencodage par canvas supprime les métadonnées d'image intégrées de chaque sortie.",
+      "imageFile": "Image convertie",
+      "zipFile": "Archive ZIP"
+    },
+    "actions": { "convert": "Convertir et enregistrer" },
+    "status": {
+      "converting": "Conversion locale des images…",
+      "progress": "Conversion de l'image {completed} sur {total}…",
+      "progressLabel": "Progression de la conversion des images",
+      "archive": "Préparation de l'archive ZIP…",
+      "saved": "{name} contenant {count} image(s) convertie(s) a été enregistré.",
+      "downloaded": "{name} contenant {count} image(s) convertie(s) a été téléchargé.",
+      "saveCancelled": "Enregistrement annulé. Aucun fichier n'a été écrit."
+    },
+    "errors": {
+      "noFiles": "Ajoutez au moins une image avant de lancer la conversion.",
+      "format": "Choisissez JPEG, PNG ou WebP.",
+      "jobPixels": "Ce lot dépasse la limite combinée de 200 mégapixels décodés. Convertissez moins d'images à la fois.",
+      "canvas": "Ce navigateur ne peut pas créer le canevas d'image.",
+      "encoder": "Impossible d'encoder {name} dans le format sélectionné.",
+      "archiveLibrary": "La bibliothèque d'archivage locale n'a pas pu être chargée.",
+      "archive": "Impossible de créer l'archive ZIP.",
+      "failure": "Impossible de convertir {name}. L'image est peut-être endommagée ou non prise en charge par ce navigateur.",
       "save": "L'emplacement de sauvegarde n'a pas pu être ouvert. Veuillez réessayer."
     }
   },
