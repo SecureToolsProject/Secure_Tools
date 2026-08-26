@@ -31,7 +31,7 @@ export const ko = {
     categories: { pdf: "PDF", image: "이미지", privacy: "개인정보 보호", scan: "스캔 및 OCR", media: "미디어" },
     categoryDescriptions: { pdf: "문서를 만들고 합치고 정리합니다", image: "이미지를 변환하고 다듬습니다", privacy: "숨겨진 파일 정보를 확인하고 정리합니다", scan: "스캔을 활용 가능한 문서로 바꿉니다", media: "오디오와 비디오를 기기에서 처리합니다" },
     browseCategory: "도구 보기 →",
-    imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", organizePdf: "PDF 정리", pdfToImages: "PDF를 이미지로", pdfMetadata: "PDF 메타데이터", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
+    imagesToPdf: "이미지를 PDF로", mergePdf: "PDF 합치기", splitPdf: "PDF 나누기", organizePdf: "PDF 정리", pdfToImages: "PDF를 이미지로", pdfMetadata: "PDF 메타데이터", imageConverter: "이미지 변환기", imageCompressor: "이미지 압축기", imageResizer: "이미지 크기 조절", imageMetadata: "이미지 메타데이터 검사 및 정리", metadataInspector: "메타데이터 확인", metadataCleaner: "메타데이터 제거",
     available: "사용 가능", comingSoon: "준비 중",
   },
   categories: {
@@ -49,7 +49,7 @@ export const ko = {
     },
     image: {
       title: "이미지 도구", description: "일상 이미지 파일을 브라우저에서 비공개로 준비하세요.",
-      convert: "일반 이미지 형식을 로컬에서 변환합니다.", compress: "명확한 품질 설정으로 파일 크기를 줄입니다.", resize: "이미지를 정확한 픽셀 크기로 조절합니다.",
+      convert: "일반 이미지 형식을 로컬에서 변환합니다.", compress: "명확한 품질 설정으로 파일 크기를 줄입니다.", resize: "이미지를 정확한 픽셀 크기로 조절합니다.", metadata: "개인정보 관련 메타데이터를 확인하고 검증된 정리본을 저장합니다.",
     },
     privacy: {
       title: "개인정보 보호 도구", description: "원본 파일을 공유하지 않고 숨겨진 정보를 확인하고 제거하세요.",

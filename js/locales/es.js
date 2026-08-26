@@ -122,6 +122,7 @@ export const es = {
     "imageConverter": "Convertidor de imágenes",
     "imageCompressor": "Compresor de imagen",
     "imageResizer": "Cambio de tamaño de imagen",
+    "imageMetadata": "Inspector y limpiador de metadatos",
     "metadataInspector": "Inspector de metadatos",
     "metadataCleaner": "Limpiador de metadatos",
     "available": "Disponible",
@@ -153,7 +154,8 @@ export const es = {
       "description": "Prepare imágenes cotidianas de forma privada en su navegador.",
       "convert": "Convierte formatos de imagen comunes localmente.",
       "compress": "Reduzca el tamaño del archivo con controles de calidad claros.",
-      "resize": "Cambia el tamaño de las imágenes a las dimensiones exactas en píxeles."
+      "resize": "Cambia el tamaño de las imágenes a las dimensiones exactas en píxeles.",
+      "metadata": "Revisa metadatos de privacidad y guarda una copia verificada."
     },
     "privacy": {
       "title": "Herramientas de privacidad",

@@ -122,6 +122,7 @@ export const ja = {
     "imageConverter": "画像変換",
     "imageCompressor": "画像圧縮",
     "imageResizer": "画像サイズ変更",
+    "imageMetadata": "画像メタデータ検査・クリーナー",
     "metadataInspector": "メタデータ確認",
     "metadataCleaner": "メタデータ削除",
     "available": "利用可能",
@@ -153,7 +154,8 @@ export const ja = {
       "description": "画像ファイルをブラウザ上でプライベートに処理します",
       "convert": "一般的な画像形式を端末内で変換します",
       "compress": "画質を調整しながらファイルサイズを小さくします",
-      "resize": "画像を指定したピクセルサイズに変更します"
+      "resize": "画像を指定したピクセルサイズに変更します",
+      "metadata": "プライバシー関連メタデータを確認し、検証済みコピーを保存します"
     },
     "privacy": {
       "title": "プライバシーツール",

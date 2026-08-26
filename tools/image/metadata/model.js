@@ -1,11 +1,33 @@
 export const MAX_METADATA_VALUE_LENGTH = 2000;
 export const MAX_DIAGNOSTIC_LENGTH = 500;
 
-const GROUPS = Object.freeze(["location", "device", "author", "time", "descriptive", "rights", "technical", "other"]);
+const GROUPS = Object.freeze(["location", "device", "time", "technical", "software", "author", "rights", "descriptive", "xmp", "iptc", "color", "rendering", "other"]);
+const CATEGORY_GROUP = Object.freeze({
+  location: "location",
+  device: "device",
+  timestamp: "time",
+  technical: "technical",
+  software: "software",
+  identity: "author",
+  rights: "rights",
+  description: "descriptive",
+  color: "color",
+  rendering: "rendering",
+});
 
 function boundedText(value, limit) {
   const text = String(value ?? "").replaceAll("\0", "�");
   return { text: text.length > limit ? `${text.slice(0, limit)}…` : text, truncated: text.length > limit };
+}
+
+function diagnosticText(item) {
+  if (!item || typeof item !== "object") return boundedText(item, MAX_DIAGNOSTIC_LENGTH).text;
+  const parts = [];
+  if (item.severity) parts.push(String(item.severity).toUpperCase());
+  if (item.code) parts.push(String(item.code));
+  if (Number.isSafeInteger(item.offset)) parts.push(`byte ${item.offset}`);
+  if (item.message) parts.push(String(item.message));
+  return boundedText(parts.join(" · ") || "Diagnostic", MAX_DIAGNOSTIC_LENGTH).text;
 }
 
 function rational(value) {
@@ -28,8 +50,8 @@ export function formatMetadataValue(value, labels = {}) {
 function groupFor(entry) {
   const namespace = String(entry.namespace || "").toLowerCase();
   const category = String(entry.category || "other").toLowerCase();
-  if (namespace === "xmp" || namespace === "iptc") return namespace === "iptc" ? "descriptive" : (GROUPS.includes(category) ? category : "descriptive");
-  return GROUPS.includes(category) ? category : "other";
+  if (namespace === "xmp" || namespace === "iptc") return namespace;
+  return CATEGORY_GROUP[category] || "other";
 }
 
 export function buildInspectionModel(source, labels = {}) {
@@ -53,7 +75,7 @@ export function buildInspectionModel(source, labels = {}) {
     cleanable: source?.cleanable === true,
     count: entries.length,
     groups: [...groups].filter(([, items]) => items.length).map(([key, items]) => ({ key, items })),
-    diagnostics: (source?.report?.diagnostics || []).map((item) => boundedText(item?.message || item?.code || item, MAX_DIAGNOSTIC_LENGTH).text),
+    diagnostics: (source?.report?.diagnostics || []).map(diagnosticText),
   };
 }
 
@@ -68,6 +90,6 @@ export function buildCleaningModel(result) {
     checks,
     valid: result?.verification?.valid === true && checks.length > 0 && checks.every((check) => check?.passed === true),
     diagnostics: [...(result?.cleaned?.diagnostics || []), ...(result?.verification?.diagnostics || [])]
-      .map((item) => boundedText(item?.message || item?.code || item, MAX_DIAGNOSTIC_LENGTH).text),
+      .map(diagnosticText),
   };
 }
