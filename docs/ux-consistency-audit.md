@@ -81,3 +81,10 @@ Automated checks now enforce:
 - complete six-locale Privacy metadata, category, and scope copy.
 
 Interactive browser QA was retried on 2026-08-26 against a temporary localhost server. The browser runtime terminated before navigation with `windows sandbox failed: helper_unknown_error: apply deny-read ACLs`. Browser QA therefore did **not** pass and automated DOM/CSS checks are not presented as visual verification. Manual review remains open for `/`, `/tools/image/`, `/tools/privacy/`, `/tools/image/metadata/`, and `/tools/pdf/metadata/` at 320, 360, 390, 768, 1024, and 1440 CSS pixels in Light and Dark themes, including all six locales and keyboard focus/activation of the Privacy cards.
+
+
+## Sprint 17 release-readiness follow-up
+
+Sprint 17 localized shared brand, primary-navigation, footer-navigation, category-navigation, and local-processing-summary accessible names across all six interface languages. Homepage proof copy now states the bounded invariant—no production file-content upload—rather than the absolute word “Nothing,” and production PDF/Image category notes no longer mention planned cards that are not present. Static i18n and UX tests enforce these contracts across all 19 production pages.
+
+Interactive browser QA was retried on 2026-08-26 against a temporary localhost server. Browser control failed before navigation with `windows sandbox failed: helper_unknown_error: apply deny-read ACLs`. Visual rendering, responsive interaction, keyboard operation, browser-native save/download, and Network-panel checks remain **BLOCKED**, not passed. The complete open matrix is maintained in [v2 promotion QA](./v2-release-qa.md).

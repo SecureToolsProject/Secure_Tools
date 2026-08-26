@@ -16,6 +16,11 @@
 
 ### Changed
 
+- Hardened v2 promotion gates for all ten production tools, vendored-resource integrity, local-only network invariants, save failure paths, and resource boundaries.
+- Corrected canonical repository links and extended integration CI to `v2` pushes.
+- Narrowed homepage and category privacy copy to production file-content processing and localized shared navigation and summary accessible names across all six interface languages.
+- Added a live v2 promotion QA matrix that keeps blocked browser evidence separate from passing automated checks.
+
 - Removed the standalone planned Rotate PDF card; page rotation remains available as part of PDF Organizer.
 - Moved shared browser image validation and decoding into `tools/shared/image.js` for PDF and Image tools.
 - Promoted Privacy from generic planned placeholders to a production navigation hub for the existing Image and PDF metadata tools, with distinct supported-scope copy in all six locales.

@@ -2,9 +2,9 @@
 
 Secure Tools is a privacy-first web hub for everyday file utilities. Production tools process file contents locally in the browser instead of uploading them to a server.
 
-The project uses a category-first architecture, a Pull Request/main CI gate, and static GitHub Pages deployment.
+The project uses a category-first architecture, pull-request CI plus `main`/`v2` integration CI gates, and static GitHub Pages deployment.
 
-The v1 baseline is recorded in the [changelog](./CHANGELOG.md) and historical [v1.0.0 release QA checklist](./docs/release-qa.md). Sprint 12 begins the v2 cycle by expanding production tools into the Image category.
+The v1 baseline is recorded in the [changelog](./CHANGELOG.md) and historical [v1.0.0 release QA checklist](./docs/release-qa.md). The live [v2 promotion QA gate](./docs/v2-release-qa.md) records current automated evidence, dependency and repository risks, and the open manual browser matrix.
 
 ## Available tools
 
