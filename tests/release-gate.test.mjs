@@ -83,6 +83,7 @@ assert.match(secureMetadataProvenance, /Release tag: `v0\.1\.0`/);
 assert.match(secureMetadataProvenance, /Release commit: `352258ec413a838dfe8b9146370505f125b5ae10`/);
 assert.match(secureMetadataProvenance, /SHA-256: `8d0b8a1addf904760aa1f52378fb05eed6540520cb05fe2320d77011cba69c28`/);
 assert.match(secureMetadataProvenance, /Runtime dependencies: 0/);
+assert.match(read("assets/vendor/secure-metadata/secure-metadata-0.1.0.browser.js"), /maxInputBytes:\s*100 \* 1024 \* 1024/);
 
 const renderer = read("tools/shared/pdf-renderer.js");
 assert.match(renderer, /new URL\("\.\.\/\.\.\/assets\/vendor\/pdfjs\/pdf\.worker\.min\.mjs", import\.meta\.url\)/);
@@ -152,4 +153,4 @@ await assert.rejects(writeBlobToHandle({
   },
 }, blob), writeFailure);
 
-console.log("v1.0.0 release gate checks passed.");
+console.log("Release integrity and save-path gate checks passed.");

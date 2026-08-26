@@ -1,15 +1,17 @@
 # v1.0.0 Release QA
 
-This document is the release-candidate gate for Secure Tools v1.0.0. It records completed automated evidence separately from manual browser sign-off. An unchecked item is pending, not implicitly passed.
+> Historical snapshot: this checklist records the Sprint 11 release-candidate state before v1.0.0 was published on 2026-08-24. Its then-pending manual boxes are preserved and are not evidence of later sign-off. Use the [v2 promotion QA gate](./v2-release-qa.md) for the current release decision.
+
+This document was the release-candidate gate for Secure Tools v1.0.0. It records completed automated evidence separately from manual browser sign-off. An unchecked item was pending at the time of the snapshot, not implicitly passed.
 
 ## Current decision
 
 - Automated release gate: passed on 2026-08-20 with `node tests/run-all.mjs` and `git diff --check`.
 - Source-level privacy, security, dependency, license, route, resource, localization, responsive-contract, and accessibility audits: passed.
 - Manual browser matrix: pending.
-- v1.0.0 tag and GitHub release: not created by Sprint 11.
+- At the Sprint 11 snapshot, the v1.0.0 tag and GitHub release had not been created. GitHub now records v1.0.0 as published on 2026-08-24.
 
-The Sprint is eligible for integration after CI passes, but publication of the v1.0.0 tag/release remains blocked until a human completes the manual matrix below. This manual gate does not invalidate the automated Sprint result.
+At the time of this snapshot, the Sprint was eligible for integration after CI, while publication remained blocked pending the manual matrix below. The later publication is historical repository state; this preserved checklist does not infer or reconstruct missing manual evidence.
 
 ## Automated release evidence
 

@@ -74,6 +74,7 @@ export const fr = {
       "source": "Code source",
       "about": "À propos"
     },
+    "aria": { "home": "Accueil Secure Tools", "primaryNavigation": "Navigation principale", "footerNavigation": "Navigation du pied de page", "toolCategories": "Catégories d’outils", "localProcessingSummary": "Résumé du traitement local" },
     "language": "Langue",
     "theme": "Thème",
     "themes": {
@@ -90,9 +91,9 @@ export const fr = {
     "primary": "Explorer les outils",
     "secondary": "Vérifier la confidentialité",
     "trust": "Traitement local · Open source · Pas de suivi",
-    "proofLabel": "Ce qui quitte votre appareil",
-    "proofValue": "Rien",
-    "proofNote": "Les outils de base traitent le contenu des fichiers dans la mémoire du navigateur."
+    "proofLabel": "Contenu de fichier téléversé",
+    "proofValue": "Aucun",
+    "proofNote": "Les outils disponibles traitent le contenu des fichiers localement dans la mémoire du navigateur."
   },
   "tools": {
     "eyebrow": "Outils",
@@ -137,7 +138,7 @@ export const fr = {
       "scan": "Numérisation et OCR",
       "media": "Médias"
     },
-    "localNote": "Les outils disponibles traitent le contenu des fichiers dans la mémoire du navigateur. Les éléments prévus sont clairement indiqués.",
+    "localNote": "Les outils disponibles traitent le contenu des fichiers localement dans la mémoire du navigateur.",
     "plannedNote": "Cette catégorie est prévue. Aucun élément indisponible n'est présenté comme fonctionnel.",
     "pdf": {
       "title": "Outils PDF",

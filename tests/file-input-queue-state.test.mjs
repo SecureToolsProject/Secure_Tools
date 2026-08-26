@@ -17,6 +17,33 @@ const tools = [
     programmaticPickerCount: 1,
   },
   {
+    name: "Image Resize",
+    html: read("tools/image/resize/index.html"),
+    app: read("tools/image/resize/app.js"),
+    chooseKey: "imageToPdf.drop.choose",
+    renderCall: "renderQueue()",
+    stateRule: /elements\.empty\.hidden\s*=\s*state\.items\.length\s*>\s*0/,
+    programmaticPickerCount: 1,
+  },
+  {
+    name: "Image Compressor",
+    html: read("tools/image/compress/index.html"),
+    app: read("tools/image/compress/app.js"),
+    chooseKey: "imageToPdf.drop.choose",
+    renderCall: "renderQueue()",
+    stateRule: /elements\.empty\.hidden\s*=\s*state\.items\.length\s*>\s*0/,
+    programmaticPickerCount: 1,
+  },
+  {
+    name: "Image Metadata",
+    html: read("tools/image/metadata/index.html"),
+    app: read("tools/image/metadata/app.js"),
+    chooseKey: "imageMetadata.drop.choose",
+    renderCall: "render()",
+    stateRule: /elements\.source_empty\.hidden\s*=\s*hasSource/,
+    programmaticPickerCount: 0,
+  },
+  {
     name: "Images to PDF",
     html: read("tools/pdf/images-to-pdf/index.html"),
     app: read("tools/pdf/images-to-pdf/app.js"),
@@ -63,13 +90,14 @@ function testNativeDropZoneContract(tool) {
   assert.doesNotMatch(tool.html, /<label class="button button--primary"[^>]*for="file-input"/, `${tool.name}: nested picker control can double-activate`);
   assert.equal((tool.app.match(/elements\.input\.click\(\)/g) || []).length, tool.programmaticPickerCount, `${tool.name}: unexpected picker activation path`);
   assert.doesNotMatch(tool.app, /dropZone\.addEventListener\("click"/, `${tool.name}: drop zone must rely on native label activation`);
-  assert.match(tool.app, /dropZone\.addEventListener\("drop"/, `${tool.name}: drag-and-drop handling was removed`);
+  assert.match(tool.app, /(?:dropZone|elements\.drop_zone)\.addEventListener\("drop"/, `${tool.name}: drag-and-drop handling was removed`);
 }
 
 function testStateContract(tool) {
   assert.match(tool.app, tool.stateRule, `${tool.name}: empty-state visibility is not derived from current state`);
-  const languageHandler = tool.app.match(/document\.addEventListener\("securetools:languagechange",[\s\S]*?\);/)?.[0] || "";
-  assert.match(languageHandler, new RegExp(tool.renderCall.replace(/[()]/g, "\\$&")), `${tool.name}: language changes do not restore state-derived visibility`);
+  const languageIndex = tool.app.indexOf('document.addEventListener("securetools:languagechange"');
+  assert.ok(languageIndex >= 0, `${tool.name}: language-change handler is missing`);
+  assert.match(tool.app.slice(languageIndex), new RegExp(tool.renderCall.replace(/[()]/g, "\\$&")), `${tool.name}: language changes do not restore state-derived visibility`);
 }
 
 for (const tool of tools) {

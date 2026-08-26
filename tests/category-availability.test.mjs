@@ -50,6 +50,12 @@ const pdfList = categoryList(read("tools/pdf/index.html"));
 assert.equal(linkedRoutes(pdfList).length, 6, "Every PDF production card must remain linked");
 assert.equal((pdfList.match(/status--available/g) || []).length, 6);
 
+for (const category of ["pdf", "image"]) {
+  const html = read(`tools/${category}/index.html`);
+  assert.match(html, /data-i18n="categories\.localNote">Available tools process file contents locally in browser memory\./);
+  assert.doesNotMatch(html, /Planned items are clearly marked/);
+}
+
 for (const category of ["scan", "media"]) {
   const plannedList = categoryList(read(`tools/${category}/index.html`));
   assert.equal(linkedRoutes(plannedList).length, 0, `${category} must remain planned`);
@@ -59,6 +65,7 @@ for (const category of ["scan", "media"]) {
 
 assert.equal(translations.en.tools.categoryDescriptions.privacy, "Inspect and clean supported image or PDF metadata.");
 for (const [language, catalog] of Object.entries(translations)) {
+  assert.doesNotMatch(catalog.categories.localNote, /planned|geplant|prévu|planificad|準備中|준비 중/i, `${language} production category note mentions planned work`);
   assert.equal(typeof catalog.privacyHub.imageDescription, "string", `${language} image scope is missing`);
   assert.equal(typeof catalog.privacyHub.pdfDescription, "string", `${language} PDF scope is missing`);
 }
