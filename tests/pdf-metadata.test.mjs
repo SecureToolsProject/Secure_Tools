@@ -145,6 +145,11 @@ function testUiArchitectureAndScope() {
   const vendor = JSON.parse(read("assets/vendor/pdf-lib/package.json"));
   assert.equal(vendor.version, "1.17.1");
   assert.match(html, /<label class="drop-zone__picker" for="file-input">/);
+  assert.match(html, /id="source-card" class="source-card"[^>]*data-i18n-aria-label="pdfMetadata\.source\.selectedLabel"[^>]*hidden/);
+  assert.match(html, /class="pdf-file-icon" aria-hidden="true">PDF/);
+  assert.match(html, /id="source-name" class="source-name"/);
+  assert.match(html, /id="clear-source" class="queue-action queue-action--remove"[^>]*data-i18n-aria-label="pdfMetadata\.source\.remove"/);
+  assert.match(app, /state\.source = null;[\s\S]*state\.fields = \[\];[\s\S]*state\.comparison = null;[\s\S]*elements\.input\.focus\(\)/);
   assert.match(html, /<table class="metadata-table">/);
   assert.match(html, /id="select-all"/);
   assert.match(html, /id="clear-selection"/);

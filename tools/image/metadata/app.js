@@ -5,13 +5,19 @@ import { buildCleaningModel, buildInspectionModel } from "./model.js";
 import { cleanAndVerifyImageMetadata, createCleanOutputPlan, inspectImageMetadata } from "./metadata.js";
 
 const elements = Object.fromEntries([
-  "file-input", "drop-zone", "source-empty", "source-summary", "clear-source", "inspection", "coverage",
+  "file-input", "drop-zone", "source-empty", "source-card", "source-thumbnail", "source-name", "source-summary", "clear-source", "inspection", "coverage",
   "metadata-empty", "metadata-groups", "inspection-diagnostics", "inspection-diagnostic-list", "clean-image",
   "clean-result", "result-summary", "removed-list", "preserved-list", "result-diagnostics",
   "result-diagnostic-list", "tool-status",
 ].map((id) => [id.replaceAll("-", "_"), document.querySelector(`#${id}`)]));
 
-const state = { source: null, inspection: null, result: null, busy: false, status: null };
+const state = { source: null, inspection: null, result: null, previewUrl: null, busy: false, status: null };
+
+function releasePreview() {
+  if (state.previewUrl) URL.revokeObjectURL(state.previewUrl);
+  state.previewUrl = null;
+  elements.source_thumbnail.removeAttribute("src");
+}
 const message = (key, values = {}) => Object.entries(values).reduce((text, [name, value]) => text.replaceAll(`{${name}}`, String(value)), t(key));
 
 function setStatus(key, values = {}, tone = "neutral") {
@@ -69,8 +75,12 @@ function renderResult() {
 function render() {
   const hasSource = Boolean(state.source);
   elements.source_empty.hidden = hasSource;
-  elements.source_summary.hidden = !hasSource;
-  if (hasSource) elements.source_summary.textContent = message("imageMetadata.source.summary", { name: state.source.file.name, size: formatBytes(state.source.file.size), format: state.source.format.toUpperCase(), count: state.inspection.count });
+  elements.source_card.hidden = !hasSource;
+  if (hasSource) {
+    elements.source_name.textContent = state.source.file.name;
+    elements.source_summary.textContent = message("imageMetadata.source.meta", { size: formatBytes(state.source.file.size), format: state.source.format.toUpperCase() });
+    if (state.previewUrl && elements.source_thumbnail.src !== state.previewUrl) elements.source_thumbnail.src = state.previewUrl;
+  }
   elements.inspection.hidden = !hasSource;
   elements.file_input.disabled = state.busy;
   elements.clear_source.disabled = state.busy || !hasSource;
@@ -95,9 +105,10 @@ function errorKey(error) {
 async function addSource(files) {
   if (state.busy || !files.length) return;
   if (files.length !== 1) { setStatus("imageMetadata.errors.oneFile", {}, "error"); return; }
-  state.busy = true; state.source = null; state.inspection = null; state.result = null; render(); setStatus("imageMetadata.status.reading");
+  state.busy = true; releasePreview(); state.source = null; state.inspection = null; state.result = null; render(); setStatus("imageMetadata.status.reading");
   try {
     state.source = await inspectImageMetadata(files[0]);
+    state.previewUrl = URL.createObjectURL(state.source.file);
     state.inspection = buildInspectionModel(state.source, valueLabels());
     setStatus(state.inspection.count ? "imageMetadata.status.loaded" : "imageMetadata.status.noneFound", { count: state.inspection.count }, state.inspection.successful ? "success" : "warning");
   } catch (error) {
@@ -107,7 +118,7 @@ async function addSource(files) {
 
 function clearSource() {
   if (state.busy) return;
-  state.source = null; state.inspection = null; state.result = null; setStatus("imageMetadata.status.cleared"); render();
+  releasePreview(); state.source = null; state.inspection = null; state.result = null; setStatus("imageMetadata.status.cleared"); render(); elements.file_input.focus();
 }
 
 async function cleanAndSave() {
@@ -136,5 +147,6 @@ elements.clean_image.addEventListener("click", cleanAndSave);
 for (const type of ["dragenter", "dragover"]) elements.drop_zone.addEventListener(type, (event) => { event.preventDefault(); if (!state.busy) elements.drop_zone.dataset.dragging = "true"; });
 for (const type of ["dragleave", "drop"]) elements.drop_zone.addEventListener(type, (event) => { event.preventDefault(); delete elements.drop_zone.dataset.dragging; });
 elements.drop_zone.addEventListener("drop", (event) => { if (!state.busy) addSource([...event.dataTransfer.files]); });
+window.addEventListener("pagehide", releasePreview);
 document.addEventListener("securetools:languagechange", () => { if (state.source) state.inspection = buildInspectionModel(state.source, valueLabels()); render(); if (state.status) setStatus(state.status.key, state.status.values, state.status.tone); });
 render();

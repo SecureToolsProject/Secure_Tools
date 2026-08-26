@@ -7,7 +7,7 @@ import { cleanPdfMetadata, metadataFilename, readPdfMetadata } from "./pdf.js";
 
 const elements = {
   input: document.querySelector("#file-input"), dropZone: document.querySelector("#drop-zone"),
-  empty: document.querySelector("#source-empty"), summary: document.querySelector("#source-summary"),
+  empty: document.querySelector("#source-empty"), sourceCard: document.querySelector("#source-card"), sourceName: document.querySelector("#source-name"), summary: document.querySelector("#source-summary"),
   clearSource: document.querySelector("#clear-source"), inspector: document.querySelector("#inspector"),
   body: document.querySelector("#metadata-body"), selectAll: document.querySelector("#select-all"),
   removeAll: document.querySelector("#remove-all"),
@@ -97,8 +97,11 @@ function render() {
   const selected = selectedMetadataKeys(state.fields).length;
   const present = state.fields.filter((field) => field.present).length;
   elements.empty.hidden = hasSource;
-  elements.summary.hidden = !hasSource;
-  if (hasSource) elements.summary.textContent = message("pdfMetadata.source.summary", { name: state.source.file.name, size: formatBytes(state.source.file.size), pages: state.source.pages.length, fields: present });
+  elements.sourceCard.hidden = !hasSource;
+  if (hasSource) {
+    elements.sourceName.textContent = state.source.file.name;
+    elements.summary.textContent = message("pdfMetadata.source.meta", { size: formatBytes(state.source.file.size) });
+  }
   elements.inspector.hidden = !hasSource;
   elements.input.disabled = state.busy;
   elements.clearSource.disabled = state.busy || !hasSource;
@@ -158,6 +161,7 @@ function clearSource() {
   elements.filename.value = "";
   setStatus("pdfMetadata.status.cleared");
   render();
+  elements.input.focus();
 }
 
 async function cleanAndSave() {

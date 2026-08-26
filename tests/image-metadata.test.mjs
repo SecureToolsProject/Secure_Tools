@@ -148,6 +148,14 @@ await assert.rejects(cleanAndVerifyImageMetadata({ bytes: sourceBytes, cleanable
 
 const html = read("tools/image/metadata/index.html"); const app = read("tools/image/metadata/app.js"); const adapter = read("tools/image/metadata/metadata.js"); const model = read("tools/image/metadata/model.js"); const category = read("tools/image/index.html");
 assert.match(html, /type="file"[^>]*aria-describedby="drop-description"/); assert.doesNotMatch(html, /type="file"[^>]*multiple/);
+assert.match(html, /id="source-card" class="source-card"[^>]*data-i18n-aria-label="imageMetadata\.source\.selectedLabel"[^>]*hidden/);
+assert.match(html, /id="source-thumbnail" class="queue-thumbnail" alt=""/);
+assert.match(html, /id="source-name" class="source-name"/);
+assert.match(html, /id="clear-source" class="queue-action queue-action--remove"[^>]*data-i18n-aria-label="imageMetadata\.source\.remove"/);
+assert.match(app, /URL\.createObjectURL\(state\.source\.file\)/);
+assert.match(app, /URL\.revokeObjectURL\(state\.previewUrl\)/);
+assert.match(app, /pagehide[^;]+releasePreview/);
+assert.match(app, /releasePreview\(\); state\.source = null; state\.inspection = null; state\.result = null/);
 assert.match(html, /connect-src 'none'/); assert.match(html, /role="status" aria-live="polite"/);
 assert.match(category, /href="\.\/metadata\/"/); assert.equal((category.match(/class="category-tool surface"/g) || []).length, 4);
 const requestIndex = app.indexOf("await requestSaveHandle"); const cleanIndex = app.indexOf("await cleanAndVerifyImageMetadata"); const writeIndex = app.indexOf("await writeBlobToHandle");
