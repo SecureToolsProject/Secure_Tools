@@ -122,6 +122,7 @@ export const fr = {
     "imageConverter": "Convertisseur d'images",
     "imageCompressor": "Compresseur d'images",
     "imageResizer": "Redimensionneur d'image",
+    "imageMetadata": "Inspecteur et nettoyeur de métadonnées",
     "metadataInspector": "Inspecteur de métadonnées",
     "metadataCleaner": "Nettoyeur de métadonnées",
     "available": "Disponible",
@@ -153,7 +154,8 @@ export const fr = {
       "description": "Préparez des images de tous les jours en privé dans votre navigateur.",
       "convert": "Convertissez localement les formats d'image courants.",
       "compress": "Réduisez la taille des fichiers avec des contrôles de qualité clairs.",
-      "resize": "Redimensionnez les images aux dimensions exactes en pixels."
+      "resize": "Redimensionnez les images aux dimensions exactes en pixels.",
+      "metadata": "Examinez les métadonnées privées et enregistrez une copie vérifiée."
     },
     "privacy": {
       "title": "Outils de confidentialité",

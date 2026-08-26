@@ -11,6 +11,7 @@ The v1 baseline is recorded in the [changelog](./CHANGELOG.md) and historical [v
 - [Image Converter](./tools/image/converter/) — convert batches of JPEG, PNG, and WebP images locally with predictable names and ZIP output.
 - [Image Resize](./tools/image/resize/) — resize image batches by pixels or percentage while preserving aspect ratio by default.
 - [Image Compressor](./tools/image/compress/) — quality-compress image batches locally and compare original and result sizes.
+- [Image Metadata Inspector & Cleaner](./tools/image/metadata/) — inspect supported metadata and save a fail-closed, verified cleaned copy without pixel re-encoding.
 - [Images to PDF](./tools/pdf/images-to-pdf/) — arrange JPEG, PNG, and WebP images and save them as one PDF.
 - [Merge PDF](./tools/pdf/merge/) — validate, order, and combine PDF pages without rasterizing them.
 - [Split PDF](./tools/pdf/split/) — extract ordered page ranges or create predictable per-page and fixed-interval archives.
@@ -74,7 +75,10 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │       ├── ja.js
 │       ├── es.js
 │       ├── de.js
-│       └── fr.js
+│       ├── fr.js
+│       ├── image-resize.js
+│       ├── image-compressor.js
+│       └── image-metadata.js
 ├── tools/
 │   ├── shared/
 │   │   ├── file.js
@@ -92,7 +96,10 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │   │   └── metadata/
 │   ├── image/
 │   │   ├── index.html
-│   │   └── converter/
+│   │   ├── converter/
+│   │   ├── resize/
+│   │   ├── compress/
+│   │   └── metadata/
 │   ├── privacy/
 │   ├── scan/
 │   ├── media/
@@ -102,12 +109,14 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │   ├── jspdf/
 │   ├── jszip/
 │   ├── pdf-lib/
-│   └── pdfjs/
+│   ├── pdfjs/
+│   └── secure-metadata/
 └── tests/
     ├── ci-foundation.test.mjs
     ├── home-structure.test.mjs
     ├── image-to-pdf.test.mjs
     ├── image-converter.test.mjs
+    ├── image-metadata.test.mjs
     ├── pdf-merge-and-categories.test.mjs
     ├── pdf-split.test.mjs
     ├── pdf-metadata.test.mjs
@@ -168,6 +177,20 @@ Image Compressor is available at `/tools/image/compress/` on the v2 integration 
 - Uses collision-safe Unicode `_compressed` names and saves multiple outputs as `compressed_images.zip` through the same-origin JSZip dependency.
 - Reuses the established input, queue, dimension, 50-megapixel per-image, and 200-megapixel aggregate decoded-work limits. Queues remain available after recoverable failures or save cancellation.
 - Performs no target-size search, resizing, cropping, metadata editing, upload, analytics, telemetry, remote codec, or runtime network request.
+## Image Metadata Inspector & Cleaner
+
+Image Metadata Inspector & Cleaner is available at `/tools/image/metadata/` on the v2 integration branch.
+
+- Accepts exactly one signature-validated JPEG, PNG, or WebP file and enforces the application’s 50 MiB limit before full inspection.
+- Uses the manually pinned, same-origin `secure-metadata v0.1.0` browser artifact. No npm package, CDN, runtime GitHub request, or automatic version check is used.
+- Separates decoded values from opaque detected containers and presents `metadata-partial` as successful but non-exhaustive. “No supported metadata detected” is not a claim that the file contains no metadata.
+- Privacy Clean calls the library’s authoritative default policy: supported EXIF, XMP, IPTC, comments, PNG text metadata, and timestamps are removed while ICC color profiles are preserved.
+- Keeps source bytes unchanged and never decodes pixels, creates Canvas, resizes, converts, changes quality, or re-encodes the image.
+- Calls `verifyMetadata` on cleaned bytes and requires a valid result with every policy check passing before saving. Invalid, incomplete, truncated, or mismatched results fail closed with no output write.
+- Derives MIME and the normalized `_clean` filename from the detected image format, not the supplied MIME type or extension.
+
+Detailed wording boundaries and provenance are recorded in [Image Metadata privacy and verification](./docs/image-metadata-privacy.md).
+
 
 ## Images to PDF
 
@@ -293,6 +316,17 @@ All processing libraries are pinned and served as same-origin static files. Prod
 - Main module and worker: same-origin files under `assets/vendor/pdfjs/`
 - Details and hashes: [assets/vendor/pdfjs/README.md](./assets/vendor/pdfjs/README.md)
 
+### secure-metadata
+
+- Version/tag: `v0.1.0`
+- Release commit: `352258ec413a838dfe8b9146370505f125b5ae10`
+- Purpose: local JPEG, PNG, and WebP metadata inspection, Privacy Clean, and fail-closed verification
+- Browser artifact SHA-256: `8d0b8a1addf904760aa1f52378fb05eed6540520cb05fe2320d77011cba69c28`
+- License: MIT
+- Runtime dependencies: 0
+- Integration: manually pinned same-origin GitHub Release artifact; not an npm runtime dependency
+- Details and provenance: [assets/vendor/secure-metadata/README.md](./assets/vendor/secure-metadata/README.md)
+
 Each dependency keeps its license and package metadata beside the vendored browser build.
 
 ## Local development
@@ -311,7 +345,7 @@ Run the complete local and CI validation entry point with:
 node tests/run-all.mjs
 ```
 
-It checks JavaScript syntax and runs Image Converter, Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category-first homepage, system typography, CJK wrapping, long-copy layout, six-language catalog parity and placeholders, locale detection and persistence, static resource, privacy/network, security-hardening, dependency-integrity, save-path, ZIP, and CI workflow regression coverage. Test fixtures are generated deterministically; CI never processes real user files.
+It checks JavaScript syntax and runs Image Converter, Image Resize, Image Compressor, Image Metadata, Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category-first homepage, system typography, CJK wrapping, long-copy layout, six-language catalog parity and placeholders, locale detection and persistence, static resource, privacy/network, security-hardening, dependency-integrity, save-path, ZIP, and CI workflow regression coverage. Test fixtures are generated deterministically; CI never processes real user files.
 
 ## Production security controls
 
@@ -371,7 +405,6 @@ The historical prototype is absent from the deployed tree. External URLs in docu
 ## Deferred work
 
 - Broader PDF modification, compression, and encryption workflows
-- Image resizing, compression, and dedicated metadata inspection/cleaning
 - Broader XMP and structural PDF metadata sanitization
 - Scan/OCR and media tools
 - Offline/PWA support

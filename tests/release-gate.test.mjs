@@ -52,6 +52,16 @@ const vendors = {
       "pdf.worker.min.mjs": "0613f41490dd6aaceed7a93fbbd38c85e6d6aa60474b6588c6e7709cfbe18cb3",
     },
   },
+  "secure-metadata": {
+    name: "secure-metadata",
+    version: "0.1.0",
+    license: "MIT",
+    files: ["LICENSE", "README.md", "package.json", "secure-metadata-0.1.0.browser.js"],
+    runtimes: {
+      "secure-metadata-0.1.0.browser.js": "8d0b8a1addf904760aa1f52378fb05eed6540520cb05fe2320d77011cba69c28",
+    },
+  },
+
 };
 
 assert.deepEqual(fs.readdirSync(path.join(root, "assets/vendor")).sort(), Object.keys(vendors).sort());
@@ -68,6 +78,11 @@ for (const [directory, expected] of Object.entries(vendors)) {
   }
 }
 assert.match(read("assets/vendor/jszip/README.md"), /License choice: MIT/);
+const secureMetadataProvenance = read("assets/vendor/secure-metadata/README.md");
+assert.match(secureMetadataProvenance, /Release tag: `v0\.1\.0`/);
+assert.match(secureMetadataProvenance, /Release commit: `352258ec413a838dfe8b9146370505f125b5ae10`/);
+assert.match(secureMetadataProvenance, /SHA-256: `8d0b8a1addf904760aa1f52378fb05eed6540520cb05fe2320d77011cba69c28`/);
+assert.match(secureMetadataProvenance, /Runtime dependencies: 0/);
 
 const renderer = read("tools/shared/pdf-renderer.js");
 assert.match(renderer, /new URL\("\.\.\/\.\.\/assets\/vendor\/pdfjs\/pdf\.worker\.min\.mjs", import\.meta\.url\)/);

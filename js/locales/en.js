@@ -36,7 +36,7 @@ export const en = {
     categoryDescriptions: { pdf: "Create, combine, and organize documents.", image: "Convert and prepare everyday images.", privacy: "Inspect and clean hidden file details.", scan: "Turn scans into useful documents.", media: "Work with audio and video locally." },
     browseCategory: "Browse category →",
     imagesToPdf: "Images to PDF", mergePdf: "Merge PDF", splitPdf: "Split PDF", organizePdf: "Organize PDF", pdfToImages: "PDF to Images", pdfMetadata: "PDF Metadata", imageConverter: "Image Converter",
-    imageCompressor: "Image Compressor", imageResizer: "Image Resizer", metadataInspector: "Metadata Inspector", metadataCleaner: "Metadata Cleaner",
+    imageCompressor: "Image Compressor", imageResizer: "Image Resizer", imageMetadata: "Image Metadata Inspector & Cleaner", metadataInspector: "Metadata Inspector", metadataCleaner: "Metadata Cleaner",
     available: "Available", comingSoon: "Coming soon",
   },
   categories: {
@@ -54,7 +54,7 @@ export const en = {
     },
     image: {
       title: "Image tools", description: "Prepare everyday images privately in your browser.",
-      convert: "Convert common image formats locally.", compress: "Reduce file size with clear quality controls.", resize: "Resize images to exact pixel dimensions.",
+      convert: "Convert common image formats locally.", compress: "Reduce file size with clear quality controls.", resize: "Resize images to exact pixel dimensions.", metadata: "Inspect privacy-relevant metadata and save a verified cleaned copy.",
     },
     privacy: {
       title: "Privacy tools", description: "Inspect and remove hidden file details without sharing the source file.",
