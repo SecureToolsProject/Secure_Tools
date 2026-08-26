@@ -164,12 +164,25 @@ function testUiArchitectureAndScope() {
   assert.match(pdf, /updateMetadata: false/);
   assert.match(pdf, /PDFDocument\.load\(bytes/);
   assert.match(pdf, /samePages\(beforePages, afterPages\)/);
+  const retainedIndex = pdf.indexOf("const retained = requested.filter");
+  const failClosedIndex = pdf.indexOf('if (retained.length) throw createPdfError("METADATA_VERIFICATION_FAILED")');
+  const returnIndex = pdf.indexOf("return {", retainedIndex);
+  assert.ok(retainedIndex > -1 && failClosedIndex > retainedIndex && failClosedIndex < returnIndex, "Verification must fail before cleaned bytes are returned");
+  assert.match(app, /METADATA_VERIFICATION_FAILED[^\n]+pdfMetadata\.errors\.verification/);
+  assert.doesNotMatch(app, /status\.partiallyCleaned/);
   assert.doesNotMatch(pdf, /copyPages|canvas|addImage|toDataURL/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(css, /overflow-wrap:\s*anywhere/);
   assert.match(css, /\.metadata-comparison\[hidden\]/);
-  assert.match(html, /id="remove-all"[^>]*data-i18n="pdfMetadata\.actions\.removeAll"/);
-  assert.match(css, /grid-template-columns:\s*2\.5rem minmax\(0, 1fr\)/);
+  assert.doesNotMatch(html, /id="remove-all"/);
+  assert.match(html, /id="metadata-summary-list" class="metadata-summary-list"[\s\S]*id="inspection-details" class="inspection-details"/);
+  assert.match(html, /id="clean-pdf"[^>]*data-i18n="pdfMetadata\.actions\.privacyClean"/);
+  assert.match(html, /id="customize-cleaning" class="clean-customization"[^>]*hidden[\s\S]*<fieldset>[\s\S]*id="custom-policy-options"/);
+  assert.match(html, /id="clean-custom"[^>]*data-i18n="pdfMetadata\.actions\.customClean"/);
+  assert.match(app, /elements\.clean\.addEventListener\("click", \(\) => cleanAndSave\(state\.fields\.filter\(\(field\) => field\.present\)\.map\(\(field\) => field\.key\)\)\)/);
+  assert.match(app, /elements\.cleanCustom\.addEventListener\("click", \(\) => cleanAndSave\(selectedMetadataKeys\(state\.fields\)\)\)/);
+  assert.match(app, /state\.fields = selectAllPresentMetadata\(source\.fields\)/);
+  assert.match(css, /#custom-policy-options[^}]*grid-template-columns:\s*repeat\(2/);
   assert.doesNotMatch(css, /\.metadata-table\s*\{\s*min-width/);
   assert.match(read("tools/pdf/index.html"), /href="\.\/metadata\/"/);
 }

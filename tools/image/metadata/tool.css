@@ -32,3 +32,17 @@ details li { overflow-wrap: anywhere; }
   .metadata-entry { grid-template-columns: 1fr; gap: var(--space-1); }
   .result-grid { grid-template-columns: 1fr; }
 }
+
+.metadata-workspace > h2 { margin: 0 0 var(--space-4); }
+.metadata-workspace > .source-card { margin-bottom: var(--space-5); }
+.inspector-heading p, .inspection-details > p { color: var(--text-secondary); }
+.metadata-groups--primary { margin-bottom: var(--space-4); }
+.inspection-details summary, .clean-customization summary { width: fit-content; cursor: pointer; font-weight: var(--font-weight-bold); }
+.inspection-details summary:focus-visible, .clean-customization summary:focus-visible { outline: .18rem solid var(--focus); outline-offset: .18rem; }
+.inspection-details h4 { margin-top: var(--space-5); }
+.clean-customization { grid-column: 1 / -1; min-width: 0; margin-top: 0; }
+.clean-customization > p { margin: var(--space-3) 0; }
+.clean-customization fieldset { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2) var(--space-4); margin: var(--space-4) 0; padding: var(--space-4); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.clean-customization legend { padding-inline: var(--space-2); font-weight: var(--font-weight-bold); }
+.clean-customization .check-field { margin: 0; }
+@media (max-width: 38rem) { .clean-customization fieldset { grid-template-columns: 1fr; } .clean-customization .button { width: 100%; } }
