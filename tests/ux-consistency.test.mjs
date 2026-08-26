@@ -8,6 +8,9 @@ const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 
 const fileTools = [
   ["Image Converter", "tools/image/converter/index.html", "tools/image/converter/app.js", "image/"],
+  ["Image Resize", "tools/image/resize/index.html", "tools/image/resize/app.js", "image/"],
+  ["Image Compressor", "tools/image/compress/index.html", "tools/image/compress/app.js", "image/"],
+  ["Image Metadata", "tools/image/metadata/index.html", "tools/image/metadata/app.js", "image/"],
   ["Images to PDF", "tools/pdf/images-to-pdf/index.html", "tools/pdf/images-to-pdf/app.js", "image/"],
   ["Merge PDF", "tools/pdf/merge/index.html", "tools/pdf/merge/app.js", "pdf"],
   ["Split PDF", "tools/pdf/split/index.html", "tools/pdf/split/app.js", "pdf"],
@@ -42,7 +45,7 @@ function testFileInputContract() {
     assert.match(app, /dragenter[\s\S]*dragover/, `${name}: drag-enter/over behavior is missing`);
     assert.match(app, /dataset\.dragging/, `${name}: visible drag-active state is missing`);
     assert.match(app, /addEventListener\("drop"/, `${name}: drop handling is missing`);
-    assert.match(app, /elements\.input\.disabled\s*=/, `${name}: busy/loading input state is not explicit`);
+    assert.match(app, /elements\.(?:input|file_input)\.disabled\s*=/, `${name}: busy/loading input state is not explicit`);
     assert.match(html, /<button[^>]*class="button button--primary"/, `${name}: primary action does not use the shared pattern`);
     assert.match(html, /class="tool-status[^"]*" role="status" aria-live="polite"/, `${name}: shared live status is missing`);
     assert.doesNotMatch(html, /\.\.\/images-to-pdf\/tool\.css|\.\.\/split\/tool\.css/, `${name}: tool imports a sibling's stylesheet`);

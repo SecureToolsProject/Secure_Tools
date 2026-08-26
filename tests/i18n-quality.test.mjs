@@ -95,6 +95,9 @@ function testSelectorsAndDocumentTranslation() {
 
 function testDynamicToolsAndMetadata() {
   const dynamicApps = [
+    "tools/image/converter/app.js",
+    "tools/image/resize/app.js",
+    "tools/image/compress/app.js",
     "tools/pdf/images-to-pdf/app.js",
     "tools/pdf/merge/app.js",
     "tools/pdf/split/app.js",
