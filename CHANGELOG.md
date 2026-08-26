@@ -18,6 +18,8 @@
 
 - Removed the standalone planned Rotate PDF card; page rotation remains available as part of PDF Organizer.
 - Moved shared browser image validation and decoding into `tools/shared/image.js` for PDF and Image tools.
+- Promoted Privacy from generic planned placeholders to a production navigation hub for the existing Image and PDF metadata tools, with distinct supported-scope copy in all six locales.
+- Repaired the Image category’s semantic tool list so all four available cards remain within the same list.
 
 ## 1.0.0
 

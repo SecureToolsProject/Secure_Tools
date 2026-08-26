@@ -67,3 +67,17 @@ Browser automation remained unavailable because the Windows helper failed under 
 ## Validation boundary
 
 Automated checks cover architecture, semantics, resources, six-language keys, known overflow anti-patterns, CSP, and functional regressions. Browser automation remained subject to the known Windows sandbox ACL limitation during this Sprint. If visual control is unavailable, real human browser review at 360, 390, 768, 1024, and 1440 CSS pixels in Light/Dark themes remains required before v1.0.0 release approval.
+
+## Sprint 16 Privacy hub follow-up
+
+Sprint 16 corrected the Image category list structure and replaced the stale generic Privacy placeholders with two available navigation cards. The hub routes to the existing Image and PDF metadata tools and states their distinct, bounded inspection and cleaning scopes. Scan/OCR and Media remain planned and non-interactive.
+
+Automated checks now enforce:
+
+- one semantic list containing all four Image production cards;
+- exactly two available Privacy links with existing route targets;
+- all six PDF production links remaining available;
+- Scan/OCR and Media remaining planned; and
+- complete six-locale Privacy metadata, category, and scope copy.
+
+Interactive browser QA was retried on 2026-08-26 against a temporary localhost server. The browser runtime terminated before navigation with `windows sandbox failed: helper_unknown_error: apply deny-read ACLs`. Browser QA therefore did **not** pass and automated DOM/CSS checks are not presented as visual verification. Manual review remains open for `/`, `/tools/image/`, `/tools/privacy/`, `/tools/image/metadata/`, and `/tools/pdf/metadata/` at 320, 360, 390, 768, 1024, and 1440 CSS pixels in Light and Dark themes, including all six locales and keyboard focus/activation of the Privacy cards.
