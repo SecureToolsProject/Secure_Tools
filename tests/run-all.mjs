@@ -29,6 +29,7 @@ for (const test of [
   "tests/image-resize.test.mjs",
   "tests/image-compressor.test.mjs",
   "tests/image-metadata.test.mjs",
+  "tests/category-availability.test.mjs",
   "tests/pdf-merge-and-categories.test.mjs",
   "tests/file-input-queue-state.test.mjs",
   "tests/pdf-split.test.mjs",
