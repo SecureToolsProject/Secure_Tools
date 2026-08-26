@@ -88,3 +88,11 @@ Interactive browser QA was retried on 2026-08-26 against a temporary localhost s
 Sprint 17 localized shared brand, primary-navigation, footer-navigation, category-navigation, and local-processing-summary accessible names across all six interface languages. Homepage proof copy now states the bounded invariant—no production file-content upload—rather than the absolute word “Nothing,” and production PDF/Image category notes no longer mention planned cards that are not present. Static i18n and UX tests enforce these contracts across all 19 production pages.
 
 Interactive browser QA was retried on 2026-08-26 against a temporary localhost server. Browser control failed before navigation with `windows sandbox failed: helper_unknown_error: apply deny-read ACLs`. Visual rendering, responsive interaction, keyboard operation, browser-native save/download, and Network-panel checks remain **BLOCKED**, not passed. The complete open matrix is maintained in [v2 promotion QA](./v2-release-qa.md).
+
+## Sprint 18 Metadata UX follow-up
+
+Sprint 18 aligned the Image Metadata and PDF Metadata source cards, made decoded values the primary inspection surface, and moved opaque containers, coverage, diagnostics, and complete supported-field views into native details disclosures. Default Privacy Clean remains the primary action; Customize exposes only supported class-level controls and does not offer individual-value editing or broaden either tool’s documented scope. Both cleaners now require their requested verification checks to pass before any output write.
+
+Automated tests cover source reset and object-URL cleanup, decoded/opaque grouping, format-specific Image policies and expectations, PDF default/custom selection, retained-field fail-closed behavior, six-locale parity, responsive CSS contracts, security invariants, and the release gate. `git diff --check` and `node tests/run-all.mjs` passed on 2026-08-26.
+
+Interactive browser QA was attempted against `127.0.0.1:4173`, but the browser-control runtime terminated before navigation with `windows sandbox failed: helper_unknown_error: apply deny-read ACLs`. Visual rendering, keyboard interaction, responsive behavior, native save/download, and Network-panel observations remain **BLOCKED**, not passed. The live manual matrix is maintained in [v2 promotion QA](./v2-release-qa.md).

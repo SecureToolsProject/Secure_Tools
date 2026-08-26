@@ -193,8 +193,10 @@ Image Metadata Inspector & Cleaner is available at `/tools/image/metadata/` on t
 
 - Accepts exactly one signature-validated JPEG, PNG, or WebP file and enforces the application’s 50 MiB limit before full inspection.
 - Uses the manually pinned, same-origin `secure-metadata v0.1.0` browser artifact. No npm package, CDN, runtime GitHub request, or automatic version check is used.
-- Separates decoded values from opaque detected containers and presents `metadata-partial` as successful but non-exhaustive. “No supported metadata detected” is not a claim that the file contains no metadata.
+- Shows the local source thumbnail, detected format, size, and a keyboard-accessible remove/reset path. Decoded values are primary; opaque containers, coverage, and diagnostics remain available in a native details disclosure.
+- Presents `metadata-partial` as successful but non-exhaustive. “No supported metadata detected” is not a claim that the file contains no metadata.
 - Privacy Clean calls the library’s authoritative default policy: supported EXIF, XMP, IPTC, comments, PNG text metadata, and timestamps are removed while ICC color profiles are preserved.
+- Customize exposes only supported class-level removal controls for the detected format. Unselected supported classes and unknown structures are preserved; individual metadata-value editing is not offered.
 - Keeps source bytes unchanged and never decodes pixels, creates Canvas, resizes, converts, changes quality, or re-encodes the image.
 - Calls `verifyMetadata` on cleaned bytes and requires a valid result with every policy check passing before saving. Invalid, incomplete, truncated, or mismatched results fail closed with no output write.
 - Derives MIME and the normalized `_clean` filename from the detected image format, not the supplied MIME type or extension.
@@ -281,9 +283,10 @@ PDF Metadata Inspector & Cleaner is available at `/tools/pdf/metadata/` for one 
 
 - The explicit metadata model inspects Title, Author, Subject, Keywords, Creator, Producer, Creation Date, and Modification Date from the standard PDF document-info dictionary.
 - Values remain raw in application state while the UI formats dates with `Intl.DateTimeFormat`, safely replaces surfaced null characters for display, and limits individual rendered values to 2,000 characters. Cleaning still targets the complete underlying field.
-- Users can remove one or more selected fields or choose the explicit “Remove all supported metadata” path. Missing fields are shown consistently and cannot be selected.
+- Shows a compact source card and decoded values first, with all eight supported document-info fields available in a native details disclosure.
+- Privacy Clean removes every present supported document-info field. Customize exposes only the same eight class-level field controls; missing fields remain disabled and individual value editing is not offered.
 - Cleaning edits the loaded PDF with `pdf-lib` using `updateMetadata: false`; pages are not rasterized, copied from screenshots, or reconstructed.
-- After serialization, the tool reloads the produced bytes, inspects all supported fields again, and reports cleared or retained selections from that serialized output. Page count, dimensions, and rotation must also match before the result is offered as successful.
+- After serialization, the tool reloads the produced bytes and inspects all supported fields again. Every requested field must be absent, and page count, dimensions, and rotation must match before any output is written; a retained requested field fails closed.
 - Repeated cleaning continues from the previously verified output bytes. Loading or clearing a source releases the prior model, comparison, and retained byte references.
 - The original PDF is never modified. Saving uses the shared File System Access picker where available and the revoking Blob-download fallback elsewhere.
 

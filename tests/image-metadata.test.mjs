@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { cleanAndVerifyImageMetadata, createCleanOutputPlan, inspectImageMetadata, PRIVACY_CLEAN_POLICY } from "../tools/image/metadata/metadata.js";
+import { cleanAndVerifyImageMetadata, createCleaningPolicy, createCleanOutputPlan, createVerificationExpectation, inspectImageMetadata, PRIVACY_CLEAN_POLICY } from "../tools/image/metadata/metadata.js";
 import { buildCleaningModel, buildInspectionModel, formatMetadataValue, MAX_METADATA_VALUE_LENGTH } from "../tools/image/metadata/model.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -95,9 +95,12 @@ const partialModel = buildInspectionModel({ format: "jpeg", file: { size: 10 }, 
 assert.equal(partialModel.successful, true, "metadata-partial is a successful, explicitly non-exhaustive inspection");
 assert.equal(partialModel.cleanable, true);
 assert.equal(partialModel.groups[0].items[0].value.opaque, true);
+assert.equal(partialModel.decodedCount, 0); assert.equal(partialModel.additionalCount, 1); assert.deepEqual(partialModel.decodedGroups, []);
 assert.equal(partialModel.groups[0].key, "xmp", "XMP remains a distinct namespace group");
-const categorized = buildInspectionModel({ cleanable: true, report: { inspectionStatus: "metadata-partial", entries: [{ id: "a", namespace: "exif", name: "Software", category: "software" }, { id: "b", namespace: "iptc", name: "Caption", category: "description" }, { id: "c", namespace: "unknown", name: "Tag", category: "not-known" }], diagnostics: [{ severity: "warning", code: "TEST_DIAGNOSTIC", offset: 42, message: "bounded detail" }] } }, labels);
+const categorized = buildInspectionModel({ cleanable: true, report: { inspectionStatus: "metadata-partial", entries: [{ id: "a", namespace: "exif", name: "Software", category: "software", value: "Camera App" }, { id: "b", namespace: "iptc", name: "Caption", category: "description", value: "Decoded caption" }, { id: "c", namespace: "unknown", name: "Tag", category: "not-known" }], diagnostics: [{ severity: "warning", code: "TEST_DIAGNOSTIC", offset: 42, message: "bounded detail" }] } }, labels);
 assert.deepEqual(categorized.groups.map(({ key }) => key), ["software", "iptc", "other"]);
+assert.deepEqual(categorized.decodedGroups.map(({ key }) => key), ["software", "iptc"]);
+assert.equal(categorized.decodedCount, 2); assert.equal(categorized.decodedGroupCount, 2); assert.equal(categorized.additionalCount, 1);
 assert.match(categorized.diagnostics[0], /WARNING · TEST_DIAGNOSTIC · byte 42 · bounded detail/);
 assert.equal(buildInspectionModel({ report: { inspectionStatus: "format-only", entries: [], diagnostics: [] } }).coverageKey, "imageMetadata.coverage.format-only");
 assert.equal(buildInspectionModel({ report: { inspectionStatus: "container-inspected", entries: [], diagnostics: [] } }).count, 0, "No supported metadata is distinct from a claim that no metadata exists");
@@ -120,6 +123,16 @@ assert.equal(cleanedReport.report.entries.some((entry) => entry.namespace === "p
 const resultModel = buildCleaningModel(cleaned); assert.equal(resultModel.valid, true); assert.equal(resultModel.filename, "holiday_clean.png");
 assert.ok(cleaned.cleaned.preserved.some((change) => change.namespace === "icc"), "ICC is preserved by the authoritative policy");
 const secondClean = await cleanAndVerifyImageMetadata(source); assert.deepEqual(secondClean.bytes, cleaned.bytes, "Cleaning is deterministic");
+const customPolicy = createCleaningPolicy({ removeExif: false, removeXmp: false, removeIptc: false, removeComments: false, removeTextMetadata: false, removeTimestamps: true, preserveIcc: false });
+assert.deepEqual(createVerificationExpectation(customPolicy, "png"), { requireNoPrivacyRelevantMetadata: false, exif: "ignore", xmp: "ignore", textMetadata: "ignore", timestamps: "absent", icc: "absent" });
+assert.deepEqual(createVerificationExpectation(customPolicy, "jpeg"), { requireNoPrivacyRelevantMetadata: false, exif: "ignore", xmp: "ignore", iptc: "ignore", comments: "ignore", icc: "absent" });
+assert.deepEqual(createVerificationExpectation(customPolicy, "webp"), { requireNoPrivacyRelevantMetadata: false, exif: "ignore", xmp: "ignore", icc: "absent" });
+const customCleaned = await cleanAndVerifyImageMetadata(source, customPolicy);
+assert.equal(customCleaned.verification.valid, true); assert.deepEqual(customCleaned.verification.checks.map(({ namespace }) => namespace).sort(), ["icc", "png-time"]);
+const customReport = (await inspectImageMetadata(new File([customCleaned.bytes], "custom.png", { type: "image/png" }))).report;
+assert.equal(customReport.entries.some((entry) => entry.namespace === "png-text"), true, "Unselected PNG text is preserved");
+assert.equal(customReport.entries.some((entry) => entry.namespace === "png-time"), false, "Selected timestamp class is removed");
+assert.equal(customReport.entries.some((entry) => entry.namespace === "icc"), false, "Requested ICC removal is verified");
 
 for (const [bytes, name, format, mimeType] of [
   [metadataJpeg(), "camera.jpeg", "jpeg", "image/jpeg"],
@@ -148,6 +161,19 @@ await assert.rejects(cleanAndVerifyImageMetadata({ bytes: sourceBytes, cleanable
 
 const html = read("tools/image/metadata/index.html"); const app = read("tools/image/metadata/app.js"); const adapter = read("tools/image/metadata/metadata.js"); const model = read("tools/image/metadata/model.js"); const category = read("tools/image/index.html");
 assert.match(html, /type="file"[^>]*aria-describedby="drop-description"/); assert.doesNotMatch(html, /type="file"[^>]*multiple/);
+assert.match(html, /id="source-card" class="source-card"[^>]*data-i18n-aria-label="imageMetadata\.source\.selectedLabel"[^>]*hidden/);
+assert.match(html, /id="source-thumbnail" class="queue-thumbnail" alt=""/);
+assert.match(html, /id="source-name" class="source-name"/);
+assert.match(html, /id="clear-source" class="queue-action queue-action--remove"[^>]*data-i18n-aria-label="imageMetadata\.source\.remove"/);
+assert.match(app, /URL\.createObjectURL\(state\.source\.file\)/);
+assert.match(app, /URL\.revokeObjectURL\(state\.previewUrl\)/);
+assert.match(app, /pagehide[^;]+releasePreview/);
+assert.match(app, /releasePreview\(\); resetPolicy\(\); state\.source = null; state\.inspection = null; state\.result = null/);
+assert.match(html, /id="inspection-details" class="inspection-details"><summary[^>]*data-i18n="imageMetadata\.inspector\.details"/);
+assert.match(html, /id="metadata-groups" class="metadata-groups metadata-groups--primary"[\s\S]*id="additional-notice"[\s\S]*id="metadata-detail-groups"/);
+assert.match(html, /id="customize-cleaning" class="clean-customization"[^>]*hidden[\s\S]*<fieldset id="custom-policy-options">/);
+assert.equal((html.match(/data-policy-key=/g) || []).length, 7);
+assert.match(app, /FORMAT_POLICY_KEYS[\s\S]*jpeg:[^\n]*removeIptc[^\n]*removeComments[\s\S]*png:[^\n]*removeTextMetadata[^\n]*removeTimestamps[\s\S]*webp:/);
 assert.match(html, /connect-src 'none'/); assert.match(html, /role="status" aria-live="polite"/);
 assert.match(category, /href="\.\/metadata\/"/); assert.equal((category.match(/class="category-tool surface"/g) || []).length, 4);
 const requestIndex = app.indexOf("await requestSaveHandle"); const cleanIndex = app.indexOf("await cleanAndVerifyImageMetadata"); const writeIndex = app.indexOf("await writeBlobToHandle");
@@ -156,7 +182,10 @@ assert.ok(cleanIndex < writeIndex, "No bytes are written before cleaning and fai
 assert.match(app, /verification|Verified|verified/); assert.doesNotMatch(app + adapter + model, /innerHTML|insertAdjacentHTML|document\.write/);
 assert.doesNotMatch(app + adapter + model, /\bfetch\s*\(|XMLHttpRequest|WebSocket|sendBeacon|https?:\/\//);
 assert.doesNotMatch(adapter + model, /createImageBitmap|new Image|createElement\(["']canvas|drawImage|getContext/);
-assert.match(adapter, /cleanMetadata\(source\.bytes, DEFAULT_CLEANING_POLICY\)/);
+assert.match(adapter, /requestedPolicy = DEFAULT_CLEANING_POLICY/);
+assert.match(adapter, /cleanMetadata\(source\.bytes, policy\)/);
+assert.match(adapter, /verifyMetadata\(cleaned\.output, expectation\)/);
+assert.match(adapter, /verification\.checks\.length > 0/);
 const applicationFiles = ["tools/image/metadata/app.js", "tools/image/metadata/model.js", "tools/image/metadata/metadata.js"];
 assert.deepEqual(applicationFiles.filter((relative) => read(relative).includes("secure-metadata-0.1.0.browser.js")), ["tools/image/metadata/metadata.js"]);
 console.log("Image Metadata inspection, honest coverage, cleaning, verification, output, UI, privacy, and regression contracts passed.");

@@ -8,6 +8,7 @@ import { imageResizeLocales } from "./locales/image-resize.js";
 import { imageCompressorLocales } from "./locales/image-compressor.js";
 import { imageMetadataLocales } from "./locales/image-metadata.js";
 import { privacyHubLocales } from "./locales/privacy-hub.js";
+import { metadataUxLocales } from "./locales/metadata-ux.js";
 
 const STORAGE_KEY = "secure-tools-language";
 const baseTranslations = { en, ko, ja, es, de, fr };
@@ -18,7 +19,8 @@ export const translations = Object.fromEntries(Object.entries(baseTranslations).
   categories: { ...catalog.categories, image: { ...catalog.categories.image, metadata: imageMetadataLocales[language].categoryDescription } },
   imageResize: imageResizeLocales[language].copy,
   imageCompressor: imageCompressorLocales[language].copy,
-  imageMetadata: imageMetadataLocales[language].copy,
+  imageMetadata: { ...imageMetadataLocales[language].copy, source: { ...imageMetadataLocales[language].copy.source, ...metadataUxLocales[language].image.source }, inspector: { ...imageMetadataLocales[language].copy.inspector, ...metadataUxLocales[language].image.inspector }, clean: { ...imageMetadataLocales[language].copy.clean, ...metadataUxLocales[language].image.clean }, policy: metadataUxLocales[language].image.policy },
+  pdfMetadata: { ...catalog.pdfMetadata, source: { ...catalog.pdfMetadata.source, ...metadataUxLocales[language].pdf.source }, inspector: { ...catalog.pdfMetadata.inspector, ...metadataUxLocales[language].pdf.inspector }, actions: { ...catalog.pdfMetadata.actions, ...metadataUxLocales[language].pdf.actions }, custom: metadataUxLocales[language].pdf.custom, errors: { ...catalog.pdfMetadata.errors, ...metadataUxLocales[language].pdf.errors } },
   privacyHub: privacyHubLocales[language].copy,
 }]));
 
