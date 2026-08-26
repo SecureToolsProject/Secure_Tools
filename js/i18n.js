@@ -7,17 +7,19 @@ import { fr } from "./locales/fr.js";
 import { imageResizeLocales } from "./locales/image-resize.js";
 import { imageCompressorLocales } from "./locales/image-compressor.js";
 import { imageMetadataLocales } from "./locales/image-metadata.js";
+import { privacyHubLocales } from "./locales/privacy-hub.js";
 
 const STORAGE_KEY = "secure-tools-language";
 const baseTranslations = { en, ko, ja, es, de, fr };
 export const translations = Object.fromEntries(Object.entries(baseTranslations).map(([language, catalog]) => [language, {
   ...catalog,
-  metadata: { ...catalog.metadata, imageResize: imageResizeLocales[language].metadata, imageCompressor: imageCompressorLocales[language].metadata, imageMetadata: imageMetadataLocales[language].metadata },
-  tools: { ...catalog.tools, imageMetadata: imageMetadataLocales[language].toolName },
+  metadata: { ...catalog.metadata, imageResize: imageResizeLocales[language].metadata, imageCompressor: imageCompressorLocales[language].metadata, imageMetadata: imageMetadataLocales[language].metadata, privacyCategory: privacyHubLocales[language].metadata },
+  tools: { ...catalog.tools, imageMetadata: imageMetadataLocales[language].toolName, categoryDescriptions: { ...catalog.tools.categoryDescriptions, privacy: privacyHubLocales[language].categoryDescription } },
   categories: { ...catalog.categories, image: { ...catalog.categories.image, metadata: imageMetadataLocales[language].categoryDescription } },
   imageResize: imageResizeLocales[language].copy,
   imageCompressor: imageCompressorLocales[language].copy,
   imageMetadata: imageMetadataLocales[language].copy,
+  privacyHub: privacyHubLocales[language].copy,
 }]));
 
 export function resolveLanguage(value, availableLanguages = Object.keys(translations)) {
