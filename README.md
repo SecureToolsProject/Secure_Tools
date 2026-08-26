@@ -21,6 +21,15 @@ The v1 baseline is recorded in the [changelog](./CHANGELOG.md) and historical [v
 
 The homepage and category hubs clearly distinguish production tools from planned work.
 
+## Privacy metadata hub
+
+[`/tools/privacy/`](./tools/privacy/) is a navigation hub for the two existing production metadata tools. It does not add a generic inspector, cleaner, parser, or processing engine.
+
+- Image files route to [Image Metadata Inspector & Cleaner](./tools/image/metadata/), whose documented scope covers supported JPEG, PNG, and WebP structures. Its successful inspection may still be partial and non-exhaustive.
+- PDF files route to [PDF Metadata Inspector & Cleaner](./tools/pdf/metadata/), whose cleaning scope is limited to supported document-info fields and does not claim to remove every XMP packet, attachment, annotation, or hidden structure.
+
+Both tools process file contents locally and verify only their documented supported scope. Scan/OCR and Media remain planned categories with non-interactive cards.
+
 ## Interface languages
 
 Secure Tools ships complete, same-origin interface catalogs for:
@@ -78,7 +87,8 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │       ├── fr.js
 │       ├── image-resize.js
 │       ├── image-compressor.js
-│       └── image-metadata.js
+│       ├── image-metadata.js
+│       └── privacy-hub.js
 ├── tools/
 │   ├── shared/
 │   │   ├── file.js
@@ -136,7 +146,7 @@ The category hubs are:
 - `/tools/scan/`
 - `/tools/media/`
 
-Categories are the stable navigation layer. Individual utilities can be added beneath them without turning the homepage into an unstructured tool list. Planned utilities remain visible only when clearly marked as unavailable.
+Categories are the stable navigation layer. PDF, Image, and Privacy link to production tools; Scan/OCR and Media remain planned and non-interactive. Individual utilities can be added beneath categories without turning the homepage into an unstructured tool list.
 
 `/tools/image-to-pdf/` is a lightweight static migration page with a meta refresh and visible fallback link to `/tools/pdf/images-to-pdf/`. It does not use JavaScript to redirect.
 
