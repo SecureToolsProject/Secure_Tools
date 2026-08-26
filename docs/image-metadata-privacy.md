@@ -6,6 +6,8 @@ Inspection reports only structures supported by `secure-metadata v0.1.0`. Decode
 
 Privacy Clean uses the library’s exported `DEFAULT_CLEANING_POLICY` directly. It removes supported EXIF, XMP, IPTC, comments, ordinary PNG text metadata, and standalone timestamps while preserving ICC color profiles. Unknown structures are not guessed away. The original source bytes remain unchanged.
 
+Customize exposes only the same supported metadata classes that apply to the detected JPEG, PNG, or WebP format. The user may choose which classes to remove and whether to preserve ICC, but cannot edit individual values or target unknown structures. Verification expectations are derived from that explicit policy, so only requested removals are required to be absent and intentionally preserved supported classes may remain.
+
 The produced bytes are passed to `verifyMetadata` before any write or download. Every returned policy check must pass, the verification result must be valid, and inspection of the result must not be partial or truncated. Otherwise the operation fails closed and no output bytes are saved. This verifies only the metadata categories targeted by the supported policy; it does not establish anonymity, complete privacy, provenance, pixel privacy, steganography detection, or malware safety.
 
 ## Pinned dependency

@@ -86,6 +86,7 @@ Audited on 2026-08-26 against repository records and official npm registry metad
 | Shared input, queue, source, status, cancellation, save, and recovery checks | PASS |
 | Per-tool file, queue, dimension, pixel, render, and aggregate-work boundaries | PASS |
 | Pull-request CI | REQUIRED BEFORE MERGE |
+| Sprint 18 Metadata source cards, decoded-first disclosure, safe customization, and fail-closed verification contracts | PASS |
 
 The Node runner reports `MODULE_TYPELESS_PACKAGE_JSON` warnings because a parent user-level package file does not declare a module type. The static repository intentionally has no package manager or build configuration; all tests execute successfully.
 
@@ -113,7 +114,7 @@ For `/`, every production tool, all five category hubs, `/privacy/`, `/about/`, 
 - [ ] Inspect the Network panel while adding and processing files; confirm no file-content upload and no unexpected runtime request.
 - [ ] Inspect saved outputs for correct type, name, ordering, dimensions/pages, transparency behavior, and openability.
 - [ ] Exercise corrupt, unsupported, oversized, encrypted/password-protected, cancellation, save-cancellation, and repeated-operation paths applicable to each tool.
-- [ ] For both metadata tools, confirm partial/opaque wording remains bounded, cleaning matches the documented supported scope, verification failure prevents saving, and the source remains retryable.
+- [ ] For both metadata tools, confirm the source card, remove/reset focus path, decoded-first summary, native details disclosure, and keyboard-accessible Customize controls across all six locales. Confirm partial/opaque wording remains bounded, default Privacy Clean and custom cleaning match the documented supported scope, verification failure prevents saving, and the source remains retryable.
 - [ ] Confirm Privacy links route only to the two production metadata tools and Scan/OCR and Media cards remain non-interactive planned content.
 
 ## Recording manual evidence
