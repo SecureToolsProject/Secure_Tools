@@ -1,0 +1,74 @@
+{
+  "name": "secure-metadata",
+  "version": "0.1.0",
+  "description": "Deterministic, security-conscious metadata tooling for binary image formats.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./browser": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/browser/secure-metadata.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsup && tsup --config tsup.browser.config.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "fuzz:smoke": "npm run build --silent && node scripts/fuzz.mjs --seed 20260825 --runs 250 --max-bytes 512",
+    "fuzz": "npm run build --silent && node scripts/fuzz.mjs",
+    "typecheck": "tsc --noEmit",
+    "browser:smoke": "node scripts/browser-smoke.mjs",
+    "package:audit": "node scripts/release/audit-package.mjs",
+    "license:audit": "node scripts/release/audit-licenses.mjs",
+    "version:check": "node scripts/release/check-version.mjs",
+    "release:build": "node scripts/release/build-artifacts.mjs",
+    "release:repro": "node scripts/release/check-reproducibility.mjs",
+    "release:verify": "node scripts/release/verify-hashes.mjs",
+    "release:check": "node scripts/release/check-rc.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.13.3",
+    "eslint": "^10.9.0",
+    "fast-check": "^4.9.0",
+    "playwright": "^1.62.1",
+    "prettier": "^3.9.6",
+    "tsup": "^8.5.1",
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.67.0",
+    "vitest": "^4.1.11"
+  },
+  "overrides": {
+    "esbuild": "0.28.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SecureToolsProject/Secure_Metadata.git"
+  },
+  "homepage": "https://github.com/SecureToolsProject/Secure_Metadata#readme",
+  "bugs": {
+    "url": "https://github.com/SecureToolsProject/Secure_Metadata/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
