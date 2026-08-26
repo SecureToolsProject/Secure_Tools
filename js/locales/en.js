@@ -20,6 +20,7 @@ export const en = {
   common: {
     skip: "Skip to main content", brandTagline: "Private utilities, processed on your device",
     nav: { tools: "Tools", privacy: "Privacy", source: "Source", about: "About" },
+    aria: { home: "Secure Tools home", primaryNavigation: "Primary navigation", footerNavigation: "Footer navigation", toolCategories: "Tool categories", localProcessingSummary: "Local processing summary" },
     language: "Language", theme: "Theme", themes: { system: "System", light: "Light", dark: "Dark" },
     footerStatement: "Your files stay on your device.",
   },
@@ -27,7 +28,7 @@ export const en = {
     eyebrow: "Local-first file utilities", title: "Private tools for everyday files.",
     description: "Convert, inspect, and process files directly on your device. No uploads. No accounts. No tracking.",
     primary: "Explore tools", secondary: "Verify privacy", trust: "Local processing · Open source · No tracking",
-    proofLabel: "What leaves your device", proofValue: "Nothing", proofNote: "Core tools process file contents in browser memory.",
+    proofLabel: "File contents uploaded", proofValue: "None", proofNote: "Production tools process file contents locally in browser memory.",
   },
   tools: {
     eyebrow: "Tools", title: "Start with what you need to work on.",
@@ -42,7 +43,7 @@ export const en = {
   categories: {
     eyebrow: "Tool category",
     nav: { pdf: "PDF", image: "Image", privacy: "Privacy", scan: "Scan & OCR", media: "Media" },
-    localNote: "Available tools process file contents in browser memory. Planned items are clearly marked.",
+    localNote: "Available tools process file contents locally in browser memory.",
     plannedNote: "This category is planned. No unavailable item is presented as working.",
     pdf: {
       title: "PDF tools", description: "Create and organize PDF documents locally, without uploading private files.",

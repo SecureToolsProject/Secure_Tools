@@ -74,6 +74,7 @@ export const ja = {
       "source": "ソースコード",
       "about": "概要"
     },
+    "aria": { "home": "Secure Tools ホーム", "primaryNavigation": "メインナビゲーション", "footerNavigation": "フッターナビゲーション", "toolCategories": "ツールカテゴリ", "localProcessingSummary": "ローカル処理の概要" },
     "language": "言語",
     "theme": "テーマ",
     "themes": {
@@ -90,9 +91,9 @@ export const ja = {
     "primary": "ツールを見る",
     "secondary": "プライバシーを確認",
     "trust": "端末内処理 · オープンソース · 追跡なし",
-    "proofLabel": "端末の外へ送信されるファイル",
+    "proofLabel": "アップロードされるファイル内容",
     "proofValue": "なし",
-    "proofNote": "主要なツールはブラウザのメモリ上でファイルを処理します"
+    "proofNote": "提供中のツールはブラウザのメモリ上でファイル内容をローカル処理します。"
   },
   "tools": {
     "eyebrow": "ツール",
@@ -137,7 +138,7 @@ export const ja = {
       "scan": "スキャン・OCR",
       "media": "メディア"
     },
-    "localNote": "利用可能なツールはブラウザのメモリ上でファイルを処理します。準備中の機能は別に表示します。",
+    "localNote": "利用可能なツールはブラウザのメモリ上でファイル内容をローカル処理します。",
     "plannedNote": "このカテゴリは準備中です。まだ利用できない機能は「準備中」と表示します。",
     "pdf": {
       "title": "PDFツール",

@@ -20,11 +20,12 @@ export const ko = {
   common: {
     skip: "본문으로 바로가기", brandTagline: "기기에서 바로 처리하는 프라이버시 중심 도구",
     nav: { tools: "도구", privacy: "개인정보 보호", source: "소스", about: "소개" },
+    aria: { home: "Secure Tools 홈", primaryNavigation: "주 탐색", footerNavigation: "바닥글 탐색", toolCategories: "도구 카테고리", localProcessingSummary: "로컬 처리 요약" },
     language: "언어", theme: "테마", themes: { system: "시스템", light: "라이트", dark: "다크" }, footerStatement: "파일은 이 기기 밖으로 전송되지 않습니다",
   },
   hero: {
     eyebrow: "로컬 우선 파일 도구", title: "일상 파일을 더 안전하게 다루세요", description: "파일을 이 기기에서 바로 변환하고 확인하세요. 업로드도, 계정도, 추적도 없습니다",
-    primary: "도구 보기", secondary: "개인정보 보호 확인하기", trust: "기기 내 처리 · 오픈 소스 · 추적 없음", proofLabel: "기기 밖으로 전송되는 파일", proofValue: "없음", proofNote: "파일 처리는 브라우저 메모리에서 이루어집니다",
+    primary: "도구 보기", secondary: "개인정보 보호 확인하기", trust: "기기 내 처리 · 오픈 소스 · 추적 없음", proofLabel: "업로드되는 파일 내용", proofValue: "없음", proofNote: "제공 중인 도구는 브라우저 메모리에서 파일 내용을 로컬로 처리합니다",
   },
   tools: {
     eyebrow: "도구", title: "파일 종류에 맞는 도구를 선택하세요", description: "카테고리에서 필요한 도구를 찾아보세요. 지금 사용할 수 있는 기능은 명확히 표시됩니다",
@@ -37,7 +38,7 @@ export const ko = {
   categories: {
     eyebrow: "도구 카테고리",
     nav: { pdf: "PDF", image: "이미지", privacy: "개인정보 보호", scan: "스캔 및 OCR", media: "미디어" },
-    localNote: "사용 가능한 도구는 브라우저 메모리에서 파일을 처리합니다. 준비 중인 기능은 따로 표시합니다",
+    localNote: "사용 가능한 도구는 브라우저 메모리에서 파일 내용을 로컬로 처리합니다",
     plannedNote: "이 카테고리는 준비 중입니다. 아직 사용할 수 없는 기능은 별도로 표시합니다",
     pdf: {
       title: "PDF 도구", description: "개인 파일을 업로드하지 않고 PDF 문서를 로컬에서 만들고 정리하세요.",

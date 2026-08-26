@@ -85,11 +85,19 @@ function testSharedChromeAndAccessibility() {
     assert.match(html, /<main\b[^>]*\bid="main"/, `${relative}: main landmark target missing`);
     for (const brand of html.matchAll(/<a class="brand"[^>]*>/g)) {
       assert.match(brand[0], /aria-label="Secure Tools home"/, `${relative}: brand home link lacks a consistent name`);
+      assert.match(brand[0], /data-i18n-aria-label="common\.aria\.home"/, `${relative}: brand home name is not localized`);
     }
     const footer = html.match(/<footer class="site-footer">([\s\S]*?)<\/footer>/)?.[1] || "";
-    assert.match(footer, /<nav aria-label="Footer navigation">/, `${relative}: footer navigation missing`);
+    assert.match(footer, /<nav aria-label="Footer navigation" data-i18n-aria-label="common\.aria\.footerNavigation">/, `${relative}: localized footer navigation missing`);
+    if (html.includes('class="site-nav"')) {
+      assert.match(html, /<nav class="site-nav" aria-label="Primary navigation" data-i18n-aria-label="common\.aria\.primaryNavigation">/, `${relative}: localized primary navigation missing`);
+    }
     const keys = [...footer.matchAll(/data-i18n="(common\.nav\.[^"]+)"/g)].map((match) => match[1]);
     assert.deepEqual(keys, ["common.nav.tools", "common.nav.privacy", "common.nav.about", "common.nav.source"], `${relative}: footer links differ`);
+  }
+  assert.match(read("index.html"), /aria-label="Local processing summary" data-i18n-aria-label="common\.aria\.localProcessingSummary"/);
+  for (const relative of productionPages.filter((page) => page.startsWith("tools/"))) {
+    assert.match(read(relative), /aria-label="Tool categories" data-i18n-aria-label="common\.aria\.toolCategories"/, `${relative}: localized category navigation missing`);
   }
 }
 

@@ -45,7 +45,7 @@ function placeholders(value) {
 function testCatalogParityAndQuality() {
   assert.deepEqual([...Object.keys(translations)], [...languageNames.keys()]);
   const english = flatten(translations.en);
-  assert.equal(english.size, 719);
+  assert.equal(english.size, 724);
 
   for (const [language, catalog] of Object.entries(translations)) {
     const flattened = flatten(catalog);
@@ -85,6 +85,18 @@ function testSelectorsAndDocumentTranslation() {
     const options = [...select.matchAll(/<option value="([^"]+)">([^<]+)<\/option>/g)].map((match) => [match[1], match[2].trim()]);
     assert.deepEqual(options, [...languageNames], `${path.relative(root, file)} language options differ`);
     assert.doesNotMatch(select, /(?:🇺🇸|🇰🇷|🇯🇵|🇪🇸|🇩🇪|🇫🇷)/, "Language choices must not depend on flags");
+    for (const key of ["home", "footerNavigation"]) {
+      assert.match(html, new RegExp(`data-i18n-aria-label="common\\.aria\\.${key}"`), `${path.relative(root, file)} is missing localized ${key}`);
+    }
+    if (html.includes('class="site-nav"')) {
+      assert.match(html, /data-i18n-aria-label="common\.aria\.primaryNavigation"/, `${path.relative(root, file)} is missing localized primaryNavigation`);
+    }
+  }
+
+  for (const [language, catalog] of Object.entries(translations)) {
+    for (const key of ["home", "primaryNavigation", "footerNavigation", "toolCategories", "localProcessingSummary"]) {
+      assert.ok(catalog.common.aria[key].trim(), `${language}.common.aria.${key} is empty`);
+    }
   }
 
   const source = fs.readFileSync(path.join(root, "js/i18n.js"), "utf8");
