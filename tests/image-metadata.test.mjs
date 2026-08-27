@@ -66,6 +66,52 @@ function metadataJpeg() {
   );
 }
 
+function orientationExifPayload(orientation) {
+  const tiff = new Uint8Array(160); const view = new DataView(tiff.buffer); const little = true;
+  tiff.set([0x49, 0x49]); view.setUint16(2, 42, little); view.setUint32(4, 8, little);
+  const entries = [
+    { tag: 0x0112, type: 3, count: 1, value: orientation },
+    { tag: 0x010f, type: 2, count: 12, offset: 80 },
+    { tag: 0x0131, type: 2, count: 14, offset: 96 },
+    { tag: 0x8825, type: 4, count: 1, value: 140 },
+  ];
+  view.setUint16(8, entries.length, little);
+  entries.forEach((entry, index) => {
+    const offset = 10 + index * 12;
+    view.setUint16(offset, entry.tag, little); view.setUint16(offset + 2, entry.type, little); view.setUint32(offset + 4, entry.count, little);
+    if (entry.offset !== undefined) view.setUint32(offset + 8, entry.offset, little);
+    else if (entry.type === 3) view.setUint16(offset + 8, entry.value, little);
+    else view.setUint32(offset + 8, entry.value, little);
+  });
+  view.setUint32(58, 0, little);
+  tiff.set(new TextEncoder().encode("PrivateMake\0"), 80);
+  tiff.set(new TextEncoder().encode("PrivateEditor\0"), 96);
+  view.setUint16(140, 1, little); view.setUint16(142, 1, little); view.setUint16(144, 2, little); view.setUint32(146, 2, little);
+  tiff.set([0x4e, 0], 150); view.setUint32(154, 0, little);
+  return concatenate(new TextEncoder().encode("Exif\0\0"), tiff.slice(0, 158));
+}
+
+const ORIENTATION_SCAN = Uint8Array.of(0x11, 0xff, 0x00, 0x22, 0xff, 0xd0, 0x33);
+function orientationMetadataJpeg(orientation) {
+  const encoder = new TextEncoder();
+  return concatenate(
+    Uint8Array.of(0xff, 0xd8),
+    jpegSegment(0xe1, orientationExifPayload(orientation)),
+    jpegSegment(0xe2, concatenate(encoder.encode("ICC_PROFILE\0"), Uint8Array.of(1, 1, 9, 8, 7))),
+    jpegSegment(0xfe, encoder.encode("private comment")),
+    jpegSegment(0xda, Uint8Array.of(1)),
+    ORIENTATION_SCAN,
+    Uint8Array.of(0xff, 0xd9),
+  );
+}
+
+function jpegScanTail(bytes) {
+  for (let index = 0; index < bytes.length - 1; index += 1) {
+    if (bytes[index] === 0xff && bytes[index + 1] === 0xda) return bytes.slice(index);
+  }
+  throw new Error("JPEG scan marker not found");
+}
+
 function webpChunk(type, data) {
   const output = new Uint8Array(8 + data.length + (data.length % 2)); output.set(new TextEncoder().encode(type));
   new DataView(output.buffer).setUint32(4, data.length, true); output.set(data, 8); return output;
@@ -150,6 +196,24 @@ for (const [bytes, name, format, mimeType] of [
   assert.equal(output.plan.filename, `camera_clean.${format === "jpeg" ? "jpg" : "webp"}`);
   assert.equal(output.blob.type, mimeType); assert.equal(output.verification.valid, true);
   assert.ok(output.cleaned.preserved.some((change) => change.namespace === "icc"));
+}
+
+for (const orientation of [3, 6, 8]) {
+  const bytes = orientationMetadataJpeg(orientation); const snapshot = bytes.slice(); const scanTail = jpegScanTail(bytes);
+  const inspected = await inspectImageMetadata(new File([bytes], `orientation-${orientation}.jpg`, { type: "image/jpeg" }));
+  assert.equal(inspected.report.entries.find((entry) => entry.name === "Orientation")?.value, orientation, `Orientation ${orientation} is decoded before cleaning`);
+  assert.ok(inspected.report.entries.some((entry) => entry.namespace === "gps"), "GPS metadata is present in the regression fixture");
+  const output = await cleanAndVerifyImageMetadata(inspected);
+  assert.equal(output.verification.valid, true); assert.ok(output.verification.checks.every((check) => check.passed));
+  assert.ok(output.cleaned.preserved.some((change) => change.namespace === "exif" && change.name === "EXIF Orientation"));
+  assert.ok(output.cleaned.removed.some((change) => change.namespace === "exif"), "Privacy-related EXIF is removed");
+  assert.ok(output.cleaned.removed.some((change) => change.namespace === "jpeg-comment"), "JPEG comments are removed");
+  const after = await inspectImageMetadata(new File([output.bytes], output.plan.filename, { type: output.plan.mimeType }));
+  assert.equal(after.report.entries.find((entry) => entry.name === "Orientation")?.value, orientation, `Orientation ${orientation} survives Privacy Clean`);
+  assert.equal(after.report.entries.some((entry) => entry.namespace === "gps"), false, "GPS metadata is removed");
+  assert.equal(after.report.entries.some((entry) => ["Make", "Software"].includes(entry.name)), false, "Private EXIF fields are removed");
+  assert.deepEqual(jpegScanTail(output.bytes), scanTail, "JPEG scan payload and trailing image bytes remain unchanged");
+  assert.deepEqual(bytes, snapshot, "Orientation cleaning does not mutate source bytes");
 }
 
 class OversizeBlob extends Blob { get size() { return 50 * 1024 * 1024 + 1; } get name() { return "large.png"; } }
