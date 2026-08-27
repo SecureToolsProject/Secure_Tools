@@ -80,14 +80,14 @@ Automated checks now enforce:
 - Scan/OCR and Media remaining planned; and
 - complete six-locale Privacy metadata, category, and scope copy.
 
-Interactive browser QA was retried on 2026-08-26 against a temporary localhost server. The browser runtime terminated before navigation with `windows sandbox failed: helper_unknown_error: apply deny-read ACLs`. Browser QA therefore did **not** pass and automated DOM/CSS checks are not presented as visual verification. Manual review remains open for `/`, `/tools/image/`, `/tools/privacy/`, `/tools/image/metadata/`, and `/tools/pdf/metadata/` at 320, 360, 390, 768, 1024, and 1440 CSS pixels in Light and Dark themes, including all six locales and keyboard focus/activation of the Privacy cards.
+Interactive browser QA was retried on 2026-08-26 against a temporary localhost server. The browser runtime terminated before navigation with `windows sandbox failed: helper_unknown_error: apply deny-read ACLs`. Browser QA therefore did **not** pass and automated DOM/CSS checks are not presented as visual verification. At that Sprint checkpoint, manual review remained open for `/`, `/tools/image/`, `/tools/privacy/`, `/tools/image/metadata/`, and `/tools/pdf/metadata/` at 320, 360, 390, 768, 1024, and 1440 CSS pixels in Light and Dark themes, including all six locales and keyboard focus/activation of the Privacy cards. The later release-gate disposition is recorded below.
 
 
 ## Sprint 17 release-readiness follow-up
 
 Sprint 17 localized shared brand, primary-navigation, footer-navigation, category-navigation, and local-processing-summary accessible names across all six interface languages. Homepage proof copy now states the bounded invariant—no production file-content upload—rather than the absolute word “Nothing,” and production PDF/Image category notes no longer mention planned cards that are not present. Static i18n and UX tests enforce these contracts across all 19 production pages.
 
-Interactive browser QA was retried on 2026-08-26 against a temporary localhost server. Browser control failed before navigation with `windows sandbox failed: helper_unknown_error: apply deny-read ACLs`. Visual rendering, responsive interaction, keyboard operation, browser-native save/download, and Network-panel checks remain **BLOCKED**, not passed. The complete open matrix is maintained in [v2 promotion QA](./v2-release-qa.md).
+Interactive browser QA was retried on 2026-08-26 against a temporary localhost server. Browser control failed before navigation with `windows sandbox failed: helper_unknown_error: apply deny-read ACLs`. Visual rendering, responsive interaction, keyboard operation, browser-native save/download, and Network-panel checks remain **BLOCKED**, not passed. At that Sprint checkpoint, the manual matrix remained open; its later disposition is recorded in [v2 promotion QA](./v2-release-qa.md).
 
 ## Sprint 18 Metadata UX follow-up
 
@@ -95,7 +95,7 @@ Sprint 18 aligned the Image Metadata and PDF Metadata source cards, made decoded
 
 Automated tests cover source reset and object-URL cleanup, decoded/opaque grouping, format-specific Image policies and expectations, PDF default/custom selection, retained-field fail-closed behavior, six-locale parity, responsive CSS contracts, security invariants, and the release gate. `git diff --check` and `node tests/run-all.mjs` passed on 2026-08-26.
 
-Interactive browser QA was attempted against `127.0.0.1:4173`, but the browser-control runtime terminated before navigation with `windows sandbox failed: helper_unknown_error: apply deny-read ACLs`. Visual rendering, keyboard interaction, responsive behavior, native save/download, and Network-panel observations remain **BLOCKED**, not passed. The live manual matrix is maintained in [v2 promotion QA](./v2-release-qa.md).
+Interactive browser QA was attempted against `127.0.0.1:4173`, but the browser-control runtime terminated before navigation with `windows sandbox failed: helper_unknown_error: apply deny-read ACLs`. Visual rendering, keyboard interaction, responsive behavior, native save/download, and Network-panel observations remain **BLOCKED**, not passed. At that Sprint checkpoint, the manual matrix remained open; its later disposition is recorded in [v2 promotion QA](./v2-release-qa.md).
 
 ## Metadata Orientation hotfix follow-up
 
@@ -104,3 +104,5 @@ The hotfix upgrades the same-origin Image Metadata runtime to verified secure-me
 Image and PDF Metadata now place source information and primary cleaning controls in a desktop action layout before decoded content in DOM order, then stack them at 54rem and below. Image shows at most six prioritized decoded values and PDF at most four; all supported decoded values and the existing opaque, partial, coverage, diagnostic, and container distinctions remain in native details disclosures.
 
 Real Chrome QA was attempted twice on 2026-08-27 against a temporary localhost server with synthetic Orientation=6 JPEG, PNG, WebP, and PDF fixtures. The Chrome-control runtime failed before connection or navigation with `failed to write kernel assets: The system cannot find the path specified. (os error 3)`. Visual orientation equivalence, interactive layout, keyboard, save, and Network-panel checks remain **BLOCKED**, not passed; temporary fixtures and the server were removed.
+
+Subsequently, the user completed real local manual QA in Chrome 151.0.7922.174 (Official Build, 64-bit). General smoke, Image and Metadata workflows, Light/Dark themes, i18n, responsive layout, keyboard-only interaction, save/cancel/failure behavior, and Network-panel inspection passed. The Network panel showed local/blob behavior only, with no observed file-processing upload request. The user also verified Privacy Clean, Customize/custom cleaning, metadata removal, source/action UX, decoded summary/details, and the corrected Orientation=6 JPEG behavior. The automated browser attempts above remain historically **BLOCKED**; the separate manual Chrome result is **PASS**, and the Orientation blocker is **RESOLVED / PASS**.
