@@ -1,19 +1,20 @@
 # v2 Promotion QA
 
-This is the live promotion gate for the Secure Tools `v2` integration branch. It separates reproducible automated evidence from interactive browser evidence. `BLOCKED` and `NOT RUN` never mean `PASS`.
+This is the preserved promotion record for the Secure Tools v2.0.0 pre-release line. It separates reproducible automated evidence from interactive browser evidence. `BLOCKED` and `NOT RUN` never mean `PASS`.
 
 ## Decision
 
-**READY FOR PROMOTION** as of 2026-08-27. This means `v2` is ready for a separate promotion decision; it has not been merged to `main`, tagged, released, or deployed.
+**PROMOTED** on 2026-08-27 after the recorded gate reached **READY FOR PROMOTION**. PR #60 merged the approved `v2` tree to `main` as commit `1d1d4a6bf055eb98f6902139c2dd4de1339b8840`; `v2.0.0-rc.1` was subsequently published as a pre-release.
 
 - Automated local gate: **PASS** — `git diff --check` and `node tests/run-all.mjs` completed successfully on Windows with Node.js 24.
 - Static privacy, network, CSP, resource, dependency, route, localization, save-path, responsive-contract, and accessibility checks: **PASS**.
 - Automated / in-environment browser QA: **BLOCKED** before navigation by the local Chrome-control runtime failures documented below.
 - Manual local Chrome QA: **PASS** — the user completed the release-required interactive checks in Chrome 151.0.7922.174 (Official Build, 64-bit).
 - Metadata Orientation regression: **RESOLVED / PASS** — the user manually verified the corrected Orientation=6 JPEG behavior after the secure-metadata v0.1.1 integration.
-- Promotion to `main`, release tagging, release publication, and deployment: **NOT RUN** and outside this documentation-only scope.
+- Promotion to `main`: **PASS** — PR #60 used a normal merge commit and preserved the validated v2 history.
+- Pre-release publication: **PUBLISHED** — `v2.0.0-rc.1`; no stable v2.0.0 release is claimed by this record.
 
-No unresolved release blocker remains in this gate. The branch-protection and Dependabot visibility observations below remain repository-hardening concerns, but the existing release policy does not define them as promotion blockers. Any new failed automated or CI check, privacy regression, unexplained runtime request, corrupt output, inaccessible primary path, or failed save would reopen the gate.
+No unresolved release blocker remained at promotion. The branch-protection and Dependabot visibility observations below remain historical repository-hardening concerns; the existing release policy did not define them as promotion blockers. This document is version-specific evidence, not the active gate for future development.
 
 ## Sprint 17 audit disposition
 
@@ -72,6 +73,7 @@ Audited on 2026-08-27 against repository records, immutable GitHub Release asset
 | secure-metadata | 0.1.1 immutable GitHub release artifact | Not an npm runtime dependency | PASS |
 
 - The v1.0.0 GitHub release is published; v1.0.0-rc.1 remains marked as a prerelease.
+- The v2.0.0-rc.1 GitHub pre-release was published after the promotion evidence in this document passed; no stable v2.0.0 publication is claimed here.
 - `main` and `v2` returned “Branch not protected” from the GitHub branch-protection API. This is a repository-governance risk, not a change authorized by Sprint 17.
 - GitHub returned `403 Dependabot alerts are disabled for this repository`; vulnerability-alert visibility is therefore **NOT AVAILABLE**, not `PASS`.
 - secure-metadata alone was upgraded from 0.1.0 to the verified 0.1.1 browser Release artifact. No framework, package manager, build system, runtime dependency, CDN, or remote processing resource was added.

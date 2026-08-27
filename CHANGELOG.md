@@ -23,6 +23,7 @@
 - Narrowed homepage and category privacy copy to production file-content processing and localized shared navigation and summary accessible names across all six interface languages.
 - Added a live v2 promotion QA matrix that keeps blocked browser evidence separate from passing automated checks.
 - Recorded completed manual Chrome release QA and verified EXIF Orientation preservation, advancing the documented v2 status to READY FOR PROMOTION without creating a release.
+- Reorganized project documentation around a concise README and focused architecture, privacy, dependency, tool-status, and audit references.
 
 - Removed the standalone planned Rotate PDF card; page rotation remains available as part of PDF Organizer.
 - Moved shared browser image validation and decoding into `tools/shared/image.js` for PDF and Image tools.
