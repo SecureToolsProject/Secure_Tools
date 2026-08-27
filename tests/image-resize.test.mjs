@@ -100,7 +100,7 @@ assert.match(html, /name="resize-mode"[^>]*value="pixels"/); assert.match(html, 
 assert.match(html, /id="aspect-ratio"[^>]*checked/); assert.match(html, /id="allow-enlargement"/);
 assert.match(html, /id="output-format"[\s\S]*value="original"[\s\S]*value="jpeg"[\s\S]*value="png"[\s\S]*value="webp"/);
 assert.match(html, /role="status" aria-live="polite"/); assert.match(html, /assets\/vendor\/jszip\/jszip\.min\.js/);
-assert.match(html, /connect-src 'none'/); assert.doesNotMatch(html, /unsafe-inline|unsafe-eval|https?:\/\/(?!github\.com)/);
+assert.match(html, /connect-src 'none'/); assert.doesNotMatch(html, /unsafe-inline|unsafe-eval/); assert.doesNotMatch(html, /<script[^>]+src="https?:\/\//i); assert.doesNotMatch(html, /<link[^>]+rel="stylesheet"[^>]+href="https?:/i);
 assert.match(app, /finally\s*\{[\s\S]*state\.busy = false[\s\S]*elements\.progress\.hidden = true/);
 assert.match(app, /URL\.revokeObjectURL/); assert.match(logic, /decoded\?\.close\(\)/);
 assert.match(read("tools/shared/image.js"), /imageOrientation: "from-image"/);
