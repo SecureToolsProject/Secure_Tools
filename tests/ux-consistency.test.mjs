@@ -75,7 +75,7 @@ function testQueueSourceAndOutputPatterns() {
     assert.match(html, /class="source-empty"/);
   }
   assert.match(read("tools/pdf/organize/index.html"), /class="organizer-output tool-output surface"/);
-  assert.match(read("tools/pdf/metadata/index.html"), /class="metadata-output tool-output surface"/);
+  assert.match(read("tools/pdf/metadata/index.html"), /class="metadata-output tool-output metadata-action-panel"/);
 }
 
 function testSharedChromeAndAccessibility() {

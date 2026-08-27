@@ -1,6 +1,6 @@
 import { MAX_FILE_SIZE, validateImageSignature } from "../../shared/image.js";
 import { createImageOutputNames, IMAGE_FORMATS } from "../../shared/image-output.js";
-import { cleanMetadata, DEFAULT_CLEANING_POLICY, inspectMetadata, verifyMetadata } from "../../../assets/vendor/secure-metadata/secure-metadata-0.1.0.browser.js";
+import { cleanMetadata, DEFAULT_CLEANING_POLICY, inspectMetadata, verifyMetadata } from "../../../assets/vendor/secure-metadata/secure-metadata-0.1.1.browser.js";
 
 export const PRIVACY_CLEAN_POLICY = DEFAULT_CLEANING_POLICY;
 export const CLEANING_POLICY_KEYS = Object.freeze(["removeExif", "removeXmp", "removeIptc", "removeComments", "removeTextMetadata", "removeTimestamps", "preserveIcc"]);

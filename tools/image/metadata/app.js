@@ -6,7 +6,7 @@ import { cleanAndVerifyImageMetadata, createCleaningPolicy, createCleanOutputPla
 
 const elements = Object.fromEntries([
   "file-input", "drop-zone", "source-empty", "source-card", "source-thumbnail", "source-name", "source-summary", "clear-source",
-  "inspection", "coverage", "inspection-summary", "metadata-empty", "metadata-groups", "additional-notice", "inspection-details",
+  "inspection", "coverage", "inspection-summary", "metadata-empty", "metadata-groups", "decoded-overflow-notice", "additional-notice", "inspection-details",
   "detail-coverage", "metadata-detail-groups", "inspection-diagnostic-section", "inspection-diagnostic-list", "clean-image",
   "customize-cleaning", "clean-custom", "clean-result", "result-summary", "removed-list", "preserved-list", "result-diagnostics",
   "result-diagnostic-list", "tool-status",
@@ -78,9 +78,11 @@ function renderInspection() {
   elements.detail_coverage.textContent = t(state.inspection.coverageKey);
   elements.inspection_summary.textContent = message("imageMetadata.inspector.summary", { groups: state.inspection.decodedGroupCount, additional: state.inspection.additionalCount });
   elements.metadata_empty.hidden = state.inspection.decodedCount !== 0;
+  elements.decoded_overflow_notice.hidden = state.inspection.additionalDecodedCount === 0;
+  elements.decoded_overflow_notice.textContent = message("imageMetadata.inspector.additionalDecoded", { count: state.inspection.additionalDecodedCount });
   elements.additional_notice.hidden = state.inspection.additionalCount === 0;
   elements.additional_notice.textContent = message("imageMetadata.inspector.additional", { count: state.inspection.additionalCount });
-  renderGroups(elements.metadata_groups, state.inspection.decodedGroups, false);
+  renderGroups(elements.metadata_groups, state.inspection.summaryGroups, false);
   renderGroups(elements.metadata_detail_groups, state.inspection.groups, true);
   appendItems(elements.inspection_diagnostic_list, state.inspection.diagnostics);
   elements.inspection_diagnostic_section.hidden = state.inspection.diagnostics.length === 0;

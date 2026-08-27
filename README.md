@@ -192,10 +192,10 @@ Image Compressor is available at `/tools/image/compress/` on the v2 integration 
 Image Metadata Inspector & Cleaner is available at `/tools/image/metadata/` on the v2 integration branch.
 
 - Accepts exactly one signature-validated JPEG, PNG, or WebP file and enforces the application’s 50 MiB limit before full inspection.
-- Uses the manually pinned, same-origin `secure-metadata v0.1.0` browser artifact. No npm package, CDN, runtime GitHub request, or automatic version check is used.
-- Shows the local source thumbnail, detected format, size, and a keyboard-accessible remove/reset path. Decoded values are primary; opaque containers, coverage, and diagnostics remain available in a native details disclosure.
+- Uses the manually pinned, same-origin `secure-metadata v0.1.1` browser artifact. No npm package, CDN, runtime GitHub request, or automatic version check is used.
+- Shows the local source thumbnail, detected format, size, and a keyboard-accessible remove/reset path. Up to six high-value decoded fields are shown first; all decoded values, opaque containers, coverage, and diagnostics remain available in a native details disclosure.
 - Presents `metadata-partial` as successful but non-exhaustive. “No supported metadata detected” is not a claim that the file contains no metadata.
-- Privacy Clean calls the library’s authoritative default policy: supported EXIF, XMP, IPTC, comments, PNG text metadata, and timestamps are removed while ICC color profiles are preserved.
+- Privacy Clean calls the library’s authoritative default policy: supported privacy-related EXIF, XMP, IPTC, comments, PNG text metadata, and timestamps are removed while valid JPEG rendering orientation and ICC color profiles are preserved.
 - Customize exposes only supported class-level removal controls for the detected format. Unselected supported classes and unknown structures are preserved; individual metadata-value editing is not offered.
 - Keeps source bytes unchanged and never decodes pixels, creates Canvas, resizes, converts, changes quality, or re-encodes the image.
 - Calls `verifyMetadata` on cleaned bytes and requires a valid result with every policy check passing before saving. Invalid, incomplete, truncated, or mismatched results fail closed with no output write.
@@ -331,10 +331,10 @@ All processing libraries are pinned and served as same-origin static files. Prod
 
 ### secure-metadata
 
-- Version/tag: `v0.1.0`
-- Release commit: `352258ec413a838dfe8b9146370505f125b5ae10`
+- Version/tag: `v0.1.1`
+- Release commit: `cdcd138e48d30618b6d76f7c6538cd43ad660b53`
 - Purpose: local JPEG, PNG, and WebP metadata inspection, Privacy Clean, and fail-closed verification
-- Browser artifact SHA-256: `8d0b8a1addf904760aa1f52378fb05eed6540520cb05fe2320d77011cba69c28`
+- Browser artifact SHA-256: `4bfcc9e0e484db12192e46f076c19cf69cd36c496c7cfbb5a71c1057cbcccba1`
 - License: MIT
 - Runtime dependencies: 0
 - Integration: manually pinned same-origin GitHub Release artifact; not an npm runtime dependency

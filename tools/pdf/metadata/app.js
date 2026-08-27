@@ -9,7 +9,7 @@ const elements = {
   input: document.querySelector("#file-input"), dropZone: document.querySelector("#drop-zone"), empty: document.querySelector("#source-empty"),
   sourceCard: document.querySelector("#source-card"), sourceName: document.querySelector("#source-name"), summary: document.querySelector("#source-summary"),
   clearSource: document.querySelector("#clear-source"), inspector: document.querySelector("#inspector"), inspectorSummary: document.querySelector("#inspector-summary"),
-  summaryList: document.querySelector("#metadata-summary-list"), metadataEmpty: document.querySelector("#metadata-empty"), body: document.querySelector("#metadata-body"),
+  summaryList: document.querySelector("#metadata-summary-list"), decodedOverflowNotice: document.querySelector("#decoded-overflow-notice"), metadataEmpty: document.querySelector("#metadata-empty"), body: document.querySelector("#metadata-body"),
   inspectionDetails: document.querySelector("#inspection-details"), customizeCleaning: document.querySelector("#customize-cleaning"),
   customOptions: document.querySelector("#custom-policy-options"), selectAll: document.querySelector("#select-all"), clearSelection: document.querySelector("#clear-selection"),
   filename: document.querySelector("#filename"), clean: document.querySelector("#clean-pdf"), cleanCustom: document.querySelector("#clean-custom"),
@@ -53,7 +53,9 @@ function renderComparison() {
 function renderSummary() {
   elements.summaryList.replaceChildren();
   const present = state.fields.filter((field) => field.present);
-  present.forEach((field) => appendDefinition(elements.summaryList, field));
+  present.slice(0, 4).forEach((field) => appendDefinition(elements.summaryList, field));
+  elements.decodedOverflowNotice.hidden = present.length <= 4;
+  elements.decodedOverflowNotice.textContent = message("pdfMetadata.inspector.additionalDecoded", { count: Math.max(0, present.length - 4) });
   elements.metadataEmpty.hidden = present.length !== 0;
   elements.inspectorSummary.textContent = message("pdfMetadata.inspector.summary", { count: present.length });
 }

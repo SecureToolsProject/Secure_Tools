@@ -34,7 +34,7 @@ details li { overflow-wrap: anywhere; }
 }
 
 .metadata-workspace > h2 { margin: 0 0 var(--space-4); }
-.metadata-workspace > .source-card { margin-bottom: var(--space-5); }
+.metadata-source-panel > .source-card { margin: 0; }
 .inspector-heading p, .inspection-details > p { color: var(--text-secondary); }
 .metadata-groups--primary { margin-bottom: var(--space-4); }
 .inspection-details summary, .clean-customization summary { width: fit-content; cursor: pointer; font-weight: var(--font-weight-bold); }
@@ -46,3 +46,9 @@ details li { overflow-wrap: anywhere; }
 .clean-customization legend { padding-inline: var(--space-2); font-weight: var(--font-weight-bold); }
 .clean-customization .check-field { margin: 0; }
 @media (max-width: 38rem) { .clean-customization fieldset { grid-template-columns: 1fr; } .clean-customization .button { width: 100%; } }
+.metadata-overview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, .42fr); gap: var(--space-5); align-items: start; margin-bottom: var(--space-5); }
+.metadata-source-panel, .metadata-action-panel { min-width: 0; }
+.metadata-action-panel { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-4); border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-subtle); }
+.metadata-action-panel > div > :first-child { margin-top: 0; }
+.metadata-action-panel > .button, .metadata-action-panel > .clean-customization > .button { width: 100%; }
+@media (max-width: 54rem) { .metadata-overview { grid-template-columns: 1fr; } }

@@ -4,12 +4,12 @@ This is the live promotion gate for the Secure Tools `v2` integration branch. It
 
 ## Decision
 
-**READY EXCEPT MANUAL QA** as of 2026-08-26, conditional on the Sprint 17 pull-request CI gate passing before merge.
+**READY EXCEPT MANUAL QA** as of 2026-08-27, conditional on the Metadata Orientation hotfix pull-request CI gate passing before merge.
 
 - Automated local gate: **PASS** — `git diff --check` and `node tests/run-all.mjs` completed successfully on Windows with Node.js 24.
 - Static privacy, network, CSP, resource, dependency, route, localization, save-path, responsive-contract, and accessibility checks: **PASS**.
-- Interactive browser gate: **BLOCKED** before navigation by the Codex Windows sandbox ACL failure documented below.
-- Promotion to `main`, release tagging, release publication, and deployment: **NOT RUN** and outside Sprint 17 scope.
+- Interactive browser gate: **BLOCKED** before navigation by the local Chrome-control runtime failure documented below.
+- Promotion to `main`, release tagging, release publication, and deployment: **NOT RUN** and outside this hotfix scope.
 
 The v2 branch must not be promoted until a human completes the open browser matrix and records evidence. Any failed automated or CI check, privacy regression, unexplained runtime request, corrupt output, inaccessible primary path, or failed save is a release blocker.
 
@@ -59,7 +59,7 @@ Automated contracts cover supported and rejected inputs, deterministic naming, d
 
 ## Dependency and repository audit
 
-Audited on 2026-08-26 against repository records and official npm registry metadata.
+Audited on 2026-08-27 against repository records, immutable GitHub Release assets, and official npm registry metadata.
 
 | Dependency | Vendored version | Official npm latest | License/inventory/hash gate |
 | --- | ---: | ---: | --- |
@@ -67,12 +67,12 @@ Audited on 2026-08-26 against repository records and official npm registry metad
 | pdf-lib | 1.17.1 | 1.17.1 | PASS |
 | JSZip | 3.10.1 | 3.10.1 | PASS |
 | PDF.js (`pdfjs-dist`) | 6.2.108 | 6.2.108 | PASS |
-| secure-metadata | 0.1.0 immutable GitHub release artifact | Not an npm runtime dependency | PASS |
+| secure-metadata | 0.1.1 immutable GitHub release artifact | Not an npm runtime dependency | PASS |
 
 - The v1.0.0 GitHub release is published; v1.0.0-rc.1 remains marked as a prerelease.
 - `main` and `v2` returned “Branch not protected” from the GitHub branch-protection API. This is a repository-governance risk, not a change authorized by Sprint 17.
 - GitHub returned `403 Dependabot alerts are disabled for this repository`; vulnerability-alert visibility is therefore **NOT AVAILABLE**, not `PASS`.
-- No dependency, vendor byte, license, framework, package manager, build system, or runtime resource was added or upgraded.
+- secure-metadata alone was upgraded from 0.1.0 to the verified 0.1.1 browser Release artifact. No framework, package manager, build system, runtime dependency, CDN, or remote processing resource was added.
 
 ## Automated command evidence
 
@@ -87,6 +87,7 @@ Audited on 2026-08-26 against repository records and official npm registry metad
 | Per-tool file, queue, dimension, pixel, render, and aggregate-work boundaries | PASS |
 | Pull-request CI | REQUIRED BEFORE MERGE |
 | Sprint 18 Metadata source cards, decoded-first disclosure, safe customization, and fail-closed verification contracts | PASS |
+| secure-metadata v0.1.1 provenance, Orientation 3/6/8 preservation, privacy-EXIF/GPS removal, unchanged JPEG scan bytes, bounded summaries, and action-panel contracts | PASS |
 
 The Node runner reports `MODULE_TYPELESS_PACKAGE_JSON` warnings because a parent user-level package file does not declare a module type. The static repository intentionally has no package manager or build configuration; all tests execute successfully.
 
@@ -99,6 +100,16 @@ windows sandbox failed: helper_unknown_error: apply deny-read ACLs
 ```
 
 Result: **BLOCKED**. Browser family/version, viewport rendering, keyboard operation, file picker behavior, output downloads, and Network-panel observations are **NOT RUN**. The temporary local server was stopped after the failed attempt. No standalone browser automation result or visual pass is claimed.
+
+## Metadata Orientation hotfix Chrome attempt
+
+Attempted twice on 2026-08-27 against a temporary server at `127.0.0.1:4173` using the requested real Chrome connection and synthetic Orientation=6 JPEG, PNG, WebP, and PDF fixtures. Chrome control failed before connection or navigation with:
+
+```text
+failed to write kernel assets: The system cannot find the path specified. (os error 3)
+```
+
+Result: **BLOCKED**. Original-versus-cleaned visual orientation, interactive toolbar layout, responsive rendering, keyboard-only operation, browser-native save/cancel/failure paths, and Network-panel observations are **NOT RUN**. Automated Orientation tests and static UX contracts remain PASS but are not presented as manual Chrome evidence. The temporary server and all synthetic fixtures were removed.
 
 ## Manual browser matrix
 
