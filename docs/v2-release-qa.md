@@ -4,14 +4,16 @@ This is the live promotion gate for the Secure Tools `v2` integration branch. It
 
 ## Decision
 
-**READY EXCEPT MANUAL QA** as of 2026-08-27, conditional on the Metadata Orientation hotfix pull-request CI gate passing before merge.
+**READY FOR PROMOTION** as of 2026-08-27. This means `v2` is ready for a separate promotion decision; it has not been merged to `main`, tagged, released, or deployed.
 
 - Automated local gate: **PASS** — `git diff --check` and `node tests/run-all.mjs` completed successfully on Windows with Node.js 24.
 - Static privacy, network, CSP, resource, dependency, route, localization, save-path, responsive-contract, and accessibility checks: **PASS**.
-- Interactive browser gate: **BLOCKED** before navigation by the local Chrome-control runtime failure documented below.
-- Promotion to `main`, release tagging, release publication, and deployment: **NOT RUN** and outside this hotfix scope.
+- Automated / in-environment browser QA: **BLOCKED** before navigation by the local Chrome-control runtime failures documented below.
+- Manual local Chrome QA: **PASS** — the user completed the release-required interactive checks in Chrome 151.0.7922.174 (Official Build, 64-bit).
+- Metadata Orientation regression: **RESOLVED / PASS** — the user manually verified the corrected Orientation=6 JPEG behavior after the secure-metadata v0.1.1 integration.
+- Promotion to `main`, release tagging, release publication, and deployment: **NOT RUN** and outside this documentation-only scope.
 
-The v2 branch must not be promoted until a human completes the open browser matrix and records evidence. Any failed automated or CI check, privacy regression, unexplained runtime request, corrupt output, inaccessible primary path, or failed save is a release blocker.
+No unresolved release blocker remains in this gate. The branch-protection and Dependabot visibility observations below remain repository-hardening concerns, but the existing release policy does not define them as promotion blockers. Any new failed automated or CI check, privacy regression, unexplained runtime request, corrupt output, inaccessible primary path, or failed save would reopen the gate.
 
 ## Sprint 17 audit disposition
 
@@ -27,35 +29,35 @@ The v2 branch must not be promoted until a human completes the open browser matr
 
 ## Production inventory and automated evidence
 
-| Production tool | Route | Functional and failure contracts | Privacy/network/resource contracts | Browser |
+| Production tool | Route | Functional and failure contracts | Privacy/network/resource contracts | Manual Chrome |
 | --- | --- | --- | --- | --- |
-| Images to PDF | `/tools/pdf/images-to-pdf/` | PASS | PASS | BLOCKED |
-| Merge PDF | `/tools/pdf/merge/` | PASS | PASS | BLOCKED |
-| Split PDF | `/tools/pdf/split/` | PASS | PASS | BLOCKED |
-| Organize PDF | `/tools/pdf/organize/` | PASS | PASS | BLOCKED |
-| PDF to Images | `/tools/pdf/to-images/` | PASS | PASS | BLOCKED |
-| PDF Metadata Inspector & Cleaner | `/tools/pdf/metadata/` | PASS | PASS | BLOCKED |
-| Image Converter | `/tools/image/converter/` | PASS | PASS | BLOCKED |
-| Image Resize | `/tools/image/resize/` | PASS | PASS | BLOCKED |
-| Image Compressor | `/tools/image/compress/` | PASS | PASS | BLOCKED |
-| Image Metadata Inspector & Cleaner | `/tools/image/metadata/` | PASS | PASS | BLOCKED |
+| Images to PDF | `/tools/pdf/images-to-pdf/` | PASS | PASS | PASS (manual smoke) |
+| Merge PDF | `/tools/pdf/merge/` | PASS | PASS | PASS (manual smoke) |
+| Split PDF | `/tools/pdf/split/` | PASS | PASS | PASS (manual smoke) |
+| Organize PDF | `/tools/pdf/organize/` | PASS | PASS | PASS (manual smoke) |
+| PDF to Images | `/tools/pdf/to-images/` | PASS | PASS | PASS (manual smoke) |
+| PDF Metadata Inspector & Cleaner | `/tools/pdf/metadata/` | PASS | PASS | PASS (manual workflow) |
+| Image Converter | `/tools/image/converter/` | PASS | PASS | PASS (manual workflow) |
+| Image Resize | `/tools/image/resize/` | PASS | PASS | PASS (manual workflow) |
+| Image Compressor | `/tools/image/compress/` | PASS | PASS | PASS (manual workflow) |
+| Image Metadata Inspector & Cleaner | `/tools/image/metadata/` | PASS | PASS | PASS (manual workflow) |
 
 Automated contracts cover supported and rejected inputs, deterministic naming, duplicate handling, repeated operations, cancellation, recoverable failures, save-path behavior, metadata verification, corrupt/encrypted inputs where applicable, queue and workload limits, object URL cleanup, and the same-origin resource model. They do not substitute for visual rendering, browser-native file picker behavior, downloaded-file inspection, or assistive-technology review.
 
 ## Static routes and shared surfaces
 
-| Surface | Automated | Browser |
+| Surface | Automated | Manual Chrome |
 | --- | --- | --- |
-| Homepage | PASS | BLOCKED |
-| PDF category | PASS | BLOCKED |
-| Image category | PASS | BLOCKED |
-| Privacy category | PASS | BLOCKED |
-| Scan/OCR planned category | PASS | BLOCKED |
-| Media planned category | PASS | BLOCKED |
-| Privacy page | PASS | BLOCKED |
-| About page | PASS | BLOCKED |
-| 404 page | PASS | BLOCKED |
-| Legacy `/tools/image-to-pdf/` redirect | PASS | BLOCKED |
+| Homepage | PASS | PASS (manual smoke) |
+| PDF category | PASS | PASS (manual smoke) |
+| Image category | PASS | PASS (manual smoke) |
+| Privacy category | PASS | PASS (manual smoke) |
+| Scan/OCR planned category | PASS | PASS (manual smoke) |
+| Media planned category | PASS | PASS (manual smoke) |
+| Privacy page | PASS | PASS (manual smoke) |
+| About page | PASS | PASS (manual smoke) |
+| 404 page | PASS | PASS (manual smoke) |
+| Legacy `/tools/image-to-pdf/` redirect | PASS | PASS (manual smoke) |
 
 ## Dependency and repository audit
 
@@ -85,7 +87,7 @@ Audited on 2026-08-27 against repository records, immutable GitHub Release asset
 | CSP, runtime-network, remote-font, vendor provenance, and runtime-hash checks | PASS |
 | Shared input, queue, source, status, cancellation, save, and recovery checks | PASS |
 | Per-tool file, queue, dimension, pixel, render, and aggregate-work boundaries | PASS |
-| Pull-request CI | REQUIRED BEFORE MERGE |
+| Metadata hotfix pull-request and `v2` push CI | PASS |
 | Sprint 18 Metadata source cards, decoded-first disclosure, safe customization, and fail-closed verification contracts | PASS |
 | secure-metadata v0.1.1 provenance, Orientation 3/6/8 preservation, privacy-EXIF/GPS removal, unchanged JPEG scan bytes, bounded summaries, and action-panel contracts | PASS |
 
@@ -111,25 +113,22 @@ failed to write kernel assets: The system cannot find the path specified. (os er
 
 Result: **BLOCKED**. Original-versus-cleaned visual orientation, interactive toolbar layout, responsive rendering, keyboard-only operation, browser-native save/cancel/failure paths, and Network-panel observations are **NOT RUN**. Automated Orientation tests and static UX contracts remain PASS but are not presented as manual Chrome evidence. The temporary server and all synthetic fixtures were removed.
 
-## Manual browser matrix
+## Manual local Chrome QA
 
-Use current stable Chromium, Firefox, and Safari/WebKit where available. Serve the repository over HTTP, use synthetic non-sensitive fixtures, disable the Network-panel cache, and clear stored language/theme preferences before detection tests.
+The user completed real local-browser release QA on 2026-08-27 in Chrome 151.0.7922.174 (Official Build, 64-bit). This evidence is separate from the blocked automated browser-control attempts above.
 
-For `/`, every production tool, all five category hubs, `/privacy/`, `/about/`, and `404.html`:
+| Reported area | Result |
+| --- | --- |
+| General smoke test | PASS |
+| Image tools | PASS |
+| Image and PDF Metadata tools | PASS |
+| Light and Dark themes | PASS |
+| Internationalization | PASS |
+| Responsive layout | PASS |
+| Keyboard-only interaction | PASS |
+| Save, cancel, and failure behavior | PASS |
+| Network panel | PASS — local/blob behavior only; no file-processing upload request was observed |
 
-- [ ] Check 320, 360, 390, 768, 1024, and 1440 CSS px with no body overflow, clipping, overlap, or inaccessible controls.
-- [ ] Check English, Korean, Japanese, Spanish, German, and French; confirm visible text, document metadata, `<html lang>`, and localized accessible names update without losing tool state.
-- [ ] Check Light, Dark, and System; change the OS preference while System is active and verify explicit Light/Dark remain stable.
-- [ ] Complete each primary workflow by keyboard, including file selection, queue/source controls, settings, primary actions, cancellation where available, and save/download fallback.
-- [ ] Confirm focus indicators, logical focus order, semantic landmarks, live status updates, progress names, and reduced-motion behavior.
-- [ ] Inspect the Network panel while adding and processing files; confirm no file-content upload and no unexpected runtime request.
-- [ ] Inspect saved outputs for correct type, name, ordering, dimensions/pages, transparency behavior, and openability.
-- [ ] Exercise corrupt, unsupported, oversized, encrypted/password-protected, cancellation, save-cancellation, and repeated-operation paths applicable to each tool.
-- [ ] For both metadata tools, confirm the source card, remove/reset focus path, decoded-first summary, native details disclosure, and keyboard-accessible Customize controls across all six locales. Confirm partial/opaque wording remains bounded, default Privacy Clean and custom cleaning match the documented supported scope, verification failure prevents saving, and the source remains retryable.
-- [ ] Confirm Privacy links route only to the two production metadata tools and Scan/OCR and Media cards remain non-interactive planned content.
+The Metadata workflows manually covered Privacy Clean, Customize/custom cleaning, metadata removal, source/action UX, and the decoded summary/details flow. The triggering JPEG carried EXIF Orientation=6. Before the dependency patch, removing the complete EXIF APP1 segment could discard rendering-critical Orientation and make the cleaned image display rotated. With secure-metadata v0.1.1, one valid unambiguous IFD0 Orientation value from 1 through 8 is preserved, other targeted EXIF/GPS metadata is removed, and pixel data is neither decoded nor re-encoded. The user manually verified the corrected behavior, so the Orientation blocker is **RESOLVED / PASS**.
 
-## Recording manual evidence
-
-Record date, tester, OS, browser/version, route, viewport, locale, theme, fixture description, result, downloaded-output checks, Network-panel result, and defect link. Screenshots may support a result but do not replace keyboard, save, output, or network verification.
-
-After all manual rows pass and no release blocker remains, update the decision to **READY FOR PROMOTION** in a dedicated reviewed change. Until then, the authoritative result remains **READY EXCEPT MANUAL QA**.
+The evidence above records only the test areas and outcomes explicitly reported by the user; it does not invent unreported sub-test detail. Release-required interactive checks are complete, while the historical automated browser attempts remain **BLOCKED**.

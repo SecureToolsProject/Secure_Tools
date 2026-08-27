@@ -4,7 +4,7 @@ Secure Tools is a privacy-first web hub for everyday file utilities. Production 
 
 The project uses a category-first architecture, pull-request CI plus `main`/`v2` integration CI gates, and static GitHub Pages deployment.
 
-The v1 baseline is recorded in the [changelog](./CHANGELOG.md) and historical [v1.0.0 release QA checklist](./docs/release-qa.md). The live [v2 promotion QA gate](./docs/v2-release-qa.md) records current automated evidence, dependency and repository risks, and the open manual browser matrix.
+The v1 baseline is recorded in the [changelog](./CHANGELOG.md) and historical [v1.0.0 release QA checklist](./docs/release-qa.md). The live [v2 promotion QA gate](./docs/v2-release-qa.md) records automated evidence, manual browser results, dependency and repository risks, and current promotion readiness.
 
 ## Available tools
 
