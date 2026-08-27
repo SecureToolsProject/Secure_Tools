@@ -175,13 +175,15 @@ function testUiArchitectureAndScope() {
   assert.match(css, /overflow-wrap:\s*anywhere/);
   assert.match(css, /\.metadata-comparison\[hidden\]/);
   assert.doesNotMatch(html, /id="remove-all"/);
-  assert.match(html, /id="metadata-summary-list" class="metadata-summary-list"[\s\S]*id="inspection-details" class="inspection-details"/);
+  assert.match(html, /class="metadata-overview"[\s\S]*class="[^"]*metadata-action-panel[^"]*"[\s\S]*id="metadata-summary-list" class="metadata-summary-list"[\s\S]*id="decoded-overflow-notice"[\s\S]*id="inspection-details" class="inspection-details"/);
   assert.match(html, /id="clean-pdf"[^>]*data-i18n="pdfMetadata\.actions\.privacyClean"/);
   assert.match(html, /id="customize-cleaning" class="clean-customization"[^>]*hidden[\s\S]*<fieldset>[\s\S]*id="custom-policy-options"/);
   assert.match(html, /id="clean-custom"[^>]*data-i18n="pdfMetadata\.actions\.customClean"/);
   assert.match(app, /elements\.clean\.addEventListener\("click", \(\) => cleanAndSave\(state\.fields\.filter\(\(field\) => field\.present\)\.map\(\(field\) => field\.key\)\)\)/);
   assert.match(app, /elements\.cleanCustom\.addEventListener\("click", \(\) => cleanAndSave\(selectedMetadataKeys\(state\.fields\)\)\)/);
   assert.match(app, /state\.fields = selectAllPresentMetadata\(source\.fields\)/);
+  assert.match(app, /present\.slice\(0, 4\)/); assert.match(app, /pdfMetadata\.inspector\.additionalDecoded/);
+  assert.ok(html.indexOf("metadata-action-panel") < html.indexOf('id="inspector"'), "Primary actions precede decoded PDF content in DOM order");
   assert.match(css, /#custom-policy-options[^}]*grid-template-columns:\s*repeat\(2/);
   assert.doesNotMatch(css, /\.metadata-table\s*\{\s*min-width/);
   assert.match(read("tools/pdf/index.html"), /href="\.\/metadata\/"/);

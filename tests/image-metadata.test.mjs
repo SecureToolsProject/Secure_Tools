@@ -146,8 +146,16 @@ assert.equal(partialModel.groups[0].key, "xmp", "XMP remains a distinct namespac
 const categorized = buildInspectionModel({ cleanable: true, report: { inspectionStatus: "metadata-partial", entries: [{ id: "a", namespace: "exif", name: "Software", category: "software", value: "Camera App" }, { id: "b", namespace: "iptc", name: "Caption", category: "description", value: "Decoded caption" }, { id: "c", namespace: "unknown", name: "Tag", category: "not-known" }], diagnostics: [{ severity: "warning", code: "TEST_DIAGNOSTIC", offset: 42, message: "bounded detail" }] } }, labels);
 assert.deepEqual(categorized.groups.map(({ key }) => key), ["software", "iptc", "other"]);
 assert.deepEqual(categorized.decodedGroups.map(({ key }) => key), ["software", "iptc"]);
-assert.equal(categorized.decodedCount, 2); assert.equal(categorized.decodedGroupCount, 2); assert.equal(categorized.additionalCount, 1);
+assert.equal(categorized.decodedCount, 2); assert.equal(categorized.decodedGroupCount, 2); assert.equal(categorized.additionalCount, 1); assert.equal(categorized.additionalDecodedCount, 0);
 assert.match(categorized.diagnostics[0], /WARNING · TEST_DIAGNOSTIC · byte 42 · bounded detail/);
+const manyDecoded = buildInspectionModel({ cleanable: true, report: { inspectionStatus: "metadata-inspected", entries: [
+  { namespace: "exif", name: "Technical", category: "technical", value: "t" }, { namespace: "exif", name: "Device", category: "device", value: "d" },
+  { namespace: "exif", name: "Captured", category: "timestamp", value: "c" }, { namespace: "gps", name: "Location", category: "location", value: "l" },
+  { namespace: "exif", name: "Software", category: "software", value: "s" }, { namespace: "iptc", name: "Author", category: "identity", value: "a" },
+  { namespace: "iptc", name: "Description", category: "description", value: "x" }, { namespace: "exif", name: "Rights", category: "rights", value: "r" },
+] } }, labels);
+assert.equal(manyDecoded.summaryGroups.reduce((count, group) => count + group.items.length, 0), 6);
+assert.equal(manyDecoded.additionalDecodedCount, 2); assert.equal(manyDecoded.summaryGroups[0].key, "device");
 assert.equal(buildInspectionModel({ report: { inspectionStatus: "format-only", entries: [], diagnostics: [] } }).coverageKey, "imageMetadata.coverage.format-only");
 assert.equal(buildInspectionModel({ report: { inspectionStatus: "container-inspected", entries: [], diagnostics: [] } }).count, 0, "No supported metadata is distinct from a claim that no metadata exists");
 const incompleteModel = buildInspectionModel({ cleanable: false, report: { inspectionStatus: "container-partial", entries: [], diagnostics: [] } }, labels);
@@ -234,10 +242,12 @@ assert.match(app, /URL\.revokeObjectURL\(state\.previewUrl\)/);
 assert.match(app, /pagehide[^;]+releasePreview/);
 assert.match(app, /releasePreview\(\); resetPolicy\(\); state\.source = null; state\.inspection = null; state\.result = null/);
 assert.match(html, /id="inspection-details" class="inspection-details"><summary[^>]*data-i18n="imageMetadata\.inspector\.details"/);
-assert.match(html, /id="metadata-groups" class="metadata-groups metadata-groups--primary"[\s\S]*id="additional-notice"[\s\S]*id="metadata-detail-groups"/);
+assert.match(html, /class="metadata-overview"[\s\S]*class="[^"]*metadata-action-panel[^"]*"[\s\S]*id="metadata-groups" class="metadata-groups metadata-groups--primary"[\s\S]*id="decoded-overflow-notice"[\s\S]*id="additional-notice"[\s\S]*id="metadata-detail-groups"/);
 assert.match(html, /id="customize-cleaning" class="clean-customization"[^>]*hidden[\s\S]*<fieldset id="custom-policy-options">/);
 assert.equal((html.match(/data-policy-key=/g) || []).length, 7);
 assert.match(app, /FORMAT_POLICY_KEYS[\s\S]*jpeg:[^\n]*removeIptc[^\n]*removeComments[\s\S]*png:[^\n]*removeTextMetadata[^\n]*removeTimestamps[\s\S]*webp:/);
+assert.match(app, /renderGroups\(elements\.metadata_groups, state\.inspection\.summaryGroups, false\)/); assert.match(app, /additionalDecodedCount/);
+assert.ok(html.indexOf("metadata-action-panel") < html.indexOf('id="inspection"'), "Primary actions precede arbitrary metadata content in DOM order");
 assert.match(html, /connect-src 'none'/); assert.match(html, /role="status" aria-live="polite"/);
 assert.match(category, /href="\.\/metadata\/"/); assert.equal((category.match(/class="category-tool surface"/g) || []).length, 4);
 const requestIndex = app.indexOf("await requestSaveHandle"); const cleanIndex = app.indexOf("await cleanAndVerifyImageMetadata"); const writeIndex = app.indexOf("await writeBlobToHandle");

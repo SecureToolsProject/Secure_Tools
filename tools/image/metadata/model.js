@@ -2,6 +2,8 @@ export const MAX_METADATA_VALUE_LENGTH = 2000;
 export const MAX_DIAGNOSTIC_LENGTH = 500;
 
 const GROUPS = Object.freeze(["location", "device", "time", "technical", "software", "author", "rights", "descriptive", "xmp", "iptc", "color", "rendering", "other"]);
+const SUMMARY_GROUPS = Object.freeze(["device", "time", "location", "software", "author", "descriptive", "rights", "rendering", "technical", "color", "xmp", "iptc", "other"]);
+export const MAX_PRIMARY_DECODED_ITEMS = 6;
 const CATEGORY_GROUP = Object.freeze({
   location: "location", device: "device", timestamp: "time", technical: "technical", software: "software",
   identity: "author", rights: "rights", description: "descriptive", color: "color", rendering: "rendering",
@@ -59,6 +61,18 @@ function groupedEntries(entries, labels) {
   return [...groups].filter(([, items]) => items.length).map(([key, items]) => ({ key, items }));
 }
 
+function primaryDecodedGroups(groups, limit = MAX_PRIMARY_DECODED_ITEMS) {
+  const byKey = new Map(groups.map((group) => [group.key, group]));
+  const ordered = [...SUMMARY_GROUPS, ...groups.map((group) => group.key).filter((key) => !SUMMARY_GROUPS.includes(key))];
+  const primary = []; let remaining = limit;
+  for (const key of ordered) {
+    const group = byKey.get(key); if (!group || remaining === 0) continue;
+    const items = group.items.slice(0, remaining); if (items.length) primary.push({ ...group, items });
+    remaining -= items.length;
+  }
+  return primary;
+}
+
 export function buildInspectionModel(source, labels = {}) {
   const entries = Array.isArray(source?.report?.entries) ? source.report.entries : [];
   const groups = groupedEntries(entries, labels);
@@ -66,6 +80,8 @@ export function buildInspectionModel(source, labels = {}) {
     .map((group) => ({ ...group, items: group.items.filter((item) => !item.value.opaque) }))
     .filter((group) => group.items.length);
   const decodedCount = decodedGroups.reduce((count, group) => count + group.items.length, 0);
+  const summaryGroups = primaryDecodedGroups(decodedGroups);
+  const summaryDecodedCount = summaryGroups.reduce((count, group) => count + group.items.length, 0);
   const status = source?.report?.inspectionStatus || "container-partial";
   return {
     format: source?.format || source?.report?.format || "",
@@ -80,6 +96,8 @@ export function buildInspectionModel(source, labels = {}) {
     additionalCount: entries.length - decodedCount,
     groups,
     decodedGroups,
+    summaryGroups,
+    additionalDecodedCount: decodedCount - summaryDecodedCount,
     diagnostics: (source?.report?.diagnostics || []).map(diagnosticText),
   };
 }
