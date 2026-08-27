@@ -10,6 +10,7 @@
 - Added the single-file Image Metadata Inspector & Cleaner for JPEG, PNG, and WebP with honest partial/opaque reporting, authoritative Privacy Clean, ICC preservation, and fail-closed verification before save.
 - Pinned the immutable `secure-metadata v0.1.1` browser Release artifact as a same-origin dependency with exact provenance and SHA-256 release-gate coverage.
 - Added per-file and aggregate compression metrics that distinguish byte savings from larger generated results.
+- Added production crawler discovery files, canonical URLs, page-specific Open Graph metadata, SEO regression coverage, and search-engine submission guidance for securetools.app.
 - Added per-image output dimension/pixel checks and a 200-megapixel aggregate resize-output workload limit.
 - Added JPEG, PNG, and WebP input/output, lossy quality controls for JPEG/WebP, deterministic white JPEG transparency, metadata-stripping canvas re-encoding, collision-safe Unicode names, and ZIP batch output.
 - Added per-file, queue, dimension, decoded-pixel, and 200-megapixel aggregate-work protections with recoverable errors.

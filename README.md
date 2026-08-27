@@ -66,6 +66,7 @@ The [documentation index](./docs/README.md) links to the maintained sources of t
 - architecture and delivery;
 - privacy, local processing, and network boundaries;
 - production dependencies and vendoring;
+- search discovery, canonical metadata, and search-engine submission;
 - production and planned tool status;
 - release QA evidence;
 - UX, accessibility, localization, and format-specific privacy audits.
