@@ -8,6 +8,11 @@ const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 const home = read("index.html");
 
 function testCategoryFirstHomepage() {
+  assert.doesNotMatch(home, />Nothing<|What leaves your device|Inspect and clean hidden file details\./);
+  assert.match(home, /data-i18n="hero\.proofLabel">File contents uploaded/);
+  assert.match(home, /data-i18n="hero\.proofValue">None/);
+  assert.match(home, /data-i18n="hero\.proofNote">Production tools process file contents locally in browser memory\./);
+  assert.match(home, /data-i18n="tools\.categoryDescriptions\.privacy">Inspect and clean supported image or PDF metadata\./);
   assert.doesNotMatch(home, /available-tools|available-tools-title|tools\.available(?:Eyebrow|Title|Description)/);
   assert.equal((home.match(/class="category-card surface"/g) || []).length, 5, "Homepage must retain five category entry points");
   const categoryHrefs = [...home.matchAll(/<a class="category-card surface" href="([^"]+)"/g)].map((match) => match[1]);

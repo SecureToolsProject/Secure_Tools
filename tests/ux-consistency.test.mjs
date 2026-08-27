@@ -8,6 +8,9 @@ const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 
 const fileTools = [
   ["Image Converter", "tools/image/converter/index.html", "tools/image/converter/app.js", "image/"],
+  ["Image Resize", "tools/image/resize/index.html", "tools/image/resize/app.js", "image/"],
+  ["Image Compressor", "tools/image/compress/index.html", "tools/image/compress/app.js", "image/"],
+  ["Image Metadata", "tools/image/metadata/index.html", "tools/image/metadata/app.js", "image/"],
   ["Images to PDF", "tools/pdf/images-to-pdf/index.html", "tools/pdf/images-to-pdf/app.js", "image/"],
   ["Merge PDF", "tools/pdf/merge/index.html", "tools/pdf/merge/app.js", "pdf"],
   ["Split PDF", "tools/pdf/split/index.html", "tools/pdf/split/app.js", "pdf"],
@@ -20,7 +23,8 @@ const productionPages = [
   "index.html", "404.html", "about/index.html", "privacy/index.html",
   "tools/pdf/index.html", "tools/pdf/images-to-pdf/index.html", "tools/pdf/merge/index.html",
   "tools/pdf/split/index.html", "tools/pdf/organize/index.html", "tools/pdf/to-images/index.html",
-  "tools/pdf/metadata/index.html", "tools/image/index.html", "tools/image/converter/index.html", "tools/privacy/index.html",
+  "tools/pdf/metadata/index.html", "tools/image/index.html", "tools/image/converter/index.html", "tools/image/resize/index.html",
+  "tools/image/compress/index.html", "tools/image/metadata/index.html", "tools/privacy/index.html",
   "tools/scan/index.html", "tools/media/index.html",
 ];
 
@@ -41,7 +45,7 @@ function testFileInputContract() {
     assert.match(app, /dragenter[\s\S]*dragover/, `${name}: drag-enter/over behavior is missing`);
     assert.match(app, /dataset\.dragging/, `${name}: visible drag-active state is missing`);
     assert.match(app, /addEventListener\("drop"/, `${name}: drop handling is missing`);
-    assert.match(app, /elements\.input\.disabled\s*=/, `${name}: busy/loading input state is not explicit`);
+    assert.match(app, /elements\.(?:input|file_input)\.disabled\s*=/, `${name}: busy/loading input state is not explicit`);
     assert.match(html, /<button[^>]*class="button button--primary"/, `${name}: primary action does not use the shared pattern`);
     assert.match(html, /class="tool-status[^"]*" role="status" aria-live="polite"/, `${name}: shared live status is missing`);
     assert.doesNotMatch(html, /\.\.\/images-to-pdf\/tool\.css|\.\.\/split\/tool\.css/, `${name}: tool imports a sibling's stylesheet`);
@@ -71,7 +75,7 @@ function testQueueSourceAndOutputPatterns() {
     assert.match(html, /class="source-empty"/);
   }
   assert.match(read("tools/pdf/organize/index.html"), /class="organizer-output tool-output surface"/);
-  assert.match(read("tools/pdf/metadata/index.html"), /class="metadata-output tool-output surface"/);
+  assert.match(read("tools/pdf/metadata/index.html"), /class="metadata-output tool-output metadata-action-panel"/);
 }
 
 function testSharedChromeAndAccessibility() {
@@ -81,11 +85,19 @@ function testSharedChromeAndAccessibility() {
     assert.match(html, /<main\b[^>]*\bid="main"/, `${relative}: main landmark target missing`);
     for (const brand of html.matchAll(/<a class="brand"[^>]*>/g)) {
       assert.match(brand[0], /aria-label="Secure Tools home"/, `${relative}: brand home link lacks a consistent name`);
+      assert.match(brand[0], /data-i18n-aria-label="common\.aria\.home"/, `${relative}: brand home name is not localized`);
     }
     const footer = html.match(/<footer class="site-footer">([\s\S]*?)<\/footer>/)?.[1] || "";
-    assert.match(footer, /<nav aria-label="Footer navigation">/, `${relative}: footer navigation missing`);
+    assert.match(footer, /<nav aria-label="Footer navigation" data-i18n-aria-label="common\.aria\.footerNavigation">/, `${relative}: localized footer navigation missing`);
+    if (html.includes('class="site-nav"')) {
+      assert.match(html, /<nav class="site-nav" aria-label="Primary navigation" data-i18n-aria-label="common\.aria\.primaryNavigation">/, `${relative}: localized primary navigation missing`);
+    }
     const keys = [...footer.matchAll(/data-i18n="(common\.nav\.[^"]+)"/g)].map((match) => match[1]);
     assert.deepEqual(keys, ["common.nav.tools", "common.nav.privacy", "common.nav.about", "common.nav.source"], `${relative}: footer links differ`);
+  }
+  assert.match(read("index.html"), /aria-label="Local processing summary" data-i18n-aria-label="common\.aria\.localProcessingSummary"/);
+  for (const relative of productionPages.filter((page) => page.startsWith("tools/"))) {
+    assert.match(read(relative), /aria-label="Tool categories" data-i18n-aria-label="common\.aria\.toolCategories"/, `${relative}: localized category navigation missing`);
   }
 }
 

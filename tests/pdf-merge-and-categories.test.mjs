@@ -5,8 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { en } from "../js/locales/en.js";
-import { ko } from "../js/locales/ko.js";
+import { translations } from "../js/i18n.js";
 import { formatBytes, moveArrayItem, sanitizePdfFilename } from "../tools/shared/file.js";
 import { inspectPdf, isSupportedPdf, mergePdfFiles } from "../tools/pdf/merge/pdf.js";
 
@@ -129,7 +128,8 @@ function testRoutesTranslationsAndPrivacy() {
   const routeFiles = [
     "index.html", "privacy/index.html", "about/index.html", "404.html", "tools/image-to-pdf/index.html",
     "tools/pdf/index.html", "tools/pdf/images-to-pdf/index.html", "tools/pdf/merge/index.html", "tools/pdf/split/index.html", "tools/pdf/organize/index.html", "tools/pdf/to-images/index.html", "tools/pdf/metadata/index.html",
-    "tools/image/index.html", "tools/image/converter/index.html", "tools/privacy/index.html", "tools/scan/index.html", "tools/media/index.html",
+    "tools/image/index.html", "tools/image/converter/index.html", "tools/image/resize/index.html", "tools/image/compress/index.html",
+    "tools/image/metadata/index.html", "tools/privacy/index.html", "tools/scan/index.html", "tools/media/index.html",
   ];
   const toImagesHtml = fs.readFileSync(path.join(root, "tools/pdf/to-images/index.html"), "utf8");
   assert.match(toImagesHtml, /assets\/vendor\/pdf-lib\/pdf-lib\.min\.js/);
@@ -146,13 +146,13 @@ function testRoutesTranslationsAndPrivacy() {
     const file = path.join(root, relative);
     const html = fs.readFileSync(file, "utf8");
     for (const [, key] of html.matchAll(/data-i18n(?:-aria-label|-title)?="([^"]+)"/g)) {
-      for (const [language, dictionary] of [["en", en], ["ko", ko]]) {
+      for (const [language, dictionary] of Object.entries(translations)) {
         assert.notEqual(lookup(dictionary, key), undefined, `${relative} missing ${language} translation: ${key}`);
       }
     }
     const page = html.match(/<body[^>]*data-page="([^"]+)"/)?.[1];
     if (page) {
-      for (const [language, dictionary] of [["en", en], ["ko", ko]]) {
+      for (const [language, dictionary] of Object.entries(translations)) {
         assert.equal(typeof lookup(dictionary, `metadata.${page}.title`), "string", `${relative} missing ${language} metadata`);
       }
     }

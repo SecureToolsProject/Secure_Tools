@@ -56,7 +56,8 @@ assert.doesNotMatch(imageHtml, /(?:unpkg|jsdelivr|cdnjs|https?:\/\/[^"']*jspdf)/
 
 const productionHtml = [
   "index.html", "404.html", "about/index.html", "privacy/index.html", "tools/image-to-pdf/index.html",
-  "tools/image/index.html", "tools/image/converter/index.html", "tools/media/index.html", "tools/pdf/index.html", "tools/privacy/index.html", "tools/scan/index.html",
+  "tools/image/index.html", "tools/image/converter/index.html", "tools/image/resize/index.html", "tools/image/compress/index.html", "tools/image/metadata/index.html",
+  "tools/media/index.html", "tools/pdf/index.html", "tools/privacy/index.html", "tools/scan/index.html",
   "tools/pdf/images-to-pdf/index.html", "tools/pdf/merge/index.html", "tools/pdf/split/index.html", "tools/pdf/organize/index.html", "tools/pdf/to-images/index.html", "tools/pdf/metadata/index.html",
 ];
 for (const relative of productionHtml) {
@@ -66,7 +67,10 @@ for (const relative of productionHtml) {
   assert.doesNotMatch(csp, /unsafe-inline|unsafe-eval/);
   assert.doesNotMatch(html, /<script(?![^>]*\bsrc=)[^>]*>[\s\S]*?<\/script>/i, `${relative}: inline script`);
   assert.doesNotMatch(html, /<style\b|\sstyle="/i, `${relative}: inline style`);
+  const sourceLinks = [...html.matchAll(/<a\b[^>]*data-repository-link[^>]*>/g)];
+  for (const [link] of sourceLinks) assert.match(link, /href="https:\/\/github\.com\/SecureToolsProject\/Secure_Tools"/, relative + ": stale Source link");
 }
+assert.match(read("js/config.js"), /REPOSITORY_URL = "https:\/\/github\.com\/SecureToolsProject\/Secure_Tools"/);
 assert.equal(fs.existsSync(path.join(root, "image2pdf_proto.html")), false);
 
 const app = read("tools/pdf/images-to-pdf/app.js");

@@ -4,9 +4,25 @@ import { ja } from "./locales/ja.js";
 import { es } from "./locales/es.js";
 import { de } from "./locales/de.js";
 import { fr } from "./locales/fr.js";
+import { imageResizeLocales } from "./locales/image-resize.js";
+import { imageCompressorLocales } from "./locales/image-compressor.js";
+import { imageMetadataLocales } from "./locales/image-metadata.js";
+import { privacyHubLocales } from "./locales/privacy-hub.js";
+import { metadataUxLocales } from "./locales/metadata-ux.js";
 
 const STORAGE_KEY = "secure-tools-language";
-export const translations = { en, ko, ja, es, de, fr };
+const baseTranslations = { en, ko, ja, es, de, fr };
+export const translations = Object.fromEntries(Object.entries(baseTranslations).map(([language, catalog]) => [language, {
+  ...catalog,
+  metadata: { ...catalog.metadata, imageResize: imageResizeLocales[language].metadata, imageCompressor: imageCompressorLocales[language].metadata, imageMetadata: imageMetadataLocales[language].metadata, privacyCategory: privacyHubLocales[language].metadata },
+  tools: { ...catalog.tools, imageMetadata: imageMetadataLocales[language].toolName, categoryDescriptions: { ...catalog.tools.categoryDescriptions, privacy: privacyHubLocales[language].categoryDescription } },
+  categories: { ...catalog.categories, image: { ...catalog.categories.image, metadata: imageMetadataLocales[language].categoryDescription } },
+  imageResize: imageResizeLocales[language].copy,
+  imageCompressor: imageCompressorLocales[language].copy,
+  imageMetadata: { ...imageMetadataLocales[language].copy, source: { ...imageMetadataLocales[language].copy.source, ...metadataUxLocales[language].image.source }, inspector: { ...imageMetadataLocales[language].copy.inspector, ...metadataUxLocales[language].image.inspector }, clean: { ...imageMetadataLocales[language].copy.clean, ...metadataUxLocales[language].image.clean }, policy: metadataUxLocales[language].image.policy },
+  pdfMetadata: { ...catalog.pdfMetadata, source: { ...catalog.pdfMetadata.source, ...metadataUxLocales[language].pdf.source }, inspector: { ...catalog.pdfMetadata.inspector, ...metadataUxLocales[language].pdf.inspector }, actions: { ...catalog.pdfMetadata.actions, ...metadataUxLocales[language].pdf.actions }, custom: metadataUxLocales[language].pdf.custom, errors: { ...catalog.pdfMetadata.errors, ...metadataUxLocales[language].pdf.errors } },
+  privacyHub: privacyHubLocales[language].copy,
+}]));
 
 export function resolveLanguage(value, availableLanguages = Object.keys(translations)) {
   const normalized = String(value || "").trim().toLowerCase();
@@ -61,6 +77,10 @@ const translateDocument = () => {
 
   document.querySelectorAll("[data-i18n-title]").forEach((element) => {
     element.setAttribute("title", t(element.dataset.i18nTitle));
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+    element.setAttribute("placeholder", t(element.dataset.i18nPlaceholder));
   });
 
   document.querySelectorAll("[data-language-select]").forEach((select) => {

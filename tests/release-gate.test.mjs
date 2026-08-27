@@ -52,6 +52,16 @@ const vendors = {
       "pdf.worker.min.mjs": "0613f41490dd6aaceed7a93fbbd38c85e6d6aa60474b6588c6e7709cfbe18cb3",
     },
   },
+  "secure-metadata": {
+    name: "secure-metadata",
+    version: "0.1.1",
+    license: "MIT",
+    files: ["LICENSE", "README.md", "package.json", "secure-metadata-0.1.1.browser.js"],
+    runtimes: {
+      "secure-metadata-0.1.1.browser.js": "4bfcc9e0e484db12192e46f076c19cf69cd36c496c7cfbb5a71c1057cbcccba1",
+    },
+  },
+
 };
 
 assert.deepEqual(fs.readdirSync(path.join(root, "assets/vendor")).sort(), Object.keys(vendors).sort());
@@ -68,6 +78,12 @@ for (const [directory, expected] of Object.entries(vendors)) {
   }
 }
 assert.match(read("assets/vendor/jszip/README.md"), /License choice: MIT/);
+const secureMetadataProvenance = read("assets/vendor/secure-metadata/README.md");
+assert.match(secureMetadataProvenance, /Release tag: `v0\.1\.1`/);
+assert.match(secureMetadataProvenance, /Release commit: `cdcd138e48d30618b6d76f7c6538cd43ad660b53`/);
+assert.match(secureMetadataProvenance, /SHA-256: `4bfcc9e0e484db12192e46f076c19cf69cd36c496c7cfbb5a71c1057cbcccba1`/);
+assert.match(secureMetadataProvenance, /Runtime dependencies: 0/);
+assert.match(read("assets/vendor/secure-metadata/secure-metadata-0.1.1.browser.js"), /maxInputBytes:\s*100 \* 1024 \* 1024/);
 
 const renderer = read("tools/shared/pdf-renderer.js");
 assert.match(renderer, /new URL\("\.\.\/\.\.\/assets\/vendor\/pdfjs\/pdf\.worker\.min\.mjs", import\.meta\.url\)/);
@@ -137,4 +153,4 @@ await assert.rejects(writeBlobToHandle({
   },
 }, blob), writeFailure);
 
-console.log("v1.0.0 release gate checks passed.");
+console.log("Release integrity and save-path gate checks passed.");

@@ -20,6 +20,7 @@ export const en = {
   common: {
     skip: "Skip to main content", brandTagline: "Private utilities, processed on your device",
     nav: { tools: "Tools", privacy: "Privacy", source: "Source", about: "About" },
+    aria: { home: "Secure Tools home", primaryNavigation: "Primary navigation", footerNavigation: "Footer navigation", toolCategories: "Tool categories", localProcessingSummary: "Local processing summary" },
     language: "Language", theme: "Theme", themes: { system: "System", light: "Light", dark: "Dark" },
     footerStatement: "Your files stay on your device.",
   },
@@ -27,7 +28,7 @@ export const en = {
     eyebrow: "Local-first file utilities", title: "Private tools for everyday files.",
     description: "Convert, inspect, and process files directly on your device. No uploads. No accounts. No tracking.",
     primary: "Explore tools", secondary: "Verify privacy", trust: "Local processing · Open source · No tracking",
-    proofLabel: "What leaves your device", proofValue: "Nothing", proofNote: "Core tools process file contents in browser memory.",
+    proofLabel: "File contents uploaded", proofValue: "None", proofNote: "Production tools process file contents locally in browser memory.",
   },
   tools: {
     eyebrow: "Tools", title: "Start with what you need to work on.",
@@ -36,13 +37,13 @@ export const en = {
     categoryDescriptions: { pdf: "Create, combine, and organize documents.", image: "Convert and prepare everyday images.", privacy: "Inspect and clean hidden file details.", scan: "Turn scans into useful documents.", media: "Work with audio and video locally." },
     browseCategory: "Browse category →",
     imagesToPdf: "Images to PDF", mergePdf: "Merge PDF", splitPdf: "Split PDF", organizePdf: "Organize PDF", pdfToImages: "PDF to Images", pdfMetadata: "PDF Metadata", imageConverter: "Image Converter",
-    imageCompressor: "Image Compressor", imageResizer: "Image Resizer", metadataInspector: "Metadata Inspector", metadataCleaner: "Metadata Cleaner",
+    imageCompressor: "Image Compressor", imageResizer: "Image Resizer", imageMetadata: "Image Metadata Inspector & Cleaner", metadataInspector: "Metadata Inspector", metadataCleaner: "Metadata Cleaner",
     available: "Available", comingSoon: "Coming soon",
   },
   categories: {
     eyebrow: "Tool category",
     nav: { pdf: "PDF", image: "Image", privacy: "Privacy", scan: "Scan & OCR", media: "Media" },
-    localNote: "Available tools process file contents in browser memory. Planned items are clearly marked.",
+    localNote: "Available tools process file contents locally in browser memory.",
     plannedNote: "This category is planned. No unavailable item is presented as working.",
     pdf: {
       title: "PDF tools", description: "Create and organize PDF documents locally, without uploading private files.",
@@ -54,7 +55,7 @@ export const en = {
     },
     image: {
       title: "Image tools", description: "Prepare everyday images privately in your browser.",
-      convert: "Convert common image formats locally.", compress: "Reduce file size with clear quality controls.", resize: "Resize images to exact pixel dimensions.",
+      convert: "Convert common image formats locally.", compress: "Reduce file size with clear quality controls.", resize: "Resize images to exact pixel dimensions.", metadata: "Inspect privacy-relevant metadata and save a verified cleaned copy.",
     },
     privacy: {
       title: "Privacy tools", description: "Inspect and remove hidden file details without sharing the source file.",

@@ -5,13 +5,29 @@
 ### Added
 
 - Started the v2 cycle with a production Image category and local Image Converter.
+- Added Image Resize with pixel and percentage modes, aspect-ratio preservation, optional enlargement, Original/JPEG/PNG/WebP output, and local batch ZIP saving.
+- Added Image Compressor with Original/JPEG/PNG/WebP output, truthful format-specific quality behavior, unchanged dimensions, and local batch ZIP saving.
+- Added the single-file Image Metadata Inspector & Cleaner for JPEG, PNG, and WebP with honest partial/opaque reporting, authoritative Privacy Clean, ICC preservation, and fail-closed verification before save.
+- Pinned the immutable `secure-metadata v0.1.1` browser Release artifact as a same-origin dependency with exact provenance and SHA-256 release-gate coverage.
+- Added per-file and aggregate compression metrics that distinguish byte savings from larger generated results.
+- Added per-image output dimension/pixel checks and a 200-megapixel aggregate resize-output workload limit.
 - Added JPEG, PNG, and WebP input/output, lossy quality controls for JPEG/WebP, deterministic white JPEG transparency, metadata-stripping canvas re-encoding, collision-safe Unicode names, and ZIP batch output.
 - Added per-file, queue, dimension, decoded-pixel, and 200-megapixel aggregate-work protections with recoverable errors.
 
 ### Changed
 
+- Hardened v2 promotion gates for all ten production tools, vendored-resource integrity, local-only network invariants, save failure paths, and resource boundaries.
+- Upgraded secure-metadata to v0.1.1 so JPEG Privacy Clean preserves one valid rendering Orientation while removing other targeted EXIF/GPS data without decoding or re-encoding pixels.
+- Aligned Image and PDF Metadata action panels and bounded their primary decoded summaries while retaining complete details.
+- Corrected canonical repository links and extended integration CI to `v2` pushes.
+- Narrowed homepage and category privacy copy to production file-content processing and localized shared navigation and summary accessible names across all six interface languages.
+- Added a live v2 promotion QA matrix that keeps blocked browser evidence separate from passing automated checks.
+- Recorded completed manual Chrome release QA and verified EXIF Orientation preservation, advancing the documented v2 status to READY FOR PROMOTION without creating a release.
+
 - Removed the standalone planned Rotate PDF card; page rotation remains available as part of PDF Organizer.
 - Moved shared browser image validation and decoding into `tools/shared/image.js` for PDF and Image tools.
+- Promoted Privacy from generic planned placeholders to a production navigation hub for the existing Image and PDF metadata tools, with distinct supported-scope copy in all six locales.
+- Repaired the Image category’s semantic tool list so all four available cards remain within the same list.
 
 ## 1.0.0
 

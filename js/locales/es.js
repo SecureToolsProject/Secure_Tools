@@ -74,6 +74,7 @@ export const es = {
       "source": "Código fuente",
       "about": "Acerca de"
     },
+    "aria": { "home": "Inicio de Secure Tools", "primaryNavigation": "Navegación principal", "footerNavigation": "Navegación del pie de página", "toolCategories": "Categorías de herramientas", "localProcessingSummary": "Resumen del procesamiento local" },
     "language": "Idioma",
     "theme": "Tema",
     "themes": {
@@ -90,9 +91,9 @@ export const es = {
     "primary": "Explorar herramientas",
     "secondary": "Verificar privacidad",
     "trust": "Procesamiento local · Código abierto · Sin seguimiento",
-    "proofLabel": "Lo que sale de tu dispositivo",
-    "proofValue": "Nada",
-    "proofNote": "Las herramientas principales procesan el contenido del archivo en la memoria del navegador."
+    "proofLabel": "Contenido de archivos subido",
+    "proofValue": "Ninguno",
+    "proofNote": "Las herramientas disponibles procesan el contenido de los archivos localmente en la memoria del navegador."
   },
   "tools": {
     "eyebrow": "Herramientas",
@@ -122,6 +123,7 @@ export const es = {
     "imageConverter": "Convertidor de imágenes",
     "imageCompressor": "Compresor de imagen",
     "imageResizer": "Cambio de tamaño de imagen",
+    "imageMetadata": "Inspector y limpiador de metadatos",
     "metadataInspector": "Inspector de metadatos",
     "metadataCleaner": "Limpiador de metadatos",
     "available": "Disponible",
@@ -136,7 +138,7 @@ export const es = {
       "scan": "Escaneo y OCR",
       "media": "Medios"
     },
-    "localNote": "Las herramientas disponibles procesan el contenido del archivo en la memoria del navegador. Los elementos planificados están claramente marcados.",
+    "localNote": "Las herramientas disponibles procesan el contenido de los archivos localmente en la memoria del navegador.",
     "plannedNote": "Esta categoría está planificada. Ningún artículo no disponible se presenta como funcional.",
     "pdf": {
       "title": "Herramientas PDF",
@@ -153,7 +155,8 @@ export const es = {
       "description": "Prepare imágenes cotidianas de forma privada en su navegador.",
       "convert": "Convierte formatos de imagen comunes localmente.",
       "compress": "Reduzca el tamaño del archivo con controles de calidad claros.",
-      "resize": "Cambia el tamaño de las imágenes a las dimensiones exactas en píxeles."
+      "resize": "Cambia el tamaño de las imágenes a las dimensiones exactas en píxeles.",
+      "metadata": "Revisa metadatos de privacidad y guarda una copia verificada."
     },
     "privacy": {
       "title": "Herramientas de privacidad",

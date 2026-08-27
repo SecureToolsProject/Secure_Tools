@@ -76,6 +76,7 @@ export async function cleanPdfMetadata({ sourceBytes, selectedKeys, PDFDocument,
     const afterByKey = new Map(after.map((field) => [field.key, field]));
     const cleared = requested.filter((key) => !afterByKey.get(key)?.present);
     const retained = requested.filter((key) => afterByKey.get(key)?.present);
+    if (retained.length) throw createPdfError("METADATA_VERIFICATION_FAILED");
 
     return {
       bytes,

@@ -45,7 +45,7 @@ function placeholders(value) {
 function testCatalogParityAndQuality() {
   assert.deepEqual([...Object.keys(translations)], [...languageNames.keys()]);
   const english = flatten(translations.en);
-  assert.equal(english.size, 553);
+  assert.equal(english.size, 761);
 
   for (const [language, catalog] of Object.entries(translations)) {
     const flattened = flatten(catalog);
@@ -77,7 +77,7 @@ function testResolutionDetectionAndPersistence() {
 
 function testSelectorsAndDocumentTranslation() {
   const pages = listFiles(root, (file) => file.endsWith(".html") && fs.readFileSync(file, "utf8").includes("data-language-select"));
-  assert.equal(pages.length, 16, "Every production page with the shared header must expose the language selector");
+  assert.equal(pages.length, 19, "Every production page with the shared header must expose the language selector");
   for (const file of pages) {
     const html = fs.readFileSync(file, "utf8");
     const select = html.match(/<select[^>]*data-language-select[^>]*>([\s\S]*?)<\/select>/)?.[1];
@@ -85,6 +85,18 @@ function testSelectorsAndDocumentTranslation() {
     const options = [...select.matchAll(/<option value="([^"]+)">([^<]+)<\/option>/g)].map((match) => [match[1], match[2].trim()]);
     assert.deepEqual(options, [...languageNames], `${path.relative(root, file)} language options differ`);
     assert.doesNotMatch(select, /(?:🇺🇸|🇰🇷|🇯🇵|🇪🇸|🇩🇪|🇫🇷)/, "Language choices must not depend on flags");
+    for (const key of ["home", "footerNavigation"]) {
+      assert.match(html, new RegExp(`data-i18n-aria-label="common\\.aria\\.${key}"`), `${path.relative(root, file)} is missing localized ${key}`);
+    }
+    if (html.includes('class="site-nav"')) {
+      assert.match(html, /data-i18n-aria-label="common\.aria\.primaryNavigation"/, `${path.relative(root, file)} is missing localized primaryNavigation`);
+    }
+  }
+
+  for (const [language, catalog] of Object.entries(translations)) {
+    for (const key of ["home", "primaryNavigation", "footerNavigation", "toolCategories", "localProcessingSummary"]) {
+      assert.ok(catalog.common.aria[key].trim(), `${language}.common.aria.${key} is empty`);
+    }
   }
 
   const source = fs.readFileSync(path.join(root, "js/i18n.js"), "utf8");
@@ -95,12 +107,16 @@ function testSelectorsAndDocumentTranslation() {
 
 function testDynamicToolsAndMetadata() {
   const dynamicApps = [
+    "tools/image/converter/app.js",
+    "tools/image/resize/app.js",
+    "tools/image/compress/app.js",
     "tools/pdf/images-to-pdf/app.js",
     "tools/pdf/merge/app.js",
     "tools/pdf/split/app.js",
     "tools/pdf/organize/app.js",
     "tools/pdf/to-images/app.js",
     "tools/pdf/metadata/app.js",
+    "tools/image/metadata/app.js",
   ];
   for (const relative of dynamicApps) {
     const source = fs.readFileSync(path.join(root, relative), "utf8");

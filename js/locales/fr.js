@@ -74,6 +74,7 @@ export const fr = {
       "source": "Code source",
       "about": "À propos"
     },
+    "aria": { "home": "Accueil Secure Tools", "primaryNavigation": "Navigation principale", "footerNavigation": "Navigation du pied de page", "toolCategories": "Catégories d’outils", "localProcessingSummary": "Résumé du traitement local" },
     "language": "Langue",
     "theme": "Thème",
     "themes": {
@@ -90,9 +91,9 @@ export const fr = {
     "primary": "Explorer les outils",
     "secondary": "Vérifier la confidentialité",
     "trust": "Traitement local · Open source · Pas de suivi",
-    "proofLabel": "Ce qui quitte votre appareil",
-    "proofValue": "Rien",
-    "proofNote": "Les outils de base traitent le contenu des fichiers dans la mémoire du navigateur."
+    "proofLabel": "Contenu de fichier téléversé",
+    "proofValue": "Aucun",
+    "proofNote": "Les outils disponibles traitent le contenu des fichiers localement dans la mémoire du navigateur."
   },
   "tools": {
     "eyebrow": "Outils",
@@ -122,6 +123,7 @@ export const fr = {
     "imageConverter": "Convertisseur d'images",
     "imageCompressor": "Compresseur d'images",
     "imageResizer": "Redimensionneur d'image",
+    "imageMetadata": "Inspecteur et nettoyeur de métadonnées",
     "metadataInspector": "Inspecteur de métadonnées",
     "metadataCleaner": "Nettoyeur de métadonnées",
     "available": "Disponible",
@@ -136,7 +138,7 @@ export const fr = {
       "scan": "Numérisation et OCR",
       "media": "Médias"
     },
-    "localNote": "Les outils disponibles traitent le contenu des fichiers dans la mémoire du navigateur. Les éléments prévus sont clairement indiqués.",
+    "localNote": "Les outils disponibles traitent le contenu des fichiers localement dans la mémoire du navigateur.",
     "plannedNote": "Cette catégorie est prévue. Aucun élément indisponible n'est présenté comme fonctionnel.",
     "pdf": {
       "title": "Outils PDF",
@@ -153,7 +155,8 @@ export const fr = {
       "description": "Préparez des images de tous les jours en privé dans votre navigateur.",
       "convert": "Convertissez localement les formats d'image courants.",
       "compress": "Réduisez la taille des fichiers avec des contrôles de qualité clairs.",
-      "resize": "Redimensionnez les images aux dimensions exactes en pixels."
+      "resize": "Redimensionnez les images aux dimensions exactes en pixels.",
+      "metadata": "Examinez les métadonnées privées et enregistrez une copie vérifiée."
     },
     "privacy": {
       "title": "Outils de confidentialité",

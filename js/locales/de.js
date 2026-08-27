@@ -74,6 +74,7 @@ export const de = {
       "source": "Quellcode",
       "about": "Über"
     },
+    "aria": { "home": "Secure Tools-Startseite", "primaryNavigation": "Hauptnavigation", "footerNavigation": "Fußzeilennavigation", "toolCategories": "Werkzeugkategorien", "localProcessingSummary": "Zusammenfassung der lokalen Verarbeitung" },
     "language": "Sprache",
     "theme": "Thema",
     "themes": {
@@ -90,9 +91,9 @@ export const de = {
     "primary": "Tools entdecken",
     "secondary": "Datenschutz überprüfen",
     "trust": "Lokale Verarbeitung · Open Source · Kein Tracking",
-    "proofLabel": "Was Ihr Gerät verlässt",
-    "proofValue": "Nichts",
-    "proofNote": "Kerntools verarbeiten Dateiinhalte im Browserspeicher."
+    "proofLabel": "Hochgeladene Dateiinhalte",
+    "proofValue": "Keine",
+    "proofNote": "Verfügbare Tools verarbeiten Dateiinhalte lokal im Browserspeicher."
   },
   "tools": {
     "eyebrow": "Werkzeuge",
@@ -122,6 +123,7 @@ export const de = {
     "imageConverter": "Bildkonverter",
     "imageCompressor": "Bildkompressor",
     "imageResizer": "Bild-Resizer",
+    "imageMetadata": "Bildmetadaten-Prüfer & Bereiniger",
     "metadataInspector": "Metadaten-Inspektor",
     "metadataCleaner": "Metadaten-Reiniger",
     "available": "Verfügbar",
@@ -136,7 +138,7 @@ export const de = {
       "scan": "Scannen und OCR",
       "media": "Medien"
     },
-    "localNote": "Verfügbare Tools verarbeiten Dateiinhalte im Browserspeicher. Geplante Artikel sind deutlich gekennzeichnet.",
+    "localNote": "Verfügbare Tools verarbeiten Dateiinhalte lokal im Browserspeicher.",
     "plannedNote": "Diese Kategorie ist geplant. Es wird kein nicht verfügbares Element als funktionsfähig angezeigt.",
     "pdf": {
       "title": "PDF-Tools",
@@ -153,7 +155,8 @@ export const de = {
       "description": "Bereiten Sie alltägliche Bilder privat in Ihrem Browser vor.",
       "convert": "Konvertieren Sie gängige Bildformate lokal.",
       "compress": "Reduzieren Sie die Dateigröße mit klaren Qualitätskontrollen.",
-      "resize": "Bilder auf exakte Pixelabmessungen skalieren."
+      "resize": "Bilder auf exakte Pixelabmessungen skalieren.",
+      "metadata": "Datenschutzrelevante Metadaten prüfen und eine verifizierte Kopie speichern."
     },
     "privacy": {
       "title": "Datenschutz-Tools",

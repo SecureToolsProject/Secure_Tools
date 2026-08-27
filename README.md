@@ -2,13 +2,16 @@
 
 Secure Tools is a privacy-first web hub for everyday file utilities. Production tools process file contents locally in the browser instead of uploading them to a server.
 
-The project uses a category-first architecture, a Pull Request/main CI gate, and static GitHub Pages deployment.
+The project uses a category-first architecture, pull-request CI plus `main`/`v2` integration CI gates, and static GitHub Pages deployment.
 
-The v1 baseline is recorded in the [changelog](./CHANGELOG.md) and historical [v1.0.0 release QA checklist](./docs/release-qa.md). Sprint 12 begins the v2 cycle by expanding production tools into the Image category.
+The v1 baseline is recorded in the [changelog](./CHANGELOG.md) and historical [v1.0.0 release QA checklist](./docs/release-qa.md). The live [v2 promotion QA gate](./docs/v2-release-qa.md) records automated evidence, manual browser results, dependency and repository risks, and current promotion readiness.
 
 ## Available tools
 
 - [Image Converter](./tools/image/converter/) — convert batches of JPEG, PNG, and WebP images locally with predictable names and ZIP output.
+- [Image Resize](./tools/image/resize/) — resize image batches by pixels or percentage while preserving aspect ratio by default.
+- [Image Compressor](./tools/image/compress/) — quality-compress image batches locally and compare original and result sizes.
+- [Image Metadata Inspector & Cleaner](./tools/image/metadata/) — inspect supported metadata and save a fail-closed, verified cleaned copy without pixel re-encoding.
 - [Images to PDF](./tools/pdf/images-to-pdf/) — arrange JPEG, PNG, and WebP images and save them as one PDF.
 - [Merge PDF](./tools/pdf/merge/) — validate, order, and combine PDF pages without rasterizing them.
 - [Split PDF](./tools/pdf/split/) — extract ordered page ranges or create predictable per-page and fixed-interval archives.
@@ -17,6 +20,15 @@ The v1 baseline is recorded in the [changelog](./CHANGELOG.md) and historical [v
 - [PDF Metadata Inspector & Cleaner](./tools/pdf/metadata/) — inspect supported document-info fields and save a locally verified cleaned copy.
 
 The homepage and category hubs clearly distinguish production tools from planned work.
+
+## Privacy metadata hub
+
+[`/tools/privacy/`](./tools/privacy/) is a navigation hub for the two existing production metadata tools. It does not add a generic inspector, cleaner, parser, or processing engine.
+
+- Image files route to [Image Metadata Inspector & Cleaner](./tools/image/metadata/), whose documented scope covers supported JPEG, PNG, and WebP structures. Its successful inspection may still be partial and non-exhaustive.
+- PDF files route to [PDF Metadata Inspector & Cleaner](./tools/pdf/metadata/), whose cleaning scope is limited to supported document-info fields and does not claim to remove every XMP packet, attachment, annotation, or hidden structure.
+
+Both tools process file contents locally and verify only their documented supported scope. Scan/OCR and Media remain planned categories with non-interactive cards.
 
 ## Interface languages
 
@@ -72,7 +84,11 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │       ├── ja.js
 │       ├── es.js
 │       ├── de.js
-│       └── fr.js
+│       ├── fr.js
+│       ├── image-resize.js
+│       ├── image-compressor.js
+│       ├── image-metadata.js
+│       └── privacy-hub.js
 ├── tools/
 │   ├── shared/
 │   │   ├── file.js
@@ -90,7 +106,10 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │   │   └── metadata/
 │   ├── image/
 │   │   ├── index.html
-│   │   └── converter/
+│   │   ├── converter/
+│   │   ├── resize/
+│   │   ├── compress/
+│   │   └── metadata/
 │   ├── privacy/
 │   ├── scan/
 │   ├── media/
@@ -100,12 +119,14 @@ The hub is a static site built with semantic HTML, CSS, and Vanilla JavaScript E
 │   ├── jspdf/
 │   ├── jszip/
 │   ├── pdf-lib/
-│   └── pdfjs/
+│   ├── pdfjs/
+│   └── secure-metadata/
 └── tests/
     ├── ci-foundation.test.mjs
     ├── home-structure.test.mjs
     ├── image-to-pdf.test.mjs
     ├── image-converter.test.mjs
+    ├── image-metadata.test.mjs
     ├── pdf-merge-and-categories.test.mjs
     ├── pdf-split.test.mjs
     ├── pdf-metadata.test.mjs
@@ -125,7 +146,7 @@ The category hubs are:
 - `/tools/scan/`
 - `/tools/media/`
 
-Categories are the stable navigation layer. Individual utilities can be added beneath them without turning the homepage into an unstructured tool list. Planned utilities remain visible only when clearly marked as unavailable.
+Categories are the stable navigation layer. PDF, Image, and Privacy link to production tools; Scan/OCR and Media remain planned and non-interactive. Individual utilities can be added beneath categories without turning the homepage into an unstructured tool list.
 
 `/tools/image-to-pdf/` is a lightweight static migration page with a meta refresh and visible fallback link to `/tools/pdf/images-to-pdf/`. It does not use JavaScript to redirect.
 
@@ -142,6 +163,46 @@ Image Converter is available at `/tools/image/converter/`.
 - Saves one converted image directly or packages multiple outputs into `converted_images.zip` with the existing same-origin JSZip build.
 - Reuses the existing 50 MiB file, 100-file queue, 500 MiB queue, 16,384-pixel dimension, and 50-megapixel per-image limits, plus a 200-megapixel aggregate decoded-work limit per conversion.
 - Keeps queued sources available after cancellation or recoverable decode, encode, archive, and save failures so the job can be retried without reloading.
+
+## Image Resize
+
+Image Resize is available at `/tools/image/resize/` on the v2 integration branch.
+
+- Accepts signature-validated JPEG, PNG, and WebP images and processes batches sequentially without uploading file contents.
+- Supports pixel bounding dimensions and per-source percentage scaling. Aspect ratio is preserved by default, either dimension may remain automatic, and enlargement is disabled by default.
+- Supports Original format for mixed batches plus explicit JPEG, PNG, and WebP output. JPEG and WebP use one batch quality setting; PNG does not expose a meaningless quality control.
+- Preserves transparency for PNG/WebP and flattens it onto white for JPEG, matching Image Converter. Canvas re-encoding strips EXIF and other embedded metadata.
+- Uses `_resized` names with deterministic collision suffixes and the established Unicode character/byte limits. Multiple outputs are packaged in `resized_images.zip`.
+- Enforces the shared 50 MiB file, 100-file queue, 500 MiB queue, 16,384-pixel dimension, and 50-megapixel per-image limits, plus a 200-megapixel aggregate output-work limit.
+- Keeps the queue available after validation, decode, canvas, encoding, archive, save, or cancellation errors so settings can be corrected and retried.
+
+## Image Compressor
+
+Image Compressor is available at `/tools/image/compress/` on the v2 integration branch.
+
+- Accepts signature-validated JPEG, PNG, and WebP images and preserves their oriented pixel dimensions while processing sequentially in browser memory.
+- Defaults to Original format. JPEG and WebP use an explicit 50–100% quality setting; PNG is re-encoded without a fake lossy-quality control, so size reduction may be limited.
+- Reports original size, result size, byte difference, and signed percentage change for every file, plus aggregate batch totals. Larger results are kept and labeled as increases rather than savings.
+- Preserves alpha for PNG/WebP and flattens transparent pixels onto white for JPEG. Canvas re-encoding strips EXIF and other embedded metadata.
+- Uses collision-safe Unicode `_compressed` names and saves multiple outputs as `compressed_images.zip` through the same-origin JSZip dependency.
+- Reuses the established input, queue, dimension, 50-megapixel per-image, and 200-megapixel aggregate decoded-work limits. Queues remain available after recoverable failures or save cancellation.
+- Performs no target-size search, resizing, cropping, metadata editing, upload, analytics, telemetry, remote codec, or runtime network request.
+## Image Metadata Inspector & Cleaner
+
+Image Metadata Inspector & Cleaner is available at `/tools/image/metadata/` on the v2 integration branch.
+
+- Accepts exactly one signature-validated JPEG, PNG, or WebP file and enforces the application’s 50 MiB limit before full inspection.
+- Uses the manually pinned, same-origin `secure-metadata v0.1.1` browser artifact. No npm package, CDN, runtime GitHub request, or automatic version check is used.
+- Shows the local source thumbnail, detected format, size, and a keyboard-accessible remove/reset path. Up to six high-value decoded fields are shown first; all decoded values, opaque containers, coverage, and diagnostics remain available in a native details disclosure.
+- Presents `metadata-partial` as successful but non-exhaustive. “No supported metadata detected” is not a claim that the file contains no metadata.
+- Privacy Clean calls the library’s authoritative default policy: supported privacy-related EXIF, XMP, IPTC, comments, PNG text metadata, and timestamps are removed while valid JPEG rendering orientation and ICC color profiles are preserved.
+- Customize exposes only supported class-level removal controls for the detected format. Unselected supported classes and unknown structures are preserved; individual metadata-value editing is not offered.
+- Keeps source bytes unchanged and never decodes pixels, creates Canvas, resizes, converts, changes quality, or re-encodes the image.
+- Calls `verifyMetadata` on cleaned bytes and requires a valid result with every policy check passing before saving. Invalid, incomplete, truncated, or mismatched results fail closed with no output write.
+- Derives MIME and the normalized `_clean` filename from the detected image format, not the supplied MIME type or extension.
+
+Detailed wording boundaries and provenance are recorded in [Image Metadata privacy and verification](./docs/image-metadata-privacy.md).
+
 
 ## Images to PDF
 
@@ -222,9 +283,10 @@ PDF Metadata Inspector & Cleaner is available at `/tools/pdf/metadata/` for one 
 
 - The explicit metadata model inspects Title, Author, Subject, Keywords, Creator, Producer, Creation Date, and Modification Date from the standard PDF document-info dictionary.
 - Values remain raw in application state while the UI formats dates with `Intl.DateTimeFormat`, safely replaces surfaced null characters for display, and limits individual rendered values to 2,000 characters. Cleaning still targets the complete underlying field.
-- Users can remove one or more selected fields or choose the explicit “Remove all supported metadata” path. Missing fields are shown consistently and cannot be selected.
+- Shows a compact source card and decoded values first, with all eight supported document-info fields available in a native details disclosure.
+- Privacy Clean removes every present supported document-info field. Customize exposes only the same eight class-level field controls; missing fields remain disabled and individual value editing is not offered.
 - Cleaning edits the loaded PDF with `pdf-lib` using `updateMetadata: false`; pages are not rasterized, copied from screenshots, or reconstructed.
-- After serialization, the tool reloads the produced bytes, inspects all supported fields again, and reports cleared or retained selections from that serialized output. Page count, dimensions, and rotation must also match before the result is offered as successful.
+- After serialization, the tool reloads the produced bytes and inspects all supported fields again. Every requested field must be absent, and page count, dimensions, and rotation must match before any output is written; a retained requested field fails closed.
 - Repeated cleaning continues from the previously verified output bytes. Loading or clearing a source releases the prior model, comparison, and retained byte references.
 - The original PDF is never modified. Saving uses the shared File System Access picker where available and the revoking Blob-download fallback elsewhere.
 
@@ -267,6 +329,17 @@ All processing libraries are pinned and served as same-origin static files. Prod
 - Main module and worker: same-origin files under `assets/vendor/pdfjs/`
 - Details and hashes: [assets/vendor/pdfjs/README.md](./assets/vendor/pdfjs/README.md)
 
+### secure-metadata
+
+- Version/tag: `v0.1.1`
+- Release commit: `cdcd138e48d30618b6d76f7c6538cd43ad660b53`
+- Purpose: local JPEG, PNG, and WebP metadata inspection, Privacy Clean, and fail-closed verification
+- Browser artifact SHA-256: `4bfcc9e0e484db12192e46f076c19cf69cd36c496c7cfbb5a71c1057cbcccba1`
+- License: MIT
+- Runtime dependencies: 0
+- Integration: manually pinned same-origin GitHub Release artifact; not an npm runtime dependency
+- Details and provenance: [assets/vendor/secure-metadata/README.md](./assets/vendor/secure-metadata/README.md)
+
 Each dependency keeps its license and package metadata beside the vendored browser build.
 
 ## Local development
@@ -285,7 +358,7 @@ Run the complete local and CI validation entry point with:
 node tests/run-all.mjs
 ```
 
-It checks JavaScript syntax and runs Image Converter, Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category-first homepage, system typography, CJK wrapping, long-copy layout, six-language catalog parity and placeholders, locale detection and persistence, static resource, privacy/network, security-hardening, dependency-integrity, save-path, ZIP, and CI workflow regression coverage. Test fixtures are generated deterministically; CI never processes real user files.
+It checks JavaScript syntax and runs Image Converter, Image Resize, Image Compressor, Image Metadata, Images to PDF, PDF Merge, PDF Split, PDF Organizer, PDF to Images, PDF Metadata, category-first homepage, system typography, CJK wrapping, long-copy layout, six-language catalog parity and placeholders, locale detection and persistence, static resource, privacy/network, security-hardening, dependency-integrity, save-path, ZIP, and CI workflow regression coverage. Test fixtures are generated deterministically; CI never processes real user files.
 
 ## Production security controls
 
@@ -345,7 +418,6 @@ The historical prototype is absent from the deployed tree. External URLs in docu
 ## Deferred work
 
 - Broader PDF modification, compression, and encryption workflows
-- Image resizing, compression, and dedicated metadata inspection/cleaning
 - Broader XMP and structural PDF metadata sanitization
 - Scan/OCR and media tools
 - Offline/PWA support
