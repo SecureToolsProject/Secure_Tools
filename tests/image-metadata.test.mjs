@@ -187,5 +187,5 @@ assert.match(adapter, /cleanMetadata\(source\.bytes, policy\)/);
 assert.match(adapter, /verifyMetadata\(cleaned\.output, expectation\)/);
 assert.match(adapter, /verification\.checks\.length > 0/);
 const applicationFiles = ["tools/image/metadata/app.js", "tools/image/metadata/model.js", "tools/image/metadata/metadata.js"];
-assert.deepEqual(applicationFiles.filter((relative) => read(relative).includes("secure-metadata-0.1.0.browser.js")), ["tools/image/metadata/metadata.js"]);
+assert.deepEqual(applicationFiles.filter((relative) => read(relative).includes("secure-metadata-0.1.1.browser.js")), ["tools/image/metadata/metadata.js"]);
 console.log("Image Metadata inspection, honest coverage, cleaning, verification, output, UI, privacy, and regression contracts passed.");

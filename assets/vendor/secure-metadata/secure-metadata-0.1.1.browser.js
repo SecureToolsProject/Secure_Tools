@@ -423,7 +423,7 @@ var IFD0_TAGS = {
   [TIFF_TAG.ORIENTATION]: {
     name: "Orientation",
     namespace: "exif",
-    category: "technical",
+    category: "rendering",
     privacy: "non-sensitive"
   },
   [TIFF_TAG.SOFTWARE]: {
@@ -928,6 +928,74 @@ function parseTiff(bytes, limits) {
   };
 }
 
+// src/exif/orientation.ts
+var EXIF_SIGNATURE = Uint8Array.of(69, 120, 105, 102, 0, 0);
+var TIFF_LENGTH = 26;
+function matches(left, right) {
+  return left.byteLength === right.byteLength && left.every((value, index) => value === right[index]);
+}
+function parseLimits(limits) {
+  return {
+    maxIfdEntries: resolveParseLimit("maxIfdEntries", limits?.maxIfdEntries),
+    maxIfdDepth: resolveParseLimit("maxIfdDepth", limits?.maxIfdDepth),
+    maxMetadataEntries: resolveParseLimit(
+      "maxMetadataEntries",
+      limits?.maxMetadataEntries
+    ),
+    maxStringBytes: resolveParseLimit("maxStringBytes", limits?.maxStringBytes),
+    maxDiagnostics: resolveParseLimit("maxDiagnostics", limits?.maxDiagnostics)
+  };
+}
+function orientationFromTiff(result) {
+  if (!result.complete || result.entryLimitExceeded === true || result.byteOrder === void 0) {
+    return void 0;
+  }
+  const orientations = result.entries.filter(
+    (entry) => entry.tag === TIFF_TAG.ORIENTATION && entry.path === "IFD0/Orientation"
+  );
+  const orientation = orientations[0];
+  if (orientations.length !== 1 || orientation === void 0 || orientation.type !== TIFF_FIELD_TYPE.SHORT || orientation.count !== 1 || typeof orientation.value !== "number" || orientation.value < 1 || orientation.value > 8) {
+    return void 0;
+  }
+  return { value: orientation.value, byteOrder: result.byteOrder };
+}
+function minimalOrientationExifPayload(orientation) {
+  const output = new Uint8Array(EXIF_SIGNATURE.byteLength + TIFF_LENGTH);
+  output.set(EXIF_SIGNATURE);
+  const tiffOffset = EXIF_SIGNATURE.byteLength;
+  const view = new DataView(
+    output.buffer,
+    output.byteOffset + tiffOffset,
+    TIFF_LENGTH
+  );
+  const little = orientation.byteOrder === "little";
+  output.set(little ? [73, 73] : [77, 77], tiffOffset);
+  view.setUint16(2, 42, little);
+  view.setUint32(4, 8, little);
+  view.setUint16(8, 1, little);
+  view.setUint16(10, TIFF_TAG.ORIENTATION, little);
+  view.setUint16(12, TIFF_FIELD_TYPE.SHORT, little);
+  view.setUint32(14, 1, little);
+  view.setUint16(18, orientation.value, little);
+  view.setUint32(22, 0, little);
+  return output;
+}
+function preservedOrientationExifPayload(payload, limits) {
+  if (payload.byteLength < EXIF_SIGNATURE.byteLength || !EXIF_SIGNATURE.every((value, index) => payload[index] === value)) {
+    return void 0;
+  }
+  const tiff = parseTiff(
+    payload.subarray(EXIF_SIGNATURE.byteLength),
+    parseLimits(limits)
+  );
+  const orientation = orientationFromTiff(tiff);
+  return orientation === void 0 ? void 0 : minimalOrientationExifPayload(orientation);
+}
+function isMinimalOrientationExifPayload(payload, result) {
+  const orientation = orientationFromTiff(result);
+  return orientation !== void 0 && matches(payload, minimalOrientationExifPayload(orientation));
+}
+
 // src/jpeg/markers.ts
 var JPEG_MARKER = {
   TEM: 1,
@@ -1014,6 +1082,7 @@ function inspectJpegMetadata(reader, result, tiffLimits, maxMetadataEntries) {
     }
     switch (segment.metadataKind) {
       case "exif": {
+        const containerIndex = entries.length;
         if (!add({
           id: `jpeg-exif-${String(segment.offset)}`,
           namespace: "exif",
@@ -1032,6 +1101,20 @@ function inspectJpegMetadata(reader, result, tiffLimits, maxMetadataEntries) {
           maxMetadataEntries: maxMetadataEntries - entries.length,
           maxDiagnostics: (tiffLimits.maxDiagnostics ?? DEFAULT_PARSE_LIMITS.maxDiagnostics) - diagnostics.length
         });
+        const payload = reader.slice(
+          segment.payloadOffset,
+          segment.payloadLength
+        );
+        if (isMinimalOrientationExifPayload(payload, tiff)) {
+          entries[containerIndex] = {
+            id: `jpeg-exif-${String(segment.offset)}`,
+            namespace: "exif",
+            name: "EXIF Orientation container",
+            category: "rendering",
+            privacy: "non-sensitive",
+            source: source(segment)
+          };
+        }
         entries.push(
           ...metadataEntriesFromTiff(tiff, {
             format: "jpeg",
@@ -1088,7 +1171,7 @@ function inspectJpegMetadata(reader, result, tiffLimits, maxMetadataEntries) {
 // src/jpeg/classify.ts
 var JFIF_SIGNATURE = [74, 70, 73, 70, 0];
 var JFXX_SIGNATURE = [74, 70, 88, 88, 0];
-var EXIF_SIGNATURE = [69, 120, 105, 102, 0, 0];
+var EXIF_SIGNATURE2 = [69, 120, 105, 102, 0, 0];
 var XMP_SIGNATURE = [
   104,
   116,
@@ -1219,7 +1302,7 @@ function classifyApplicationSegment(reader, marker, payloadOffset, payloadLength
     }
   }
   if (marker === 225) {
-    if (matchesPayload(reader, payloadOffset, payloadLength, EXIF_SIGNATURE)) {
+    if (matchesPayload(reader, payloadOffset, payloadLength, EXIF_SIGNATURE2)) {
       return { metadataKind: "exif" };
     }
     if (matchesPayload(reader, payloadOffset, payloadLength, XMP_SIGNATURE)) {
@@ -2785,22 +2868,35 @@ function changeFor3(segment, action) {
     }
   };
 }
-function copyWithoutSegments(input, removals) {
-  const retained = [];
+function jpegApp1Segment(payload) {
+  const declaredLength = payload.byteLength + 2;
+  if (declaredLength > 65535) {
+    throw new SecureMetadataError(
+      "Preserved EXIF Orientation exceeds the JPEG APP1 size limit.",
+      "CLEAN_OUTPUT_SIZE_INVALID"
+    );
+  }
+  const output = new Uint8Array(payload.byteLength + 4);
+  output.set([255, 225, declaredLength >>> 8, declaredLength & 255]);
+  output.set(payload, 4);
+  return output;
+}
+function bytesEqual(left, right) {
+  return left.byteLength === right.byteLength && left.every((value, index) => value === right[index]);
+}
+function copyWithSegmentEdits(input, edits) {
   let inputOffset = 0;
-  let outputLength = 0;
-  for (const segment of removals) {
+  let outputLength = input.byteLength;
+  for (const { segment, replacement } of edits) {
     const end = segment.rangeOffset + segment.rangeLength;
     if (!Number.isSafeInteger(segment.rangeOffset) || !Number.isSafeInteger(segment.rangeLength) || segment.rangeLength <= 0 || !Number.isSafeInteger(end) || segment.rangeOffset < inputOffset || end > input.byteLength) {
       throw new SecureMetadataError(
-        "JPEG cleaner produced an invalid removal range.",
+        "JPEG cleaner produced an invalid edit range.",
         "CLEAN_OUTPUT_SIZE_INVALID"
       );
     }
-    const length = segment.rangeOffset - inputOffset;
-    retained.push({ offset: inputOffset, length });
-    outputLength += length;
-    if (!Number.isSafeInteger(outputLength) || outputLength > input.byteLength) {
+    outputLength += (replacement?.byteLength ?? 0) - segment.rangeLength;
+    if (!Number.isSafeInteger(outputLength) || outputLength < 0 || outputLength > input.byteLength) {
       throw new SecureMetadataError(
         "JPEG cleaner output size is invalid.",
         "CLEAN_OUTPUT_SIZE_INVALID"
@@ -2808,24 +2904,20 @@ function copyWithoutSegments(input, removals) {
     }
     inputOffset = end;
   }
-  const tailLength = input.byteLength - inputOffset;
-  retained.push({ offset: inputOffset, length: tailLength });
-  outputLength += tailLength;
-  if (!Number.isSafeInteger(outputLength) || outputLength < 0 || outputLength > input.byteLength) {
-    throw new SecureMetadataError(
-      "JPEG cleaner output size is invalid.",
-      "CLEAN_OUTPUT_SIZE_INVALID"
-    );
-  }
   const output = new Uint8Array(outputLength);
+  inputOffset = 0;
   let outputOffset = 0;
-  for (const range of retained) {
-    output.set(
-      input.subarray(range.offset, range.offset + range.length),
-      outputOffset
-    );
-    outputOffset += range.length;
+  for (const { segment, replacement } of edits) {
+    const retainedLength = segment.rangeOffset - inputOffset;
+    output.set(input.subarray(inputOffset, segment.rangeOffset), outputOffset);
+    outputOffset += retainedLength;
+    if (replacement !== void 0) {
+      output.set(replacement, outputOffset);
+      outputOffset += replacement.byteLength;
+    }
+    inputOffset = segment.rangeOffset + segment.rangeLength;
   }
+  output.set(input.subarray(inputOffset), outputOffset);
   return output;
 }
 function cleanMetadata(input, policy) {
@@ -2863,14 +2955,52 @@ function cleanMetadata(input, policy) {
     );
   }
   const resolved = normalizeCleaningPolicy(policy);
-  const removals = jpeg.segments.filter(
-    (segment) => shouldRemove3(segment, resolved)
-  );
-  const removed = removals.map((segment) => changeFor3(segment, "removed"));
-  const preserved = jpeg.segments.filter(
-    (segment) => (segment.kind === "application" || segment.kind === "comment") && !shouldRemove3(segment, resolved)
-  ).map((segment) => changeFor3(segment, "preserved"));
-  const output = copyWithoutSegments(bytes, removals);
+  const orientationCandidates = resolved.removeExif ? jpeg.segments.flatMap((segment) => {
+    if (segment.metadataKind !== "exif" || segment.payloadOffset === void 0 || segment.payloadLength === void 0) {
+      return [];
+    }
+    const payload = reader.slice(
+      segment.payloadOffset,
+      segment.payloadLength
+    );
+    const replacement = preservedOrientationExifPayload(
+      payload,
+      policy?.limits
+    );
+    return replacement === void 0 ? [] : [{ segment, replacement }];
+  }) : [];
+  const orientationCandidate = orientationCandidates.length === 1 ? orientationCandidates[0] : void 0;
+  const edits = [];
+  const orientationPreserved = [];
+  for (const segment of jpeg.segments) {
+    if (!shouldRemove3(segment, resolved)) {
+      continue;
+    }
+    if (orientationCandidate !== void 0 && segment === orientationCandidate.segment) {
+      const replacement = jpegApp1Segment(orientationCandidate.replacement);
+      orientationPreserved.push({
+        ...changeFor3(segment, "preserved"),
+        name: "EXIF Orientation"
+      });
+      const original = bytes.subarray(
+        segment.rangeOffset,
+        segment.rangeOffset + segment.rangeLength
+      );
+      if (!bytesEqual(original, replacement)) {
+        edits.push({ segment, replacement });
+      }
+      continue;
+    }
+    edits.push({ segment });
+  }
+  const removed = edits.map(({ segment }) => changeFor3(segment, "removed"));
+  const preserved = [
+    ...jpeg.segments.filter(
+      (segment) => (segment.kind === "application" || segment.kind === "comment") && !shouldRemove3(segment, resolved)
+    ).map((segment) => changeFor3(segment, "preserved")),
+    ...orientationPreserved
+  ];
+  const output = copyWithSegmentEdits(bytes, edits);
   const report = inspectMetadata(
     output,
     policy?.limits === void 0 ? void 0 : { limits: policy.limits }
@@ -2908,6 +3038,17 @@ var DEFAULT_PNG_VERIFICATION_POLICY = Object.freeze({
   timestamps: "absent",
   icc: "ignore"
 });
+function namespaceIsPresent(report, namespace) {
+  if (report.format !== "jpeg" || namespace !== "exif") {
+    return report.entries.some((entry) => entry.namespace === namespace);
+  }
+  const exifEntries = report.entries.filter(
+    (entry) => entry.namespace === "exif" || entry.namespace === "gps"
+  );
+  return exifEntries.length !== 0 && !(exifEntries.length === 2 && exifEntries.some(
+    (entry) => entry.name === "EXIF Orientation container"
+  ) && exifEntries.some((entry) => entry.name === "Orientation"));
+}
 function verifyMetadata(input, expectation) {
   const report = inspectMetadata(
     input,
@@ -2966,9 +3107,7 @@ function verifyMetadata(input, expectation) {
     if (wanted === "ignore") {
       continue;
     }
-    const present = report.entries.some(
-      (entry) => entry.namespace === namespace
-    );
+    const present = namespaceIsPresent(report, namespace);
     const actual = present ? "present" : "absent";
     checks.push({
       namespace,
