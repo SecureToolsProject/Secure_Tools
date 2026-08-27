@@ -96,3 +96,11 @@ Sprint 18 aligned the Image Metadata and PDF Metadata source cards, made decoded
 Automated tests cover source reset and object-URL cleanup, decoded/opaque grouping, format-specific Image policies and expectations, PDF default/custom selection, retained-field fail-closed behavior, six-locale parity, responsive CSS contracts, security invariants, and the release gate. `git diff --check` and `node tests/run-all.mjs` passed on 2026-08-26.
 
 Interactive browser QA was attempted against `127.0.0.1:4173`, but the browser-control runtime terminated before navigation with `windows sandbox failed: helper_unknown_error: apply deny-read ACLs`. Visual rendering, keyboard interaction, responsive behavior, native save/download, and Network-panel observations remain **BLOCKED**, not passed. The live manual matrix is maintained in [v2 promotion QA](./v2-release-qa.md).
+
+## Metadata Orientation hotfix follow-up
+
+The hotfix upgrades the same-origin Image Metadata runtime to verified secure-metadata v0.1.1. Default JPEG Privacy Clean now preserves one unambiguous valid Orientation value as rendering information while removing other targeted EXIF/GPS data; it still does not decode, rotate, normalize, or re-encode pixels.
+
+Image and PDF Metadata now place source information and primary cleaning controls in a desktop action layout before decoded content in DOM order, then stack them at 54rem and below. Image shows at most six prioritized decoded values and PDF at most four; all supported decoded values and the existing opaque, partial, coverage, diagnostic, and container distinctions remain in native details disclosures.
+
+Real Chrome QA was attempted twice on 2026-08-27 against a temporary localhost server with synthetic Orientation=6 JPEG, PNG, WebP, and PDF fixtures. The Chrome-control runtime failed before connection or navigation with `failed to write kernel assets: The system cannot find the path specified. (os error 3)`. Visual orientation equivalence, interactive layout, keyboard, save, and Network-panel checks remain **BLOCKED**, not passed; temporary fixtures and the server were removed.

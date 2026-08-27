@@ -8,7 +8,7 @@
 - Added Image Resize with pixel and percentage modes, aspect-ratio preservation, optional enlargement, Original/JPEG/PNG/WebP output, and local batch ZIP saving.
 - Added Image Compressor with Original/JPEG/PNG/WebP output, truthful format-specific quality behavior, unchanged dimensions, and local batch ZIP saving.
 - Added the single-file Image Metadata Inspector & Cleaner for JPEG, PNG, and WebP with honest partial/opaque reporting, authoritative Privacy Clean, ICC preservation, and fail-closed verification before save.
-- Pinned the immutable `secure-metadata v0.1.0` browser Release artifact as a same-origin dependency with exact provenance and SHA-256 release-gate coverage.
+- Pinned the immutable `secure-metadata v0.1.1` browser Release artifact as a same-origin dependency with exact provenance and SHA-256 release-gate coverage.
 - Added per-file and aggregate compression metrics that distinguish byte savings from larger generated results.
 - Added per-image output dimension/pixel checks and a 200-megapixel aggregate resize-output workload limit.
 - Added JPEG, PNG, and WebP input/output, lossy quality controls for JPEG/WebP, deterministic white JPEG transparency, metadata-stripping canvas re-encoding, collision-safe Unicode names, and ZIP batch output.
@@ -17,6 +17,8 @@
 ### Changed
 
 - Hardened v2 promotion gates for all ten production tools, vendored-resource integrity, local-only network invariants, save failure paths, and resource boundaries.
+- Upgraded secure-metadata to v0.1.1 so JPEG Privacy Clean preserves one valid rendering Orientation while removing other targeted EXIF/GPS data without decoding or re-encoding pixels.
+- Aligned Image and PDF Metadata action panels and bounded their primary decoded summaries while retaining complete details.
 - Corrected canonical repository links and extended integration CI to `v2` pushes.
 - Narrowed homepage and category privacy copy to production file-content processing and localized shared navigation and summary accessible names across all six interface languages.
 - Added a live v2 promotion QA matrix that keeps blocked browser evidence separate from passing automated checks.
