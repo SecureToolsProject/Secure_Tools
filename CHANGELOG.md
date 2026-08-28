@@ -11,6 +11,7 @@
 - Pinned the immutable `secure-metadata v0.1.1` browser Release artifact as a same-origin dependency with exact provenance and SHA-256 release-gate coverage.
 - Added per-file and aggregate compression metrics that distinguish byte savings from larger generated results.
 - Added production crawler discovery files, canonical URLs, page-specific Open Graph metadata, SEO regression coverage, and search-engine submission guidance for securetools.app.
+- Added production favicon, Apple touch, and same-origin social preview assets with Open Graph and Twitter/X card metadata.
 - Added per-image output dimension/pixel checks and a 200-megapixel aggregate resize-output workload limit.
 - Added JPEG, PNG, and WebP input/output, lossy quality controls for JPEG/WebP, deterministic white JPEG transparency, metadata-stripping canvas re-encoding, collision-safe Unicode names, and ZIP batch output.
 - Added per-file, queue, dimension, decoded-pixel, and 200-megapixel aggregate-work protections with recoverable errors.

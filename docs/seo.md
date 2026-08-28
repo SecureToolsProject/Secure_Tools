@@ -19,10 +19,11 @@ Every indexable page has:
 
 - one HTTPS canonical URL on `securetools.app` using the directory route's trailing slash;
 - one non-empty, page-specific title and meta description;
-- `og:type=website`, `og:site_name=Secure Tools`, page-specific Open Graph title and description, and an `og:url` equal to the canonical URL;
+- `og:type=website`, `og:site_name=Secure Tools`, page-specific Open Graph title and description, an `og:url` equal to the canonical URL, and the reviewed same-origin 1200 × 630 share image;
+- a Twitter/X `summary_large_image` card that reuses the page title, description, and share image;
 - no accidental `noindex` or `nofollow` directive.
 
-No `og:image` is declared because the repository does not yet contain a reviewed production share image. Twitter/X card tags are omitted because they would duplicate the current Open Graph fields without an image-specific presentation.
+The shared preview is served statically from `https://securetools.app/assets/images/og-image.png`. Favicon and Apple touch icon files are also same-origin assets under `/assets/icons/`; no remote image service, runtime generator, manifest, service worker, or install behavior is involved.
 
 ## Language and structured-data decisions
 
