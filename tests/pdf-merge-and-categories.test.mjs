@@ -160,7 +160,9 @@ function testRoutesTranslationsAndPrivacy() {
       if (/^(?:https?:|mailto:|#)/i.test(rawReference)) continue;
       const reference = rawReference.split(/[?#]/)[0];
       if (!reference) continue;
-      let target = path.resolve(path.dirname(file), reference);
+      let target = reference.startsWith("/")
+        ? path.resolve(root, reference.slice(1))
+        : path.resolve(path.dirname(file), reference);
       if (reference.endsWith("/") || (fs.existsSync(target) && fs.statSync(target).isDirectory())) target = path.join(target, "index.html");
       assert.equal(fs.existsSync(target), true, `${relative} has missing ${attribute}: ${rawReference}`);
     }
