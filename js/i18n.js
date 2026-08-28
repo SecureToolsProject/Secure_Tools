@@ -92,6 +92,8 @@ const translateDocument = () => {
   document.querySelector('meta[name="description"]')?.setAttribute("content", t(`metadata.${pageKey}.description`));
   document.querySelector('meta[property="og:title"]')?.setAttribute("content", t(`metadata.${pageKey}.title`));
   document.querySelector('meta[property="og:description"]')?.setAttribute("content", t(`metadata.${pageKey}.description`));
+  document.querySelector('meta[name="twitter:title"]')?.setAttribute("content", t(`metadata.${pageKey}.title`));
+  document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", t(`metadata.${pageKey}.description`));
 };
 
 export function initializeI18n() {
