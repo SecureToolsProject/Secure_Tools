@@ -133,4 +133,17 @@ The user completed real local-browser release QA on 2026-08-27 in Chrome 151.0.7
 
 The Metadata workflows manually covered Privacy Clean, Customize/custom cleaning, metadata removal, source/action UX, and the decoded summary/details flow. The triggering JPEG carried EXIF Orientation=6. Before the dependency patch, removing the complete EXIF APP1 segment could discard rendering-critical Orientation and make the cleaned image display rotated. With secure-metadata v0.1.1, one valid unambiguous IFD0 Orientation value from 1 through 8 is preserved, other targeted EXIF/GPS metadata is removed, and pixel data is neither decoded nor re-encoded. The user manually verified the corrected behavior, so the Orientation blocker is **RESOLVED / PASS**.
 
+## Branding and social preview manual QA
+
+The user completed real-browser validation for PR #66 on 2026-08-28. This evidence covers the favicon and social-preview polish added after the v2.0.0-rc.1 pre-release was published.
+
+| Reported check | Result |
+| --- | --- |
+| Homepage favicon | PASS |
+| Direct tool URL favicon | PASS |
+| Light and Dark theme regression | PASS |
+| New browser console errors | PASS — none observed |
+| Broken static asset requests | PASS — none observed |
+| Unexpected external network requests | PASS — none observed |
+
 The evidence above records only the test areas and outcomes explicitly reported by the user; it does not invent unreported sub-test detail. Release-required interactive checks are complete, while the historical automated browser attempts remain **BLOCKED**.
