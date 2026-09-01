@@ -98,21 +98,27 @@ jobs:
             "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/secure-tools-web-bridge" \
             --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}")"
 
+          jq --raw-output '
+            .result as $project |
+            "Pages project state: name=\($project.name), production_branch=\($project.production_branch), subdomain=\($project.subdomain), custom_domain_count=\($project.domains // [] | map(select(. != $project.subdomain)) | length), source=\(if $project.source == null then "direct-upload" else $project.source.type end), web_analytics=\(if ($project.build_config.web_analytics_tag // "") == "" and ($project.build_config.web_analytics_token // "") == "" then "disabled" else "enabled" end)"
+          ' <<< "$project"
+
           jq --exit-status '
+            .result as $project |
             .success == true and
-            .result.name == "secure-tools-web-bridge" and
-            .result.production_branch == "main" and
-            .result.subdomain == "secure-tools-web-bridge.pages.dev" and
-            (.result.domains | length) == 0 and
-            .result.source == null and
-            (.result.build_config.web_analytics_tag // "") == "" and
-            (.result.build_config.web_analytics_token // "") == ""
+            $project.name == "secure-tools-web-bridge" and
+            $project.production_branch == "main" and
+            $project.subdomain == "secure-tools-web-bridge.pages.dev" and
+            ($project.domains // [] | map(select(. != $project.subdomain)) | length) == 0 and
+            $project.source == null and
+            ($project.build_config.web_analytics_tag // "") == "" and
+            ($project.build_config.web_analytics_token // "") == ""
           ' <<< "$project" > /dev/null || {
             echo "::error::Cloudflare Pages project is missing or violates the H3.2 isolation contract"
             exit 1
           }
 
-          echo "Validated Direct Upload project secure-tools-web-bridge: production branch main, zero custom domains, no Git integration, no Web Analytics."
+          echo "Validated Direct Upload project secure-tools-web-bridge: production branch main, stable pages.dev subdomain only, zero custom domains, no Git integration, no Web Analytics."
 
       - name: Deploy to Cloudflare Pages
         id: deploy
