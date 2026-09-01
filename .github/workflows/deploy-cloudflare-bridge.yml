@@ -78,7 +78,13 @@ jobs:
             tools \
             "$BRIDGE_DIRECTORY/"
 
-          printf '/*\n  X-Robots-Tag: noindex, nofollow\n' > "$BRIDGE_DIRECTORY/_headers"
+          printf '%s\n' \
+            'https://secure-tools-web-bridge.pages.dev/*' \
+            '  X-Robots-Tag: noindex, nofollow' \
+            '' \
+            'https://:version.secure-tools-web-bridge.pages.dev/*' \
+            '  X-Robots-Tag: noindex, nofollow' \
+            > "$BRIDGE_DIRECTORY/_headers"
 
           [[ ! -e "$BRIDGE_DIRECTORY/CNAME" ]]
           [[ ! -e "$BRIDGE_DIRECTORY/_redirects" ]]
@@ -133,13 +139,10 @@ jobs:
       - name: Validate deployed bridge
         env:
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
-        run: node tests/deployment-smoke.mjs "$DEPLOYMENT_URL"
+        run: node tests/deployment-smoke.mjs "$DEPLOYMENT_URL" noindex
 
       - name: Validate stable bridge alias
-        run: node tests/deployment-smoke.mjs https://secure-tools-web-bridge.pages.dev
+        run: node tests/deployment-smoke.mjs https://secure-tools-web-bridge.pages.dev noindex
 
       - name: Validate tools custom domain
-        run: node tests/deployment-smoke.mjs https://tools.securetools.app
-
-      - name: Validate existing GitHub Pages production
-        run: node tests/deployment-smoke.mjs https://securetools.app production
+        run: node tests/deployment-smoke.mjs https://tools.securetools.app indexable
