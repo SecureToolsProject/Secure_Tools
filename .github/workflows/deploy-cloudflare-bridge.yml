@@ -1,0 +1,157 @@
+name: Deploy Cloudflare bridge
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: web-utilities-cloudflare-bridge
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy Web Utilities bridge
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        # actions/checkout v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Run static tool validation
+        run: node tests/run-all.mjs
+
+      - name: Validate bridge prerequisites
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+
+          missing=()
+          [[ -n "$CLOUDFLARE_API_TOKEN" ]] || missing+=(CLOUDFLARE_API_TOKEN)
+          [[ -n "$CLOUDFLARE_ACCOUNT_ID" ]] || missing+=(CLOUDFLARE_ACCOUNT_ID)
+
+          if (( ${#missing[@]} > 0 )); then
+            printf '::error::Missing required GitHub Actions secret: %s\n' "${missing[@]}"
+            exit 1
+          fi
+
+          [[ "$(<CNAME)" == "securetools.app" ]] || {
+            echo "::error file=CNAME::Existing GitHub Pages custom domain changed"
+            exit 1
+          }
+
+      - name: Prepare isolated bridge artifact
+        shell: bash
+        env:
+          BRIDGE_DIRECTORY: ${{ runner.temp }}/secure-tools-web-bridge
+        run: |
+          set -euo pipefail
+
+          mkdir -p "$BRIDGE_DIRECTORY"
+          cp -R \
+            404.html \
+            index.html \
+            about \
+            assets \
+            css \
+            js \
+            privacy \
+            robots.txt \
+            sitemap.xml \
+            tools \
+            "$BRIDGE_DIRECTORY/"
+
+          printf '/*\n  X-Robots-Tag: noindex, nofollow\n' > "$BRIDGE_DIRECTORY/_headers"
+
+          [[ ! -e "$BRIDGE_DIRECTORY/CNAME" ]]
+          [[ ! -e "$BRIDGE_DIRECTORY/_redirects" ]]
+          [[ ! -e "$BRIDGE_DIRECTORY/_worker.js" ]]
+          [[ ! -d "$BRIDGE_DIRECTORY/functions" ]]
+          [[ "$(find "$BRIDGE_DIRECTORY" -name index.html -type f | wc -l)" -eq 19 ]]
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        # cloudflare/wrangler-action v4.0.0
+        uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy "${{ runner.temp }}/secure-tools-web-bridge" --project-name=secure-tools-web-bridge --branch=main --commit-hash=${{ github.sha }}
+
+      - name: Validate deployed bridge
+        shell: bash
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+        run: |
+          set -euo pipefail
+
+          [[ "$DEPLOYMENT_URL" == https://*.pages.dev ]] || {
+            echo "::error::Wrangler did not return a Pages deployment URL"
+            exit 1
+          }
+          DEPLOYMENT_URL="${DEPLOYMENT_URL%/}"
+
+          routes=(
+            /
+            /privacy/
+            /about/
+            /tools/pdf/
+            /tools/pdf/images-to-pdf/
+            /tools/pdf/merge/
+            /tools/pdf/split/
+            /tools/pdf/organize/
+            /tools/pdf/to-images/
+            /tools/pdf/metadata/
+            /tools/image/
+            /tools/image/converter/
+            /tools/image/resize/
+            /tools/image/compress/
+            /tools/image/metadata/
+            /tools/privacy/
+            /tools/scan/
+            /tools/media/
+            /tools/image-to-pdf/
+          )
+
+          for route in "${routes[@]}"; do
+            status="$(curl --silent --show-error --output /dev/null --max-redirs 0 --write-out '%{http_code}' "${DEPLOYMENT_URL}${route}")"
+            [[ "$status" == 200 ]] || {
+              echo "::error::Bridge route ${route} returned HTTP ${status}"
+              exit 1
+            }
+          done
+
+          for asset in \
+            /css/base.css \
+            /css/components.css \
+            /css/pages.css \
+            /js/theme-bootstrap.js \
+            /js/main.js \
+            /assets/icons/favicon.ico \
+            /assets/vendor/pdf-lib/pdf-lib.min.js; do
+            curl --fail --silent --show-error --output /dev/null "${DEPLOYMENT_URL}${asset}"
+          done
+
+          headers="$(curl --fail --silent --show-error --head "${DEPLOYMENT_URL}/" | tr -d '\r')"
+          grep -Eiq '^x-robots-tag: *noindex, *nofollow$' <<< "$headers" || {
+            echo "::error::Bridge root is missing X-Robots-Tag: noindex, nofollow"
+            exit 1
+          }

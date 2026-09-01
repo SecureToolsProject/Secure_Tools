@@ -44,6 +44,7 @@ for (const test of [
   "tests/i18n-quality.test.mjs",
   "tests/ux-consistency.test.mjs",
   "tests/ci-foundation.test.mjs",
+  "tests/cloudflare-bridge.test.mjs",
 ]) {
   runNode([test], test);
 }
