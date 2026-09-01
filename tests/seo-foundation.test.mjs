@@ -6,7 +6,8 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 const readBytes = (relative) => fs.readFileSync(path.join(root, relative));
-const origin = "https://securetools.app";
+const origin = "https://tools.securetools.app";
+const legacyOrigin = "https://securetools.app";
 
 const indexableRoutes = new Map([
   ["index.html", "/"],
@@ -31,6 +32,7 @@ const indexableRoutes = new Map([
 
 const excludedRoutes = ["404.html", "tools/image-to-pdf/index.html"];
 const allHtmlRoutes = [...indexableRoutes.keys(), ...excludedRoutes];
+assert.equal(indexableRoutes.size + 1, 19, "all 19 H3 migration routes remain represented");
 const shareImagePath = "assets/images/og-image.png";
 const shareImageUrl = `${origin}/${shareImagePath}`;
 const iconLinks = new Map([
@@ -77,6 +79,8 @@ for (const [relativeFile, route] of indexableRoutes) {
   assert.equal(values(html, /<meta name="twitter:image:alt" content="([^"]+)">/g).length, 1, `${relativeFile}: Twitter image alternative`);
   assert.doesNotMatch(html, /<meta name="robots" content="[^"]*(?:noindex|nofollow)/i, `${relativeFile}: indexable`);
   assert.doesNotMatch(html, /securetoolsproject\.github\.io/i, `${relativeFile}: no legacy canonical host`);
+  assert.doesNotMatch(html, new RegExp(`${legacyOrigin.replaceAll(".", "\\.")}(?:/|$)`), `${relativeFile}: no old Web Utilities SEO host`);
+  assert.doesNotMatch(html, /pages\.dev/i, `${relativeFile}: no Pages hostname in search metadata`);
   assert.doesNotMatch(html, /hreflang=/i, `${relativeFile}: no fabricated locale URL`);
   titles.add(title[0]);
   descriptions.add(description[0]);
@@ -130,6 +134,8 @@ assert.match(i18nRuntime, /meta\[name="twitter:description"\]/, "i18n updates Tw
 const robots = read("robots.txt");
 assert.equal(robots, `User-agent: *\nAllow: /\n\nSitemap: ${origin}/sitemap.xml\n`);
 assert.doesNotMatch(robots, /^Disallow:\s*\/$/im, "robots.txt does not block the site");
+assert.doesNotMatch(robots, /https:\/\/securetools\.app/i, "robots.txt omits the old Web Utilities host");
+assert.doesNotMatch(robots, /pages\.dev/i, "robots.txt omits Pages hostnames");
 
 const sitemap = read("sitemap.xml");
 assert.match(sitemap, /^<\?xml version="1\.0" encoding="UTF-8"\?>/);
@@ -140,6 +146,8 @@ const sitemapUrls = values(sitemap, /<loc>([^<]+)<\/loc>/g);
 assert.deepEqual(sitemapUrls, expectedUrls, "sitemap exactly matches the canonical public route inventory");
 assert.equal(new Set(sitemapUrls).size, sitemapUrls.length, "sitemap URLs are unique");
 for (const url of sitemapUrls) assert.ok(url.startsWith(`${origin}/`), `${url}: production origin`);
+assert.doesNotMatch(sitemap, /https:\/\/securetools\.app/i, "sitemap omits the old Web Utilities host");
+assert.doesNotMatch(sitemap, /pages\.dev/i, "sitemap omits Pages hostnames");
 
 assert.equal(read("CNAME").trim(), "securetools.app", "GitHub Pages custom domain");
 
