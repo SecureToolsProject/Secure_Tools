@@ -100,7 +100,7 @@ jobs:
 
           jq --raw-output '
             .result as $project |
-            "Pages project state: name=\($project.name), production_branch=\($project.production_branch), subdomain=\($project.subdomain), custom_domain_count=\($project.domains // [] | map(select(. != $project.subdomain)) | length), source=\(if $project.source == null then "direct-upload" else $project.source.type end), web_analytics=\(if ($project.build_config.web_analytics_tag // "") == "" and ($project.build_config.web_analytics_token // "") == "" then "disabled" else "enabled" end)"
+            "Pages project state: name=\($project.name), production_branch=\($project.production_branch), subdomain=\($project.subdomain), custom_domains=\($project.domains // [] | map(select(. != $project.subdomain)) | sort | join(",")), source=\(if $project.source == null then "direct-upload" else $project.source.type end), web_analytics=\(if ($project.build_config.web_analytics_tag // "") == "" and ($project.build_config.web_analytics_token // "") == "" then "disabled" else "enabled" end)"
           ' <<< "$project"
 
           jq --exit-status '
@@ -109,16 +109,16 @@ jobs:
             $project.name == "secure-tools-web-bridge" and
             $project.production_branch == "main" and
             $project.subdomain == "secure-tools-web-bridge.pages.dev" and
-            ($project.domains // [] | map(select(. != $project.subdomain)) | length) == 0 and
+            ($project.domains // [] | map(select(. != $project.subdomain)) | sort) == ["tools.securetools.app"] and
             $project.source == null and
             ($project.build_config.web_analytics_tag // "") == "" and
             ($project.build_config.web_analytics_token // "") == ""
           ' <<< "$project" > /dev/null || {
-            echo "::error::Cloudflare Pages project is missing or violates the H3.2 isolation contract"
+            echo "::error::Cloudflare Pages project is missing or violates the H3.3 parallel-domain contract"
             exit 1
           }
 
-          echo "Validated Direct Upload project secure-tools-web-bridge: production branch main, stable pages.dev subdomain only, zero custom domains, no Git integration, no Web Analytics."
+          echo "Validated Direct Upload project secure-tools-web-bridge: production branch main, stable pages.dev subdomain plus tools.securetools.app, no Git integration, no Web Analytics."
 
       - name: Deploy to Cloudflare Pages
         id: deploy
@@ -131,61 +131,15 @@ jobs:
           command: pages deploy "${{ runner.temp }}/secure-tools-web-bridge" --project-name=secure-tools-web-bridge --branch=main --commit-hash=${{ github.sha }}
 
       - name: Validate deployed bridge
-        shell: bash
         env:
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
-        run: |
-          set -euo pipefail
+        run: node tests/deployment-smoke.mjs "$DEPLOYMENT_URL"
 
-          [[ "$DEPLOYMENT_URL" == https://*.pages.dev ]] || {
-            echo "::error::Wrangler did not return a Pages deployment URL"
-            exit 1
-          }
-          DEPLOYMENT_URL="${DEPLOYMENT_URL%/}"
+      - name: Validate stable bridge alias
+        run: node tests/deployment-smoke.mjs https://secure-tools-web-bridge.pages.dev
 
-          routes=(
-            /
-            /privacy/
-            /about/
-            /tools/pdf/
-            /tools/pdf/images-to-pdf/
-            /tools/pdf/merge/
-            /tools/pdf/split/
-            /tools/pdf/organize/
-            /tools/pdf/to-images/
-            /tools/pdf/metadata/
-            /tools/image/
-            /tools/image/converter/
-            /tools/image/resize/
-            /tools/image/compress/
-            /tools/image/metadata/
-            /tools/privacy/
-            /tools/scan/
-            /tools/media/
-            /tools/image-to-pdf/
-          )
+      - name: Validate tools custom domain
+        run: node tests/deployment-smoke.mjs https://tools.securetools.app
 
-          for route in "${routes[@]}"; do
-            status="$(curl --silent --show-error --output /dev/null --max-redirs 0 --write-out '%{http_code}' "${DEPLOYMENT_URL}${route}")"
-            [[ "$status" == 200 ]] || {
-              echo "::error::Bridge route ${route} returned HTTP ${status}"
-              exit 1
-            }
-          done
-
-          for asset in \
-            /css/base.css \
-            /css/components.css \
-            /css/pages.css \
-            /js/theme-bootstrap.js \
-            /js/main.js \
-            /assets/icons/favicon.ico \
-            /assets/vendor/pdf-lib/pdf-lib.min.js; do
-            curl --fail --silent --show-error --output /dev/null "${DEPLOYMENT_URL}${asset}"
-          done
-
-          headers="$(curl --fail --silent --show-error --head "${DEPLOYMENT_URL}/" | tr -d '\r')"
-          grep -Eiq '^x-robots-tag: *noindex, *nofollow$' <<< "$headers" || {
-            echo "::error::Bridge root is missing X-Robots-Tag: noindex, nofollow"
-            exit 1
-          }
+      - name: Validate existing GitHub Pages production
+        run: node tests/deployment-smoke.mjs https://securetools.app production

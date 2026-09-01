@@ -1,6 +1,6 @@
 # Cloudflare Pages migration bridge
 
-Status: activation prerequisites confirmed on 2026-09-01; the first `main` deployment is pending merge of the reviewed workflow. This document does not authorize H3.3 or a custom-domain migration.
+Status: H3.2 is deployed and validated. H3.3 preparation targets a parallel `tools.securetools.app` custom domain, but the preparation pull request must remain unmerged until the activation gate below is satisfied. H3.3 does not authorize an apex migration.
 
 ## Deployment identity
 
@@ -8,11 +8,25 @@ Status: activation prerequisites confirmed on 2026-09-01; the first `main` deplo
 | --- | --- |
 | Cloudflare Pages project | `secure-tools-web-bridge` |
 | Production branch | `main` |
-| Stable validation URL after activation | `https://secure-tools-web-bridge.pages.dev` |
+| Stable validation URL | `https://secure-tools-web-bridge.pages.dev` |
 | Deployment mechanism | GitHub Actions Direct Upload through Wrangler |
-| Custom domains | None |
+| Current custom domains | None before H3.3 activation |
+| H3.3 target custom domain | `https://tools.securetools.app` |
 
-The project hostname resolves, but it is not a validated application endpoint until the first deployment succeeds. No `securetools.app`, `www.securetools.app`, or `tools.securetools.app` custom domain may be attached during H3.2.
+The stable Pages hostname is a validated application endpoint and must remain available throughout H3.3 as the rollback and comparison endpoint. `securetools.app` and `www.securetools.app` remain outside the Pages project.
+
+The H3.3 domain contract is:
+
+```text
+tools.securetools.app
+→ Cloudflare Pages project secure-tools-web-bridge
+
+secure-tools-web-bridge.pages.dev
+→ retained validation and rollback endpoint
+
+securetools.app
+→ unchanged GitHub Pages production deployment
+```
 
 ## Provenance and isolation
 
@@ -34,36 +48,51 @@ Secure_Tools main repository root + CNAME
 → https://securetools.app
 ```
 
-The workflow copies only application files to `${{ runner.temp }}/secure-tools-web-bridge`. It deliberately excludes the repository `CNAME` and injects this bridge-only file into that temporary directory:
+The workflow copies only application files to `${{ runner.temp }}/secure-tools-web-bridge`. It excludes the repository `CNAME` and injects this bridge-only file into that temporary directory:
 
 ```text
 /*
   X-Robots-Tag: noindex, nofollow
 ```
 
-The source artifact therefore retains its current canonical, Open Graph, sitemap, robots, and GitHub Pages behavior. The deployed bridge remains accessible for QA while its Cloudflare static responses instruct crawlers not to index or follow it.
+The source artifact therefore retains its current canonical, Open Graph, sitemap, robots, and GitHub Pages behavior. The Pages bridge and H3.3 custom domain remain accessible for QA while their Cloudflare static responses instruct crawlers not to index or follow them.
 
-## Required one-time setup
+## Credentials and project contract
 
-Before this workflow can safely merge and run on `main`:
+The required GitHub Actions secret names are:
 
-1. Create the Direct Upload Pages project `secure-tools-web-bridge` with production branch `main`, for example with an authenticated Wrangler session:
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
 
-   ```text
-   npx wrangler@4 pages project create secure-tools-web-bridge --production-branch main
-   ```
+Their values remain secret and must never enter source, logs, pull-request text, or untrusted workflows. The token remains limited to the intended Cloudflare account and required Pages permissions.
 
-2. Add these GitHub Actions repository secrets to `SecureToolsProject/Secure_Tools`:
+After H3.3 activation, every deployment queries the authenticated Pages project state and requires the expected name, `main` production branch, stable Pages subdomain, exactly the `tools.securetools.app` custom domain, no Git integration, and no Cloudflare Web Analytics configuration.
 
-   - `CLOUDFLARE_API_TOKEN`
-   - `CLOUDFLARE_ACCOUNT_ID`
+## H3.3 manual browser QA gate
 
-3. Limit the token to the intended Cloudflare account with only **Account → Cloudflare Pages → Edit**. No zone or DNS permission is required for this bridge. Do not reuse or expose a token value through source, logs, pull-request text, or untrusted workflows.
-4. Confirm the project has no custom domains before the first deployment.
+Do not attach the custom domain until a human has completed all of these checks against `https://secure-tools-web-bridge.pages.dev`:
 
-Both required secret names and the Direct Upload project were provisioned on 2026-09-01. Before every deployment, the workflow queries the authenticated Pages project state and requires the expected name, `main` production branch, stable Pages subdomain, zero custom domains, no Git integration, and no Cloudflare Web Analytics configuration.
+- one representative PDF operation;
+- one representative image operation;
+- one representative metadata operation; and
+- browser Network-panel confirmation that selected user files are not uploaded.
 
-## Deployment validation
+Static and contract tests do not satisfy this manual gate. Record the human result on the H3.3 issue before activation.
+
+## Custom-domain activation
+
+After the manual gate has explicit evidence, use this exact order:
+
+1. In Cloudflare, open **Workers & Pages → `secure-tools-web-bridge` → Custom domains → Set up a domain**.
+2. Enter `tools.securetools.app`, continue, and activate it through the Pages project.
+3. Because `securetools.app` is already a Cloudflare-managed zone, allow Cloudflare Pages to create and manage the associated `tools` DNS record.
+4. Wait until the Pages custom domain reports active and its TLS certificate is valid.
+5. Validate HTTPS, all 19 routes, representative assets, exact `X-Robots-Tag: noindex, nofollow`, and the existing production SEO inventory with `node tests/deployment-smoke.mjs https://tools.securetools.app`.
+6. Revalidate `secure-tools-web-bridge.pages.dev` and `securetools.app`, then merge the prepared pull request. The resulting `main` deployment continuously validates the immutable deployment, stable Pages alias, custom domain, and existing production isolation.
+
+Do not manually create a Pages-target CNAME before associating the hostname with the Pages project. Do not change apex or `www` records. Cloudflare may represent the managed record internally; the invariant is that `tools.securetools.app` resolves through `secure-tools-web-bridge` while apex records remain unchanged.
+
+## Continuous deployment validation
 
 Every `main` push and optional manual dispatch performs:
 
@@ -71,16 +100,25 @@ Every `main` push and optional manual dispatch performs:
 2. an explicit secret-name prerequisite check;
 3. creation of a temporary static artifact without `CNAME`, `_redirects`, Workers, or Pages Functions;
 4. injection of the bridge-only `_headers` rule;
-5. authenticated verification of project identity, production branch, custom-domain isolation, Direct Upload mode, and analytics isolation;
+5. authenticated verification of project identity, production branch, custom-domain contract, Direct Upload mode, and analytics isolation;
 6. Direct Upload with source SHA and branch provenance;
-7. HTTP 200 checks for all 19 H3.1 routes;
-8. representative CSS, JavaScript, icon, and vendored-library checks;
-9. verification of `X-Robots-Tag: noindex, nofollow` on the deployed root response.
+7. the shared deployment smoke contract against the immutable deployment URL, stable Pages alias, H3.3 custom domain, and existing GitHub Pages production;
+8. HTTP 200 without redirects for all 19 H3.1 routes on each endpoint;
+9. representative CSS, JavaScript, icon, and vendored-library checks;
+10. exact `X-Robots-Tag: noindex, nofollow` on Pages routes and assets, plus confirmation that production does not inherit that bridge-only header; and
+11. canonical and `og:url` values that intentionally continue to identify `https://securetools.app/...`, while the legacy `/tools/image-to-pdf/` alias retains its existing source-level noindex and stays outside the canonical inventory.
 
-Existing static tests continue to cover the representative PDF, image, metadata, privacy, local-processing, dependency-integrity, CSP, and network invariants. Interactive browser QA is still required after the endpoint exists; static tests are not a substitute for rendered or Network-panel evidence.
+Existing static tests continue to cover representative PDF, image, metadata, privacy, local-processing, dependency-integrity, CSP, and network invariants.
 
-## Rollback and removal
+During H3.3, both Pages hostnames remain non-indexable while canonical and `og:url` metadata continue to identify the existing production host. `tools.securetools.app` must not be added to production sitemap files. No Search Console operation belongs to H3.3.
 
-The bridge is additive. A failed bridge deployment does not require a production rollback because GitHub Pages remains the production origin.
+## H3.3 rollback
 
-To stop bridge automation, disable the Cloudflare bridge workflow without changing the existing CI or GitHub Pages settings. After H3 migration no longer needs the bridge, remove its Pages project only after preserving any required deployment evidence. Removing the bridge must not delete or modify the root `CNAME`, GitHub Pages configuration, DNS, Search Console, redirects, or production metadata.
+If `tools.securetools.app` is unhealthy after activation:
+
+1. remove the `tools` DNS record associated with Pages if Cloudflare does not remove it as part of detachment;
+2. detach `tools.securetools.app` from the Pages project's Custom domains configuration;
+3. confirm `secure-tools-web-bridge.pages.dev` remains healthy and no custom-domain record remains; and
+4. leave `securetools.app`, its root `CNAME`, GitHub Pages, apex and `www` DNS, Search Console, redirects, sitemap, and production metadata untouched.
+
+The bridge is additive, so rollback never requires a change to the existing production site. H3.3 does not move the apex, create legacy redirects, begin H3.4, or change application behavior.
