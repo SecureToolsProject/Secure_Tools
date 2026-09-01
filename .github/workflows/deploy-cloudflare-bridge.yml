@@ -86,6 +86,34 @@ jobs:
           [[ ! -d "$BRIDGE_DIRECTORY/functions" ]]
           [[ "$(find "$BRIDGE_DIRECTORY" -name index.html -type f | wc -l)" -eq 19 ]]
 
+      - name: Validate Cloudflare Pages project isolation
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+
+          project="$(curl --fail --silent --show-error \
+            "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/secure-tools-web-bridge" \
+            --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}")"
+
+          jq --exit-status '
+            .success == true and
+            .result.name == "secure-tools-web-bridge" and
+            .result.production_branch == "main" and
+            .result.subdomain == "secure-tools-web-bridge.pages.dev" and
+            (.result.domains | length) == 0 and
+            .result.source == null and
+            (.result.build_config.web_analytics_tag // "") == "" and
+            (.result.build_config.web_analytics_token // "") == ""
+          ' <<< "$project" > /dev/null || {
+            echo "::error::Cloudflare Pages project is missing or violates the H3.2 isolation contract"
+            exit 1
+          }
+
+          echo "Validated Direct Upload project secure-tools-web-bridge: production branch main, zero custom domains, no Git integration, no Web Analytics."
+
       - name: Deploy to Cloudflare Pages
         id: deploy
         # cloudflare/wrangler-action v4.0.0

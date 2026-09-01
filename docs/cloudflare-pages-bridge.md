@@ -1,6 +1,6 @@
 # Cloudflare Pages migration bridge
 
-Status: repository implementation prepared; activation is blocked until the required credentials and Pages project exist. This document does not authorize H3.3 or a custom-domain migration.
+Status: activation prerequisites confirmed on 2026-09-01; the first `main` deployment is pending merge of the reviewed workflow. This document does not authorize H3.3 or a custom-domain migration.
 
 ## Deployment identity
 
@@ -12,7 +12,7 @@ Status: repository implementation prepared; activation is blocked until the requ
 | Deployment mechanism | GitHub Actions Direct Upload through Wrangler |
 | Custom domains | None |
 
-The stable URL is the intended project hostname, not a validated endpoint until the first deployment succeeds. No `securetools.app`, `www.securetools.app`, or `tools.securetools.app` custom domain may be attached during H3.2.
+The project hostname resolves, but it is not a validated application endpoint until the first deployment succeeds. No `securetools.app`, `www.securetools.app`, or `tools.securetools.app` custom domain may be attached during H3.2.
 
 ## Provenance and isolation
 
@@ -61,7 +61,7 @@ Before this workflow can safely merge and run on `main`:
 3. Limit the token to the intended Cloudflare account with only **Account → Cloudflare Pages → Edit**. No zone or DNS permission is required for this bridge. Do not reuse or expose a token value through source, logs, pull-request text, or untrusted workflows.
 4. Confirm the project has no custom domains before the first deployment.
 
-The repository had neither required secret name when H3.2 implementation began. The preferred project hostname did not resolve. The PR must remain unmerged until setup is complete and the first bridge deployment can be validated.
+Both required secret names and the Direct Upload project were provisioned on 2026-09-01. Before every deployment, the workflow queries the authenticated Pages project state and requires the expected name, `main` production branch, stable Pages subdomain, zero custom domains, no Git integration, and no Cloudflare Web Analytics configuration.
 
 ## Deployment validation
 
@@ -71,10 +71,11 @@ Every `main` push and optional manual dispatch performs:
 2. an explicit secret-name prerequisite check;
 3. creation of a temporary static artifact without `CNAME`, `_redirects`, Workers, or Pages Functions;
 4. injection of the bridge-only `_headers` rule;
-5. Direct Upload with source SHA and branch provenance;
-6. HTTP 200 checks for all 19 H3.1 routes;
-7. representative CSS, JavaScript, icon, and vendored-library checks;
-8. verification of `X-Robots-Tag: noindex, nofollow` on the deployed root response.
+5. authenticated verification of project identity, production branch, custom-domain isolation, Direct Upload mode, and analytics isolation;
+6. Direct Upload with source SHA and branch provenance;
+7. HTTP 200 checks for all 19 H3.1 routes;
+8. representative CSS, JavaScript, icon, and vendored-library checks;
+9. verification of `X-Robots-Tag: noindex, nofollow` on the deployed root response.
 
 Existing static tests continue to cover the representative PDF, image, metadata, privacy, local-processing, dependency-integrity, CSP, and network invariants. Interactive browser QA is still required after the endpoint exists; static tests are not a substitute for rendered or Network-panel evidence.
 
