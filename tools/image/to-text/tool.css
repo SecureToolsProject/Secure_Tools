@@ -1,0 +1,16 @@
+.ocr-source { display: grid; grid-template-columns: minmax(10rem, 42%) minmax(0, 1fr); gap: var(--space-5); align-items: center; }
+.ocr-source[hidden], .ocr-result[hidden], .button[hidden], .generation-progress[hidden] { display: none; }
+.ocr-preview-wrap { display: grid; min-height: 15rem; max-height: 28rem; place-items: center; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-subtle); }
+.ocr-preview-wrap img { display: block; width: 100%; height: 100%; max-height: 28rem; object-fit: contain; }
+.ocr-source-details { min-width: 0; }
+.ocr-source-details strong { display: block; overflow-wrap: anywhere; }
+.ocr-source-details p { margin: var(--space-2) 0 var(--space-4); color: var(--text-secondary); }
+.source-actions, .result-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.ocr-result { padding: var(--space-5); }
+.ocr-result h2 { margin-bottom: var(--space-2); font-size: 1.35rem; }
+.ocr-result > p { color: var(--text-secondary); }
+.ocr-result label { display: block; margin-bottom: var(--space-2); font-weight: var(--font-weight-bold); }
+.ocr-result textarea { width: 100%; min-height: 16rem; resize: vertical; margin-bottom: var(--space-4); padding: var(--space-4); border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--bg-primary); color: var(--text-primary); font: inherit; line-height: 1.6; }
+.ocr-result textarea:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.clipboard-fallback { position: fixed; left: -10000px; top: 0; }
+@media (max-width: 48rem) { .ocr-source { grid-template-columns: 1fr; } .ocr-preview-wrap { min-height: 12rem; } .source-actions .button, .result-actions .button { flex: 1 1 10rem; } }
