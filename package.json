@@ -1,0 +1,21 @@
+{
+  "name": "secure-tools-web-utilities",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/prepare-ocr-assets.mjs --check",
+    "prepare:ocr": "node scripts/prepare-ocr-assets.mjs",
+    "smoke:ocr:browser": "node tests/serve-ocr-smoke.mjs",
+    "test": "node tests/run-all.mjs"
+  },
+  "dependencies": {
+    "@tesseract.js-data/eng": "1.0.0",
+    "@tesseract.js-data/kor": "1.0.0",
+    "tesseract.js": "7.0.0",
+    "tesseract.js-core": "7.0.0"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

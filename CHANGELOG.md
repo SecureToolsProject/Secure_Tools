@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added the internal Sprint 16A local OCR foundation with pinned, same-origin Tesseract.js 7.0.0 worker/core assets, English and Korean language data, orientation-aware image preparation, normalized progress, worker reuse, cancellation, cleanup, and real OCR smoke coverage. No public OCR tool was added.
 - Started the v2 cycle with a production Image category and local Image Converter.
 - Added Image Resize with pixel and percentage modes, aspect-ratio preservation, optional enlargement, Original/JPEG/PNG/WebP output, and local batch ZIP saving.
 - Added Image Compressor with Original/JPEG/PNG/WebP output, truthful format-specific quality behavior, unchanged dimensions, and local batch ZIP saving.

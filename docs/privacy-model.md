@@ -16,7 +16,9 @@ Blob URLs and data URLs are browser-local references used for previews, prepared
 
 ## Storage and source handling
 
-Theme and language preferences are the only application values stored in `localStorage`. Source files and outputs are not placed in application cloud storage. Tools retain in-memory source state only as needed for the active workflow and release object URLs, rendering tasks, models, or byte references when sources are cleared or replaced.
+Theme and language preferences are the only application values stored in `localStorage`. Tesseract.js may cache the static English and Korean language models in IndexedDB for performance. Those model bytes are application dependencies and contain no user files or results. Source images, decoded pixels, filenames, recognized text, and OCR history are not persisted in localStorage, sessionStorage, IndexedDB, cookies, or Cache Storage by Secure Tools.
+
+Source files and outputs are not placed in application cloud storage. Tools retain in-memory source state only as needed for the active workflow and release object URLs, rendering tasks, models, or byte references when sources are cleared or replaced.
 
 Save operations use the browser's File System Access picker where available and a local Blob-download fallback elsewhere. Cancellation and write failures do not silently convert into successful saves.
 

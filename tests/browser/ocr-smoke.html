@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'none'; worker-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>Secure Tools local OCR smoke test</title>
+</head>
+<body>
+  <main>
+    <h1>Local OCR smoke test</h1>
+    <output id="result">Running…</output>
+  </main>
+  <script src="../../assets/vendor/tesseract/engine/tesseract.min.js"></script>
+  <script type="module" src="./ocr-smoke.js"></script>
+</body>
+</html>
