@@ -30,6 +30,7 @@ for (const test of [
   "tests/image-compressor.test.mjs",
   "tests/image-metadata.test.mjs",
   "tests/ocr-foundation.test.mjs",
+  "tests/image-to-text.test.mjs",
   "tests/category-availability.test.mjs",
   "tests/pdf-merge-and-categories.test.mjs",
   "tests/file-input-queue-state.test.mjs",

@@ -93,7 +93,7 @@ const logic = read("tools/image/resize/resize.js");
 const css = read("tools/image/resize/tool.css");
 const category = read("tools/image/index.html");
 assert.match(category, /href="\.\/converter\/"/); assert.match(category, /href="\.\/resize\/"/);
-assert.match(category, /href="\.\/compress\/"/); assert.match(category, /href="\.\/metadata\/"/); assert.equal((category.match(/class="category-tool surface"/g) || []).length, 4);
+assert.match(category, /href="\.\/compress\/"/); assert.match(category, /href="\.\/metadata\/"/); assert.match(category, /href="\.\/to-text\/"/); assert.equal((category.match(/class="category-tool surface"/g) || []).length, 5);
 assert.doesNotMatch(category, /categories\.plannedNote/);
 assert.match(html, /type="file"[^>]*multiple[^>]*aria-describedby="drop-description"/);
 assert.match(html, /name="resize-mode"[^>]*value="pixels"/); assert.match(html, /name="resize-mode"[^>]*value="percentage"/);

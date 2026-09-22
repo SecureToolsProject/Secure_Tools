@@ -11,6 +11,7 @@ const fileTools = [
   ["Image Resize", "tools/image/resize/index.html", "tools/image/resize/app.js", "image/"],
   ["Image Compressor", "tools/image/compress/index.html", "tools/image/compress/app.js", "image/"],
   ["Image Metadata", "tools/image/metadata/index.html", "tools/image/metadata/app.js", "image/"],
+  ["Image to Text", "tools/image/to-text/index.html", "tools/image/to-text/app.js", "image/"],
   ["Images to PDF", "tools/pdf/images-to-pdf/index.html", "tools/pdf/images-to-pdf/app.js", "image/"],
   ["Merge PDF", "tools/pdf/merge/index.html", "tools/pdf/merge/app.js", "pdf"],
   ["Split PDF", "tools/pdf/split/index.html", "tools/pdf/split/app.js", "pdf"],
@@ -24,7 +25,7 @@ const productionPages = [
   "tools/pdf/index.html", "tools/pdf/images-to-pdf/index.html", "tools/pdf/merge/index.html",
   "tools/pdf/split/index.html", "tools/pdf/organize/index.html", "tools/pdf/to-images/index.html",
   "tools/pdf/metadata/index.html", "tools/image/index.html", "tools/image/converter/index.html", "tools/image/resize/index.html",
-  "tools/image/compress/index.html", "tools/image/metadata/index.html", "tools/privacy/index.html",
+  "tools/image/compress/index.html", "tools/image/metadata/index.html", "tools/image/to-text/index.html", "tools/privacy/index.html",
   "tools/scan/index.html", "tools/media/index.html",
 ];
 

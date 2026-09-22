@@ -34,7 +34,7 @@ assert.doesNotMatch(workflow, /node tests\/deployment-smoke\.mjs https:\/\/secur
 
 const deploymentSmoke = fs.readFileSync("tests/deployment-smoke.mjs", "utf8");
 const routeLines = deploymentSmoke.match(/^  "\/(?:"|[^"].*\/"),$/gm) || [];
-assert.equal(routeLines.length, 19, "deployment smoke must validate all 19 H3.1 routes");
+assert.equal(routeLines.length, 20, "deployment smoke must validate all 20 public and migration routes");
 assert.match(deploymentSmoke, /redirect: "manual"/);
 assert.match(deploymentSmoke, /\["noindex", "indexable"\]/);
 assert.match(deploymentSmoke, /"x-robots-tag"/);

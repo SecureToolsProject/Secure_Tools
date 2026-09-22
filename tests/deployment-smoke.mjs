@@ -16,6 +16,7 @@ const routes = [
   "/tools/image/resize/",
   "/tools/image/compress/",
   "/tools/image/metadata/",
+  "/tools/image/to-text/",
   "/tools/privacy/",
   "/tools/scan/",
   "/tools/media/",
@@ -95,4 +96,4 @@ for (const asset of assets) {
   await response.arrayBuffer();
 }
 
-console.log(`Deployment smoke checks passed for ${base.origin}: indexing=${indexing}, 19 routes, 7 assets, no redirects, expected indexing header, 18 tools-host canonical and social metadata pages plus the intentional noindex legacy alias.`);
+console.log(`Deployment smoke checks passed for ${base.origin}: indexing=${indexing}, 20 routes, 7 assets, no redirects, expected indexing header, 19 tools-host canonical and social metadata pages plus the intentional noindex legacy alias.`);
