@@ -62,7 +62,7 @@ npm test
 node tests/ocr-smoke.test.mjs
 ```
 
-The public Image → Text interface is not part of the current production surface. The reusable local OCR runtime is documented in [Local OCR foundation](./docs/ocr-foundation.md).
+The Image category includes a public, single-image [Image → Text OCR](./tools/image/to-text/) workflow for PNG, JPEG, and WebP input. English, Korean, and combined English + Korean recognition run through the same-origin OCR runtime documented in [Local OCR foundation](./docs/ocr-foundation.md).
 
 ## Documentation
 

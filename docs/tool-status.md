@@ -14,13 +14,14 @@
 | Image | [Image Resize](../tools/image/resize/) | Production | Pixel or percentage batch resize |
 | Image | [Image Compressor](../tools/image/compress/) | Production | JPEG/WebP quality and PNG re-encoding |
 | Image | [Image Metadata Inspector & Cleaner](../tools/image/metadata/) | Production | Supported JPEG, PNG, WebP metadata |
+| Image | [Image → Text OCR](../tools/image/to-text/) | Production | One PNG, JPEG, or WebP → editable English/Korean text |
 | Privacy | [Privacy hub](../tools/privacy/) | Production hub | Navigation to Image and PDF metadata tools |
 | Scan/OCR | Category surface | Planned | No production processing tool |
 | Media | Category surface | Planned | No production processing tool |
 
 “Production” means linked and covered by the current repository validation. “Planned” cards are non-interactive. Secure Tools may later link separately deployed companion applications, but no Companion status or integration exists on the live site today.
 
-The Scan/OCR category now has an internal, tested OCR runtime foundation for JPEG, PNG, and WebP input with English, Korean, and combined recognition. It remains planned because Sprint 16A does not expose an Image → Text page or change navigation, sitemap, structured data, or the product catalog.
+The Image category exposes the tested OCR runtime through a single-image Image → Text workflow with English, Korean, and combined recognition. The broader Scan/OCR category remains planned; PDF OCR and searchable PDF output are deferred.
 
 ## Shared Image boundaries
 
@@ -45,6 +46,10 @@ Preserves oriented pixel dimensions while re-encoding in Original/JPEG/PNG/WebP 
 ### Image Metadata Inspector & Cleaner
 
 Accepts one JPEG, PNG, or WebP file and uses the pinned `secure-metadata v0.1.1` browser artifact without decoding or re-encoding pixels. It separates decoded fields from opaque detected containers and presents partial inspection as non-exhaustive. Privacy Clean and Customize operate only on supported metadata classes; verification must pass before output is saved. Valid unambiguous JPEG EXIF Orientation and ICC color information are preserved according to policy. Full guarantees and exclusions are in [Image Metadata privacy and verification](./image-metadata-privacy.md).
+
+### Image → Text OCR
+
+Accepts one signature-validated PNG, JPEG, or WebP image and recognizes English, Korean, or combined text with the pinned same-origin Tesseract.js runtime. The preview and OCR input use the shared orientation-aware decoder. Recognition starts only after an explicit action and reports real engine progress; it can be cancelled and retried. Results remain editable and can be copied or downloaded as UTF-8 text. Source replacement, removal, language changes, cancellation, and navigation invalidate older requests and release owned preview URLs and workers.
 
 ## PDF tools
 
@@ -74,7 +79,7 @@ Inspects Title, Author, Subject, Keywords, Creator, Producer, Creation Date, and
 
 ## Deferred directions
 
-Broader PDF modification, compression, encryption, XMP/structural sanitization, Scan/OCR, Media, and offline/PWA work remain deferred. Separately deployed companion applications are an architectural possibility, not a current product status or integration.
+Broader PDF modification, compression, encryption, XMP/structural sanitization, PDF OCR, searchable PDF output, broader Scan/OCR workflows, Media, and offline/PWA work remain deferred. Separately deployed companion applications are an architectural possibility, not a current product status or integration.
 
 ## Related guarantees
 

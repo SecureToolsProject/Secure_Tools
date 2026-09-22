@@ -2,7 +2,7 @@
 
 ## Scope and privacy
 
-Sprint 16A provides reusable image OCR infrastructure without publishing an Image → Text tool. It accepts the same signature-validated PNG, JPEG, and WebP formats as the existing image pipeline and rasterizes them through the shared orientation-aware decoder before recognition. PDF rendering, searchable PDF output, camera capture, batch UI, OCR history, cloud OCR, and text post-processing are outside this foundation.
+Sprint 16A provides the reusable OCR infrastructure. Sprint 16B publishes it as a single-image Image → Text tool in the v2.1.0 development cycle. It accepts the same signature-validated PNG, JPEG, and WebP formats as the existing image pipeline and rasterizes them through the shared orientation-aware decoder before recognition. PDF rendering, searchable PDF output, camera capture, batch UI, OCR history, cloud OCR, and automatic text post-processing remain outside this scope.
 
 **User images and OCR output remain in the browser and are not sent to an OCR server.**
 
@@ -35,13 +35,15 @@ The service always passes explicit `workerPath`, `corePath`, and `langPath` valu
 
 One service instance reuses a ready worker while the selected language stays the same. Changing the language terminates that worker and creates a replacement. Recognition failure discards the worker so the next request starts cleanly. `dispose()` is idempotent and terminates the owned worker.
 
-Progress callbacks receive only project-owned stages: `loading-engine`, `loading-language`, `initializing`, `recognizing`, and `complete`. Numeric upstream progress is clamped to `0..1`; missing progress remains `null`. Raw logger objects are never exposed, and callbacks are cleared after each operation.
+Progress callbacks receive only project-owned stages: `loading-engine`, `loading-language`, `initializing`, `recognizing`, and `complete`. Numeric upstream progress is clamped to `0..1`; missing progress remains `null`. The Image → Text page renders missing numeric progress as indeterminate instead of inventing a percentage. Raw logger objects are never exposed, and callbacks are cleared after each operation.
 
 Tesseract.js does not expose safe per-job cancellation. During recognition, an abort terminates and discards the worker before the promise rejects with `OCR_CANCELLED`; later work creates a new worker. An abort during initialization is observed as soon as the library yields the worker handle, which is then terminated before cancellation returns. This avoids reporting cancellation while an owned worker continues running.
 
+The public controller adds a monotonically increasing request identity around the service. Only the current source, language, and recognition request may update progress or results. Replacing or removing a source, changing language, cancelling, or leaving the page invalidates earlier callbacks. The six visible phases are `empty`, `ready`, `recognizing`, `success`, `error`, and `cancelled`.
+
 ## CSP and verification
 
-The unlinked browser smoke page at `tests/browser/ocr-smoke.html` runs the real browser bundle, direct worker, WASM core, and English model under the same strict meta CSP used by production pages. It passed in Chromium with the existing `script-src 'self'`, inherited `worker-src 'self'`, and `connect-src 'none'` policy, without CSP or console errors. No production CSP was changed.
+The browser smoke page at `tests/browser/ocr-smoke.html` runs the real browser bundle, direct worker, WASM core, and English model under the same strict meta CSP used by production pages. The public route uses the same runtime paths and unchanged production CSP. Browser QA also exercises the actual Image → Text selection, recognition, edit, copy/download, replace, remove, and cancellation paths.
 
 Run the repeatable browser check with `npm run smoke:ocr:browser`, then open the printed localhost URL and require a visible `PASS` result. The page rejects any third-party resource entry it observes. The automated Node smoke test performs real English recognition using local core and trained data; unit tests cover path configuration, language mapping, progress, orientation cleanup, reuse, language replacement, initialization/recognition failures, cancellation, disposal, and stale callbacks.
 
