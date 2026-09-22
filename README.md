@@ -53,11 +53,16 @@ python -m http.server 8000
 
 Open [http://localhost:8000](http://localhost:8000). Do not use a `file://` URL.
 
-Run the complete validation suite with:
+Install the pinned OCR build inputs, verify that the committed production assets match them, and run the validation suites with:
 
 ```bash
-node tests/run-all.mjs
+npm ci --ignore-scripts
+npm run build
+npm test
+node tests/ocr-smoke.test.mjs
 ```
+
+The public Image → Text interface is not part of the current production surface. The reusable local OCR runtime is documented in [Local OCR foundation](./docs/ocr-foundation.md).
 
 ## Documentation
 

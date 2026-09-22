@@ -20,6 +20,8 @@
 
 “Production” means linked and covered by the current repository validation. “Planned” cards are non-interactive. Secure Tools may later link separately deployed companion applications, but no Companion status or integration exists on the live site today.
 
+The Scan/OCR category now has an internal, tested OCR runtime foundation for JPEG, PNG, and WebP input with English, Korean, and combined recognition. It remains planned because Sprint 16A does not expose an Image → Text page or change navigation, sitemap, structured data, or the product catalog.
+
 ## Shared Image boundaries
 
 Image admission validates signatures before decoding. Image Converter, Resize, Compressor, and Images to PDF share a 50 MiB per-file limit, 100-file queue limit, 500 MiB aggregate queue limit, 16,384-pixel per-dimension limit, and 50-megapixel per-image decoded limit. Converter, Resize, and Compressor also enforce a 200-megapixel aggregate work limit appropriate to their output path.

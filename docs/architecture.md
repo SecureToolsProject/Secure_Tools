@@ -2,7 +2,7 @@
 
 ## Application model
 
-Secure Tools is a static GitHub Pages application built with semantic HTML, CSS, and Vanilla JavaScript ES Modules. It has no framework, build step, backend, database, authentication service, runtime API, or required package installation.
+Secure Tools is a static GitHub Pages application built with semantic HTML, CSS, and Vanilla JavaScript ES Modules. It has no framework, backend, database, authentication service, or runtime API. Production deploys committed static files directly. A pinned npm preparation step reproduces and verifies the vendored OCR runtime; it does not create a server-side production dependency.
 
 Production routes load application code and pinned libraries from the same origin. File-processing workflows run through browser APIs and in-memory data. The [privacy model](./privacy-model.md) defines the limits of that statement.
 
@@ -44,6 +44,7 @@ The current production inventory and tool-specific behavior live in [tool status
 - `js/i18n.js` resolves six supported languages, applies translations without reload, updates document metadata and `<html lang>`, and preserves tool state when language changes.
 - `js/config.js` centralizes repository links.
 - `tools/shared/` owns common file admission, signature validation, image/PDF helpers, queue conventions, local save behavior, and shared tool presentation.
+- `tools/shared/ocr.js` owns language selection, same-origin OCR paths, normalized progress, orientation-aware image preparation, worker reuse, cancellation, and disposal. It is infrastructure only and is not linked from the public tool surface.
 - The File System Access API is used when available; a revoking Blob-download fallback serves other browsers.
 
 Tool implementations retain specialized models when their workflows differ. Organizer uses a page grid and PDF rendering lifecycle; Metadata tools use bounded inspection models and fail-closed output verification. Shared UI does not erase these tool-specific guarantees.
@@ -56,9 +57,9 @@ Image conversion, resizing, and compression use browser decode, Canvas, and enco
 
 ## Development and delivery
 
-Local development requires only an HTTP server. The authoritative test entry point is `node tests/run-all.mjs`.
+Serving the committed production tree requires only an HTTP server. Reproducing OCR assets and running the full CI checks requires Node.js 24 and the exact lockfile. `npm run build` verifies prepared OCR assets, `npm test` runs the static and unit suite, and `node tests/ocr-smoke.test.mjs` performs real English recognition.
 
-`.github/workflows/ci.yml` validates pull requests and pushes to `main` using Node.js 24. It checks commit-range whitespace, JavaScript syntax, and the repository test suite without installing a production dependency or adding deployment behavior.
+`.github/workflows/ci.yml` validates pull requests and pushes to `main` using Node.js 24. It installs the lockfile only to reproduce and verify OCR assets, then checks commit-range whitespace, JavaScript syntax, unit coverage, and real local OCR without adding deployment behavior.
 
 Development uses short-lived branches and normal merge commits. Shared `main` history is not force-pushed or rewritten. GitHub Pages can publish `main` from the repository root; relative links support both the `/Secure_Tools/` project path and root-hosted deployments.
 

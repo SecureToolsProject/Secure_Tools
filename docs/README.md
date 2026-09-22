@@ -9,6 +9,7 @@ The root [README](../README.md) introduces Secure Tools. This directory owns det
 | [Architecture](./architecture.md) | Static application structure, shared browser foundations, delivery, and future ecosystem direction |
 | [Privacy model](./privacy-model.md) | Local-processing and network boundaries, storage, security controls, and bounded privacy claims |
 | [Dependencies](./dependencies.md) | Production runtime inventory, versions, vendoring, licenses, and integrity ownership |
+| [Local OCR foundation](./ocr-foundation.md) | Self-hosted Tesseract assets, languages, lifecycle, cancellation, caching, and privacy guarantees |
 | [Tool status](./tool-status.md) | Production and planned surfaces, supported formats, behavior, and resource boundaries |
 | [Search discovery and metadata](./seo.md) | Canonical routes, crawler files, metadata policy, maintenance, and submission steps |
 | [Cloudflare Pages migration bridge](./cloudflare-pages-bridge.md) | H3.2/H3.3 provenance plus the prepared H3.5 hostname-specific indexing, activation, validation, and rollback contracts |
