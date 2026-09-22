@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://securetools.app/sitemap.xml
+Sitemap: https://tools.securetools.app/sitemap.xml
