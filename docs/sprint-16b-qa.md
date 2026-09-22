@@ -1,7 +1,9 @@
 # Sprint 16B Image → Text QA
 
-Date: 2026-09-23  
-Development cycle: v2.1.0  
+Date: 2026-09-23
+
+Development cycle: v2.1.0
+
 Route: `/tools/image/to-text/`
 
 ## Automated evidence
