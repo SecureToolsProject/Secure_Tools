@@ -249,7 +249,7 @@ assert.match(app, /FORMAT_POLICY_KEYS[\s\S]*jpeg:[^\n]*removeIptc[^\n]*removeCom
 assert.match(app, /renderGroups\(elements\.metadata_groups, state\.inspection\.summaryGroups, false\)/); assert.match(app, /additionalDecodedCount/);
 assert.ok(html.indexOf("metadata-action-panel") < html.indexOf('id="inspection"'), "Primary actions precede arbitrary metadata content in DOM order");
 assert.match(html, /connect-src 'none'/); assert.match(html, /role="status" aria-live="polite"/);
-assert.match(category, /href="\.\/metadata\/"/); assert.equal((category.match(/class="category-tool surface"/g) || []).length, 4);
+assert.match(category, /href="\.\/metadata\/"/); assert.match(category, /href="\.\/to-text\/"/); assert.equal((category.match(/class="category-tool surface"/g) || []).length, 5);
 const requestIndex = app.indexOf("await requestSaveHandle"); const cleanIndex = app.indexOf("await cleanAndVerifyImageMetadata"); const writeIndex = app.indexOf("await writeBlobToHandle");
 assert.ok(requestIndex > -1 && requestIndex < cleanIndex, "Save capability is acquired from the click path before asynchronous cleaning");
 assert.ok(cleanIndex < writeIndex, "No bytes are written before cleaning and fail-closed verification succeed");

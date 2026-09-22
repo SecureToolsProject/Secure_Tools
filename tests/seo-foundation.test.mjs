@@ -25,6 +25,7 @@ const indexableRoutes = new Map([
   ["tools/image/resize/index.html", "/tools/image/resize/"],
   ["tools/image/compress/index.html", "/tools/image/compress/"],
   ["tools/image/metadata/index.html", "/tools/image/metadata/"],
+  ["tools/image/to-text/index.html", "/tools/image/to-text/"],
   ["tools/privacy/index.html", "/tools/privacy/"],
   ["tools/scan/index.html", "/tools/scan/"],
   ["tools/media/index.html", "/tools/media/"],
@@ -32,7 +33,7 @@ const indexableRoutes = new Map([
 
 const excludedRoutes = ["404.html", "tools/image-to-pdf/index.html"];
 const allHtmlRoutes = [...indexableRoutes.keys(), ...excludedRoutes];
-assert.equal(indexableRoutes.size + 1, 19, "all 19 H3 migration routes remain represented");
+assert.equal(indexableRoutes.size + 1, 20, "all 20 public and migration routes remain represented");
 const shareImagePath = "assets/images/og-image.png";
 const shareImageUrl = `${origin}/${shareImagePath}`;
 const iconLinks = new Map([
