@@ -10,7 +10,9 @@ assert.match(workflow, /uses: actions\/setup-node@v4/);
 assert.match(workflow, /node-version: 24/);
 assert.match(workflow, /permissions:\s*\n\s+contents: read/);
 assert.match(workflow, /git diff --check/);
-assert.match(workflow, /run: node tests\/run-all\.mjs/);
-assert.doesNotMatch(workflow, /npm (?:install|ci|run)/);
+assert.match(workflow, /run: npm ci --ignore-scripts/);
+assert.match(workflow, /run: npm run build/);
+assert.match(workflow, /run: npm test/);
+assert.match(workflow, /run: node tests\/ocr-smoke\.test\.mjs/);
 
 console.log("CI workflow contract checks passed.");

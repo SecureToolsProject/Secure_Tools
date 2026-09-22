@@ -64,7 +64,7 @@ const vendors = {
 
 };
 
-assert.deepEqual(fs.readdirSync(path.join(root, "assets/vendor")).sort(), Object.keys(vendors).sort());
+assert.deepEqual(fs.readdirSync(path.join(root, "assets/vendor")).sort(), [...Object.keys(vendors), "tesseract"].sort());
 for (const [directory, expected] of Object.entries(vendors)) {
   const base = path.join(root, "assets/vendor", directory);
   const metadata = JSON.parse(fs.readFileSync(path.join(base, "package.json"), "utf8"));
