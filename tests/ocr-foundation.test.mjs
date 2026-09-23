@@ -200,6 +200,17 @@ assert.deepEqual(
   [...Object.keys(manifest.assets), "README.md", "manifest.json"].sort(),
   "OCR vendor inventory contains only documented prepared assets",
 );
+function listAbsoluteFiles(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const target = path.join(directory, entry.name);
+    return entry.isDirectory() ? listAbsoluteFiles(target) : [target];
+  });
+}
+const publicOcrReferences = listAbsoluteFiles(path.join(root, "tools"))
+  .filter((file) => file.endsWith(".html"))
+  .map((file) => path.relative(root, file).replaceAll("\\", "/"))
+  .filter((relative) => read(relative).includes("assets/vendor/tesseract"));
+assert.deepEqual(publicOcrReferences, ["tools/image/to-text/index.html"], "OCR runtime must stay lazy to its public route");
 for (const required of ["engine/tesseract.min.js", "worker/worker.min.js", "lang/eng.traineddata.gz", "lang/kor.traineddata.gz"]) {
   assert.ok(manifest.assets[required], `missing ${required}`);
 }
