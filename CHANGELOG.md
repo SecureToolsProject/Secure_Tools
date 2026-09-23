@@ -20,6 +20,7 @@
 
 ### Changed
 
+- Hardened the v2.1.0 release candidate with real English, Korean, and combined local OCR smoke coverage plus reproducible browser, privacy, CSP, asset, locale, responsive, accessibility, and regression evidence.
 - Hardened v2 promotion gates for all ten production tools, vendored-resource integrity, local-only network invariants, save failure paths, and resource boundaries.
 - Upgraded secure-metadata to v0.1.1 so JPEG Privacy Clean preserves one valid rendering Orientation while removing other targeted EXIF/GPS data without decoding or re-encoding pixels.
 - Aligned Image and PDF Metadata action panels and bounded their primary decoded summaries while retaining complete details.

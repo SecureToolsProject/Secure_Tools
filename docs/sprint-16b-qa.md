@@ -10,7 +10,7 @@ Route: `/tools/image/to-text/`
 
 - `npm run build`: pinned OCR assets match the installed packages and lockfile.
 - `npm test`: syntax, state-machine, stale-callback, localization, route, CSP, privacy, responsive-contract, and regression suites pass.
-- `node tests/ocr-smoke.test.mjs`: real local English OCR passes with the pinned core and language data.
+- `node tests/ocr-smoke.test.mjs`: real local English, Korean, and combined OCR pass with the pinned core and language data.
 - The browser smoke page completes real English OCR through the same direct worker, WASM core, and language-model paths and reports `PASS: HELLO`.
 
 ## Chromium browser QA
