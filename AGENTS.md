@@ -11,6 +11,17 @@
 - Sprint and routine development pull requests target `v2.1`, not `main`.
 - After a successful merge, delete only the merged short-lived branch when cleanup is authorized.
 
+## Commit messages
+
+- Use exactly `<Gitmoji>[<Action>] <imperative subject>` for every human-authored commit. There is no space before `[Action]`, square brackets are mandatory, and exactly one space follows `]`.
+- Use one fixed pair: `✨[Feat]`, `➕[Add]`, `🚀[Deploy]`, `✅[Test]`, `📈[Data]`, `🐛[Fix]`, `♻️[Refactor]`, `🔧[Config]`, `🚨[Hotfix]`, `⚙️[Chore]`, `🎉[Init]`, `📄[Docs]`, `🎀[Style]`, or `🚚[Rename]`.
+- Write a concise imperative subject for one logical change. Split unrelated changes into separate commits.
+- Plain Conventional Commit prefixes such as `feat:`, mismatched pairs such as `🐛[Feat]`, and spaced forms such as `✨ [Feat]` are prohibited.
+- Good: `✨[Feat] Add Image to Text OCR`, `✅[Test] Cover OCR cancellation`, `📄[Docs] Document release workflow`.
+- Bad: `feat: add OCR`, `✨ [Feat] Add OCR`, `✨[Fix] Add OCR`.
+- Inspect recent conforming history if uncertain. Do not create a commit until its message satisfies this convention.
+- Commit creation does not authorize merging; the merge-authority policy below still applies.
+
 ## Merge authority
 
 - Creating a pull request and merging it are separate operations.
