@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added the Sprint 16B Image → Text OCR interface for the v2.1.0 development cycle with single-image PNG/JPEG/WebP input, English/Korean/combined recognition, editable results, copy, UTF-8 TXT download, cancellation, retry, orientation-correct previews, request-identity safeguards, and complete six-locale UI coverage.
 - Added the internal Sprint 16A local OCR foundation with pinned, same-origin Tesseract.js 7.0.0 worker/core assets, English and Korean language data, orientation-aware image preparation, normalized progress, worker reuse, cancellation, cleanup, and real OCR smoke coverage. No public OCR tool was added.
 - Started the v2 cycle with a production Image category and local Image Converter.
 - Added Image Resize with pixel and percentage modes, aspect-ratio preservation, optional enlargement, Original/JPEG/PNG/WebP output, and local batch ZIP saving.
@@ -19,6 +20,7 @@
 
 ### Changed
 
+- Hardened the v2.1.0 release candidate with real English, Korean, and combined local OCR smoke coverage plus reproducible browser, privacy, CSP, asset, locale, responsive, accessibility, and regression evidence.
 - Hardened v2 promotion gates for all ten production tools, vendored-resource integrity, local-only network invariants, save failure paths, and resource boundaries.
 - Upgraded secure-metadata to v0.1.1 so JPEG Privacy Clean preserves one valid rendering Orientation while removing other targeted EXIF/GPS data without decoding or re-encoding pixels.
 - Aligned Image and PDF Metadata action panels and bounded their primary decoded summaries while retaining complete details.

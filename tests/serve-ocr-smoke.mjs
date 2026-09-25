@@ -4,17 +4,23 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const port = Number.parseInt(process.argv[2] || "4173", 10);
 const contentTypes = new Map([
+  [".css", "text/css; charset=utf-8"],
   [".gz", "application/gzip"],
   [".html", "text/html; charset=utf-8"],
   [".js", "text/javascript; charset=utf-8"],
   [".json", "application/json; charset=utf-8"],
+  [".png", "image/png"],
+  [".ico", "image/x-icon"],
   [".wasm", "application/wasm"],
 ]);
 
 const server = http.createServer((request, response) => {
   const pathname = new URL(request.url, "http://127.0.0.1").pathname;
-  const requested = pathname === "/" ? "/tests/browser/ocr-smoke.html" : pathname;
+  const requested = pathname === "/"
+    ? "/tests/browser/ocr-smoke.html"
+    : pathname.endsWith("/") ? `${pathname}index.html` : pathname;
   const target = path.resolve(root, `.${decodeURIComponent(requested)}`);
   if (!target.startsWith(`${root}${path.sep}`)) {
     response.writeHead(403).end("Forbidden");
@@ -33,6 +39,7 @@ const server = http.createServer((request, response) => {
   });
 });
 
-server.listen(4173, "127.0.0.1", () => {
-  console.log("OCR browser smoke: http://127.0.0.1:4173/tests/browser/ocr-smoke.html");
+server.listen(port, "127.0.0.1", () => {
+  console.log(`OCR browser smoke: http://127.0.0.1:${port}/tests/browser/ocr-smoke.html`);
+  console.log(`Image to Text UI QA: http://127.0.0.1:${port}/tools/image/to-text/`);
 });

@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - v2
+      - v2.1
 
 permissions:
   contents: read
@@ -22,10 +23,44 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Enforce pull request branch policy
+        if: github.event_name == 'pull_request'
+        shell: bash
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          if [[ "$BASE_REF" == "v2.1" ]]; then
+            if [[ "$HEAD_REF" =~ ^(feat|fix|test|chore)/.+$ ]]; then
+              exit 0
+            fi
+            echo "::error::Pull requests into v2.1 must come from feat/*, fix/*, test/*, or chore/* branches."
+            exit 1
+          fi
+
+          if [[ "$BASE_REF" == "main" ]]; then
+            if [[ "$HEAD_REF" == "v2.1" || "$HEAD_REF" =~ ^hotfix/.+$ ]]; then
+              exit 0
+            fi
+            echo "::error::Only v2.1 release promotion or an explicit hotfix/* branch may target main."
+            exit 1
+          fi
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
+
+      - name: Enforce commit and pull request title conventions
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          COMMIT_CONVENTION_GRANDFATHER: edb0ade331c54f380ae33abe7816c5a92f3a590a
+        run: |
+          node scripts/validate-commit-message.mjs --range "$BASE_SHA" "$HEAD_SHA" --grandfather-through "$COMMIT_CONVENTION_GRANDFATHER"
+          node scripts/validate-commit-message.mjs --title "$PR_TITLE"
 
       - name: Check changed files for whitespace errors
         shell: bash

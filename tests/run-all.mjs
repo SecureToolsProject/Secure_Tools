@@ -30,6 +30,7 @@ for (const test of [
   "tests/image-compressor.test.mjs",
   "tests/image-metadata.test.mjs",
   "tests/ocr-foundation.test.mjs",
+  "tests/image-to-text.test.mjs",
   "tests/category-availability.test.mjs",
   "tests/pdf-merge-and-categories.test.mjs",
   "tests/file-input-queue-state.test.mjs",
@@ -45,6 +46,7 @@ for (const test of [
   "tests/i18n-quality.test.mjs",
   "tests/ux-consistency.test.mjs",
   "tests/ci-foundation.test.mjs",
+  "tests/commit-message.test.mjs",
   "tests/cloudflare-bridge.test.mjs",
 ]) {
   runNode([test], test);

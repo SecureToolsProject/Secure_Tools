@@ -28,10 +28,10 @@ function assertRoutesExist(categoryPage, routes) {
 
 const imageHtml = read("tools/image/index.html");
 const imageList = categoryList(imageHtml);
-const imageRoutes = ["./converter/", "./resize/", "./compress/", "./metadata/"];
-assert.equal((imageList.match(/<li>/g) || []).length, 4);
+const imageRoutes = ["./converter/", "./resize/", "./compress/", "./metadata/", "./to-text/"];
+assert.equal((imageList.match(/<li>/g) || []).length, 5);
 assert.deepEqual(linkedRoutes(imageList), imageRoutes);
-assert.equal((imageList.match(/status--available/g) || []).length, 4);
+assert.equal((imageList.match(/status--available/g) || []).length, 5);
 assert.doesNotMatch(imageHtml, /<\/ul>\s*<li>/, "Image metadata card must remain inside the semantic list");
 assertRoutesExist("tools/image/index.html", imageRoutes);
 
