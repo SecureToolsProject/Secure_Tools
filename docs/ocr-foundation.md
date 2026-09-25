@@ -29,6 +29,8 @@ Production URLs are:
 
 The service always passes explicit `workerPath`, `corePath`, and `langPath` values. `corePath` is the directory, so Tesseract.js can choose the scalar, SIMD, or relaxed-SIMD LSTM runtime. `workerBlobURL: false` creates a direct same-origin worker. Missing local assets produce a controlled initialization failure; the application has no CDN or external-service retry.
 
+Browser HTTP cache and Tesseract.js model caching may allow a previously loaded workflow to run while disconnected. Secure Tools does not install a service worker and does not guarantee that application, worker, core, or model assets are available offline. A fresh or partially cached browser can therefore fail with the localized initialization error. There is no cloud fallback.
+
 ## Service behavior
 
 `tools/shared/ocr.js` supports `eng`, `kor`, and `eng+kor` internally. UI code should present localized language names rather than these engine identifiers.
@@ -45,7 +47,7 @@ The public controller adds a monotonically increasing request identity around th
 
 The browser smoke page at `tests/browser/ocr-smoke.html` runs the real browser bundle, direct worker, WASM core, and English model under the same strict meta CSP used by production pages. The public route uses the same runtime paths and unchanged production CSP. Browser QA also exercises the actual Image → Text selection, recognition, edit, copy/download, replace, remove, and cancellation paths.
 
-Run the repeatable browser check with `npm run smoke:ocr:browser`, then open the printed localhost URL and require a visible `PASS` result. The page rejects any third-party resource entry it observes. The automated Node smoke test performs real English recognition using local core and trained data; unit tests cover path configuration, language mapping, progress, orientation cleanup, reuse, language replacement, initialization/recognition failures, cancellation, disposal, and stale callbacks.
+Run the repeatable browser check with `npm run smoke:ocr:browser`, then open the printed localhost URL and require a visible `PASS` result. The page rejects any third-party resource entry it observes. The automated Node smoke test performs real English, Korean, and combined recognition using local core and trained data; unit tests cover path configuration, language mapping, progress, orientation cleanup, reuse, language replacement, initialization/recognition failures, cancellation, disposal, and stale callbacks.
 
 ## Adding a language
 

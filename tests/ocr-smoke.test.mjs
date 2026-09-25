@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
@@ -58,21 +59,36 @@ function createTextBmp(text) {
   return Buffer.concat([header, pixels]);
 }
 
-const progress = [];
-const worker = await createWorker("eng", 1, {
-  langPath: path.join(root, "assets", "vendor", "tesseract", "lang"),
-  cacheMethod: "none",
-  logger(message) { progress.push(message.status); },
-});
+async function recognize(language, image) {
+  const progress = [];
+  const worker = await createWorker(language, 1, {
+    langPath: path.join(root, "assets", "vendor", "tesseract", "lang"),
+    cacheMethod: "none",
+    logger(message) { progress.push(message.status); },
+  });
 
-try {
-  const result = await worker.recognize(createTextBmp("HELLO"));
-  assert.match(result.data.text.replace(/\s+/g, " ").trim(), /HELLO/i);
-  assert.ok(progress.includes("loading tesseract core"));
-  assert.ok(progress.includes("loading language traineddata"));
-  assert.ok(progress.includes("recognizing text"));
-} finally {
-  await worker.terminate();
+  try {
+    const result = await worker.recognize(image);
+    return { text: result.data.text.replace(/\s+/g, " ").trim(), progress };
+  } finally {
+    await worker.terminate();
+  }
 }
 
-console.log("Real local English OCR smoke test passed.");
+const english = await recognize("eng", createTextBmp("HELLO"));
+assert.match(english.text, /HELLO/i);
+assert.ok(english.progress.includes("loading tesseract core"));
+assert.ok(english.progress.includes("loading language traineddata"));
+assert.ok(english.progress.includes("recognizing text"));
+
+const multilingualFixture = Buffer.from(
+  fs.readFileSync(path.join(root, "tests", "fixtures", "ocr-korean-english.png.b64"), "utf8").trim(),
+  "base64",
+);
+const korean = await recognize("kor", multilingualFixture);
+assert.match(korean.text, /한글/);
+const combined = await recognize("eng+kor", multilingualFixture);
+assert.match(combined.text, /한글/);
+assert.match(combined.text, /HELLO/i);
+
+console.log("Real local English, Korean, and combined OCR smoke tests passed.");
