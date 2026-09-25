@@ -21,7 +21,8 @@ assert.match(workflow, /name: Enforce commit and pull request title conventions/
 assert.match(workflow, /BASE_SHA: \$\{\{ github\.event\.pull_request\.base\.sha \}\}/);
 assert.match(workflow, /HEAD_SHA: \$\{\{ github\.event\.pull_request\.head\.sha \}\}/);
 assert.match(workflow, /PR_TITLE: \$\{\{ github\.event\.pull_request\.title \}\}/);
-assert.match(workflow, /node scripts\/validate-commit-message\.mjs --range "\$BASE_SHA" "\$HEAD_SHA"/);
+assert.match(workflow, /COMMIT_CONVENTION_GRANDFATHER: edb0ade331c54f380ae33abe7816c5a92f3a590a/);
+assert.match(workflow, /node scripts\/validate-commit-message\.mjs --range "\$BASE_SHA" "\$HEAD_SHA" --grandfather-through "\$COMMIT_CONVENTION_GRANDFATHER"/);
 assert.match(workflow, /node scripts\/validate-commit-message\.mjs --title "\$PR_TITLE"/);
 assert.match(workflow, /git diff --check/);
 assert.match(workflow, /run: npm ci --ignore-scripts/);
