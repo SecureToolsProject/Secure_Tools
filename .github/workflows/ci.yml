@@ -51,6 +51,16 @@ jobs:
         with:
           node-version: 24
 
+      - name: Enforce commit and pull request title conventions
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          node scripts/validate-commit-message.mjs --range "$BASE_SHA" "$HEAD_SHA"
+          node scripts/validate-commit-message.mjs --title "$PR_TITLE"
+
       - name: Check changed files for whitespace errors
         shell: bash
         env:
