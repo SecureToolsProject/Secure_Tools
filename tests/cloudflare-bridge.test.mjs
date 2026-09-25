@@ -29,8 +29,11 @@ assert.match(workflow, /\[\[ ! -e "\$BRIDGE_DIRECTORY\/_redirects" \]\]/);
 assert.match(workflow, /find "\$BRIDGE_DIRECTORY" -name index\.html -type f \| wc -l\)" -eq 20/);
 assert.doesNotMatch(workflow, /securetools\.app\/tools/);
 assert.match(workflow, /node tests\/deployment-smoke\.mjs "\$DEPLOYMENT_URL" noindex/);
-assert.match(workflow, /node tests\/deployment-smoke\.mjs https:\/\/secure-tools-web-bridge\.pages\.dev noindex/);
-assert.match(workflow, /node tests\/deployment-smoke\.mjs https:\/\/tools\.securetools\.app indexable/);
+assert.match(workflow, /smoke_with_retry https:\/\/secure-tools-web-bridge\.pages\.dev noindex/);
+assert.match(workflow, /smoke_with_retry https:\/\/tools\.securetools\.app indexable/);
+assert.match(workflow, /for attempt in 1 2 3 4 5 6;/);
+assert.match(workflow, /Waiting for Cloudflare alias propagation/);
+assert.match(workflow, /sleep 10/);
 assert.doesNotMatch(workflow, /node tests\/deployment-smoke\.mjs https:\/\/securetools\.app/);
 
 const deploymentSmoke = fs.readFileSync("tests/deployment-smoke.mjs", "utf8");

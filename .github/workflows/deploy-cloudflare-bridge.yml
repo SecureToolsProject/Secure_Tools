@@ -141,8 +141,22 @@ jobs:
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
         run: node tests/deployment-smoke.mjs "$DEPLOYMENT_URL" noindex
 
-      - name: Validate stable bridge alias
-        run: node tests/deployment-smoke.mjs https://secure-tools-web-bridge.pages.dev noindex
+      - name: Validate stable deployment aliases
+        shell: bash
+        run: |
+          smoke_with_retry() {
+            local url="$1"
+            local indexing="$2"
 
-      - name: Validate tools custom domain
-        run: node tests/deployment-smoke.mjs https://tools.securetools.app indexable
+            for attempt in 1 2 3 4 5 6; do
+              if node tests/deployment-smoke.mjs "$url" "$indexing"; then
+                return 0
+              fi
+              [[ "$attempt" -lt 6 ]] || return 1
+              echo "Waiting for Cloudflare alias propagation (attempt $attempt of 6)."
+              sleep 10
+            done
+          }
+
+          smoke_with_retry https://secure-tools-web-bridge.pages.dev noindex
+          smoke_with_retry https://tools.securetools.app indexable
