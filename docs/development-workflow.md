@@ -30,6 +30,14 @@ feat/* fix/* test/* chore/*
 5. Treat review and merge as a separate step. An agent does not merge its own pull request or enable auto-merge unless the user explicitly authorizes that specific action.
 6. After a successful merge and verification, remove the merged short-lived branch when branch cleanup is authorized.
 
+## Commit convention
+
+Human-authored commits use `<Gitmoji>[<Action>] <imperative subject>`. The prefix must be one fixed canonical pair: `✨[Feat]`, `➕[Add]`, `🚀[Deploy]`, `✅[Test]`, `📈[Data]`, `🐛[Fix]`, `♻️[Refactor]`, `🔧[Config]`, `🚨[Hotfix]`, `⚙️[Chore]`, `🎉[Init]`, `📄[Docs]`, `🎀[Style]`, or `🚚[Rename]`.
+
+There is no space between the Gitmoji and `[Action]`; exactly one space separates the closing bracket from a non-empty, concise imperative subject. Each commit represents one logical change. For example, `✨[Feat] Add Image to Text OCR` and `✅[Test] Cover OCR cancellation` are valid; `feat: add OCR`, `✨ [Feat] Add OCR`, and `✨[Fix] Add OCR` are invalid.
+
+CI validates non-merge commits introduced by the pull request’s actual base-to-head range and validates the pull-request title with the same structural rule. Technical merge commits are excluded by their multiple-parent topology so normal merge commits remain supported. Published non-conforming history is retained and never rewritten solely for message compliance.
+
 ## Production release
 
 After the v2.1.0 scope is integrated, complete release hardening and final verification on `v2.1`. Promote it through a dedicated `v2.1` → `main` pull request. Only after that pull request is explicitly reviewed and merged may a separately authorized task create the v2.1.0 tag and release.
