@@ -26,6 +26,7 @@ assert.match(workflow, /web_analytics_token/);
 assert.match(workflow, /Pages project state:/);
 assert.match(workflow, /\[\[ ! -e "\$BRIDGE_DIRECTORY\/CNAME" \]\]/);
 assert.match(workflow, /\[\[ ! -e "\$BRIDGE_DIRECTORY\/_redirects" \]\]/);
+assert.match(workflow, /find "\$BRIDGE_DIRECTORY" -name index\.html -type f \| wc -l\)" -eq 20/);
 assert.doesNotMatch(workflow, /securetools\.app\/tools/);
 assert.match(workflow, /node tests\/deployment-smoke\.mjs "\$DEPLOYMENT_URL" noindex/);
 assert.match(workflow, /node tests\/deployment-smoke\.mjs https:\/\/secure-tools-web-bridge\.pages\.dev noindex/);

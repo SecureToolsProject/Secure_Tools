@@ -90,7 +90,7 @@ jobs:
           [[ ! -e "$BRIDGE_DIRECTORY/_redirects" ]]
           [[ ! -e "$BRIDGE_DIRECTORY/_worker.js" ]]
           [[ ! -d "$BRIDGE_DIRECTORY/functions" ]]
-          [[ "$(find "$BRIDGE_DIRECTORY" -name index.html -type f | wc -l)" -eq 19 ]]
+          [[ "$(find "$BRIDGE_DIRECTORY" -name index.html -type f | wc -l)" -eq 20 ]]
 
       - name: Validate Cloudflare Pages project isolation
         shell: bash
