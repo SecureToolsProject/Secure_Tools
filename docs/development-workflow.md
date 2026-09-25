@@ -36,7 +36,7 @@ Human-authored commits use `<Gitmoji>[<Action>] <imperative subject>`. The prefi
 
 There is no space between the Gitmoji and `[Action]`; exactly one space separates the closing bracket from a non-empty, concise imperative subject. Each commit represents one logical change. For example, `✨[Feat] Add Image to Text OCR` and `✅[Test] Cover OCR cancellation` are valid; `feat: add OCR`, `✨ [Feat] Add OCR`, and `✨[Fix] Add OCR` are invalid.
 
-CI validates non-merge commits introduced by the pull request’s actual base-to-head range and validates the pull-request title with the same structural rule. Technical merge commits are excluded by their multiple-parent topology so normal merge commits remain supported. Published non-conforming history is retained and never rewritten solely for message compliance.
+CI validates non-merge commits introduced by the pull request’s actual base-to-head range and validates the pull-request title with the same structural rule. Technical merge commits are excluded by their multiple-parent topology so normal merge commits remain supported. Published non-conforming history through `edb0ade331c54f380ae33abe7816c5a92f3a590a` is an explicit grandfather boundary: ancestors of that commit are excluded from later ranges, while every human-authored commit after it remains subject to validation. That history is retained and never rewritten solely for message compliance.
 
 ## Production release
 

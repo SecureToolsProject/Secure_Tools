@@ -38,13 +38,15 @@ function git(argumentsList, cwd) {
   return execFileSync("git", argumentsList, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
 }
 
-export function nonMergeCommits(base, head, cwd = process.cwd()) {
-  const output = git(["rev-list", "--reverse", "--no-merges", `${base}..${head}`], cwd);
+export function nonMergeCommits(base, head, cwd = process.cwd(), grandfatherThrough = null) {
+  const argumentsList = ["rev-list", "--reverse", "--no-merges", `${base}..${head}`];
+  if (grandfatherThrough) argumentsList.push(`^${grandfatherThrough}`);
+  const output = git(argumentsList, cwd);
   return output ? output.split(/\r?\n/) : [];
 }
 
-export function validateCommitRange(base, head, cwd = process.cwd()) {
-  return nonMergeCommits(base, head, cwd).map((sha) => {
+export function validateCommitRange(base, head, cwd = process.cwd(), grandfatherThrough = null) {
+  return nonMergeCommits(base, head, cwd, grandfatherThrough).map((sha) => {
     const subject = git(["show", "-s", "--format=%s", sha], cwd);
     return { sha, subject, ...validateCommitMessage(subject) };
   });
@@ -69,17 +71,19 @@ export function run(argumentsList = process.argv.slice(2), cwd = process.cwd()) 
     return;
   }
 
-  if (mode === "--range" && values.length === 2) {
-    const results = validateCommitRange(values[0], values[1], cwd);
+  if (mode === "--range" && (values.length === 2 || (values.length === 4 && values[2] === "--grandfather-through"))) {
+    const grandfatherThrough = values[3] || null;
+    const results = validateCommitRange(values[0], values[1], cwd, grandfatherThrough);
     const failures = results.filter((result) => !result.valid);
     if (failures.length) {
       throw new Error(failures.map((failure) => failureText(`commit ${failure.sha}`, failure.subject, failure.reason)).join("\n\n"));
     }
-    console.log(`Validated ${results.length} non-merge commit${results.length === 1 ? "" : "s"} in ${values[0]}..${values[1]}.`);
+    const boundary = grandfatherThrough ? ` after grandfather boundary ${grandfatherThrough}` : "";
+    console.log(`Validated ${results.length} non-merge commit${results.length === 1 ? "" : "s"} in ${values[0]}..${values[1]}${boundary}.`);
     return;
   }
 
-  throw new Error("Usage: node scripts/validate-commit-message.mjs --message <subject> | --title <title> | --range <base-sha> <head-sha>");
+  throw new Error("Usage: node scripts/validate-commit-message.mjs --message <subject> | --title <title> | --range <base-sha> <head-sha> [--grandfather-through <sha>]");
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {

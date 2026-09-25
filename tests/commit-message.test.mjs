@@ -81,6 +81,16 @@ try {
   assert.equal(failures.length, 1);
   assert.equal(failures[0].subject, "test: add invalid fixture");
   assert.match(failures[0].sha, /^[0-9a-f]{40}$/);
+
+  fs.writeFileSync(path.join(temporaryRepository, "current.txt"), "current\n");
+  git("add", "current.txt");
+  git("commit", "-q", "-m", "🐛[Fix] Validate commits after enforcement");
+  const currentHead = git("rev-parse", "HEAD");
+  const grandfathered = validateCommitRange(base, currentHead, temporaryRepository, invalidHead);
+  assert.equal(grandfathered.length, 1, "published ancestors through the enforcement boundary are excluded");
+  assert.equal(grandfathered[0].subject, "🐛[Fix] Validate commits after enforcement");
+  assert.equal(grandfathered[0].valid, true);
+  assert.doesNotThrow(() => run(["--range", base, currentHead, "--grandfather-through", invalidHead], temporaryRepository));
 } finally {
   fs.rmSync(temporaryRepository, { recursive: true, force: true });
 }
