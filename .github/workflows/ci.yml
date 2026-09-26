@@ -6,7 +6,7 @@ on:
     branches:
       - main
       - v2
-      - v2.1
+      - v2.2
 
 permissions:
   contents: read
@@ -23,33 +23,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
       - name: Enforce pull request branch policy
         if: github.event_name == 'pull_request'
         shell: bash
         env:
           BASE_REF: ${{ github.base_ref }}
           HEAD_REF: ${{ github.head_ref }}
-        run: |
-          if [[ "$BASE_REF" == "v2.1" ]]; then
-            if [[ "$HEAD_REF" =~ ^(feat|fix|test|chore)/.+$ ]]; then
-              exit 0
-            fi
-            echo "::error::Pull requests into v2.1 must come from feat/*, fix/*, test/*, or chore/* branches."
-            exit 1
-          fi
-
-          if [[ "$BASE_REF" == "main" ]]; then
-            if [[ "$HEAD_REF" == "v2.1" || "$HEAD_REF" =~ ^hotfix/.+$ ]]; then
-              exit 0
-            fi
-            echo "::error::Only v2.1 release promotion or an explicit hotfix/* branch may target main."
-            exit 1
-          fi
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
+        run: node scripts/validate-branch-policy.mjs "$BASE_REF" "$HEAD_REF"
 
       - name: Enforce commit and pull request title conventions
         if: github.event_name == 'pull_request'
