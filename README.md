@@ -19,23 +19,23 @@ See the [privacy model](./docs/privacy-model.md) for exact guarantees and bounda
 
 ### PDF
 
-- [Images to PDF](./tools/pdf/images-to-pdf/) — arrange JPEG, PNG, and WebP images and save one PDF.
-- [PDF Merge](./tools/pdf/merge/) — combine validated PDFs without rasterizing pages.
-- [PDF Split](./tools/pdf/split/) — extract ranges or produce per-page and fixed-interval archives.
-- [PDF Organizer](./tools/pdf/organize/) — preview, reorder, rotate, remove, and export pages.
-- [PDF to Images](./tools/pdf/to-images/) — render pages to PNG, JPEG, or WebP.
-- [PDF Metadata Inspector & Cleaner](./tools/pdf/metadata/) — inspect and remove supported document-info fields.
+- [Images to PDF](https://tools.securetools.app/pdf/images-to-pdf/) — arrange JPEG, PNG, and WebP images and save one PDF.
+- [PDF Merge](https://tools.securetools.app/pdf/merge/) — combine validated PDFs without rasterizing pages.
+- [PDF Split](https://tools.securetools.app/pdf/split/) — extract ranges or produce per-page and fixed-interval archives.
+- [PDF Organizer](https://tools.securetools.app/pdf/organize/) — preview, reorder, rotate, remove, and export pages.
+- [PDF to Images](https://tools.securetools.app/pdf/to-images/) — render pages to PNG, JPEG, or WebP.
+- [PDF Metadata Inspector & Cleaner](https://tools.securetools.app/pdf/metadata/) — inspect and remove supported document-info fields.
 
 ### Image
 
-- [Image Converter](./tools/image/converter/) — convert JPEG, PNG, and WebP batches.
-- [Image Resize](./tools/image/resize/) — resize batches by pixels or percentage.
-- [Image Compressor](./tools/image/compress/) — quality-compress images and compare byte results.
-- [Image Metadata Inspector & Cleaner](./tools/image/metadata/) — inspect supported metadata and save a verified cleaned copy without pixel re-encoding.
+- [Image Converter](https://tools.securetools.app/image/converter/) — convert JPEG, PNG, and WebP batches.
+- [Image Resize](https://tools.securetools.app/image/resize/) — resize batches by pixels or percentage.
+- [Image Compressor](https://tools.securetools.app/image/compress/) — quality-compress images and compare byte results.
+- [Image Metadata Inspector & Cleaner](https://tools.securetools.app/image/metadata/) — inspect supported metadata and save a verified cleaned copy without pixel re-encoding.
 
 ### Privacy
 
-The [Privacy hub](./tools/privacy/) links to the specialized Image and PDF metadata tools. It is a cross-category navigation surface, not a generic sanitizer. Scan/OCR and Media remain planned.
+The [Privacy hub](https://tools.securetools.app/privacy/) links to the specialized Image and PDF metadata tools. It is a cross-category navigation surface, not a generic sanitizer. Scan/OCR and Media remain planned.
 
 Detailed formats, limits, and behavior are listed in [tool status](./docs/tool-status.md).
 
@@ -45,10 +45,11 @@ Secure Tools includes English, Korean, Japanese, Spanish, German, and French int
 
 ## Local development
 
-Serve the repository over HTTP so ES Modules load correctly:
+Build the deployable tree, then serve `dist/` over HTTP so ES Modules load correctly:
 
 ```bash
-python -m http.server 8000
+npm run build
+python -m http.server 8000 --directory dist
 ```
 
 Open [http://localhost:8000](http://localhost:8000). Do not use a `file://` URL.
@@ -62,7 +63,7 @@ npm test
 node tests/ocr-smoke.test.mjs
 ```
 
-The Image category includes a public, single-image [Image → Text OCR](./tools/image/to-text/) workflow for PNG, JPEG, and WebP input. English, Korean, and combined English + Korean recognition run through the same-origin OCR runtime documented in [Local OCR foundation](./docs/ocr-foundation.md).
+The Image category includes a public, single-image [Image → Text OCR](https://tools.securetools.app/image/to-text/) workflow for PNG, JPEG, and WebP input. English, Korean, and combined English + Korean recognition run through the same-origin OCR runtime documented in [Local OCR foundation](./docs/ocr-foundation.md).
 
 ## Documentation
 

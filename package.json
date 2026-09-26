@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/prepare-ocr-assets.mjs --check",
+    "build": "node scripts/prepare-ocr-assets.mjs --check && node scripts/build-site.mjs",
     "prepare:ocr": "node scripts/prepare-ocr-assets.mjs",
     "smoke:ocr:browser": "node tests/serve-ocr-smoke.mjs",
     "test:commit-messages": "node tests/commit-message.test.mjs",

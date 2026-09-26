@@ -38,6 +38,7 @@ for (const test of [
   "tests/security-hardening.test.mjs",
   "tests/release-gate.test.mjs",
   "tests/seo-foundation.test.mjs",
+  "tests/url-namespace.test.mjs",
   "tests/home-structure.test.mjs",
   "tests/typography-i18n-layout.test.mjs",
   "tests/pdf-to-images.test.mjs",

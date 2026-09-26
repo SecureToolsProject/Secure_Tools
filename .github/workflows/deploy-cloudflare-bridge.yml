@@ -64,19 +64,9 @@ jobs:
         run: |
           set -euo pipefail
 
+          npm run build
           mkdir -p "$BRIDGE_DIRECTORY"
-          cp -R \
-            404.html \
-            index.html \
-            about \
-            assets \
-            css \
-            js \
-            privacy \
-            robots.txt \
-            sitemap.xml \
-            tools \
-            "$BRIDGE_DIRECTORY/"
+          cp -R dist/. "$BRIDGE_DIRECTORY/"
 
           printf '%s\n' \
             'https://secure-tools-web-bridge.pages.dev/*' \
@@ -87,10 +77,9 @@ jobs:
             > "$BRIDGE_DIRECTORY/_headers"
 
           [[ ! -e "$BRIDGE_DIRECTORY/CNAME" ]]
-          [[ ! -e "$BRIDGE_DIRECTORY/_redirects" ]]
           [[ ! -e "$BRIDGE_DIRECTORY/_worker.js" ]]
           [[ ! -d "$BRIDGE_DIRECTORY/functions" ]]
-          [[ "$(find "$BRIDGE_DIRECTORY" -name index.html -type f | wc -l)" -eq 20 ]]
+          node scripts/validate-build.mjs "$BRIDGE_DIRECTORY"
 
       - name: Validate Cloudflare Pages project isolation
         shell: bash
