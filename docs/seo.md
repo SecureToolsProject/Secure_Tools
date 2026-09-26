@@ -12,7 +12,7 @@ The root `CNAME` remains `securetools.app` in H3.4A because this preparation tas
 
 - `/robots.txt` allows public crawling and points to `https://tools.securetools.app/sitemap.xml`.
 - `/sitemap.xml` lists exactly the 18 canonical Web Utilities pages intended for indexing.
-- The 404 page and legacy `/tools/image-to-pdf/` alias are intentionally `noindex` and absent from the sitemap.
+- Redirect-only `/tools/*` URLs and the 404 page are absent from the sitemap.
 - No Hub, old apex, GitHub Pages, or `pages.dev` URL belongs in the Web Utilities sitemap.
 - Static assets, tests, documentation files, and generated user downloads are not sitemap entries.
 
@@ -43,7 +43,7 @@ https://:version.secure-tools-web-bridge.pages.dev/*
   X-Robots-Tag: noindex, nofollow
 ```
 
-This leaves `tools.securetools.app` without the bridge header while retaining duplicate-host protection on stable, branch, and immutable `pages.dev` URLs. It requires no Worker, Pages Function, redirect, or zone-level Transform Rule. The legacy `/tools/image-to-pdf/` page keeps its independent HTML `noindex` directive on every hostname.
+This leaves `tools.securetools.app` without the bridge header while retaining duplicate-host protection on stable, branch, and immutable `pages.dev` URLs. It requires no Worker, Pages Function, or zone-level Transform Rule. Cloudflare Pages reads the generated `_redirects` file and permanently redirects each legacy `/tools/*` path to its root-level canonical route with status 308.
 
 ## Language and structured data
 
@@ -69,6 +69,8 @@ Do not merge the H3.4A pull request as an ordinary application release. Activate
 Prolonged partial activation is unsafe because crawlers could see conflicting canonicals, a new sitemap before the intended host is indexable, duplicate content on `pages.dev`, or Web Utilities metadata published from the old apex while the Hub cutover is incomplete.
 
 ## Maintenance
+
+Canonical tool URLs use `https://tools.securetools.app/<category>/<tool>/`. Legacy `https://tools.securetools.app/tools/<category>/<tool>/` URLs remain compatibility entry points through permanent redirects and must never appear in canonical metadata or the sitemap.
 
 When an indexable route is added, renamed, redirected, or retired:
 

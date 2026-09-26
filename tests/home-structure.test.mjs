@@ -17,11 +17,11 @@ function testCategoryFirstHomepage() {
   assert.equal((home.match(/class="category-card surface"/g) || []).length, 5, "Homepage must retain five category entry points");
   const categoryHrefs = [...home.matchAll(/<a class="category-card surface" href="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(categoryHrefs, [
-    "./tools/pdf/",
-    "./tools/image/",
-    "./tools/privacy/",
-    "./tools/scan/",
-    "./tools/media/",
+    "./pdf/",
+    "./image/",
+    "./privacy/",
+    "./scan/",
+    "./media/",
   ]);
 
   const flow = [

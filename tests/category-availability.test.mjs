@@ -4,6 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { translations } from "../js/i18n.js";
+import { canonicalPages } from "../scripts/site-routes.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
@@ -23,6 +24,14 @@ function assertRoutesExist(categoryPage, routes) {
   for (const route of routes) {
     const target = path.resolve(directory, route, "index.html");
     assert.equal(fs.existsSync(target), true, `${categoryPage} links to missing route ${route}`);
+  }
+}
+
+function assertPublicRoutesExist(categoryRoute, routes) {
+  const publicRoutes = new Set(canonicalPages.map(({ route }) => route));
+  for (const route of routes) {
+    const target = new URL(route, `https://tools.securetools.app${categoryRoute}`).pathname;
+    assert.ok(publicRoutes.has(target), `${categoryRoute} links to missing public route ${target}`);
   }
 }
 
@@ -63,7 +72,7 @@ assert.equal((scanList.match(/<article class="category-tool surface">/g) || []).
 assert.equal((scanList.match(/tools\.comingSoon/g) || []).length, 1);
 assert.match(scanList, /data-i18n="categories\.scan\.documentTitle"/);
 
-const privacyHtml = read("tools/privacy/index.html");
+const privacyHtml = read("privacy/index.html");
 const privacyList = categoryList(privacyHtml);
 const privacyRoutes = ["../image/metadata/", "../pdf/metadata/"];
 assert.equal((privacyList.match(/<li>/g) || []).length, 2);
@@ -72,7 +81,7 @@ assert.equal((privacyList.match(/status--available/g) || []).length, 2);
 assert.doesNotMatch(privacyList, /tools\.comingSoon|<article\b|tools\.metadata(?:Inspector|Cleaner)/);
 assert.match(privacyHtml, /data-i18n="privacyHub\.imageDescription"/);
 assert.match(privacyHtml, /data-i18n="privacyHub\.pdfDescription"/);
-assertRoutesExist("tools/privacy/index.html", privacyRoutes);
+assertPublicRoutesExist("/privacy/", privacyRoutes);
 
 const pdfList = categoryList(read("tools/pdf/index.html"));
 assert.equal(linkedRoutes(pdfList).length, 6, "Every PDF production card must remain linked");

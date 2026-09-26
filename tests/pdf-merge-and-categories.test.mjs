@@ -8,10 +8,13 @@ import { fileURLToPath } from "node:url";
 import { translations } from "../js/i18n.js";
 import { formatBytes, moveArrayItem, sanitizePdfFilename } from "../tools/shared/file.js";
 import { inspectPdf, isSupportedPdf, mergePdfFiles } from "../tools/pdf/merge/pdf.js";
+import { canonicalPages } from "../scripts/site-routes.mjs";
 
 const require = createRequire(import.meta.url);
 const { PDFDocument, StandardFonts } = require("../assets/vendor/pdf-lib/pdf-lib.min.js");
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const publicRouteBySource = new Map(canonicalPages.map(({ source, route }) => [source, route]));
+const publicRoutes = new Set(canonicalPages.map(({ route }) => route));
 
 async function makePdf(name, pageSizes, type = "application/pdf") {
   const document = await PDFDocument.create();
@@ -164,7 +167,11 @@ function testRoutesTranslationsAndPrivacy() {
         ? path.resolve(root, reference.slice(1))
         : path.resolve(path.dirname(file), reference);
       if (reference.endsWith("/") || (fs.existsSync(target) && fs.statSync(target).isDirectory())) target = path.join(target, "index.html");
-      assert.equal(fs.existsSync(target), true, `${relative} has missing ${attribute}: ${rawReference}`);
+      const publicBase = publicRouteBySource.get(relative);
+      const publicTarget = publicBase && attribute === "href" && reference.endsWith("/")
+        ? new URL(reference, `https://tools.securetools.app${publicBase}`).pathname
+        : null;
+      assert.equal(fs.existsSync(target) || publicRoutes.has(publicTarget), true, `${relative} has missing ${attribute}: ${rawReference}`);
     }
     for (const [, source] of html.matchAll(/<script[^>]+src="([^"]+)"/gi)) assert.doesNotMatch(source, /^https?:/i, `${relative} loads an external script`);
     for (const tag of html.matchAll(/<link\b[^>]*>/gi)) {

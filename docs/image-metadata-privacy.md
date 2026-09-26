@@ -1,6 +1,6 @@
 # Image Metadata privacy and verification
 
-The Image Metadata Inspector & Cleaner at `/tools/image/metadata/` processes one signature-validated JPEG, PNG, or WebP file in browser memory. The application enforces its existing 50 MiB per-image limit before reading the full file. It does not upload the image, decode pixels, use Canvas, resize, convert, or re-encode it.
+The Image Metadata Inspector & Cleaner at `/image/metadata/` processes one signature-validated JPEG, PNG, or WebP file in browser memory. The application enforces its existing 50 MiB per-image limit before reading the full file. It does not upload the image, decode pixels, use Canvas, resize, convert, or re-encode it.
 
 Inspection reports only structures supported by `secure-metadata v0.1.1`. Decoded values and opaque detected containers are presented differently. A `metadata-partial` result is a successful but non-exhaustive inspection; it is not evidence that every possible metadata structure was decoded. “No supported metadata detected” does not mean that the image contains no metadata or hidden information.
 
