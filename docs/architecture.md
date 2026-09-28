@@ -47,6 +47,7 @@ The current production inventory and tool-specific behavior live in [tool status
 - `js/config.js` centralizes repository links.
 - `tools/shared/` owns common file admission, signature validation, image/PDF helpers, queue conventions, local save behavior, and shared tool presentation.
 - `tools/shared/ocr.js` owns language selection, same-origin OCR paths, normalized progress, orientation-aware image preparation, worker reuse, cancellation, and disposal for the public Image → Text workflow.
+- `tools/shared/pdf-ocr.ts` composes the existing PDF.js renderer and OCR service into a sequential, cancellable per-page text pipeline for future PDF OCR interfaces. It does not generate searchable PDFs.
 - The File System Access API is used when available; a revoking Blob-download fallback serves other browsers.
 
 Tool implementations retain specialized models when their workflows differ. Organizer uses a page grid and PDF rendering lifecycle; Metadata tools use bounded inspection models and fail-closed output verification. Shared UI does not erase these tool-specific guarantees.

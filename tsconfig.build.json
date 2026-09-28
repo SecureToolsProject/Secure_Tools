@@ -9,6 +9,7 @@
     "tools/image/to-text/controller.ts",
     "tools/image/to-text/output.ts",
     "tools/image/to-text/preview.ts",
+    "tools/shared/pdf-ocr.ts",
     "tools/shared/*.d.ts"
   ]
 }

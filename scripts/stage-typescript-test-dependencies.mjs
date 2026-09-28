@@ -6,6 +6,6 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const stagingDirectory = path.join(root, ".ts-build", "tools", "shared");
 
 fs.mkdirSync(stagingDirectory, { recursive: true });
-for (const file of ["image.js", "ocr.js", "save.js"]) {
+for (const file of ["image.js", "ocr.js", "pdf.js", "save.js"]) {
   fs.copyFileSync(path.join(root, "tools", "shared", file), path.join(stagingDirectory, file));
 }
