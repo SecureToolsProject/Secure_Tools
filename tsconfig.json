@@ -16,6 +16,7 @@
   },
   "include": [
     "tools/image/to-text/*.ts",
+    "tools/shared/pdf-ocr.ts",
     "tools/shared/*.d.ts"
   ]
 }

@@ -12,5 +12,21 @@ export interface OcrProgress {
   progress: number | null;
 }
 
+export interface OcrRecognitionOptions {
+  language: OcrLanguage;
+  signal?: AbortSignal;
+  onProgress?: (progress: OcrProgress) => void;
+}
+
+export interface OcrService {
+  recognizeImage(image: Blob, options: OcrRecognitionOptions): Promise<{ text: string }>;
+  dispose(): Promise<void>;
+}
+
+export interface OcrServiceConfiguration {
+  prepareImage?: (image: Blob) => Promise<Blob>;
+}
+
 export function resolveOcrLanguage(language: unknown): OcrLanguage;
 export function prepareImageForOcr(image: Blob): Promise<Blob>;
+export function createOcrService(configuration?: OcrServiceConfiguration): OcrService;

@@ -31,6 +31,7 @@ for (const test of [
   "tests/image-compressor.test.mjs",
   "tests/image-metadata.test.mjs",
   "tests/ocr-foundation.test.mjs",
+  "tests/pdf-ocr-foundation.test.mjs",
   "tests/image-to-text.test.mjs",
   "tests/typescript-foundation.test.mjs",
   "tests/category-availability.test.mjs",

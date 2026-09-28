@@ -21,7 +21,7 @@ assert.equal(typeConfig.compilerOptions.noEmit, true);
 assert.equal(typeConfig.compilerOptions.sourceMap, false);
 assert.equal(buildConfig.compilerOptions.outDir, ".ts-build");
 
-assert.equal(compiledBrowserModules.length, 3, "the initial migration remains intentionally bounded");
+assert.equal(compiledBrowserModules.length, 4, "the compiled TypeScript boundary remains intentionally bounded");
 assert.equal(new Set(compiledBrowserModules.map((module) => module.public)).size, compiledBrowserModules.length);
 for (const module of compiledBrowserModules) {
   assert.ok(fs.existsSync(path.join(root, module.source)), `${module.source} exists`);

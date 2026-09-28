@@ -13,6 +13,7 @@ const contentTypes = new Map([
   [".gz", "application/gzip"],
   [".html", "text/html; charset=utf-8"],
   [".js", "text/javascript; charset=utf-8"],
+  [".mjs", "text/javascript; charset=utf-8"],
   [".json", "application/json; charset=utf-8"],
   [".png", "image/png"],
   [".ico", "image/x-icon"],
@@ -50,5 +51,6 @@ const server = http.createServer((request, response) => {
 
 server.listen(port, "127.0.0.1", () => {
   console.log(`OCR browser smoke: http://127.0.0.1:${port}/tests/browser/ocr-smoke.html`);
+  console.log(`PDF OCR browser smoke: http://127.0.0.1:${port}/tests/browser/pdf-ocr-smoke.html`);
   console.log(`Image to Text UI QA: http://127.0.0.1:${port}/image/to-text/`);
 });
