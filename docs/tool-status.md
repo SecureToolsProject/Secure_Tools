@@ -4,18 +4,18 @@
 
 | Category | Tool or surface | Status | Formats / scope |
 | --- | --- | --- | --- |
-| PDF | [Images to PDF](../tools/pdf/images-to-pdf/) | Production | JPEG, PNG, WebP → PDF |
-| PDF | [PDF Merge](../tools/pdf/merge/) | Production | Ordered PDF page copying |
-| PDF | [PDF Split](../tools/pdf/split/) | Production | Ranges, every page, fixed intervals |
-| PDF | [PDF Organizer](../tools/pdf/organize/) | Production | Preview, reorder, rotate, remove, export |
-| PDF | [PDF to Images](../tools/pdf/to-images/) | Production | PDF pages → PNG, JPEG, WebP |
-| PDF | [PDF Metadata Inspector & Cleaner](../tools/pdf/metadata/) | Production | Eight supported document-info fields |
-| Image | [Image Converter](../tools/image/converter/) | Production | JPEG, PNG, WebP conversion |
-| Image | [Image Resize](../tools/image/resize/) | Production | Pixel or percentage batch resize |
-| Image | [Image Compressor](../tools/image/compress/) | Production | JPEG/WebP quality and PNG re-encoding |
-| Image | [Image Metadata Inspector & Cleaner](../tools/image/metadata/) | Production | Supported JPEG, PNG, WebP metadata |
-| Image | [Image → Text OCR](../tools/image/to-text/) | Production | One PNG, JPEG, or WebP → editable English/Korean text |
-| Privacy | [Privacy hub](../tools/privacy/) | Production hub | Navigation to Image and PDF metadata tools |
+| PDF | [Images to PDF](https://tools.securetools.app/pdf/images-to-pdf/) | Production | JPEG, PNG, WebP → PDF |
+| PDF | [PDF Merge](https://tools.securetools.app/pdf/merge/) | Production | Ordered PDF page copying |
+| PDF | [PDF Split](https://tools.securetools.app/pdf/split/) | Production | Ranges, every page, fixed intervals |
+| PDF | [PDF Organizer](https://tools.securetools.app/pdf/organize/) | Production | Preview, reorder, rotate, remove, export |
+| PDF | [PDF to Images](https://tools.securetools.app/pdf/to-images/) | Production | PDF pages → PNG, JPEG, WebP |
+| PDF | [PDF Metadata Inspector & Cleaner](https://tools.securetools.app/pdf/metadata/) | Production | Eight supported document-info fields |
+| Image | [Image Converter](https://tools.securetools.app/image/converter/) | Production | JPEG, PNG, WebP conversion |
+| Image | [Image Resize](https://tools.securetools.app/image/resize/) | Production | Pixel or percentage batch resize |
+| Image | [Image Compressor](https://tools.securetools.app/image/compress/) | Production | JPEG/WebP quality and PNG re-encoding |
+| Image | [Image Metadata Inspector & Cleaner](https://tools.securetools.app/image/metadata/) | Production | Supported JPEG, PNG, WebP metadata |
+| Image | [Image → Text OCR](https://tools.securetools.app/image/to-text/) | Production | One PNG, JPEG, or WebP → editable English/Korean text |
+| Privacy | [Privacy hub](https://tools.securetools.app/privacy/) | Production hub | Navigation to Image and PDF metadata tools |
 | Scan/OCR | Category surface | Planned | No production processing tool |
 | Media | Category surface | Planned | No production processing tool |
 

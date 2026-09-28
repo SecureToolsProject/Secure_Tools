@@ -3,37 +3,19 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { canonicalPages, productionOrigin } from "../scripts/site-routes.mjs";
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 const readBytes = (relative) => fs.readFileSync(path.join(root, relative));
-const origin = "https://tools.securetools.app";
+const origin = productionOrigin;
 const legacyOrigin = "https://securetools.app";
 
-const indexableRoutes = new Map([
-  ["index.html", "/"],
-  ["about/index.html", "/about/"],
-  ["privacy/index.html", "/privacy/"],
-  ["tools/pdf/index.html", "/tools/pdf/"],
-  ["tools/pdf/images-to-pdf/index.html", "/tools/pdf/images-to-pdf/"],
-  ["tools/pdf/merge/index.html", "/tools/pdf/merge/"],
-  ["tools/pdf/split/index.html", "/tools/pdf/split/"],
-  ["tools/pdf/organize/index.html", "/tools/pdf/organize/"],
-  ["tools/pdf/to-images/index.html", "/tools/pdf/to-images/"],
-  ["tools/pdf/metadata/index.html", "/tools/pdf/metadata/"],
-  ["tools/image/index.html", "/tools/image/"],
-  ["tools/image/converter/index.html", "/tools/image/converter/"],
-  ["tools/image/resize/index.html", "/tools/image/resize/"],
-  ["tools/image/compress/index.html", "/tools/image/compress/"],
-  ["tools/image/metadata/index.html", "/tools/image/metadata/"],
-  ["tools/image/to-text/index.html", "/tools/image/to-text/"],
-  ["tools/privacy/index.html", "/tools/privacy/"],
-  ["tools/scan/index.html", "/tools/scan/"],
-  ["tools/media/index.html", "/tools/media/"],
-]);
+const indexableRoutes = new Map(canonicalPages.map(({ source, route }) => [source, route]));
 
 const excludedRoutes = ["404.html", "tools/image-to-pdf/index.html"];
 const allHtmlRoutes = [...indexableRoutes.keys(), ...excludedRoutes];
-assert.equal(indexableRoutes.size + 1, 20, "all 20 public and migration routes remain represented");
+assert.equal(indexableRoutes.size, 18, "all canonical pages come from the route manifest");
 const shareImagePath = "assets/images/og-image.png";
 const shareImageUrl = `${origin}/${shareImagePath}`;
 const iconLinks = new Map([

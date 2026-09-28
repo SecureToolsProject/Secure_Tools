@@ -2,7 +2,7 @@
 
 ## Application model
 
-Secure Tools is a static GitHub Pages application built with semantic HTML, CSS, and Vanilla JavaScript ES Modules. It has no framework, backend, database, authentication service, or runtime API. Production deploys committed static files directly. A pinned npm preparation step reproduces and verifies the vendored OCR runtime; it does not create a server-side production dependency.
+Secure Tools is a static application built with semantic HTML, CSS, and Vanilla JavaScript ES Modules. It has no framework, Vite configuration, backend, database, authentication service, or runtime API. The build stages deployable files in `dist/`; a pinned npm preparation step reproduces and verifies the vendored OCR runtime without creating a server-side production dependency.
 
 Production routes load application code and pinned libraries from the same origin. File-processing workflows run through browser APIs and in-memory data. The [privacy model](./privacy-model.md) defines the limits of that statement.
 
@@ -15,7 +15,7 @@ The homepage points to stable category hubs instead of maintaining a flat list o
 - Privacy: a cross-category hub for the two metadata tools;
 - Scan/OCR and Media: planned, non-interactive surfaces.
 
-Each production tool owns a route under `tools/<category>/<tool>/`. The legacy `/tools/image-to-pdf/` route is a static migration page to `/tools/pdf/images-to-pdf/` with a visible fallback link.
+Each production tool has a canonical route at `/<category>/<tool>/`. The `tools/` directory remains the source-code organization, while `scripts/site-routes.mjs` maps its pages into the root-level public namespace. Every previously public `/tools/*` path has a one-hop 308 redirect to its canonical destination. The Privacy policy and metadata-tool hub share `/privacy/` because stripping the old prefix would otherwise collide with the existing policy route.
 
 ```text
 .
@@ -27,9 +27,11 @@ Each production tool owns a route under `tools/<category>/<tool>/`. The legacy `
 │   ├── shared/              input, validation, output, save, PDF, and UI foundations
 │   ├── pdf/                 PDF hub and production tools
 │   ├── image/               Image hub and production tools
-│   ├── privacy/             metadata-tool navigation hub
+│   ├── privacy/             source template retained for route-history checks
 │   ├── scan/, media/        planned category pages
-│   └── image-to-pdf/        legacy static redirect
+│   └── image-to-pdf/        retired client-side migration source
+├── scripts/site-routes.mjs  canonical pages and legacy redirect manifest
+├── dist/                    generated deployment artifact (ignored)
 ├── assets/vendor/           pinned same-origin runtime libraries
 ├── docs/                    technical, privacy, and audit records
 └── tests/                   static and functional validation
@@ -57,7 +59,7 @@ Image conversion, resizing, and compression use browser decode, Canvas, and enco
 
 ## Development and delivery
 
-Serving the committed production tree requires only an HTTP server. Reproducing OCR assets and running the full CI checks requires Node.js 24 and the exact lockfile. `npm run build` verifies prepared OCR assets, `npm test` runs the static and unit suite, and `node tests/ocr-smoke.test.mjs` performs real English, Korean, and combined recognition.
+Serving the generated `dist/` tree requires only an HTTP server. Reproducing OCR assets and running the full CI checks requires Node.js 24 and the exact lockfile. `npm run build` verifies prepared OCR assets and stages the site, `npm test` runs the static and unit suite, and `node tests/ocr-smoke.test.mjs` performs real English, Korean, and combined recognition.
 
 `.github/workflows/ci.yml` validates pull requests and pushes to `main` using Node.js 24. It installs the lockfile only to reproduce and verify OCR assets, then checks commit-range whitespace, JavaScript syntax, unit coverage, and real local OCR without adding deployment behavior.
 

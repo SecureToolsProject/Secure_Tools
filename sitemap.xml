@@ -3,20 +3,19 @@
   <url><loc>https://tools.securetools.app/</loc></url>
   <url><loc>https://tools.securetools.app/about/</loc></url>
   <url><loc>https://tools.securetools.app/privacy/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/pdf/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/pdf/images-to-pdf/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/pdf/merge/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/pdf/split/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/pdf/organize/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/pdf/to-images/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/pdf/metadata/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/image/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/image/converter/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/image/resize/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/image/compress/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/image/metadata/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/image/to-text/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/privacy/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/scan/</loc></url>
-  <url><loc>https://tools.securetools.app/tools/media/</loc></url>
+  <url><loc>https://tools.securetools.app/pdf/</loc></url>
+  <url><loc>https://tools.securetools.app/pdf/images-to-pdf/</loc></url>
+  <url><loc>https://tools.securetools.app/pdf/merge/</loc></url>
+  <url><loc>https://tools.securetools.app/pdf/split/</loc></url>
+  <url><loc>https://tools.securetools.app/pdf/organize/</loc></url>
+  <url><loc>https://tools.securetools.app/pdf/to-images/</loc></url>
+  <url><loc>https://tools.securetools.app/pdf/metadata/</loc></url>
+  <url><loc>https://tools.securetools.app/image/</loc></url>
+  <url><loc>https://tools.securetools.app/image/converter/</loc></url>
+  <url><loc>https://tools.securetools.app/image/resize/</loc></url>
+  <url><loc>https://tools.securetools.app/image/compress/</loc></url>
+  <url><loc>https://tools.securetools.app/image/metadata/</loc></url>
+  <url><loc>https://tools.securetools.app/image/to-text/</loc></url>
+  <url><loc>https://tools.securetools.app/scan/</loc></url>
+  <url><loc>https://tools.securetools.app/media/</loc></url>
 </urlset>

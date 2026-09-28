@@ -3,7 +3,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { legacyRedirects, redirectStatus } from "../scripts/site-routes.mjs";
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const siteRoot = path.join(root, "dist");
 const port = Number.parseInt(process.argv[2] || "4173", 10);
 const contentTypes = new Map([
   [".css", "text/css; charset=utf-8"],
@@ -18,11 +21,17 @@ const contentTypes = new Map([
 
 const server = http.createServer((request, response) => {
   const pathname = new URL(request.url, "http://127.0.0.1").pathname;
-  const requested = pathname === "/"
-    ? "/tests/browser/ocr-smoke.html"
-    : pathname.endsWith("/") ? `${pathname}index.html` : pathname;
-  const target = path.resolve(root, `.${decodeURIComponent(requested)}`);
-  if (!target.startsWith(`${root}${path.sep}`)) {
+  const redirect = legacyRedirects.find(({ from }) => from === pathname);
+  if (redirect) {
+    const target = new URL(redirect.to, "http://127.0.0.1");
+    target.search = new URL(request.url, "http://127.0.0.1").search;
+    response.writeHead(redirectStatus, { Location: `${target.pathname}${target.search}` }).end();
+    return;
+  }
+  const requested = pathname.endsWith("/") ? `${pathname}index.html` : pathname;
+  const fileRoot = requested.startsWith("/tests/browser/") ? root : siteRoot;
+  const target = path.resolve(fileRoot, `.${decodeURIComponent(requested)}`);
+  if (!target.startsWith(`${fileRoot}${path.sep}`)) {
     response.writeHead(403).end("Forbidden");
     return;
   }
@@ -41,5 +50,5 @@ const server = http.createServer((request, response) => {
 
 server.listen(port, "127.0.0.1", () => {
   console.log(`OCR browser smoke: http://127.0.0.1:${port}/tests/browser/ocr-smoke.html`);
-  console.log(`Image to Text UI QA: http://127.0.0.1:${port}/tools/image/to-text/`);
+  console.log(`Image to Text UI QA: http://127.0.0.1:${port}/image/to-text/`);
 });
