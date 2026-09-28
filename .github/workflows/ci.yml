@@ -62,6 +62,9 @@ jobs:
       - name: Install pinned OCR build inputs
         run: npm ci --ignore-scripts
 
+      - name: Type-check migrated browser modules
+        run: npm run typecheck
+
       - name: Verify prepared production OCR assets
         run: npm run build
 

@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { canonicalPages, legacyRedirects, redirectStatus } from "./site-routes.mjs";
+import { compiledBrowserModules } from "./typescript-modules.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.join(root, "dist");
@@ -13,7 +14,10 @@ fs.mkdirSync(output, { recursive: true });
 for (const directory of ["assets", "css", "js"]) {
   fs.cpSync(path.join(root, directory), path.join(output, directory), { recursive: true });
 }
-fs.cpSync(path.join(root, "tools", "shared"), path.join(output, "shared"), { recursive: true });
+fs.cpSync(path.join(root, "tools", "shared"), path.join(output, "shared"), {
+  recursive: true,
+  filter: (source) => !/\.(?:d\.ts|ts|tsx|map)$/.test(source),
+});
 
 for (const { source, route } of canonicalPages) {
   const destination = route === "/"
@@ -24,9 +28,17 @@ for (const { source, route } of canonicalPages) {
 
   const sourceDirectory = path.dirname(path.join(root, source));
   for (const entry of fs.readdirSync(sourceDirectory, { withFileTypes: true })) {
-    if (entry.name === "index.html" || entry.isDirectory()) continue;
+    if (entry.name === "index.html" || entry.isDirectory() || /\.(?:d\.ts|ts|tsx|map)$/.test(entry.name)) continue;
     fs.copyFileSync(path.join(sourceDirectory, entry.name), path.join(path.dirname(destination), entry.name));
   }
+}
+
+for (const module of compiledBrowserModules) {
+  const source = path.join(root, ".ts-build", module.compiled);
+  const destination = path.join(output, module.public);
+  if (!fs.existsSync(source)) throw new Error(`Missing compiled TypeScript module: ${module.source}`);
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.copyFileSync(source, destination);
 }
 
 for (const file of ["404.html", "robots.txt", "sitemap.xml"]) {

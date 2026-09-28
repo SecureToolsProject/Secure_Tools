@@ -1,4 +1,5 @@
 import { OCR_LANGUAGES, resolveOcrLanguage } from "../../shared/ocr.js";
+import type { OcrLanguage, OcrProgress } from "../../shared/ocr.js";
 
 export const OCR_UI_STATES = Object.freeze({
   EMPTY: "empty",
@@ -7,23 +8,75 @@ export const OCR_UI_STATES = Object.freeze({
   SUCCESS: "success",
   ERROR: "error",
   CANCELLED: "cancelled",
-});
+} as const);
 
-export function defaultOcrLanguage(uiLanguage) {
+export type OcrUiState = typeof OCR_UI_STATES[keyof typeof OCR_UI_STATES];
+
+export interface ImageToTextFile {
+  readonly name: string;
+  readonly size: number;
+  readonly type: string;
+}
+
+export interface ImageToTextSource {
+  readonly file: ImageToTextFile;
+  readonly previewUrl: string;
+  readonly previewType: string;
+}
+
+export interface ImageToTextState {
+  phase: OcrUiState;
+  source: ImageToTextSource | null;
+  language: OcrLanguage;
+  text: string;
+  progress: OcrProgress | null;
+  error: unknown;
+}
+
+export interface RecognitionOptions {
+  language: OcrLanguage;
+  signal: AbortSignal;
+  onProgress: (progress: OcrProgress) => void;
+}
+
+export interface ImageToTextControllerConfiguration {
+  language?: OcrLanguage;
+  recognizeImage: (
+    file: ImageToTextFile,
+    options: RecognitionOptions,
+  ) => Promise<{ text: string }>;
+  prepareSource: (file: ImageToTextFile) => Promise<ImageToTextSource>;
+  releaseSource?: (source: ImageToTextSource) => void;
+  onChange?: (state: ImageToTextState) => void;
+  dispose?: () => void | Promise<void>;
+}
+
+interface ActiveRecognition {
+  request: number;
+  abortController: AbortController;
+  promise: Promise<{ text: string }>;
+}
+
+function errorCode(error: unknown): string | undefined {
+  if (typeof error !== "object" || error === null || !("code" in error)) return undefined;
+  return typeof error.code === "string" ? error.code : undefined;
+}
+
+export function defaultOcrLanguage(uiLanguage: unknown): OcrLanguage {
   return String(uiLanguage || "").toLowerCase().startsWith("ko")
     ? OCR_LANGUAGES.KOREAN_ENGLISH
     : OCR_LANGUAGES.ENGLISH;
 }
 
-export function createImageToTextController(configuration) {
+export function createImageToTextController(configuration: ImageToTextControllerConfiguration) {
   const recognizeImage = configuration.recognizeImage;
   const prepareSource = configuration.prepareSource;
   const releaseSource = configuration.releaseSource || (() => {});
   const onChange = configuration.onChange || (() => {});
   let generation = 0;
-  let active = null;
+  let active: ActiveRecognition | null = null;
   let disposed = false;
-  let state = {
+  let state: ImageToTextState = {
     phase: OCR_UI_STATES.EMPTY,
     source: null,
     language: resolveOcrLanguage(configuration.language || OCR_LANGUAGES.ENGLISH),
@@ -32,18 +85,18 @@ export function createImageToTextController(configuration) {
     error: null,
   };
 
-  function publish(patch) {
+  function publish(patch: Partial<ImageToTextState>): void {
     state = { ...state, ...patch };
     onChange({ ...state });
   }
 
-  function snapshot() {
+  function snapshot(): ImageToTextState {
     return { ...state };
   }
 
-  async function cancel() {
+  async function cancel(): Promise<boolean> {
     if (!active) return false;
-    const current = active;
+    const current: ActiveRecognition = active;
     generation += 1;
     active = null;
     current.abortController.abort();
@@ -52,7 +105,7 @@ export function createImageToTextController(configuration) {
     return true;
   }
 
-  async function select(file) {
+  async function select(file: ImageToTextFile): Promise<void> {
     if (disposed) return;
     await cancel();
     const request = ++generation;
@@ -66,14 +119,14 @@ export function createImageToTextController(configuration) {
         return;
       }
       publish({ phase: OCR_UI_STATES.READY, source, text: "", progress: null, error: null });
-    } catch (error) {
+    } catch (error: unknown) {
       if (request === generation && !disposed) {
         publish({ phase: OCR_UI_STATES.ERROR, source: null, text: "", progress: null, error });
       }
     }
   }
 
-  async function remove() {
+  async function remove(): Promise<void> {
     if (disposed) return;
     await cancel();
     generation += 1;
@@ -81,7 +134,7 @@ export function createImageToTextController(configuration) {
     publish({ phase: OCR_UI_STATES.EMPTY, source: null, text: "", progress: null, error: null });
   }
 
-  async function setLanguage(language) {
+  async function setLanguage(language: unknown): Promise<void> {
     const nextLanguage = resolveOcrLanguage(language);
     if (nextLanguage === state.language || disposed) return;
     await cancel();
@@ -95,7 +148,7 @@ export function createImageToTextController(configuration) {
     });
   }
 
-  async function recognize() {
+  async function recognize(): Promise<void> {
     if (disposed || !state.source || active) return;
     const request = ++generation;
     const abortController = new AbortController();
@@ -104,7 +157,7 @@ export function createImageToTextController(configuration) {
     const promise = recognizeImage(source.file, {
       language: state.language,
       signal: abortController.signal,
-      onProgress(progress) {
+      onProgress(progress: OcrProgress) {
         if (!disposed && request === generation && active?.request === request) publish({ progress });
       },
     });
@@ -114,13 +167,14 @@ export function createImageToTextController(configuration) {
       if (!disposed && request === generation && active?.request === request) {
         publish({ phase: OCR_UI_STATES.SUCCESS, text: result.text, progress: null, error: null });
       }
-    } catch (error) {
+    } catch (error: unknown) {
       if (!disposed && request === generation && active?.request === request) {
+        const cancelled = errorCode(error) === "OCR_CANCELLED";
         publish({
-          phase: error?.code === "OCR_CANCELLED" ? OCR_UI_STATES.CANCELLED : OCR_UI_STATES.ERROR,
+          phase: cancelled ? OCR_UI_STATES.CANCELLED : OCR_UI_STATES.ERROR,
           text: "",
           progress: null,
-          error: error?.code === "OCR_CANCELLED" ? null : error,
+          error: cancelled ? null : error,
         });
       }
     } finally {
@@ -128,11 +182,11 @@ export function createImageToTextController(configuration) {
     }
   }
 
-  function updateText(text) {
+  function updateText(text: unknown): void {
     if (state.phase === OCR_UI_STATES.SUCCESS) publish({ text: String(text) });
   }
 
-  async function dispose() {
+  async function dispose(): Promise<void> {
     if (disposed) return;
     await cancel();
     disposed = true;

@@ -4,11 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/prepare-ocr-assets.mjs --check && node scripts/build-site.mjs",
+    "build": "node scripts/prepare-ocr-assets.mjs --check && npm run compile:ts && node scripts/build-site.mjs",
+    "compile:ts": "tsc -p tsconfig.build.json && node scripts/stage-typescript-test-dependencies.mjs",
     "prepare:ocr": "node scripts/prepare-ocr-assets.mjs",
     "smoke:ocr:browser": "node tests/serve-ocr-smoke.mjs",
     "test:commit-messages": "node tests/commit-message.test.mjs",
-    "test": "node tests/run-all.mjs"
+    "test": "npm run typecheck && npm run compile:ts && node tests/run-all.mjs",
+    "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
     "@tesseract.js-data/eng": "1.0.0",
@@ -18,5 +20,8 @@
   },
   "engines": {
     "node": ">=24"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
   }
 }

@@ -3,9 +3,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { createImageToTextController, defaultOcrLanguage, OCR_UI_STATES } from "../tools/image/to-text/controller.js";
-import { copyText, createTextBlob, downloadText, textFilename } from "../tools/image/to-text/output.js";
-import { preparePreviewSource, releasePreviewSource } from "../tools/image/to-text/preview.js";
+import { createImageToTextController, defaultOcrLanguage, OCR_UI_STATES } from "../.ts-build/tools/image/to-text/controller.js";
+import { copyText, createTextBlob, downloadText, textFilename } from "../.ts-build/tools/image/to-text/output.js";
+import { preparePreviewSource, releasePreviewSource } from "../.ts-build/tools/image/to-text/preview.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");

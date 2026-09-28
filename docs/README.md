@@ -8,6 +8,7 @@ The root [README](../README.md) introduces Secure Tools. This directory owns det
 | --- | --- |
 | [Architecture](./architecture.md) | Static application structure, shared browser foundations, delivery, and future ecosystem direction |
 | [Development workflow](./development-workflow.md) | Production, integration, Sprint, release, hotfix, merge-authority, and branch-cleanup rules |
+| [TypeScript migration policy](./typescript-migration.md) | Strict incremental migration, JavaScript coexistence, and controlled browser emission |
 | [Privacy model](./privacy-model.md) | Local-processing and network boundaries, storage, security controls, and bounded privacy claims |
 | [Dependencies](./dependencies.md) | Production runtime inventory, versions, vendoring, licenses, and integrity ownership |
 | [Local OCR foundation](./ocr-foundation.md) | Self-hosted Tesseract assets, languages, lifecycle, cancellation, caching, and privacy guarantees |
