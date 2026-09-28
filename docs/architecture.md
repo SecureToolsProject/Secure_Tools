@@ -2,7 +2,7 @@
 
 ## Application model
 
-Secure Tools is a static application built with semantic HTML, CSS, and Vanilla JavaScript ES Modules. It has no framework, Vite configuration, backend, database, authentication service, or runtime API. The build stages deployable files in `dist/`; a pinned npm preparation step reproduces and verifies the vendored OCR runtime without creating a server-side production dependency.
+Secure Tools is a static application built with semantic HTML, CSS, and browser ES Modules. JavaScript and strict TypeScript coexist without a framework, Vite configuration, or bundler. It has no backend, database, authentication service, or runtime API. The build compiles an explicit list of TypeScript modules to ignored staging output, then stages deployable files in `dist/`; a pinned npm preparation step reproduces and verifies the vendored OCR runtime without creating a server-side production dependency.
 
 Production routes load application code and pinned libraries from the same origin. File-processing workflows run through browser APIs and in-memory data. The [privacy model](./privacy-model.md) defines the limits of that statement.
 
@@ -59,9 +59,9 @@ Image conversion, resizing, and compression use browser decode, Canvas, and enco
 
 ## Development and delivery
 
-Serving the generated `dist/` tree requires only an HTTP server. Reproducing OCR assets and running the full CI checks requires Node.js 24 and the exact lockfile. `npm run build` verifies prepared OCR assets and stages the site, `npm test` runs the static and unit suite, and `node tests/ocr-smoke.test.mjs` performs real English, Korean, and combined recognition.
+Serving the generated `dist/` tree requires only an HTTP server. Reproducing OCR assets and running the full CI checks requires Node.js 24 and the exact lockfile. `npm run typecheck` enforces strict TypeScript contracts, `npm run build` verifies prepared OCR assets, compiles the declared TypeScript modules, and stages the site, `npm test` includes typechecking plus the static and unit suite, and `node tests/ocr-smoke.test.mjs` performs real English, Korean, and combined recognition. The incremental migration policy is documented in [TypeScript migration policy](./typescript-migration.md).
 
-`.github/workflows/ci.yml` validates pull requests and pushes to `main` using Node.js 24. It installs the lockfile only to reproduce and verify OCR assets, then checks commit-range whitespace, JavaScript syntax, unit coverage, and real local OCR without adding deployment behavior.
+`.github/workflows/ci.yml` validates pull requests and pushes to `main`, `v2`, and `v2.2` using Node.js 24. It installs the lockfile to reproduce and verify OCR assets and use the locked TypeScript compiler, then checks strict types, commit-range whitespace, JavaScript syntax, unit coverage, and real local OCR without adding deployment behavior.
 
 Development uses short-lived branches and normal merge commits. Shared `main` history is not force-pushed or rewritten. GitHub Pages can publish `main` from the repository root; relative links support both the `/Secure_Tools/` project path and root-hosted deployments.
 

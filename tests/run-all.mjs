@@ -17,7 +17,8 @@ function runNode(argumentsList, label) {
   if (result.status !== 0) throw new Error(`${label} failed with exit code ${result.status ?? "unknown"}.`);
 }
 
-const sourceFiles = ["js", "tools", "tests"]
+const sourceDirectories = ["js", "tools", "tests", ".ts-build"].filter((directory) => fs.existsSync(path.join(root, directory)));
+const sourceFiles = sourceDirectories
   .flatMap((directory) => listFiles(path.join(root, directory)))
   .filter((file) => /\.(?:js|mjs)$/.test(file));
 
@@ -31,6 +32,7 @@ for (const test of [
   "tests/image-metadata.test.mjs",
   "tests/ocr-foundation.test.mjs",
   "tests/image-to-text.test.mjs",
+  "tests/typescript-foundation.test.mjs",
   "tests/category-availability.test.mjs",
   "tests/pdf-merge-and-categories.test.mjs",
   "tests/file-input-queue-state.test.mjs",
