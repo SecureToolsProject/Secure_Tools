@@ -52,5 +52,6 @@ const server = http.createServer((request, response) => {
 server.listen(port, "127.0.0.1", () => {
   console.log(`OCR browser smoke: http://127.0.0.1:${port}/tests/browser/ocr-smoke.html`);
   console.log(`PDF OCR browser smoke: http://127.0.0.1:${port}/tests/browser/pdf-ocr-smoke.html`);
+  console.log(`PDF to Text browser smoke: http://127.0.0.1:${port}/tests/browser/pdf-to-text-smoke.html`);
   console.log(`Image to Text UI QA: http://127.0.0.1:${port}/image/to-text/`);
 });
