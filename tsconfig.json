@@ -16,7 +16,10 @@
   },
   "include": [
     "tools/image/to-text/*.ts",
+    "tools/pdf/to-text/*.ts",
     "tools/shared/pdf-ocr.ts",
-    "tools/shared/*.d.ts"
+    "tools/shared/*.d.ts",
+    "tools/pdf/split/*.d.ts",
+    "js/*.d.ts"
   ]
 }

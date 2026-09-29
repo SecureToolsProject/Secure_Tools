@@ -210,7 +210,7 @@ const publicOcrReferences = listAbsoluteFiles(path.join(root, "tools"))
   .filter((file) => file.endsWith(".html"))
   .map((file) => path.relative(root, file).replaceAll("\\", "/"))
   .filter((relative) => read(relative).includes("assets/vendor/tesseract"));
-assert.deepEqual(publicOcrReferences, ["tools/image/to-text/index.html"], "OCR runtime must stay lazy to its public route");
+assert.deepEqual(publicOcrReferences, ["tools/image/to-text/index.html", "tools/pdf/to-text/index.html"], "OCR runtime must stay lazy to public OCR routes");
 for (const required of ["engine/tesseract.min.js", "worker/worker.min.js", "lang/eng.traineddata.gz", "lang/kor.traineddata.gz"]) {
   assert.ok(manifest.assets[required], `missing ${required}`);
 }

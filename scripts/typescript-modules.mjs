@@ -1,5 +1,20 @@
 export const compiledBrowserModules = Object.freeze([
   Object.freeze({
+    source: "tools/pdf/to-text/app.ts",
+    compiled: "tools/pdf/to-text/app.js",
+    public: "pdf/to-text/app.js",
+  }),
+  Object.freeze({
+    source: "tools/pdf/to-text/controller.ts",
+    compiled: "tools/pdf/to-text/controller.js",
+    public: "pdf/to-text/controller.js",
+  }),
+  Object.freeze({
+    source: "tools/pdf/to-text/output.ts",
+    compiled: "tools/pdf/to-text/output.js",
+    public: "pdf/to-text/output.js",
+  }),
+  Object.freeze({
     source: "tools/shared/pdf-ocr.ts",
     compiled: "tools/shared/pdf-ocr.js",
     public: "shared/pdf-ocr.js",

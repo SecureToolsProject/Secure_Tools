@@ -84,8 +84,8 @@ assert.match(privacyHtml, /data-i18n="privacyHub\.pdfDescription"/);
 assertPublicRoutesExist("/privacy/", privacyRoutes);
 
 const pdfList = categoryList(read("tools/pdf/index.html"));
-assert.equal(linkedRoutes(pdfList).length, 6, "Every PDF production card must remain linked");
-assert.equal((pdfList.match(/status--available/g) || []).length, 6);
+assert.equal(linkedRoutes(pdfList).length, 7, "Every PDF production card must remain linked");
+assert.equal((pdfList.match(/status--available/g) || []).length, 7);
 
 for (const category of ["pdf", "image", "scan"]) {
   const html = read(`tools/${category}/index.html`);
