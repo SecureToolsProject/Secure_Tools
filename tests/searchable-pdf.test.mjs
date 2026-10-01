@@ -48,6 +48,8 @@ assert.equal(await extract(4), "EXISTING TEXT", "pages with meaningful text reta
 assert.equal(await extract(5), "", "unselected pages remain without an added layer");
 const reloaded = await PDFLib.PDFDocument.load(output);
 assert.equal(reloaded.getTitle(), "Preserved title"); assert.equal(reloaded.getAuthor(), "Secure Tools");
+assert.ok(reloaded.getPages()[0].node.Contents().size() >= 2, "the original visible content stream remains before the added text layer");
+assert.equal(reloaded.getPages()[4].node.Contents().size(), 1, "an unselected page keeps only its original visible content stream");
 assert.equal(progress.at(-1).phase, "complete");
 assert.equal(searchablePdfFilename("unsafe:name.PDF"), "unsafe-name-searchable.pdf");
 
