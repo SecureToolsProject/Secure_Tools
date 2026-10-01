@@ -8,7 +8,7 @@ import { canonicalPages, legacyRedirects, productionOrigin, redirectStatus } fro
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const routes = new Set(canonicalPages.map(({ route }) => route));
 
-assert.equal(canonicalPages.length, 18);
+assert.equal(canonicalPages.length, 19);
 assert.equal(legacyRedirects.length, 17);
 assert.equal(redirectStatus, 308);
 assert.ok(routes.has("/image/to-text/"));

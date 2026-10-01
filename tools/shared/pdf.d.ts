@@ -3,3 +3,4 @@ export interface PdfFileLike extends Blob {
 }
 
 export function isSupportedPdf(file: unknown): boolean;
+export function inspectPdf(file: PdfFileLike, PDFDocument: unknown): Promise<{ pageCount: number }>;

@@ -11,6 +11,7 @@ export const canonicalPages = [
   { source: "tools/pdf/organize/index.html", route: "/pdf/organize/" },
   { source: "tools/pdf/to-images/index.html", route: "/pdf/to-images/" },
   { source: "tools/pdf/metadata/index.html", route: "/pdf/metadata/" },
+  { source: "tools/pdf/to-text/index.html", route: "/pdf/to-text/", legacy: false },
   { source: "tools/image/index.html", route: "/image/" },
   { source: "tools/image/converter/index.html", route: "/image/converter/" },
   { source: "tools/image/resize/index.html", route: "/image/resize/" },
@@ -23,7 +24,7 @@ export const canonicalPages = [
 
 export const legacyRedirects = [
   ...canonicalPages
-    .filter(({ source }) => source.startsWith("tools/"))
+    .filter(({ source, legacy }) => source.startsWith("tools/") && legacy !== false)
     .map(({ route }) => ({ from: `/tools${route}`, to: route })),
   { from: "/tools/privacy/", to: "/privacy/" },
   { from: "/tools/image-to-pdf/", to: "/pdf/images-to-pdf/" },

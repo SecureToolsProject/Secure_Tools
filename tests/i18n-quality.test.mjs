@@ -46,7 +46,7 @@ function placeholders(value) {
 function testCatalogParityAndQuality() {
   assert.deepEqual([...Object.keys(translations)], [...languageNames.keys()]);
   const english = flatten(translations.en);
-  assert.equal(english.size, 817);
+  assert.equal(english.size, 887);
 
   for (const [language, catalog] of Object.entries(translations)) {
     const flattened = flatten(catalog);
@@ -78,7 +78,7 @@ function testResolutionDetectionAndPersistence() {
 
 function testSelectorsAndDocumentTranslation() {
   const pages = canonicalPages.map(({ source }) => path.join(root, source));
-  assert.equal(pages.length, 18, "Every canonical page comes from the route manifest");
+  assert.equal(pages.length, 19, "Every canonical page comes from the route manifest");
   for (const file of pages) {
     const html = fs.readFileSync(file, "utf8");
     const select = html.match(/<select[^>]*data-language-select[^>]*>([\s\S]*?)<\/select>/)?.[1];

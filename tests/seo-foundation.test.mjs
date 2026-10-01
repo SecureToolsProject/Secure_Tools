@@ -15,7 +15,7 @@ const indexableRoutes = new Map(canonicalPages.map(({ source, route }) => [sourc
 
 const excludedRoutes = ["404.html", "tools/image-to-pdf/index.html"];
 const allHtmlRoutes = [...indexableRoutes.keys(), ...excludedRoutes];
-assert.equal(indexableRoutes.size, 18, "all canonical pages come from the route manifest");
+assert.equal(indexableRoutes.size, 19, "all canonical pages come from the route manifest");
 const shareImagePath = "assets/images/og-image.png";
 const shareImageUrl = `${origin}/${shareImagePath}`;
 const iconLinks = new Map([
