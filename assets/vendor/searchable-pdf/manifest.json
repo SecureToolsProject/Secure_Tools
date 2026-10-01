@@ -1,0 +1,21 @@
+{
+  "generatedBy": "npm run prepare:ocr",
+  "packages": {
+    "@pdf-lib/fontkit": "1.1.1",
+    "@fontsource/noto-sans-kr": "5.3.0"
+  },
+  "assets": {
+    "fontkit.umd.min.js": {
+      "bytes": 758440,
+      "sha256": "d8df561b9fba98e24f2e5130e40948809281bbbc55a20c412359f1a0a5eb35a6"
+    },
+    "NotoSansKR-OFL-1.1.txt": {
+      "bytes": 4314,
+      "sha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3"
+    },
+    "NotoSansKR-400.js": {
+      "bytes": 1133310,
+      "sha256": "04c744353dde85d9ee99ba690db122459628041be7735b14f72e62f05beb3f16"
+    }
+  }
+}

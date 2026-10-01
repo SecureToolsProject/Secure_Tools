@@ -14,12 +14,17 @@ export interface OcrProgress {
 
 export interface OcrRecognitionOptions {
   language: OcrLanguage;
+  includeLayout?: boolean;
   signal?: AbortSignal;
   onProgress?: (progress: OcrProgress) => void;
 }
 
+export interface OcrBoundingBox { x0: number; y0: number; x1: number; y1: number }
+export interface OcrLine { text: string; confidence: number | null; bbox: OcrBoundingBox }
+export interface OcrRecognitionResult { text: string; lines?: readonly OcrLine[] }
+
 export interface OcrService {
-  recognizeImage(image: Blob, options: OcrRecognitionOptions): Promise<{ text: string }>;
+  recognizeImage(image: Blob, options: OcrRecognitionOptions): Promise<OcrRecognitionResult>;
   dispose(): Promise<void>;
 }
 

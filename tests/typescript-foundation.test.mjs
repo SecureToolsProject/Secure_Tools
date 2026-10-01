@@ -21,7 +21,8 @@ assert.equal(typeConfig.compilerOptions.noEmit, true);
 assert.equal(typeConfig.compilerOptions.sourceMap, false);
 assert.equal(buildConfig.compilerOptions.outDir, ".ts-build");
 
-assert.equal(compiledBrowserModules.length, 7, "the compiled TypeScript boundary remains intentionally bounded");
+assert.equal(compiledBrowserModules.length, 8, "the compiled TypeScript boundary remains intentionally bounded");
+assert.ok(compiledBrowserModules.some((module) => module.source === "tools/shared/searchable-pdf.ts"));
 assert.equal(new Set(compiledBrowserModules.map((module) => module.public)).size, compiledBrowserModules.length);
 for (const module of compiledBrowserModules) {
   assert.ok(fs.existsSync(path.join(root, module.source)), `${module.source} exists`);

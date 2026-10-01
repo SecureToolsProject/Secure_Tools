@@ -138,6 +138,20 @@ assert.equal(new TextDecoder().decode(await readPdfOcrSource(acceptedPdf)), "%PD
 }
 
 {
+  const renderer = rendererHarness({ pageCount: 1 });
+  const ocr = ocrHarness(async (_image, options) => {
+    assert.equal(options.includeLayout, true);
+    return { text: "layout", lines: [{ text: "layout", confidence: 54, bbox: { x0: 2, y0: 4, x1: 20, y1: 14 } }] };
+  });
+  const service = createPdfOcrService({ rendererFactory: async () => renderer.renderer, ocrService: ocr.service, canvasFactory: () => canvasHarness([]) });
+  const result = await service.recognizeDocument({ sourceBytes: new ArrayBuffer(1), language: "eng", includeLayout: true, inspectExistingText: true });
+  assert.deepEqual(result.pages[0].lines, [{ text: "layout", confidence: 54, bbox: { x0: 2, y0: 4, x1: 20, y1: 14 } }]);
+  assert.deepEqual(result.pages[0].rasterToPdfTransform.map((value) => Object.is(value, -0) ? 0 : value), [0.5, 0, 0, -0.5, 0, 50]);
+  assert.equal(result.pages[0].hasMeaningfulText, false);
+  await service.dispose();
+}
+
+{
   const languages = [];
   const ocr = ocrHarness(async (_image, options) => { languages.push(options.language); return { text: options.language }; });
   const service = createPdfOcrService({
@@ -255,7 +269,7 @@ assert.match(source, /page\.cleanup\(\);[\s\S]*canvas\.width = 1;[\s\S]*canvas\.
 assert.doesNotMatch(source, /fetch\s*\(|XMLHttpRequest|sendBeacon|WebSocket|EventSource|https?:\/\//);
 assert.doesNotMatch(source, /createObjectURL|revokeObjectURL/);
 assert.doesNotMatch(source, /\bany\b|sourceMappingURL/);
-assert.match(read("docs/pdf-ocr-foundation.md"), /Searchable PDF generation remains a separate Sprint/);
+assert.match(read("docs/pdf-ocr-foundation.md"), /layout-aware contract/);
 assert.match(read("tests/browser/pdf-ocr-smoke.html"), /connect-src 'none'/);
 assert.match(read("tests/browser/pdf-ocr-smoke.js"), /externalRequests/);
 
