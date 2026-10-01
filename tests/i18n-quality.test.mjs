@@ -46,7 +46,7 @@ function placeholders(value) {
 function testCatalogParityAndQuality() {
   assert.deepEqual([...Object.keys(translations)], [...languageNames.keys()]);
   const english = flatten(translations.en);
-  assert.equal(english.size, 887);
+  assert.equal(english.size, 896);
 
   for (const [language, catalog] of Object.entries(translations)) {
     const flattened = flatten(catalog);

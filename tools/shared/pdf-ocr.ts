@@ -18,6 +18,17 @@ export type PdfOcrPageSelection =
 export interface PdfOcrPageResult {
   pageNumber: number;
   text: string;
+  lines?: readonly PdfOcrLine[];
+  rasterWidth?: number;
+  rasterHeight?: number;
+  rasterToPdfTransform?: readonly [number, number, number, number, number, number];
+  hasMeaningfulText?: boolean;
+}
+
+export interface PdfOcrLine {
+  text: string;
+  confidence: number | null;
+  bbox: Readonly<{ x0: number; y0: number; x1: number; y1: number }>;
 }
 
 export interface PdfOcrProgress {
@@ -45,6 +56,8 @@ export interface PdfOcrRequest {
   signal?: AbortSignal;
   onProgress?: (progress: PdfOcrProgress) => void;
   onPageResult?: (result: PdfOcrPageResult) => void;
+  includeLayout?: boolean;
+  inspectExistingText?: boolean;
 }
 
 export interface PdfOcrRenderer {
@@ -138,7 +151,8 @@ async function renderPage(
   scale: number,
   canvasFactory: () => HTMLCanvasElement,
   signal: AbortSignal,
-): Promise<Blob> {
+  inspectExistingText: boolean,
+): Promise<{ image: Blob; width: number; height: number; rasterToPdfTransform: readonly [number, number, number, number, number, number]; hasMeaningfulText: boolean }> {
   throwIfAborted(signal);
   const page = await renderer.getPage(pageNumber);
   const viewport = page.getViewport({ scale });
@@ -154,16 +168,27 @@ async function renderPage(
     throw pdfOcrError("CANVAS_UNAVAILABLE");
   }
   try {
+    const textContent = inspectExistingText ? requestTextContent(page) : Promise.resolve({ items: [] });
     await renderer.runRender(page, { canvasContext: context, viewport, background: "#ffffff" });
     throwIfAborted(signal);
     const blob = await canvasToPngBlob(canvas);
     throwIfAborted(signal);
-    return blob;
+    const [a, b, c, d, e, f] = viewport.transform || [scale, 0, 0, -scale, 0, dimensions.height];
+    const determinant = a * d - b * c;
+    if (!Number.isFinite(determinant) || Math.abs(determinant) < Number.EPSILON) throw pdfOcrError("PDF_OCR_TRANSFORM_INVALID");
+    const inverse = Object.freeze([d / determinant, -b / determinant, -c / determinant, a / determinant, (c * f - d * e) / determinant, (b * e - a * f) / determinant] as const);
+    const content = await textContent;
+    return { image: blob, width: dimensions.width, height: dimensions.height, rasterToPdfTransform: inverse, hasMeaningfulText: content.items.some((item) => typeof (item as { str?: unknown }).str === "string" && (item as { str: string }).str.trim().length > 0) };
   } finally {
     page.cleanup();
     canvas.width = 1;
     canvas.height = 1;
   }
+}
+
+
+function requestTextContent(page: PdfPageProxy): Promise<{ readonly items: readonly unknown[] }> {
+  return page.getTextContent?.().catch(() => ({ items: [] })) || Promise.resolve({ items: [] });
 }
 
 export function resolvePdfOcrPages(selection: PdfOcrPageSelection | undefined, pageCount: number): number[] {
@@ -241,10 +266,11 @@ export function createPdfOcrService(configuration: PdfOcrServiceConfiguration = 
           phase: "rendering-page", pageNumber, pageIndex: index + 1, pageCount: selectedPageNumbers.length,
           documentPageCount, pageProgress: null, overallProgress: index / selectedPageNumbers.length, ocrStage: null,
         });
-        const image = await renderPage(renderer, pageNumber, renderScale, canvasFactory, signal);
+        const rendered = await renderPage(renderer, pageNumber, renderScale, canvasFactory, signal, request.inspectExistingText === true);
         throwIfAborted(signal);
-        const recognized = await ocrService.recognizeImage(image, {
+        const recognized = await ocrService.recognizeImage(rendered.image, {
           language,
+          includeLayout: request.includeLayout,
           signal,
           onProgress(progress: OcrProgress) {
             const pageProgress = progress.progress;
@@ -257,7 +283,17 @@ export function createPdfOcrService(configuration: PdfOcrServiceConfiguration = 
           },
         });
         throwIfAborted(signal);
-        const result = Object.freeze({ pageNumber, text: recognized.text });
+        const result: PdfOcrPageResult = Object.freeze({
+          pageNumber,
+          text: recognized.text,
+          ...(request.includeLayout ? {
+            lines: recognized.lines || Object.freeze([]),
+            rasterWidth: rendered.width,
+            rasterHeight: rendered.height,
+            rasterToPdfTransform: rendered.rasterToPdfTransform,
+            hasMeaningfulText: request.inspectExistingText ? rendered.hasMeaningfulText : false,
+          } : {}),
+        });
         pages.push(result);
         append(result);
       }

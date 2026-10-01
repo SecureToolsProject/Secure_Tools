@@ -33,6 +33,7 @@ for (const test of [
   "tests/ocr-foundation.test.mjs",
   "tests/pdf-ocr-foundation.test.mjs",
   "tests/pdf-to-text.test.mjs",
+  "tests/searchable-pdf.test.mjs",
   "tests/image-to-text.test.mjs",
   "tests/typescript-foundation.test.mjs",
   "tests/category-availability.test.mjs",

@@ -24,6 +24,8 @@ assert.doesNotMatch(html, /https?:\/\/(?!tools\.securetools\.app|github\.com)/);
 for (const language of ["en", "ko", "ja", "es", "de", "fr"]) {
   assert.ok(translations[language].metadata.pdfToText.title);
   assert.ok(translations[language].pdfToText.result.copyAll);
+  assert.ok(translations[language].pdfToText.result.downloadSearchable);
+  assert.ok(translations[language].pdfToText.result.searchableHint);
   assert.ok(translations[language].categories.pdf.toText);
 }
 
@@ -48,6 +50,8 @@ await running;
 assert.equal(controller.getState().phase, "cancelled");
 assert.deepEqual(controller.getState().pages, []);
 assert.equal(request.selection.mode, "all");
+assert.equal(request.includeLayout, true);
+assert.equal(request.inspectExistingText, true);
 assert.ok(states.includes("recognizing"));
 
 let copied = "";
@@ -95,4 +99,19 @@ await replacementController.select(newFile);
 releaseOld(); await oldSelection;
 assert.equal(replacementController.getState().source.file.name, "new.pdf");
 assert.equal(replacementController.getState().source.pageCount, 2);
+
+let releaseBuild;
+const buildController = createPdfToTextController({
+  inspect: async () => ({ pageCount: 1 }),
+  service: {
+    async recognizeDocument() { return { pages: [{ pageNumber: 1, text: "layout", lines: [], rasterToPdfTransform: [1, 0, 0, 1, 0, 0] }] }; },
+    async cancel() { return false; }, async dispose() {},
+  },
+  buildSearchablePdf: async () => new Promise((resolve) => { releaseBuild = () => resolve(Uint8Array.of(1, 2, 3)); }),
+});
+await buildController.select(file); await buildController.recognize("eng", { mode: "all" });
+const staleBuild = buildController.buildSearchable({}, {}, new ArrayBuffer(1));
+await buildController.select(newFile); releaseBuild();
+assert.equal(await staleBuild, null, "a replaced source rejects a delayed searchable PDF");
+assert.equal(buildController.getState().source.file.name, "new.pdf");
 console.log("PDF to Text route, localization, output, and stale-job cancellation checks passed.");
