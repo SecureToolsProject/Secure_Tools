@@ -2,11 +2,14 @@ import type { PdfOcrPageResult } from "./pdf-ocr.js";
 
 type Matrix = readonly [number, number, number, number, number, number];
 interface PdfFontLike { widthOfTextAtSize(text: string, size: number): number }
-interface PdfPageLike { drawText(text: string, options: { x: number; y: number; size: number; font: PdfFontLike; rotate: unknown; opacity: number }): void }
+interface PdfPageLike { pushOperators(...operators: unknown[]): void; drawText(text: string, options: { x: number; y: number; size: number; font: PdfFontLike; rotate: unknown; opacity: number }): void }
 interface PdfDocumentLike { registerFontkit(value: unknown): void; embedFont(bytes: ArrayBuffer, options: { subset: boolean }): Promise<PdfFontLike>; getPages(): PdfPageLike[]; save(): Promise<Uint8Array> }
 export interface PdfLibLike {
   PDFDocument: { load(bytes: ArrayBuffer, options?: { ignoreEncryption?: boolean; updateMetadata?: boolean }): Promise<PdfDocumentLike> };
   degrees(angle: number): unknown;
+  pushGraphicsState(): unknown;
+  popGraphicsState(): unknown;
+  setCharacterSqueeze(percent: number): unknown;
 }
 export interface SearchablePdfProgress { phase: "building-pdf" | "saving" | "complete"; pageNumber: number | null; pageIndex: number; pageCount: number }
 export interface SearchablePdfRequest { sourceBytes: ArrayBuffer; pages: readonly PdfOcrPageResult[]; PDFLib: PdfLibLike; fontkit: unknown; fontBytes: ArrayBuffer; signal?: AbortSignal; onProgress?: (progress: SearchablePdfProgress) => void }
@@ -52,7 +55,12 @@ export async function createSearchablePdf(request: SearchablePdfRequest): Promis
       const unitWidth = font.widthOfTextAtSize(line.text, 1);
       const size = unitWidth > 0 ? Math.max(1, Math.min(heightSize, width / unitWidth)) : heightSize;
       const cos = (right.x - left.x) / width; const sin = (right.y - left.y) / width;
+      // Fit the OCR line's full width independently of its height. Uniform font
+      // sizing alone leaves short invisible lines and shifts later word hits.
+      const textWidth = font.widthOfTextAtSize(line.text, size);
+      page.pushOperators(request.PDFLib.pushGraphicsState(), request.PDFLib.setCharacterSqueeze(textWidth > 0 ? width / textWidth * 100 : 100));
       page.drawText(line.text, { x: left.x, y: left.y, size, font, rotate: request.PDFLib.degrees(Math.atan2(sin, cos) * 180 / Math.PI), opacity: 0 });
+      page.pushOperators(request.PDFLib.popGraphicsState());
     }
     await new Promise<void>((resolve) => setTimeout(resolve, 0));
   }
