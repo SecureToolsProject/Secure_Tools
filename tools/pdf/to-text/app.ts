@@ -5,6 +5,7 @@ import { PDF_OCR_LARGE_DOCUMENT_THRESHOLD } from "../../shared/pdf-ocr.js";
 import { searchablePdfFilename } from "../../shared/searchable-pdf.js";
 import type { PdfLibLike } from "../../shared/searchable-pdf.js";
 import { downloadBlob } from "../../shared/save.js";
+import { updateJobFocus } from "../../shared/job-focus.js";
 import { parsePageSelection } from "../split/pdf.js";
 import { createPdfToTextController } from "./controller.js";
 import type { PdfToTextState } from "./controller.js";
@@ -37,6 +38,7 @@ const template = (key: string, values: Record<string, string | number> = {}) => 
 );
 const codeOf = (error: unknown) => error instanceof Error && "code" in error ? String(error.code) : "PDF_OCR_FAILED";
 let latest: PdfToTextState;
+let sourceFocusPending = false;
 
 function statusKey(state: PdfToTextState): string {
   if (state.phase === "preparing") return "pdfToText.status.preparing";
@@ -49,6 +51,9 @@ function statusKey(state: PdfToTextState): string {
 }
 
 function renderPages(state: PdfToTextState): void {
+  const focused = document.activeElement;
+  const editing = focused instanceof HTMLTextAreaElement && elements.pages.contains(focused)
+    ? { id: focused.id, start: focused.selectionStart, end: focused.selectionEnd } : null;
   elements.pages.replaceChildren();
   state.pages.forEach((page) => {
     const article = document.createElement("article"); article.className = "page-result surface";
@@ -61,6 +66,10 @@ function renderPages(state: PdfToTextState): void {
     button.addEventListener("click", async () => { try { await copyText(field.value); showTransient("pdfToText.status.pageCopied", { page: page.pageNumber }); } catch { showError("pdfToText.errors.copy"); } });
     header.append(heading, button); article.append(header, label, field); elements.pages.append(article);
   });
+  if (editing && !elements.result.hidden) {
+    const field = document.getElementById(editing.id) as HTMLTextAreaElement | null;
+    field?.focus(); field?.setSelectionRange(editing.start, editing.end);
+  }
 }
 
 function progressText(state: PdfToTextState): string {
@@ -72,6 +81,8 @@ function progressText(state: PdfToTextState): string {
 }
 
 function render(state: PdfToTextState): void {
+  const focused = document.activeElement;
+  if (state.phase === "preparing" && [elements.cancel, elements.input, elements.replace].includes(focused as HTMLElement)) sourceFocusPending = true;
   latest = state;
   const hasSource = Boolean(state.source); const busy = state.phase === "preparing" || state.phase === "recognizing" || state.phase === "building";
   elements.sourceEmpty.hidden = hasSource;
@@ -97,6 +108,8 @@ function render(state: PdfToTextState): void {
   elements.status.dataset.tone = state.phase === "error" ? "error" : state.phase === "success" ? "success" : state.phase === "cancelled" ? "warning" : "";
   elements.result.hidden = state.pages.length === 0;
   renderPages(state);
+  if (state.phase !== "preparing") updateJobFocus(focused, elements.recognize, elements.cancel, !elements.cancel.hidden, elements.searchable);
+  if (sourceFocusPending && !busy) { elements.input.focus(); sourceFocusPending = false; }
 }
 
 const controller = createPdfToTextController({
@@ -119,7 +132,7 @@ async function choose(files: FileList | File[]): Promise<void> {
 }
 
 elements.input.addEventListener("change", () => { if (elements.input.files) void choose(elements.input.files); });
-elements.replace.addEventListener("click", () => elements.input.click()); elements.remove.addEventListener("click", () => void controller.reset());
+elements.replace.addEventListener("click", () => elements.input.click()); elements.remove.addEventListener("click", async () => { await controller.reset(); elements.input.focus(); });
 elements.cancel.addEventListener("click", () => void controller.cancel());
 elements.recognize.addEventListener("click", () => { clearRangeError(); try { void controller.recognize(elements.language.value as "eng" | "kor" | "eng+kor", selectedPages()); } catch (error) { elements.range.setAttribute("aria-invalid", "true"); elements.rangeError.textContent = t(`pdfToText.errors.${codeOf(error)}`); } });
 [elements.language, elements.all, elements.selected].forEach((element) => element.addEventListener("change", () => { elements.rangePanel.hidden = !elements.selected.checked; clearRangeError(); controller.invalidateResults(); }));
