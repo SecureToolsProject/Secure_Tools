@@ -55,6 +55,7 @@ for (const test of [
   "tests/ci-foundation.test.mjs",
   "tests/commit-message.test.mjs",
   "tests/cloudflare-bridge.test.mjs",
+  "tests/release-hardening-http.test.mjs",
 ]) {
   runNode([test], test);
 }

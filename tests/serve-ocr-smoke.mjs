@@ -8,6 +8,7 @@ import { legacyRedirects, redirectStatus } from "../scripts/site-routes.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteRoot = path.join(root, "dist");
 const port = Number.parseInt(process.argv[2] || "4173", 10);
+const audit = process.argv.includes("--audit");
 const contentTypes = new Map([
   [".css", "text/css; charset=utf-8"],
   [".gz", "application/gzip"],
@@ -16,6 +17,7 @@ const contentTypes = new Map([
   [".mjs", "text/javascript; charset=utf-8"],
   [".json", "application/json; charset=utf-8"],
   [".png", "image/png"],
+  [".pdf", "application/pdf"],
   [".ico", "image/x-icon"],
   [".wasm", "application/wasm"],
 ]);
@@ -45,7 +47,10 @@ const server = http.createServer((request, response) => {
       "Cache-Control": "no-store",
       "Content-Type": contentTypes.get(path.extname(target)) || "application/octet-stream",
     });
-    response.end(body);
+    const payload = audit && path.extname(target) === ".html" && fileRoot === siteRoot
+      ? body.toString().replace("</head>", '<script defer src="/tests/browser/runtime-audit.js"></script></head>')
+      : body;
+    response.end(payload);
   });
 });
 

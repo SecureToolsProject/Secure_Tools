@@ -44,6 +44,10 @@ const extract = async (pageNumber) => (await (await parsed.getPage(pageNumber)).
 assert.equal(await extract(1), "HELLO SEARCHABLE PDF");
 assert.equal(await extract(2), "검색 가능한 PDF");
 assert.equal(await extract(3), "HELLO 검색 PDF");
+for (const number of [1, 2, 3]) {
+  const content = await (await parsed.getPage(number)).getTextContent();
+  assert.ok(Math.abs(content.items.reduce((sum, item) => sum + (item.width || 0), 0) - 260) < 0.1, "the invisible line fills the mapped OCR width");
+}
 assert.equal(await extract(4), "EXISTING TEXT", "pages with meaningful text retain one original text layer without OCR duplication");
 assert.equal(await extract(5), "", "unselected pages remain without an added layer");
 const reloaded = await PDFLib.PDFDocument.load(output);
@@ -52,6 +56,36 @@ assert.ok(reloaded.getPages()[0].node.Contents().size() >= 2, "the original visi
 assert.equal(reloaded.getPages()[4].node.Contents().size(), 1, "an unselected page keeps only its original visible content stream");
 assert.equal(progress.at(-1).phase, "complete");
 assert.equal(searchablePdfFilename("unsafe:name.PDF"), "unsafe-name-searchable.pdf");
+
+// A representative document tests the structures that ordinary pdf-lib load/save
+// preserves. This is not a guarantee for signed or dynamic/implementation-specific PDFs.
+const complex = await PDFLib.PDFDocument.create();
+complex.setTitle("Complex preservation"); complex.setAuthor("QA author"); complex.setSubject("QA subject"); complex.setKeywords(["local", "OCR"]);
+complex.setCreator("QA creator"); complex.setProducer("QA producer");
+complex.setCreationDate(new Date("2026-01-01T00:00:00Z")); complex.setModificationDate(new Date("2026-02-01T00:00:00Z"));
+const complexPage = complex.addPage([320, 480]); complexPage.setCropBox(20, 30, 280, 420); complexPage.setRotation(PDFLib.degrees(90));
+complexPage.drawRectangle({ x: 30, y: 60, width: 200, height: 100, color: PDFLib.rgb(0.3, 0.4, 0.6) });
+const field = complex.getForm().createTextField("retained-field"); field.setText("FORM VALUE"); field.addToPage(complexPage, { x: 40, y: 300, width: 160, height: 30 });
+const link = complex.context.register(complex.context.obj({ Type: "Annot", Subtype: "Link", Rect: [40, 80, 180, 110], Border: [0, 0, 0], A: { Type: "Action", S: "URI", URI: PDFLib.PDFString.of("https://example.test/retained-link") } }));
+complexPage.node.addAnnot(link);
+const outlineRoot = complex.context.register(complex.context.obj({ Type: "Outlines", Count: 1 }));
+const outlineItem = complex.context.register(complex.context.obj({ Title: PDFLib.PDFString.of("Retained bookmark"), Parent: outlineRoot, Dest: [complexPage.ref, "Fit"] }));
+const outlineDict = complex.context.lookup(outlineRoot); outlineDict.set(PDFLib.PDFName.of("First"), outlineItem); outlineDict.set(PDFLib.PDFName.of("Last"), outlineItem);
+complex.catalog.set(PDFLib.PDFName.of("Outlines"), outlineRoot);
+const complexInput = await complex.save();
+const complexOutput = await createSearchablePdf({ sourceBytes: complexInput.buffer.slice(complexInput.byteOffset, complexInput.byteOffset + complexInput.byteLength), pages: [{ ...pages[0], rasterWidth: 840, rasterHeight: 560, rasterToPdfTransform: [0, 0.5, 0.5, 0, 20, 30] }], PDFLib, fontkit, fontBytes: fontBytes.buffer.slice(fontBytes.byteOffset, fontBytes.byteOffset + fontBytes.byteLength) });
+const preserved = await PDFLib.PDFDocument.load(complexOutput, { updateMetadata: false }); const preservedPage = preserved.getPages()[0];
+assert.deepEqual(preservedPage.getSize(), { width: 320, height: 480 }); assert.deepEqual(preservedPage.getCropBox(), { x: 20, y: 30, width: 280, height: 420 }); assert.equal(preservedPage.getRotation().angle, 90);
+for (const getter of ["getTitle", "getAuthor", "getSubject", "getKeywords", "getCreator", "getProducer"]) assert.equal(preserved[getter](), complex[getter](), getter);
+assert.equal(preserved.getCreationDate().toISOString(), "2026-01-01T00:00:00.000Z"); assert.equal(preserved.getModificationDate().toISOString(), "2026-02-01T00:00:00.000Z");
+assert.equal(preserved.getForm().getTextField("retained-field").getText(), "FORM VALUE");
+const retainedLink = preserved.context.lookup(link); assert.equal(retainedLink.lookup(PDFLib.PDFName.of("A")).lookup(PDFLib.PDFName.of("URI")).decodeText(), "https://example.test/retained-link");
+assert.equal(preserved.context.lookup(outlineItem).lookup(PDFLib.PDFName.of("Title")).decodeText(), "Retained bookmark");
+assert.ok(preserved.catalog.get(PDFLib.PDFName.of("Outlines"))); assert.equal(preservedPage.node.Annots().size(), 2);
+const originalComplex = await PDFLib.PDFDocument.load(complexInput, { updateMetadata: false });
+const beforeStreams = originalComplex.getPages()[0].node.Contents().asArray().map((ref) => originalComplex.context.lookup(ref).contents);
+const afterStreams = preservedPage.node.Contents().asArray().map((ref) => preserved.context.lookup(ref).contents);
+for (const originalBytes of beforeStreams) assert.ok(afterStreams.some((bytes) => Buffer.from(bytes).equals(Buffer.from(originalBytes))), "every original content stream remains byte-identical");
 
 async function measureOnePage(text) {
   const input = await PDFLib.PDFDocument.create(); input.addPage([300, 180]).drawRectangle({ x: 20, y: 30, width: 250, height: 100, color: PDFLib.rgb(0.2, 0.4, 0.7) });
@@ -71,8 +105,8 @@ const controller = new AbortController(); controller.abort();
 await assert.rejects(createSearchablePdf({ sourceBytes: new ArrayBuffer(1), pages: [], PDFLib, fontkit, fontBytes: new ArrayBuffer(1), signal: controller.signal }), (error) => error.code === "SEARCHABLE_PDF_CANCELLED");
 await assert.rejects(createSearchablePdf({ sourceBytes: new ArrayBuffer(1), pages: [], PDFLib, fontkit, fontBytes: new ArrayBuffer(1) }));
 const midBuild = new AbortController();
-const fakePage = { drawText() {} };
-const fakeLibrary = { degrees: (angle) => angle, PDFDocument: { async load() { return { registerFontkit() {}, async embedFont() { return { widthOfTextAtSize: () => 10 }; }, getPages: () => [fakePage, fakePage], async save() { return Uint8Array.of(1); } }; } } };
+const fakePage = { drawText() {}, pushOperators() {} };
+const fakeLibrary = { degrees: (angle) => angle, pushGraphicsState() {}, popGraphicsState() {}, setCharacterSqueeze() {}, PDFDocument: { async load() { return { registerFontkit() {}, async embedFont() { return { widthOfTextAtSize: () => 10 }; }, getPages: () => [fakePage, fakePage], async save() { return Uint8Array.of(1); } }; } } };
 await assert.rejects(createSearchablePdf({ sourceBytes: new ArrayBuffer(1), pages: [pages[0], { ...pages[0], pageNumber: 2 }], PDFLib: fakeLibrary, fontkit: {}, fontBytes: new ArrayBuffer(1), signal: midBuild.signal, onProgress(value) { if (value.phase === "building-pdf" && value.pageIndex === 1) midBuild.abort(); } }), (error) => error.code === "SEARCHABLE_PDF_CANCELLED");
 const sourceCode = fs.readFileSync(path.join(root, "tools/shared/searchable-pdf.ts"), "utf8");
 assert.doesNotMatch(sourceCode, /fetch\s*\(|XMLHttpRequest|sendBeacon|WebSocket|EventSource|https?:\/\//);
