@@ -9,6 +9,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteRoot = path.join(root, "dist");
 const port = Number.parseInt(process.argv[2] || "4173", 10);
 const audit = process.argv.includes("--audit");
+const gates = process.argv.includes("--gates");
 const contentTypes = new Map([
   [".css", "text/css; charset=utf-8"],
   [".gz", "application/gzip"],
@@ -47,9 +48,16 @@ const server = http.createServer((request, response) => {
       "Cache-Control": "no-store",
       "Content-Type": contentTypes.get(path.extname(target)) || "application/octet-stream",
     });
-    const payload = audit && path.extname(target) === ".html" && fileRoot === siteRoot
+    let payload = audit && path.extname(target) === ".html" && fileRoot === siteRoot
       ? body.toString().replace("</head>", '<script defer src="/tests/browser/runtime-audit.js"></script></head>')
       : body;
+    if (gates && path.extname(target) === ".html" && fileRoot === siteRoot) {
+      payload = payload.toString().replace("<head>", '<head><script src="/tests/browser/gate-audit.js"></script>')
+        .replace("</body>", '<script type="module" src="/tests/browser/gate-fixtures.js"></script></body>');
+    }
+    if (gates && ["/assets/vendor/tesseract/worker/worker.min.js", "/assets/vendor/pdfjs/pdf.worker.min.mjs"].includes(requested)) {
+      payload = fs.readFileSync(path.join(root, "tests/browser/gate-worker-audit.js"), "utf8") + "\n" + body;
+    }
     response.end(payload);
   });
 });

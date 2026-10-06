@@ -1,0 +1,2809 @@
+[
+  {
+    "route": "/image/metadata/",
+    "audit": {
+      "calls": [],
+      "resources": [
+        {
+          "url": "http://local.adguard.org/?ts=1791293577812&type=content-script&dmn=127.0.0.1:4176&url=http%3A%2F%2F127.0.0.1%3A4176%2Fimage%2Fmetadata%2F&app=ChatGPT.exe&css=2&js=1&rel=1&rji=1&sbe=1&stealth=1&st-loc&st-dnt",
+          "origin": "http://local.adguard.org",
+          "initiatorType": "script",
+          "responseStatus": 0
+        },
+        {
+          "url": "http://local.adguard.org/?ts=1791293577812&name=AdGuard%20Extra&name=AdGuard%20Popup%20Blocker&type=user-script",
+          "origin": "http://local.adguard.org",
+          "initiatorType": "script",
+          "responseStatus": 0
+        },
+        {
+          "url": "http://127.0.0.1:4176/tests/browser/gate-audit.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/theme-bootstrap.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/base.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/components.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/categories.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/pages.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/tool.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/metadata/tool.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/main.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/metadata/app.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/tests/browser/gate-fixtures.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/config.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/i18n.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/theme.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/file.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/save.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/metadata/model.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/metadata/metadata.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/en.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/ja.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/ko.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/es.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/de.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/fr.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-resize.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-compressor.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/pdf-to-text.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-to-text.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-metadata.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/privacy-hub.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/metadata-ux.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/image.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/image-output.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/secure-metadata/secure-metadata-0.1.1.browser.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/pdf-lib/pdf-lib.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        }
+      ],
+      "errors": [],
+      "violations": [],
+      "downloads": [],
+      "jobs": [],
+      "statuses": [
+        {
+          "text": "",
+          "milliseconds": 20621
+        },
+        {
+          "text": "Inspecting metadata locally…",
+          "tone": "neutral",
+          "milliseconds": 143680
+        },
+        {
+          "text": "Inspection complete. No supported metadata entries were found.",
+          "tone": "success",
+          "milliseconds": 143687.8999999985
+        }
+      ],
+      "activeWorkers": 0,
+      "objectUrls": [
+        {
+          "url": "blob:http://127.0.0.1:4176/fe14d4b9-b4fa-4a20-81f9-59a2022d1f26",
+          "bytes": 23929,
+          "type": "image/png",
+          "revoked": false
+        }
+      ],
+      "canvasesInDom": 0
+    },
+    "scripts": [
+      "http://127.0.0.1:4176/tests/browser/gate-audit.js",
+      "http://127.0.0.1:4176/js/theme-bootstrap.js",
+      "http://127.0.0.1:4176/js/main.js",
+      "http://127.0.0.1:4176/image/metadata/app.js",
+      "http://127.0.0.1:4176/tests/browser/gate-fixtures.js"
+    ]
+  },
+  {
+    "route": "/image/converter/",
+    "audit": {
+      "calls": [],
+      "resources": [
+        {
+          "url": "http://local.adguard.org/?ts=1791293577812&type=content-script&dmn=127.0.0.1:4176&url=http%3A%2F%2F127.0.0.1%3A4176%2Fimage%2Fconverter%2F&app=ChatGPT.exe&css=2&js=1&rel=1&rji=1&sbe=1&stealth=1&st-loc&st-dnt",
+          "origin": "http://local.adguard.org",
+          "initiatorType": "script",
+          "responseStatus": 0
+        },
+        {
+          "url": "http://local.adguard.org/?ts=1791293577812&name=AdGuard%20Extra&name=AdGuard%20Popup%20Blocker&type=user-script",
+          "origin": "http://local.adguard.org",
+          "initiatorType": "script",
+          "responseStatus": 0
+        },
+        {
+          "url": "http://127.0.0.1:4176/tests/browser/gate-audit.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/theme-bootstrap.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/base.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/components.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/pages.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/categories.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/tool.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/converter/tool.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/jszip/jszip.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/main.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/converter/app.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/tests/browser/gate-fixtures.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/config.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/i18n.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/theme.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/file.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/image.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/save.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/converter/converter.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/ko.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/en.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/ja.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/es.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/fr.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/de.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-resize.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-compressor.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-metadata.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-to-text.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/pdf-to-text.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/privacy-hub.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/metadata-ux.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/image-output.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        }
+      ],
+      "errors": [],
+      "violations": [],
+      "downloads": [],
+      "jobs": [],
+      "statuses": [
+        {
+          "text": "",
+          "milliseconds": 434.69999999552965
+        }
+      ],
+      "activeWorkers": 0,
+      "objectUrls": [],
+      "canvasesInDom": 0
+    },
+    "scripts": [
+      "http://127.0.0.1:4176/tests/browser/gate-audit.js",
+      "http://127.0.0.1:4176/js/theme-bootstrap.js",
+      "http://127.0.0.1:4176/assets/vendor/jszip/jszip.min.js",
+      "http://127.0.0.1:4176/js/main.js",
+      "http://127.0.0.1:4176/image/converter/app.js",
+      "http://127.0.0.1:4176/tests/browser/gate-fixtures.js"
+    ],
+    "limitation": "Input decoding audited; native save action interrupted control in prior tab."
+  },
+  {
+    "route": "/pdf/merge/",
+    "audit": {
+      "calls": [],
+      "resources": [
+        {
+          "url": "http://local.adguard.org/?ts=1791293577812&type=content-script&dmn=127.0.0.1:4176&url=http%3A%2F%2F127.0.0.1%3A4176%2Fpdf%2Fmerge%2F&app=ChatGPT.exe&css=2&js=1&rel=1&rji=1&sbe=1&stealth=1&st-loc&st-dnt",
+          "origin": "http://local.adguard.org",
+          "initiatorType": "script",
+          "responseStatus": 0
+        },
+        {
+          "url": "http://local.adguard.org/?ts=1791293577812&name=AdGuard%20Extra&name=AdGuard%20Popup%20Blocker&type=user-script",
+          "origin": "http://local.adguard.org",
+          "initiatorType": "script",
+          "responseStatus": 0
+        },
+        {
+          "url": "http://127.0.0.1:4176/tests/browser/gate-audit.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/theme-bootstrap.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/base.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/components.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/pages.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/categories.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/tool.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/pdf/merge/tool.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/pdf-lib/pdf-lib.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/main.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/tests/browser/gate-fixtures.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/pdf/merge/app.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/config.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/i18n.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/theme.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/file.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/save.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/pdf/merge/pdf.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/en.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/ko.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/ja.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/es.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/de.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-resize.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/fr.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-compressor.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-metadata.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-to-text.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/privacy-hub.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/pdf-to-text.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/metadata-ux.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/pdf.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        }
+      ],
+      "errors": [],
+      "violations": [],
+      "downloads": [
+        {
+          "filename": "merged-document.pdf",
+          "href": "blob:http://127.0.0.1:4176/852dcad5-8ba8-480c-9cce-3b8a78d20169",
+          "bytes": 21989,
+          "milliseconds": 1859.5999999940395
+        }
+      ],
+      "jobs": [],
+      "statuses": [
+        {
+          "text": "",
+          "milliseconds": 385.09999999403954
+        },
+        {
+          "text": "Checking PDFs locally…",
+          "tone": "neutral",
+          "milliseconds": 981.1999999955297
+        },
+        {
+          "text": "Added 1 PDF file(s).",
+          "tone": "success",
+          "milliseconds": 986.0999999940395
+        },
+        {
+          "text": "Checking PDFs locally…",
+          "tone": "neutral",
+          "milliseconds": 1297.5999999940395
+        },
+        {
+          "text": "Added 1 PDF file(s).",
+          "tone": "success",
+          "milliseconds": 1301.3999999985099
+        },
+        {
+          "text": "Merging PDFs locally…",
+          "tone": "neutral",
+          "milliseconds": 1852.5
+        },
+        {
+          "text": "Merging file 1 of 2…",
+          "tone": "neutral",
+          "milliseconds": 1855.7999999970198
+        },
+        {
+          "text": "Merging file 2 of 2…",
+          "tone": "neutral",
+          "milliseconds": 1857.1999999955297
+        },
+        {
+          "text": "PDF saved and file references cleared.",
+          "tone": "neutral",
+          "milliseconds": 1860.5
+        }
+      ],
+      "activeWorkers": 0,
+      "objectUrls": [
+        {
+          "url": "blob:http://127.0.0.1:4176/852dcad5-8ba8-480c-9cce-3b8a78d20169",
+          "bytes": 21989,
+          "type": "application/pdf",
+          "revoked": false
+        }
+      ],
+      "canvasesInDom": 0
+    },
+    "scripts": [
+      "http://127.0.0.1:4176/tests/browser/gate-audit.js",
+      "http://127.0.0.1:4176/js/theme-bootstrap.js",
+      "http://127.0.0.1:4176/assets/vendor/pdf-lib/pdf-lib.min.js",
+      "http://127.0.0.1:4176/js/main.js",
+      "http://127.0.0.1:4176/pdf/merge/app.js",
+      "http://127.0.0.1:4176/tests/browser/gate-fixtures.js"
+    ]
+  },
+  {
+    "route": "/pdf/to-text/",
+    "audit": {
+      "calls": [
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.worker.min.mjs",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at #Ia (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:262428)\n    at new PDFWorker (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:261935)\n    at PDFWorker.create (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:263925)\n    at Module.getDocument (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:247807)\n    at LocalPdfRenderer.load (http://127.0.0.1:4176/shared/pdf-renderer.js:20:33)\n    at run (http://127.0.0.1:4176/shared/pdf-ocr.js:168:54)\n    at async Object.recognizeDocument (http://127.0.0.1:4176/shared/pdf-ocr.js:243:20)\n    at async Object.recognize (http://127.0.0.1:4176/pdf/to-text/controller.js:38:28)"
+        },
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at t.exports (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:19332)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46809\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38443)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:39785)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38872)\n    at l (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45787)\n    at a (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45990)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46049"
+        },
+        {
+          "api": "worker importScripts",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/core/tesseract-core-relaxedsimd-lstm.wasm.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:3:157)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:66\n    at Array.forEach (<anonymous>)\n    at self.importScripts (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:51)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108362\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101365)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:102707)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101794)\n    at o (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:107498)\n    at s (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108921)"
+        },
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.worker.min.mjs",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at #Ia (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:262428)\n    at new PDFWorker (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:261935)\n    at PDFWorker.create (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:263925)\n    at Module.getDocument (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:247807)\n    at LocalPdfRenderer.load (http://127.0.0.1:4176/shared/pdf-renderer.js:20:33)\n    at run (http://127.0.0.1:4176/shared/pdf-ocr.js:168:54)\n    at async Object.recognizeDocument (http://127.0.0.1:4176/shared/pdf-ocr.js:243:20)\n    at async Object.recognize (http://127.0.0.1:4176/pdf/to-text/controller.js:38:28)"
+        },
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.worker.min.mjs",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at #Ia (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:262428)\n    at new PDFWorker (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:261935)\n    at PDFWorker.create (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:263925)\n    at Module.getDocument (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:247807)\n    at LocalPdfRenderer.load (http://127.0.0.1:4176/shared/pdf-renderer.js:20:33)\n    at run (http://127.0.0.1:4176/shared/pdf-ocr.js:168:54)\n    at async Object.recognizeDocument (http://127.0.0.1:4176/shared/pdf-ocr.js:243:20)\n    at async Object.recognize (http://127.0.0.1:4176/pdf/to-text/controller.js:38:28)"
+        },
+        {
+          "api": "cancel-click",
+          "milliseconds": 26292,
+          "url": "http://127.0.0.1:4176/pdf/to-text/"
+        },
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.worker.min.mjs",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at #Ia (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:262428)\n    at new PDFWorker (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:261935)\n    at PDFWorker.create (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:263925)\n    at Module.getDocument (http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs:26:247807)\n    at LocalPdfRenderer.load (http://127.0.0.1:4176/shared/pdf-renderer.js:20:33)\n    at run (http://127.0.0.1:4176/shared/pdf-ocr.js:168:54)\n    at async Object.recognizeDocument (http://127.0.0.1:4176/shared/pdf-ocr.js:243:20)\n    at async Object.recognize (http://127.0.0.1:4176/pdf/to-text/controller.js:38:28)"
+        },
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at t.exports (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:19332)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46809\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38443)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:39785)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38872)\n    at l (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45787)\n    at a (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45990)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46049"
+        },
+        {
+          "api": "worker importScripts",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/core/tesseract-core-relaxedsimd-lstm.wasm.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:3:157)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:66\n    at Array.forEach (<anonymous>)\n    at self.importScripts (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:51)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108362\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101365)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:102707)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101794)\n    at o (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:107498)\n    at s (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108921)"
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://local.adguard.org/?ts=1791293577812&type=content-script&dmn=127.0.0.1:4176&url=http%3A%2F%2F127.0.0.1%3A4176%2Fpdf%2Fto-text%2F&app=ChatGPT.exe&css=2&js=1&rel=1&rji=1&sbe=1&stealth=1&st-loc&st-dnt",
+          "origin": "http://local.adguard.org",
+          "initiatorType": "script",
+          "responseStatus": 0
+        },
+        {
+          "url": "http://local.adguard.org/?ts=1791293577812&name=AdGuard%20Extra&name=AdGuard%20Popup%20Blocker&type=user-script",
+          "origin": "http://local.adguard.org",
+          "initiatorType": "script",
+          "responseStatus": 0
+        },
+        {
+          "url": "http://127.0.0.1:4176/tests/browser/gate-audit.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/theme-bootstrap.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/base.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/components.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/pages.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/categories.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/tool.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/pdf/to-text/tool.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/pdf-lib/pdf-lib.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/searchable-pdf/fontkit.umd.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/searchable-pdf/NotoSansKR-400.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/main.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/pdf/to-text/app.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/tests/browser/gate-fixtures.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/config.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/theme.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/i18n.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/file.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/pdf.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/pdf-ocr.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/save.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/searchable-pdf.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/job-focus.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/pdf/split/pdf.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/pdf/to-text/controller.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/pdf/to-text/output.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/en.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/ko.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/es.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/ja.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/de.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/fr.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-resize.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-compressor.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-metadata.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-to-text.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/pdf-to-text.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/privacy-hub.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/metadata-ux.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/ocr.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/to-text/output.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/image.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/pdf-renderer.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.min.mjs",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.worker.min.mjs",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.worker.min.mjs",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.worker.min.mjs",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/pdfjs/pdf.worker.min.mjs",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        }
+      ],
+      "errors": [],
+      "violations": [],
+      "downloads": [
+        {
+          "filename": "pdf-eng-1-searchable.pdf",
+          "href": "blob:http://127.0.0.1:4176/fa99b6d4-3535-4d6f-bc50-2bc6ccd7754b",
+          "bytes": 10300,
+          "milliseconds": 28885.89999999851
+        }
+      ],
+      "jobs": [
+        {
+          "action": "recognize",
+          "milliseconds": 1401,
+          "status": "Recognition complete. You can edit every page.",
+          "tone": "success"
+        },
+        {
+          "action": "recognize",
+          "milliseconds": 1,
+          "status": "PDF ready. Choose pages and a language to begin.",
+          "tone": ""
+        },
+        {
+          "action": "recognize",
+          "milliseconds": 255,
+          "status": "Recognition complete. You can edit every page.",
+          "tone": "success"
+        },
+        {
+          "action": "recognize",
+          "milliseconds": 986,
+          "status": "Recognition complete. You can edit every page.",
+          "tone": "success"
+        },
+        {
+          "action": "download-searchable",
+          "milliseconds": 606,
+          "status": "Operation cancelled. The PDF remains ready.",
+          "tone": "warning"
+        },
+        {
+          "action": "download-searchable",
+          "milliseconds": 556,
+          "status": "PDF ready. Choose pages and a language to begin.",
+          "tone": ""
+        },
+        {
+          "action": "recognize",
+          "milliseconds": 385,
+          "status": "Recognition complete. You can edit every page.",
+          "tone": "success"
+        },
+        {
+          "action": "download-searchable",
+          "milliseconds": 1134,
+          "status": "Recognition complete. You can edit every page.",
+          "tone": "success"
+        }
+      ],
+      "statuses": [
+        {
+          "text": "",
+          "milliseconds": 354.1000000014901
+        },
+        {
+          "text": "Preparing the PDF locally…",
+          "tone": "",
+          "milliseconds": 1980.3999999985099
+        },
+        {
+          "text": "PDF ready. Choose pages and a language to begin.",
+          "tone": "",
+          "milliseconds": 1984.7999999970198
+        },
+        {
+          "text": "Loading the PDF locally…",
+          "tone": "",
+          "milliseconds": 2229.2000000029802
+        },
+        {
+          "text": "Rendering page 1 of 2…",
+          "tone": "",
+          "milliseconds": 2988.7999999970198
+        },
+        {
+          "text": "Recognizing page 1 of 2… 0%",
+          "tone": "",
+          "milliseconds": 3044.10000000149
+        },
+        {
+          "text": "Recognizing page 1 of 2… 100%",
+          "tone": "",
+          "milliseconds": 3137.7999999970198
+        },
+        {
+          "text": "Recognizing page 1 of 2… 0%",
+          "tone": "",
+          "milliseconds": 3138.2000000029802
+        },
+        {
+          "text": "Recognizing page 1 of 2… 100%",
+          "tone": "",
+          "milliseconds": 3164.39999999851
+        },
+        {
+          "text": "Recognizing page 1 of 2… 0%",
+          "tone": "",
+          "milliseconds": 3165.10000000149
+        },
+        {
+          "text": "Recognizing page 1 of 2… 25%",
+          "tone": "",
+          "milliseconds": 3216.10000000149
+        },
+        {
+          "text": "Recognizing page 1 of 2… 50%",
+          "tone": "",
+          "milliseconds": 3217.7000000029802
+        },
+        {
+          "text": "Recognizing page 1 of 2… 75%",
+          "tone": "",
+          "milliseconds": 3222.10000000149
+        },
+        {
+          "text": "Recognizing page 1 of 2… 100%",
+          "tone": "",
+          "milliseconds": 3222.7999999970198
+        },
+        {
+          "text": "Recognizing page 1 of 2… 0%",
+          "tone": "",
+          "milliseconds": 3223.39999999851
+        },
+        {
+          "text": "Recognizing page 1 of 2… 100%",
+          "tone": "",
+          "milliseconds": 3270.39999999851
+        },
+        {
+          "text": "Recognizing page 1 of 2… 0%",
+          "tone": "",
+          "milliseconds": 3320.10000000149
+        },
+        {
+          "text": "Recognizing page 1 of 2… 23%",
+          "tone": "",
+          "milliseconds": 3353.39999999851
+        },
+        {
+          "text": "Recognizing page 1 of 2… 47%",
+          "tone": "",
+          "milliseconds": 3400.5
+        },
+        {
+          "text": "Recognizing page 1 of 2… 100%",
+          "tone": "",
+          "milliseconds": 3435.10000000149
+        },
+        {
+          "text": "Rendering page 2 of 2…",
+          "tone": "",
+          "milliseconds": 3442.2999999970198
+        },
+        {
+          "text": "Recognizing page 2 of 2… 0%",
+          "tone": "",
+          "milliseconds": 3522.2000000029802
+        },
+        {
+          "text": "Recognizing page 2 of 2… 23%",
+          "tone": "",
+          "milliseconds": 3544.10000000149
+        },
+        {
+          "text": "Recognizing page 2 of 2… 47%",
+          "tone": "",
+          "milliseconds": 3587.89999999851
+        },
+        {
+          "text": "Recognizing page 2 of 2… 100%",
+          "tone": "",
+          "milliseconds": 3618.89999999851
+        },
+        {
+          "text": "Finishing recognition…",
+          "tone": "",
+          "milliseconds": 3621.2999999970198
+        },
+        {
+          "text": "Recognition complete. You can edit every page.",
+          "tone": "success",
+          "milliseconds": 3626.5
+        },
+        {
+          "text": "PDF ready. Choose pages and a language to begin.",
+          "tone": "",
+          "milliseconds": 3827.39999999851
+        },
+        {
+          "text": "Loading the PDF locally…",
+          "tone": "",
+          "milliseconds": 4026.2999999970198
+        },
+        {
+          "text": "Rendering page 2 of 1…",
+          "tone": "",
+          "milliseconds": 4096.5
+        },
+        {
+          "text": "Recognizing page 2 of 1… 0%",
+          "tone": "",
+          "milliseconds": 4169.20000000298
+        },
+        {
+          "text": "Recognizing page 2 of 1… 23%",
+          "tone": "",
+          "milliseconds": 4190
+        },
+        {
+          "text": "Recognizing page 2 of 1… 47%",
+          "tone": "",
+          "milliseconds": 4235.5
+        },
+        {
+          "text": "Recognizing page 2 of 1… 100%",
+          "tone": "",
+          "milliseconds": 4271.89999999851
+        },
+        {
+          "text": "Finishing recognition…",
+          "tone": "",
+          "milliseconds": 4273.89999999851
+        },
+        {
+          "text": "Recognition complete. You can edit every page.",
+          "tone": "success",
+          "milliseconds": 4279.10000000149
+        },
+        {
+          "text": "PDF ready. Choose pages and a language to begin.",
+          "tone": "",
+          "milliseconds": 23950.79999999702
+        },
+        {
+          "text": "Preparing the PDF locally…",
+          "tone": "",
+          "milliseconds": 24405.29999999702
+        },
+        {
+          "text": "PDF ready. Choose pages and a language to begin.",
+          "tone": "",
+          "milliseconds": 24410.39999999851
+        },
+        {
+          "text": "Loading the PDF locally…",
+          "tone": "",
+          "milliseconds": 24544
+        },
+        {
+          "text": "Rendering page 1 of 5…",
+          "tone": "",
+          "milliseconds": 24616.10000000149
+        },
+        {
+          "text": "Recognizing page 1 of 5… 0%",
+          "tone": "",
+          "milliseconds": 24678.79999999702
+        },
+        {
+          "text": "Recognizing page 1 of 5… 23%",
+          "tone": "",
+          "milliseconds": 24698.79999999702
+        },
+        {
+          "text": "Recognizing page 1 of 5… 47%",
+          "tone": "",
+          "milliseconds": 24742.79999999702
+        },
+        {
+          "text": "Recognizing page 1 of 5… 100%",
+          "tone": "",
+          "milliseconds": 24773.5
+        },
+        {
+          "text": "Rendering page 2 of 5…",
+          "tone": "",
+          "milliseconds": 24776.39999999851
+        },
+        {
+          "text": "Recognizing page 2 of 5… 0%",
+          "tone": "",
+          "milliseconds": 24835.10000000149
+        },
+        {
+          "text": "Recognizing page 2 of 5… 23%",
+          "tone": "",
+          "milliseconds": 24862.20000000298
+        },
+        {
+          "text": "Recognizing page 2 of 5… 47%",
+          "tone": "",
+          "milliseconds": 24911.39999999851
+        },
+        {
+          "text": "Recognizing page 2 of 5… 100%",
+          "tone": "",
+          "milliseconds": 24949.39999999851
+        },
+        {
+          "text": "Rendering page 3 of 5…",
+          "tone": "",
+          "milliseconds": 24950.79999999702
+        },
+        {
+          "text": "Recognizing page 3 of 5… 0%",
+          "tone": "",
+          "milliseconds": 25013.5
+        },
+        {
+          "text": "Recognizing page 3 of 5… 23%",
+          "tone": "",
+          "milliseconds": 25034.20000000298
+        },
+        {
+          "text": "Recognizing page 3 of 5… 47%",
+          "tone": "",
+          "milliseconds": 25082.60000000149
+        },
+        {
+          "text": "Recognizing page 3 of 5… 100%",
+          "tone": "",
+          "milliseconds": 25126.5
+        },
+        {
+          "text": "Rendering page 4 of 5…",
+          "tone": "",
+          "milliseconds": 25128.70000000298
+        },
+        {
+          "text": "Recognizing page 4 of 5… 0%",
+          "tone": "",
+          "milliseconds": 25194.39999999851
+        },
+        {
+          "text": "Recognizing page 4 of 5… 23%",
+          "tone": "",
+          "milliseconds": 25223.70000000298
+        },
+        {
+          "text": "Recognizing page 4 of 5… 47%",
+          "tone": "",
+          "milliseconds": 25281.89999999851
+        },
+        {
+          "text": "Recognizing page 4 of 5… 100%",
+          "tone": "",
+          "milliseconds": 25322.5
+        },
+        {
+          "text": "Rendering page 5 of 5…",
+          "tone": "",
+          "milliseconds": 25327.29999999702
+        },
+        {
+          "text": "Recognizing page 5 of 5… 0%",
+          "tone": "",
+          "milliseconds": 25388.10000000149
+        },
+        {
+          "text": "Recognizing page 5 of 5… 23%",
+          "tone": "",
+          "milliseconds": 25414.10000000149
+        },
+        {
+          "text": "Recognizing page 5 of 5… 47%",
+          "tone": "",
+          "milliseconds": 25472.89999999851
+        },
+        {
+          "text": "Recognizing page 5 of 5… 100%",
+          "tone": "",
+          "milliseconds": 25515.79999999702
+        },
+        {
+          "text": "Finishing recognition…",
+          "tone": "",
+          "milliseconds": 25517.89999999851
+        },
+        {
+          "text": "Recognition complete. You can edit every page.",
+          "tone": "success",
+          "milliseconds": 25526.5
+        },
+        {
+          "text": "Building text layer for page 1 of 5…",
+          "tone": "",
+          "milliseconds": 25702.5
+        },
+        {
+          "text": "Building text layer for page 2 of 5…",
+          "tone": "",
+          "milliseconds": 26285.29999999702
+        },
+        {
+          "text": "Operation cancelled. The PDF remains ready.",
+          "tone": "warning",
+          "milliseconds": 26296
+        },
+        {
+          "text": "Building text layer for page 1 of 5…",
+          "tone": "",
+          "milliseconds": 26466.10000000149
+        },
+        {
+          "text": "Building text layer for page 2 of 5…",
+          "tone": "",
+          "milliseconds": 27005.39999999851
+        },
+        {
+          "text": "Preparing the PDF locally…",
+          "tone": "",
+          "milliseconds": 27014.60000000149
+        },
+        {
+          "text": "PDF ready. Choose pages and a language to begin.",
+          "tone": "",
+          "milliseconds": 27017.10000000149
+        },
+        {
+          "text": "Loading the PDF locally…",
+          "tone": "",
+          "milliseconds": 27171.29999999702
+        },
+        {
+          "text": "Rendering page 1 of 1…",
+          "tone": "",
+          "milliseconds": 27235.20000000298
+        },
+        {
+          "text": "Recognizing page 1 of 1… 0%",
+          "tone": "",
+          "milliseconds": 27279.70000000298
+        },
+        {
+          "text": "Recognizing page 1 of 1… 100%",
+          "tone": "",
+          "milliseconds": 27369.5
+        },
+        {
+          "text": "Recognizing page 1 of 1… 0%",
+          "tone": "",
+          "milliseconds": 27369.89999999851
+        },
+        {
+          "text": "Recognizing page 1 of 1… 100%",
+          "tone": "",
+          "milliseconds": 27398.20000000298
+        },
+        {
+          "text": "Recognizing page 1 of 1… 0%",
+          "tone": "",
+          "milliseconds": 27400.10000000149
+        },
+        {
+          "text": "Recognizing page 1 of 1… 50%",
+          "tone": "",
+          "milliseconds": 27409.5
+        },
+        {
+          "text": "Recognizing page 1 of 1… 100%",
+          "tone": "",
+          "milliseconds": 27411.39999999851
+        },
+        {
+          "text": "Recognizing page 1 of 1… 0%",
+          "tone": "",
+          "milliseconds": 27411.89999999851
+        },
+        {
+          "text": "Recognizing page 1 of 1… 100%",
+          "tone": "",
+          "milliseconds": 27457.5
+        },
+        {
+          "text": "Recognizing page 1 of 1… 0%",
+          "tone": "",
+          "milliseconds": 27504.20000000298
+        },
+        {
+          "text": "Recognizing page 1 of 1… 100%",
+          "tone": "",
+          "milliseconds": 27544.20000000298
+        },
+        {
+          "text": "Finishing recognition…",
+          "tone": "",
+          "milliseconds": 27548.5
+        },
+        {
+          "text": "Recognition complete. You can edit every page.",
+          "tone": "success",
+          "milliseconds": 27553.89999999851
+        },
+        {
+          "text": "Building text layer for page 1 of 1…",
+          "tone": "",
+          "milliseconds": 27757.70000000298
+        },
+        {
+          "text": "Saving the searchable PDF locally…",
+          "tone": "",
+          "milliseconds": 28129.79999999702
+        },
+        {
+          "text": "Building text layer for page 1 of 1…",
+          "tone": "",
+          "milliseconds": 28880.5
+        },
+        {
+          "text": "Recognition complete. You can edit every page.",
+          "tone": "success",
+          "milliseconds": 28884.5
+        },
+        {
+          "text": "Downloaded pdf-eng-1-searchable.pdf.",
+          "tone": "success",
+          "milliseconds": 28887
+        }
+      ],
+      "activeWorkers": 1,
+      "objectUrls": [
+        {
+          "url": "blob:http://127.0.0.1:4176/fa99b6d4-3535-4d6f-bc50-2bc6ccd7754b",
+          "bytes": 10300,
+          "type": "application/pdf",
+          "revoked": false
+        }
+      ],
+      "canvasesInDom": 0
+    },
+    "scripts": [
+      "http://127.0.0.1:4176/tests/browser/gate-audit.js",
+      "http://127.0.0.1:4176/js/theme-bootstrap.js",
+      "http://127.0.0.1:4176/assets/vendor/pdf-lib/pdf-lib.min.js",
+      "http://127.0.0.1:4176/assets/vendor/searchable-pdf/fontkit.umd.min.js",
+      "http://127.0.0.1:4176/assets/vendor/searchable-pdf/NotoSansKR-400.js",
+      "http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js",
+      "http://127.0.0.1:4176/js/main.js",
+      "http://127.0.0.1:4176/pdf/to-text/app.js",
+      "http://127.0.0.1:4176/tests/browser/gate-fixtures.js"
+    ]
+  },
+  {
+    "route": "/image/to-text/",
+    "audit": {
+      "calls": [
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at t.exports (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:19332)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46809\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38443)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:39785)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38872)\n    at l (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45787)\n    at a (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45990)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46049"
+        },
+        {
+          "api": "worker importScripts",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/core/tesseract-core-relaxedsimd-lstm.wasm.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:3:157)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:66\n    at Array.forEach (<anonymous>)\n    at self.importScripts (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:51)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108362\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101365)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:102707)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101794)\n    at o (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:107498)\n    at s (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108921)"
+        },
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at t.exports (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:19332)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46809\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38443)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:39785)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38872)\n    at l (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45787)\n    at a (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45990)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46049"
+        },
+        {
+          "api": "worker importScripts",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/core/tesseract-core-relaxedsimd-lstm.wasm.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:3:157)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:66\n    at Array.forEach (<anonymous>)\n    at self.importScripts (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:51)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108362\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101365)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:102707)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101794)\n    at o (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:107498)\n    at s (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108921)"
+        },
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at t.exports (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:19332)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46809\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38443)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:39785)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38872)\n    at l (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45787)\n    at a (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45990)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46049"
+        },
+        {
+          "api": "worker importScripts",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/core/tesseract-core-relaxedsimd-lstm.wasm.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:3:157)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:66\n    at Array.forEach (<anonymous>)\n    at self.importScripts (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:51)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108362\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101365)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:102707)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101794)\n    at o (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:107498)\n    at s (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108921)"
+        },
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at t.exports (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:19332)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46809\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38443)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:39785)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38872)\n    at l (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45787)\n    at a (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45990)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46049"
+        },
+        {
+          "api": "worker importScripts",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/core/tesseract-core-relaxedsimd-lstm.wasm.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:3:157)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:66\n    at Array.forEach (<anonymous>)\n    at self.importScripts (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:51)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108362\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101365)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:102707)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101794)\n    at o (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:107498)\n    at s (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108921)"
+        },
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at t.exports (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:19332)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46809\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38443)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:39785)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38872)\n    at l (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45787)\n    at a (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45990)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46049"
+        },
+        {
+          "api": "worker importScripts",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/core/tesseract-core-relaxedsimd-lstm.wasm.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:3:157)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:66\n    at Array.forEach (<anonymous>)\n    at self.importScripts (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:51)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108362\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101365)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:102707)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101794)\n    at o (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:107498)\n    at s (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108921)"
+        },
+        {
+          "api": "cancel-click",
+          "milliseconds": 52217.89999999851,
+          "url": "http://127.0.0.1:4176/image/to-text/"
+        },
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at t.exports (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:19332)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46809\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38443)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:39785)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38872)\n    at l (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45787)\n    at a (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45990)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46049"
+        },
+        {
+          "api": "worker importScripts",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/core/tesseract-core-relaxedsimd-lstm.wasm.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:3:157)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:66\n    at Array.forEach (<anonymous>)\n    at self.importScripts (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:51)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108362\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101365)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:102707)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101794)\n    at o (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:107498)\n    at s (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108921)"
+        },
+        {
+          "api": "Worker",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/tests/browser/gate-audit.js:7:80)\n    at new window.Worker (http://127.0.0.1:4176/tests/browser/gate-audit.js:15:7)\n    at t.exports (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:19332)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46809\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38443)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:39785)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:38872)\n    at l (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45787)\n    at a (http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:45990)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js:2:46049"
+        },
+        {
+          "api": "worker importScripts",
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/core/tesseract-core-relaxedsimd-lstm.wasm.js",
+          "stack": "Error\n    at record (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:3:157)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:66\n    at Array.forEach (<anonymous>)\n    at self.importScripts (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:12:51)\n    at http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108362\n    at p (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101365)\n    at Generator.<anonymous> (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:102707)\n    at Generator.next (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:101794)\n    at o (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:107498)\n    at s (http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js:17:108921)"
+        }
+      ],
+      "resources": [
+        {
+          "url": "http://local.adguard.org/?ts=1791293577812&type=content-script&dmn=127.0.0.1:4176&url=http%3A%2F%2F127.0.0.1%3A4176%2Fimage%2Fto-text%2F&app=ChatGPT.exe&css=2&js=1&rel=1&rji=1&sbe=1&stealth=1&st-loc&st-dnt",
+          "origin": "http://local.adguard.org",
+          "initiatorType": "script",
+          "responseStatus": 0
+        },
+        {
+          "url": "http://local.adguard.org/?ts=1791293577812&name=AdGuard%20Extra&name=AdGuard%20Popup%20Blocker&type=user-script",
+          "origin": "http://local.adguard.org",
+          "initiatorType": "script",
+          "responseStatus": 0
+        },
+        {
+          "url": "http://127.0.0.1:4176/tests/browser/gate-audit.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/theme-bootstrap.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/base.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/pages.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/components.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/categories.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/tool.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/to-text/tool.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/main.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/to-text/app.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/tests/browser/gate-fixtures.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/i18n.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/file.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/to-text/controller.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/job-focus.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/to-text/output.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/ocr.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/to-text/preview.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/config.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/theme.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/en.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/ko.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/ja.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/es.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/fr.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/de.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-resize.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-compressor.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-metadata.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-to-text.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/pdf-to-text.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/privacy-hub.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/metadata-ux.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/save.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/image.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/pdf-lib/pdf-lib.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/tesseract/worker/worker.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "other",
+          "responseStatus": 200
+        }
+      ],
+      "errors": [],
+      "violations": [],
+      "downloads": [],
+      "jobs": [
+        {
+          "action": "recognize",
+          "milliseconds": 937,
+          "status": "Recognition complete. You can edit the result.",
+          "tone": "success"
+        },
+        {
+          "action": "recognize",
+          "milliseconds": 280,
+          "status": "Recognition complete. You can edit the result.",
+          "tone": "success"
+        },
+        {
+          "action": "recognize",
+          "milliseconds": 401,
+          "status": "Recognition complete. You can edit the result.",
+          "tone": "success"
+        },
+        {
+          "action": "recognize",
+          "milliseconds": 286,
+          "status": "Recognition complete. You can edit the result.",
+          "tone": "success"
+        },
+        {
+          "action": "recognize",
+          "milliseconds": 395,
+          "status": "Recognition complete. You can edit the result.",
+          "tone": "success"
+        },
+        {
+          "action": "recognize",
+          "milliseconds": 57,
+          "status": "Recognition cancelled. The image remains ready.",
+          "tone": "warning"
+        },
+        {
+          "action": "recognize",
+          "milliseconds": 393,
+          "status": "Recognition complete. You can edit the result.",
+          "tone": "success"
+        },
+        {
+          "action": "recognize",
+          "milliseconds": 292,
+          "status": "Recognition complete. You can edit the result.",
+          "tone": "success"
+        }
+      ],
+      "statuses": [
+        {
+          "text": "",
+          "milliseconds": 442.70000000298023
+        },
+        {
+          "text": "Preparing the image locally…",
+          "milliseconds": 47226.89999999851
+        },
+        {
+          "text": "",
+          "milliseconds": 47227.70000000298
+        },
+        {
+          "text": "Image ready. Choose a language and start recognition.",
+          "milliseconds": 47244.70000000298
+        },
+        {
+          "text": "Loading the local OCR engine…",
+          "milliseconds": 47523.20000000298
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 48265.39999999851
+        },
+        {
+          "text": "Loading language data…",
+          "milliseconds": 48291.29999999702
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 48337.10000000149
+        },
+        {
+          "text": "Recognizing text… 0%",
+          "milliseconds": 48410.5
+        },
+        {
+          "text": "Recognizing text… 100%",
+          "milliseconds": 48452.10000000149
+        },
+        {
+          "text": "Finishing recognition…",
+          "milliseconds": 48455.29999999702
+        },
+        {
+          "text": "Recognition complete. You can edit the result.",
+          "tone": "success",
+          "milliseconds": 48458
+        },
+        {
+          "text": "Preparing the image locally…",
+          "milliseconds": 48680.60000000149
+        },
+        {
+          "text": "",
+          "milliseconds": 48681.39999999851
+        },
+        {
+          "text": "Image ready. Choose a language and start recognition.",
+          "milliseconds": 48698.10000000149
+        },
+        {
+          "text": "Loading the local OCR engine…",
+          "milliseconds": 48975.60000000149
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 49095.20000000298
+        },
+        {
+          "text": "Loading language data…",
+          "milliseconds": 49122
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 49130.39999999851
+        },
+        {
+          "text": "Recognizing text… 0%",
+          "milliseconds": 49211.29999999702
+        },
+        {
+          "text": "Recognizing text… 100%",
+          "milliseconds": 49248.39999999851
+        },
+        {
+          "text": "Finishing recognition…",
+          "milliseconds": 49250.29999999702
+        },
+        {
+          "text": "Recognition complete. You can edit the result.",
+          "tone": "success",
+          "milliseconds": 49252.5
+        },
+        {
+          "text": "Preparing the image locally…",
+          "milliseconds": 49507.5
+        },
+        {
+          "text": "",
+          "milliseconds": 49509.10000000149
+        },
+        {
+          "text": "Image ready. Choose a language and start recognition.",
+          "milliseconds": 49527
+        },
+        {
+          "text": "Loading the local OCR engine…",
+          "milliseconds": 49802.29999999702
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 49909.5
+        },
+        {
+          "text": "Loading language data…",
+          "milliseconds": 49935.89999999851
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 49954
+        },
+        {
+          "text": "Recognizing text… 0%",
+          "milliseconds": 50066.70000000298
+        },
+        {
+          "text": "Recognizing text… 23%",
+          "milliseconds": 50104.29999999702
+        },
+        {
+          "text": "Recognizing text… 47%",
+          "milliseconds": 50162.79999999702
+        },
+        {
+          "text": "Recognizing text… 100%",
+          "milliseconds": 50197.70000000298
+        },
+        {
+          "text": "Finishing recognition…",
+          "milliseconds": 50199.89999999851
+        },
+        {
+          "text": "Recognition complete. You can edit the result.",
+          "tone": "success",
+          "milliseconds": 50201.5
+        },
+        {
+          "text": "Preparing the image locally…",
+          "milliseconds": 50458.89999999851
+        },
+        {
+          "text": "",
+          "milliseconds": 50460.10000000149
+        },
+        {
+          "text": "Image ready. Choose a language and start recognition.",
+          "milliseconds": 50477.89999999851
+        },
+        {
+          "text": "Loading the local OCR engine…",
+          "milliseconds": 50741.5
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 50853.39999999851
+        },
+        {
+          "text": "Loading language data…",
+          "milliseconds": 50885.79999999702
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 50896.89999999851
+        },
+        {
+          "text": "Recognizing text… 0%",
+          "milliseconds": 50976.20000000298
+        },
+        {
+          "text": "Recognizing text… 100%",
+          "milliseconds": 51019.79999999702
+        },
+        {
+          "text": "Finishing recognition…",
+          "milliseconds": 51022.89999999851
+        },
+        {
+          "text": "Recognition complete. You can edit the result.",
+          "tone": "success",
+          "milliseconds": 51024.60000000149
+        },
+        {
+          "text": "Preparing the image locally…",
+          "milliseconds": 51264
+        },
+        {
+          "text": "",
+          "milliseconds": 51265.10000000149
+        },
+        {
+          "text": "Image ready. Choose a language and start recognition.",
+          "milliseconds": 51284.5
+        },
+        {
+          "text": "Loading the local OCR engine…",
+          "milliseconds": 51547.5
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 51664.10000000149
+        },
+        {
+          "text": "Loading language data…",
+          "milliseconds": 51691.5
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 51708
+        },
+        {
+          "text": "Recognizing text… 0%",
+          "milliseconds": 51812.29999999702
+        },
+        {
+          "text": "Recognizing text… 23%",
+          "milliseconds": 51852.39999999851
+        },
+        {
+          "text": "Recognizing text… 47%",
+          "milliseconds": 51901.10000000149
+        },
+        {
+          "text": "Recognizing text… 100%",
+          "milliseconds": 51935.29999999702
+        },
+        {
+          "text": "Finishing recognition…",
+          "milliseconds": 51937.60000000149
+        },
+        {
+          "text": "Recognition complete. You can edit the result.",
+          "tone": "success",
+          "milliseconds": 51939.79999999702
+        },
+        {
+          "text": "Loading the local OCR engine…",
+          "milliseconds": 52165.89999999851
+        },
+        {
+          "text": "Recognition cancelled. The image remains ready.",
+          "tone": "warning",
+          "milliseconds": 52220.70000000298
+        },
+        {
+          "text": "Loading the local OCR engine…",
+          "milliseconds": 52465.79999999702
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 52582
+        },
+        {
+          "text": "Loading language data…",
+          "milliseconds": 52610.5
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 52628.60000000149
+        },
+        {
+          "text": "Recognizing text… 0%",
+          "milliseconds": 52729.20000000298
+        },
+        {
+          "text": "Recognizing text… 23%",
+          "milliseconds": 52766.39999999851
+        },
+        {
+          "text": "Recognizing text… 47%",
+          "milliseconds": 52817.29999999702
+        },
+        {
+          "text": "Recognizing text… 100%",
+          "milliseconds": 52851.70000000298
+        },
+        {
+          "text": "Finishing recognition…",
+          "milliseconds": 52854
+        },
+        {
+          "text": "Recognition complete. You can edit the result.",
+          "tone": "success",
+          "milliseconds": 52855.70000000298
+        },
+        {
+          "text": "Preparing the image locally…",
+          "milliseconds": 53091
+        },
+        {
+          "text": "",
+          "milliseconds": 53092.10000000149
+        },
+        {
+          "text": "The file is not a supported PNG, JPEG, or WebP image.",
+          "tone": "error",
+          "milliseconds": 53095
+        },
+        {
+          "text": "Preparing the image locally…",
+          "milliseconds": 53467.60000000149
+        },
+        {
+          "text": "",
+          "milliseconds": 53468.39999999851
+        },
+        {
+          "text": "Image ready. Choose a language and start recognition.",
+          "milliseconds": 53497.60000000149
+        },
+        {
+          "text": "Loading the local OCR engine…",
+          "milliseconds": 53771
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 53879.5
+        },
+        {
+          "text": "Loading language data…",
+          "milliseconds": 53908.70000000298
+        },
+        {
+          "text": "Initializing recognition…",
+          "milliseconds": 53928.5
+        },
+        {
+          "text": "Recognizing text… 0%",
+          "milliseconds": 54011.89999999851
+        },
+        {
+          "text": "Recognizing text… 100%",
+          "milliseconds": 54054.60000000149
+        },
+        {
+          "text": "Finishing recognition…",
+          "milliseconds": 54058
+        },
+        {
+          "text": "Recognition complete. You can edit the result.",
+          "tone": "success",
+          "milliseconds": 54060.70000000298
+        }
+      ],
+      "activeWorkers": 1,
+      "objectUrls": [
+        {
+          "url": "blob:http://127.0.0.1:4176/e4e3c8a2-bf7c-47ac-8f20-e414c6886e37",
+          "bytes": 20777,
+          "type": "image/png",
+          "revoked": true
+        },
+        {
+          "url": "blob:http://127.0.0.1:4176/3b34dc8f-6d82-4779-9d9a-f74ca4062569",
+          "bytes": 17504,
+          "type": "image/png",
+          "revoked": true
+        },
+        {
+          "url": "blob:http://127.0.0.1:4176/53c89171-63d2-49c3-b962-cca07fa02838",
+          "bytes": 30616,
+          "type": "image/png",
+          "revoked": true
+        },
+        {
+          "url": "blob:http://127.0.0.1:4176/80323d86-2b72-4997-9e34-ccdc4866065d",
+          "bytes": 20777,
+          "type": "image/png",
+          "revoked": true
+        },
+        {
+          "url": "blob:http://127.0.0.1:4176/d036a4e4-9813-4028-8679-841f90c73903",
+          "bytes": 30616,
+          "type": "image/png",
+          "revoked": true
+        },
+        {
+          "url": "blob:http://127.0.0.1:4176/de865556-804b-43d7-981e-2049b0084b0e",
+          "bytes": 20777,
+          "type": "image/png",
+          "revoked": false
+        }
+      ],
+      "canvasesInDom": 0
+    },
+    "scripts": [
+      "http://127.0.0.1:4176/tests/browser/gate-audit.js",
+      "http://127.0.0.1:4176/js/theme-bootstrap.js",
+      "http://127.0.0.1:4176/assets/vendor/tesseract/engine/tesseract.min.js",
+      "http://127.0.0.1:4176/js/main.js",
+      "http://127.0.0.1:4176/image/to-text/app.js",
+      "http://127.0.0.1:4176/tests/browser/gate-fixtures.js"
+    ]
+  },
+  {
+    "route": "/image/converter/",
+    "audit": {
+      "calls": [],
+      "resources": [
+        {
+          "url": "http://local.adguard.org/?ts=1791293577812&type=content-script&dmn=127.0.0.1:4176&url=http%3A%2F%2F127.0.0.1%3A4176%2Fimage%2Fconverter%2F&app=ChatGPT.exe&css=2&js=1&rel=1&rji=1&sbe=1&stealth=1&st-loc&st-dnt",
+          "origin": "http://local.adguard.org",
+          "initiatorType": "script",
+          "responseStatus": 0
+        },
+        {
+          "url": "http://local.adguard.org/?ts=1791293577812&name=AdGuard%20Extra&name=AdGuard%20Popup%20Blocker&type=user-script",
+          "origin": "http://local.adguard.org",
+          "initiatorType": "script",
+          "responseStatus": 0
+        },
+        {
+          "url": "http://127.0.0.1:4176/tests/browser/gate-audit.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/theme-bootstrap.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/components.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/base.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/tool.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/categories.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/converter/tool.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/css/pages.css",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "link",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/jszip/jszip.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/main.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/converter/app.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/tests/browser/gate-fixtures.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/config.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/i18n.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/theme.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/file.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/save.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/image.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/image/converter/converter.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/es.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/en.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/ko.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/ja.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/de.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-resize.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-metadata.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-compressor.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/fr.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/privacy-hub.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/image-to-text.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/metadata-ux.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/js/locales/pdf-to-text.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/shared/image-output.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        },
+        {
+          "url": "http://127.0.0.1:4176/assets/vendor/pdf-lib/pdf-lib.min.js",
+          "origin": "http://127.0.0.1:4176",
+          "initiatorType": "script",
+          "responseStatus": 200
+        }
+      ],
+      "errors": [],
+      "violations": [],
+      "downloads": [],
+      "jobs": [],
+      "statuses": [
+        {
+          "text": "",
+          "milliseconds": 327.1000000014901
+        },
+        {
+          "text": "Added 1 image(s).",
+          "tone": "success",
+          "milliseconds": 1501.6999999955297
+        },
+        {
+          "text": "Converting images locally…",
+          "tone": "neutral",
+          "milliseconds": 12467.10000000149
+        },
+        {
+          "text": "Converting image 1 of 1…",
+          "tone": "neutral",
+          "milliseconds": 12506.69999999553
+        },
+        {
+          "text": "Saved image-eng.jpg with 1 converted image(s).",
+          "tone": "success",
+          "milliseconds": 12643.39999999851
+        }
+      ],
+      "activeWorkers": 0,
+      "objectUrls": [
+        {
+          "url": "blob:http://127.0.0.1:4176/f43b8b6d-fc14-4671-b587-6270a1a41cee",
+          "bytes": 23929,
+          "type": "image/png",
+          "revoked": false
+        }
+      ],
+      "canvasesInDom": 0
+    },
+    "scripts": [
+      "http://127.0.0.1:4176/tests/browser/gate-audit.js",
+      "http://127.0.0.1:4176/js/theme-bootstrap.js",
+      "http://127.0.0.1:4176/assets/vendor/jszip/jszip.min.js",
+      "http://127.0.0.1:4176/js/main.js",
+      "http://127.0.0.1:4176/image/converter/app.js",
+      "http://127.0.0.1:4176/tests/browser/gate-fixtures.js"
+    ],
+    "status": "Saved image-eng.jpg with 1 converted image(s)."
+  }
+]
