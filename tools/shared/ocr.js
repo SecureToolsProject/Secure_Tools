@@ -46,6 +46,18 @@ export function normalizeOcrProgress(message) {
   };
 }
 
+function normalizeOcrLines(blocks) {
+  if (!Array.isArray(blocks)) return [];
+  const lines = [];
+  for (const block of blocks) for (const paragraph of block?.paragraphs || []) for (const line of paragraph?.lines || []) {
+    const text = typeof line?.text === "string" ? line.text.trim() : "";
+    const box = line?.bbox;
+    if (!text || !box || ![box.x0, box.y0, box.x1, box.y1].every(Number.isFinite)) continue;
+    lines.push(Object.freeze({ text, confidence: Number.isFinite(line.confidence) ? line.confidence : null, bbox: Object.freeze({ x0: box.x0, y0: box.y0, x1: box.x1, y1: box.y1 }) }));
+  }
+  return Object.freeze(lines);
+}
+
 function canvasToBlob(canvas) {
   return new Promise((resolve, reject) => {
     canvas.toBlob((blob) => {
@@ -175,7 +187,11 @@ export function createOcrService(configuration = {}) {
       const activeWorker = await ensureWorker(language, options.signal);
       if (options.signal?.aborted) throw cancellationError();
 
-      const recognition = activeWorker.recognize(preparedImage);
+      const recognition = activeWorker.recognize(
+        preparedImage,
+        {},
+        options.includeLayout ? { text: true, blocks: true } : { text: true },
+      );
       const interruption = new Promise((_, reject) => {
         const cancel = (error) => {
           const cleanup = discardWorker();
@@ -190,7 +206,9 @@ export function createOcrService(configuration = {}) {
       });
       const result = await Promise.race([recognition, interruption]);
       emit({ stage: "complete", progress: 1 });
-      return { text: typeof result?.data?.text === "string" ? result.data.text : "" };
+      const output = { text: typeof result?.data?.text === "string" ? result.data.text : "" };
+      if (options.includeLayout) output.lines = normalizeOcrLines(result?.data?.blocks);
+      return output;
     } catch (error) {
       if (error?.code === "OCR_CANCELLED" || options.signal?.aborted) throw cancellationError();
       if (error?.code && !error.code.startsWith("OCR_")) throw error;

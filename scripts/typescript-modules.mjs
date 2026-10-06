@@ -20,6 +20,11 @@ export const compiledBrowserModules = Object.freeze([
     public: "shared/pdf-ocr.js",
   }),
   Object.freeze({
+    source: "tools/shared/searchable-pdf.ts",
+    compiled: "tools/shared/searchable-pdf.js",
+    public: "shared/searchable-pdf.js",
+  }),
+  Object.freeze({
     source: "tools/image/to-text/controller.ts",
     compiled: "tools/image/to-text/controller.js",
     public: "image/to-text/controller.js",

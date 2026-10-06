@@ -2,12 +2,15 @@ import { t } from "../../../js/i18n.js";
 import { formatBytes } from "../../shared/file.js";
 import { inspectPdf } from "../../shared/pdf.js";
 import { PDF_OCR_LARGE_DOCUMENT_THRESHOLD } from "../../shared/pdf-ocr.js";
+import { searchablePdfFilename } from "../../shared/searchable-pdf.js";
+import type { PdfLibLike } from "../../shared/searchable-pdf.js";
+import { downloadBlob } from "../../shared/save.js";
 import { parsePageSelection } from "../split/pdf.js";
 import { createPdfToTextController } from "./controller.js";
 import type { PdfToTextState } from "./controller.js";
 import { copyText, downloadPdfText, formatPdfOcrText, pdfTextFilename } from "./output.js";
 
-declare global { interface Window { PDFLib?: { PDFDocument?: unknown } } }
+declare global { interface Window { PDFLib?: { PDFDocument?: unknown }; fontkit?: unknown; SecureToolsSearchablePdfFont?: string } }
 type ElementMap = Record<string, HTMLElement>;
 const byId = <T extends HTMLElement>(id: string): T => {
   const value = document.getElementById(id);
@@ -26,7 +29,7 @@ const elements: ElementMap & {
   replace: byId("replace-source"), warning: byId("large-warning"), rangePanel: byId("range-panel"),
   rangeError: byId("range-error"), recognize: byId("recognize"), cancel: byId("cancel"),
   status: byId("tool-status"), result: byId("result-panel"), pages: byId("result-pages"),
-  copyAll: byId("copy-all"), download: byId("download-result"),
+  copyAll: byId("copy-all"), download: byId("download-result"), searchable: byId("download-searchable"),
 };
 
 const template = (key: string, values: Record<string, string | number> = {}) => Object.entries(values).reduce(
@@ -40,6 +43,7 @@ function statusKey(state: PdfToTextState): string {
   if (state.phase === "ready") return "pdfToText.status.ready";
   if (state.phase === "cancelled") return "pdfToText.status.cancelled";
   if (state.phase === "success") return "pdfToText.status.success";
+  if (state.phase === "building") return "pdfToText.status.building";
   if (state.phase === "error") return `pdfToText.errors.${codeOf(state.error)}`;
   return "";
 }
@@ -69,7 +73,7 @@ function progressText(state: PdfToTextState): string {
 
 function render(state: PdfToTextState): void {
   latest = state;
-  const hasSource = Boolean(state.source); const busy = state.phase === "preparing" || state.phase === "recognizing";
+  const hasSource = Boolean(state.source); const busy = state.phase === "preparing" || state.phase === "recognizing" || state.phase === "building";
   elements.sourceEmpty.hidden = hasSource;
   elements.sourceCard.hidden = !hasSource;
   elements.warning.hidden = !state.source || state.source.pageCount < PDF_OCR_LARGE_DOCUMENT_THRESHOLD;
@@ -77,13 +81,18 @@ function render(state: PdfToTextState): void {
   elements.input.toggleAttribute("disabled", busy); elements.language.toggleAttribute("disabled", busy);
   elements.all.toggleAttribute("disabled", busy); elements.selected.toggleAttribute("disabled", busy); elements.range.toggleAttribute("disabled", busy || !elements.selected.checked);
   elements.remove.toggleAttribute("disabled", busy); elements.replace.toggleAttribute("disabled", busy);
-  elements.recognize.toggleAttribute("disabled", !hasSource || busy); elements.recognize.hidden = state.phase === "recognizing";
-  elements.cancel.hidden = state.phase !== "recognizing";
-  elements.progress.hidden = state.phase !== "recognizing";
+  elements.recognize.toggleAttribute("disabled", !hasSource || busy); elements.recognize.hidden = state.phase === "recognizing" || state.phase === "building";
+  elements.cancel.hidden = state.phase !== "recognizing" && state.phase !== "building";
+  elements.searchable.toggleAttribute("disabled", !state.searchableReady || busy);
+  elements.progress.hidden = state.phase !== "recognizing" && state.phase !== "building";
   if (state.phase === "recognizing") {
     const value = state.progress?.overallProgress;
     if (value === null || value === undefined) elements.progress.removeAttribute("value"); else elements.progress.value = value;
     elements.status.textContent = progressText(state);
+  } else if (state.phase === "building") {
+    elements.progress.removeAttribute("value");
+    const progress = state.searchableProgress;
+    elements.status.textContent = progress?.phase === "saving" ? t("pdfToText.progress.saving") : template("pdfToText.progress.building", { page: progress?.pageNumber || progress?.pageIndex || 1, total: progress?.pageCount || state.pages.length });
   } else { elements.status.textContent = statusKey(state) ? t(statusKey(state)) : ""; }
   elements.status.dataset.tone = state.phase === "error" ? "error" : state.phase === "success" ? "success" : state.phase === "cancelled" ? "warning" : "";
   elements.result.hidden = state.pages.length === 0;
@@ -117,6 +126,22 @@ elements.recognize.addEventListener("click", () => { clearRangeError(); try { vo
 elements.range.addEventListener("input", () => { clearRangeError(); controller.invalidateResults(); });
 elements.copyAll.addEventListener("click", async () => { try { await copyText(formatPdfOcrText(latest.pages)); showTransient("pdfToText.status.copied"); } catch { showError("pdfToText.errors.copy"); } });
 elements.download.addEventListener("click", () => { try { downloadPdfText(latest.pages, latest.source?.file.name); showTransient("pdfToText.status.downloaded", { name: pdfTextFilename(latest.source?.file.name) }); } catch { showError("pdfToText.errors.download"); } });
+elements.searchable.addEventListener("click", async () => {
+  const source = latest.source;
+  try {
+    if (!source || !window.PDFLib?.PDFDocument || !window.fontkit) throw Object.assign(new Error("PDF_LIBRARY_UNAVAILABLE"), { code: "PDF_LIBRARY_UNAVAILABLE" });
+    if (!window.SecureToolsSearchablePdfFont) throw Object.assign(new Error("SEARCHABLE_PDF_FONT_UNAVAILABLE"), { code: "SEARCHABLE_PDF_FONT_UNAVAILABLE" });
+    const binary = atob(window.SecureToolsSearchablePdfFont); const font = new Uint8Array(binary.length);
+    for (let index = 0; index < binary.length; index += 1) font[index] = binary.charCodeAt(index);
+    if (latest.source !== source) return;
+    const bytes = await controller.buildSearchable(window.PDFLib as unknown as PdfLibLike, window.fontkit, font.buffer);
+    if (!bytes || latest.source !== source) return;
+    const filename = searchablePdfFilename(source.file.name);
+    downloadBlob(new Blob([bytes.slice().buffer], { type: "application/pdf" }), filename);
+    showTransient("pdfToText.status.searchableDownloaded", { name: filename });
+    elements.searchable.focus();
+  } catch (error) { showError(`pdfToText.errors.${codeOf(error)}`); }
+});
 for (const type of ["dragenter", "dragover"]) elements.drop.addEventListener(type, (event) => { event.preventDefault(); elements.drop.dataset.dragging = "true"; });
 for (const type of ["dragleave", "drop"]) elements.drop.addEventListener(type, (event) => { event.preventDefault(); delete elements.drop.dataset.dragging; });
 elements.drop.addEventListener("drop", (event) => { const data = (event as DragEvent).dataTransfer; if (data) void choose(data.files); });
