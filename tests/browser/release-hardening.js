@@ -113,4 +113,3 @@ document.querySelector("#select").addEventListener("click", () => {
   const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(searchRanges[0]);
   status.textContent = `Selected text: ${selection.toString()}`;
 });
-
