@@ -57,6 +57,7 @@ for (const test of [
   "tests/commit-message.test.mjs",
   "tests/cloudflare-bridge.test.mjs",
   "tests/release-hardening-http.test.mjs",
+  "tests/verify-browser-export-artifacts.mjs",
 ]) {
   runNode([test], test);
 }

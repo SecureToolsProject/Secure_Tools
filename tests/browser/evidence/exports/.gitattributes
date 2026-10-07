@@ -1,0 +1,3 @@
+# Preserve the exact browser-boundary artifact bytes across platform checkouts.
+*.txt -text
+*.pdf -text
