@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import path from "node:path";
+import { spawnSync } from "node:child_process";
 
 const workflow = fs.readFileSync(".github/workflows/deploy-cloudflare-bridge.yml", "utf8");
 
@@ -62,5 +64,28 @@ assert.match(deploymentSmoke, /"twitter:image"/);
 assert.equal(fs.readFileSync("CNAME", "utf8").trim(), "securetools.app");
 assert.ok(!fs.existsSync("_headers"), "bridge headers must not enter the GitHub Pages artifact");
 assert.ok(!fs.existsSync("_redirects"), "redirects are generated only in the build artifact");
+
+// Execute the real packaging block, preserving its strict isolation assertions.
+const preparation = workflow.match(/- name: Prepare isolated bridge artifact[\s\S]*?run: \|\n([\s\S]*?)\n      - name:/)?.[1];
+assert.ok(preparation, "Isolated artifact preparation block exists");
+const staging = path.resolve(".ts-build");
+fs.mkdirSync(staging, { recursive: true });
+const artifact = fs.mkdtempSync(path.join(staging, "cloudflare-isolation-"));
+assert.equal(path.dirname(artifact), staging);
+try {
+  const shell = process.platform === "win32" ? path.join(process.env.ProgramFiles, "Git/bin/bash.exe") : "bash";
+  const result = spawnSync(shell, ["-e", "-o", "pipefail", "-c", preparation.replace(/^          /gm, "")], {
+    env: { ...process.env, BRIDGE_DIRECTORY: process.platform === "win32" ? artifact.replaceAll("\\", "/").replace(/^([A-Za-z]):\//, (_, drive) => `/${drive.toLowerCase()}/`) : artifact }, encoding: "utf8",
+  });
+  assert.equal(result.status, 0, `Actual deployment packaging succeeds: ${result.stdout}\n${result.stderr}`);
+  assert.equal(fs.readFileSync("CNAME", "utf8").trim(), "securetools.app");
+  assert.equal(fs.readFileSync("dist/CNAME", "utf8").trim(), "securetools.app", "Generic build retains hosting ownership file");
+  assert.ok(!fs.existsSync(path.join(artifact, "CNAME")), "Isolated Cloudflare artifact excludes CNAME");
+  assert.ok(!fs.existsSync(path.join(artifact, "_worker.js")) && !fs.existsSync(path.join(artifact, "functions")));
+  assert.match(fs.readFileSync(path.join(artifact, "_headers"), "utf8"), /X-Robots-Tag: noindex, nofollow/);
+} finally {
+  assert.equal(path.dirname(artifact), staging);
+  fs.rmSync(artifact, { recursive: true, force: true });
+}
 
 console.log("Cloudflare bridge workflow contract checks passed.");
