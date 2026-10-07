@@ -1,0 +1,56 @@
+name: Production smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      production_origin:
+        description: Canonical production origin
+        required: true
+        default: https://tools.securetools.app
+        type: string
+      immutable_origin:
+        description: Immutable deployment origin to compare
+        required: true
+        type: string
+  # Bootstrap this new workflow before its explicitly authorized merge.
+  # Ordinary development PRs do not run the production browser gate.
+  pull_request:
+    branches: [main]
+    paths: [.github/workflows/production-smoke.yml, 'tests/production/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-smoke-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  smoke:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'test/production-verification'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PRODUCTION_ORIGIN: ${{ inputs.production_origin || 'https://tools.securetools.app' }}
+      IMMUTABLE_ORIGIN: ${{ inputs.immutable_origin || 'https://b9802e7e.secure-tools-web-bridge.pages.dev' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:production
+      - name: Publish technical result
+        if: always()
+        run: cat .ts-build/production-smoke/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain failure diagnostics (synthetic fixtures only)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-smoke-diagnostics
+          path: .ts-build/production-smoke
+          retention-days: 7
