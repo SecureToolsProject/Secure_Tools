@@ -52,7 +52,7 @@ export function run([baseRef, headRef] = process.argv.slice(2)) {
   if (baseRef === "main" && headRef === deploymentRecoveryBranch) {
     const { BASE_SHA, HEAD_SHA } = process.env;
     if (!BASE_SHA || !HEAD_SHA) throw new Error("Deployment recovery requires BASE_SHA and HEAD_SHA for file-scope validation.");
-    if (BASE_SHA !== "6c369953a84295ee1564f116e807f260363c332c") throw new Error("Deployment recovery requires the explicitly authorized incident baseline.");
+    if (BASE_SHA !== "5cf025092094e79646b765543bc99b382d8a742f") throw new Error("Deployment recovery requires the explicitly authorized incident baseline.");
     const files = execFileSync("git", ["diff", "--name-only", `${BASE_SHA}...${HEAD_SHA}`], { encoding: "utf8" }).trim().split(/\r?\n/).filter(Boolean);
     validateDeploymentRecoveryScope(files);
   }

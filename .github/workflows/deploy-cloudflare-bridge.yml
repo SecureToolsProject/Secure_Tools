@@ -74,6 +74,8 @@ jobs:
           npm run build
           mkdir -p "$BRIDGE_DIRECTORY"
           cp -R dist/. "$BRIDGE_DIRECTORY/"
+          # Keep the generic/GitHub Pages CNAME; strip only the isolated Pages copy.
+          rm -f "$BRIDGE_DIRECTORY/CNAME"
 
           printf '%s\n' \
             'https://secure-tools-web-bridge.pages.dev/*' \
