@@ -9,6 +9,7 @@
     "prepare:ocr": "node scripts/prepare-ocr-assets.mjs && node scripts/prepare-searchable-pdf-assets.mjs",
     "smoke:ocr:browser": "node tests/serve-ocr-smoke.mjs",
     "test:commit-messages": "node tests/commit-message.test.mjs",
+    "test:production": "node tests/production/smoke.mjs",
     "test": "npm run typecheck && npm run compile:ts && node tests/run-all.mjs",
     "typecheck": "tsc -p tsconfig.json"
   },
@@ -24,6 +25,7 @@
     "node": ">=24"
   },
   "devDependencies": {
+    "playwright": "1.63.0",
     "typescript": "7.0.2"
   }
 }
