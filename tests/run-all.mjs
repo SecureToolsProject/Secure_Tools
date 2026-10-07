@@ -51,10 +51,13 @@ for (const test of [
   "tests/pdf-metadata.test.mjs",
   "tests/i18n-quality.test.mjs",
   "tests/ux-consistency.test.mjs",
+  "tests/job-focus.test.mjs",
   "tests/branch-policy.test.mjs",
   "tests/ci-foundation.test.mjs",
   "tests/commit-message.test.mjs",
   "tests/cloudflare-bridge.test.mjs",
+  "tests/release-hardening-http.test.mjs",
+  "tests/verify-browser-export-artifacts.mjs",
 ]) {
   runNode([test], test);
 }

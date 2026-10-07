@@ -1,0 +1,605 @@
+{
+  "phrases": [
+    "HELLO SEARCHABLE PDF",
+    "검색 가능한 PDF",
+    "HELLO 검색 PDF"
+  ],
+  "rotations": [
+    0,
+    90,
+    180,
+    270
+  ],
+  "timings": [
+    {
+      "stage": "OCR",
+      "milliseconds": 1859
+    },
+    {
+      "stage": "PDF build",
+      "milliseconds": 1812
+    }
+  ],
+  "extracts": [
+    {
+      "page": 1,
+      "rotation": 0,
+      "text": "HELLO SEARCHABLE PDF  검색 가능한 PDF HELLO 검색 PDF"
+    },
+    {
+      "page": 2,
+      "rotation": 90,
+      "text": "HELLO SEARCHABLE PDF  검색 가능한 PDF HELLO 검색 PDF"
+    },
+    {
+      "page": 3,
+      "rotation": 180,
+      "text": "HELLO SEARCHABLE PDF  검색 가능한 PDF HELLO 검색 PDF"
+    },
+    {
+      "page": 4,
+      "rotation": 270,
+      "text": "HELLO SEARCHABLE PDF  검색 가능한 PDF HELLO 검색 PDF"
+    },
+    {
+      "page": 5,
+      "rotation": 0,
+      "text": "EXISTING TEXT"
+    },
+    {
+      "page": 6,
+      "rotation": 0,
+      "text": ""
+    }
+  ],
+  "preservation": [
+    {
+      "page": 1,
+      "pixelsIdentical": true,
+      "changedChannelRatio": 0,
+      "meanChannelError": 0,
+      "maximumError": 0
+    },
+    {
+      "page": 2,
+      "pixelsIdentical": false,
+      "changedChannelRatio": 0.0042138671875,
+      "meanChannelError": 0.0042138671875,
+      "maximumError": 1
+    },
+    {
+      "page": 3,
+      "pixelsIdentical": false,
+      "changedChannelRatio": 0.0042138671875,
+      "meanChannelError": 0.0042138671875,
+      "maximumError": 1
+    },
+    {
+      "page": 4,
+      "pixelsIdentical": false,
+      "changedChannelRatio": 0.0042138671875,
+      "meanChannelError": 0.0042138671875,
+      "maximumError": 1
+    },
+    {
+      "page": 5,
+      "pixelsIdentical": true,
+      "changedChannelRatio": 0,
+      "meanChannelError": 0,
+      "maximumError": 0
+    },
+    {
+      "page": 6,
+      "pixelsIdentical": false,
+      "changedChannelRatio": 0.0042138671875,
+      "meanChannelError": 0.0042138671875,
+      "maximumError": 1
+    }
+  ],
+  "downloadsRequested": 0,
+  "externalRequests": [
+    "http://local.adguard.org/?ts=1791293577812&type=content-script&dmn=127.0.0.1:4176&url=http%3A%2F%2F127.0.0.1%3A4176%2Ftests%2Fbrowser%2Frelease-hardening.html&app=ChatGPT.exe&css=2&js=1&rel=1&rji=1&sbe=1&stealth=1&st-loc&st-dnt",
+    "http://local.adguard.org/?ts=1791293577812&name=AdGuard%20Extra&name=AdGuard%20Popup%20Blocker&type=user-script"
+  ],
+  "errors": [],
+  "textGeometry": [
+    {
+      "page": 1,
+      "viewport": [
+        1,
+        0,
+        0,
+        -1,
+        0,
+        320
+      ],
+      "items": [
+        {
+          "str": "HELLO SEARCHABLE PDF",
+          "width": 279.99999999999994,
+          "height": 15.17,
+          "transform": [
+            24.019902204683877,
+            0,
+            0,
+            15.17,
+            42.5,
+            240
+          ]
+        },
+        {
+          "str": "",
+          "width": 0,
+          "height": 0,
+          "transform": [
+            26.300702307582053,
+            0,
+            0,
+            19.27,
+            42.5,
+            173
+          ]
+        },
+        {
+          "str": "검색 가능한 PDF",
+          "width": 183.5,
+          "height": 19.27,
+          "transform": [
+            26.300702307582053,
+            0,
+            0,
+            19.27,
+            42.5,
+            173
+          ]
+        },
+        {
+          "str": "HELLO 검색 PDF",
+          "width": 182,
+          "height": 19.27,
+          "transform": [
+            24.911032028469748,
+            0,
+            0,
+            19.27,
+            42.5,
+            108
+          ]
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "viewport": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "items": [
+        {
+          "str": "HELLO SEARCHABLE PDF",
+          "width": 279.99999999999994,
+          "height": 15.17,
+          "transform": [
+            1.4707948175399285e-15,
+            24.019902204683877,
+            -15.17,
+            9.288945971532676e-16,
+            80,
+            42.5
+          ]
+        },
+        {
+          "str": "",
+          "width": 0,
+          "height": 0,
+          "transform": [
+            1.6104535448153887e-15,
+            26.300702307582053,
+            -19.27,
+            1.179947190978475e-15,
+            147,
+            42.5
+          ]
+        },
+        {
+          "str": "검색 가능한 PDF",
+          "width": 183.5,
+          "height": 19.27,
+          "transform": [
+            1.6104535448153887e-15,
+            26.300702307582053,
+            -19.27,
+            1.179947190978475e-15,
+            147,
+            42.5
+          ]
+        },
+        {
+          "str": "HELLO 검색 PDF",
+          "width": 181.99999999999997,
+          "height": 19.27,
+          "transform": [
+            1.525360781856134e-15,
+            24.911032028469748,
+            -19.27,
+            1.179947190978475e-15,
+            212,
+            42.5
+          ]
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "viewport": [
+        -1,
+        0,
+        0,
+        1,
+        480,
+        0
+      ],
+      "items": [
+        {
+          "str": "HELLO SEARCHABLE PDF",
+          "width": 279.99999999999994,
+          "height": 15.17,
+          "transform": [
+            -24.019902204683877,
+            2.941589635079857e-15,
+            -1.857789194306535e-15,
+            -15.17,
+            437.5,
+            80
+          ]
+        },
+        {
+          "str": "",
+          "width": 0,
+          "height": 0,
+          "transform": [
+            -26.300702307582053,
+            3.2209070896307774e-15,
+            -2.35989438195695e-15,
+            -19.27,
+            437.5,
+            147
+          ]
+        },
+        {
+          "str": "검색 가능한 PDF",
+          "width": 183.5,
+          "height": 19.27,
+          "transform": [
+            -26.300702307582053,
+            3.2209070896307774e-15,
+            -2.35989438195695e-15,
+            -19.27,
+            437.5,
+            147
+          ]
+        },
+        {
+          "str": "HELLO 검색 PDF",
+          "width": 181.9999999999999,
+          "height": 19.27,
+          "transform": [
+            -24.911032028469748,
+            3.050721563712268e-15,
+            -2.35989438195695e-15,
+            -19.27,
+            437.5,
+            212
+          ]
+        }
+      ]
+    },
+    {
+      "page": 4,
+      "viewport": [
+        0,
+        -1,
+        -1,
+        0,
+        480,
+        320
+      ],
+      "items": [
+        {
+          "str": "HELLO SEARCHABLE PDF",
+          "width": 279.99999999999994,
+          "height": 15.17,
+          "transform": [
+            1.4707948175399285e-15,
+            -24.019902204683877,
+            15.17,
+            9.288945971532676e-16,
+            240,
+            437.5
+          ]
+        },
+        {
+          "str": "",
+          "width": 0,
+          "height": 0,
+          "transform": [
+            1.6104535448153887e-15,
+            -26.300702307582053,
+            19.27,
+            1.179947190978475e-15,
+            173,
+            437.5
+          ]
+        },
+        {
+          "str": "검색 가능한 PDF",
+          "width": 183.49999999999994,
+          "height": 19.27,
+          "transform": [
+            1.6104535448153887e-15,
+            -26.300702307582053,
+            19.27,
+            1.179947190978475e-15,
+            173,
+            437.5
+          ]
+        },
+        {
+          "str": "HELLO 검색 PDF",
+          "width": 181.99999999999994,
+          "height": 19.27,
+          "transform": [
+            1.525360781856134e-15,
+            -24.911032028469748,
+            19.27,
+            1.179947190978475e-15,
+            108,
+            437.5
+          ]
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "viewport": [
+        1,
+        0,
+        0,
+        -1,
+        0,
+        320
+      ],
+      "items": [
+        {
+          "str": "EXISTING TEXT",
+          "width": 187.55000000000004,
+          "height": 25,
+          "transform": [
+            25,
+            0,
+            0,
+            25,
+            40,
+            240
+          ]
+        }
+      ]
+    },
+    {
+      "page": 6,
+      "viewport": [
+        1,
+        0,
+        0,
+        -1,
+        0,
+        320
+      ],
+      "items": []
+    }
+  ],
+  "ocrGeometry": [
+    {
+      "pageNumber": 1,
+      "rasterToPdfTransform": [
+        0.5,
+        0,
+        0,
+        -0.5,
+        0,
+        320
+      ],
+      "lines": [
+        {
+          "text": "HELLO SEARCHABLE PDF",
+          "confidence": 96,
+          "bbox": {
+            "x0": 85,
+            "y0": 123,
+            "x1": 645,
+            "y1": 160
+          }
+        },
+        {
+          "text": "검색 가능한 PDF",
+          "confidence": 93,
+          "bbox": {
+            "x0": 85,
+            "y0": 247,
+            "x1": 452,
+            "y1": 294
+          }
+        },
+        {
+          "text": "HELLO 검색 PDF",
+          "confidence": 94,
+          "bbox": {
+            "x0": 85,
+            "y0": 377,
+            "x1": 449,
+            "y1": 424
+          }
+        }
+      ]
+    },
+    {
+      "pageNumber": 2,
+      "rasterToPdfTransform": [
+        0,
+        0.5,
+        0.5,
+        0,
+        0,
+        0
+      ],
+      "lines": [
+        {
+          "text": "HELLO SEARCHABLE PDF",
+          "confidence": 96,
+          "bbox": {
+            "x0": 85,
+            "y0": 123,
+            "x1": 645,
+            "y1": 160
+          }
+        },
+        {
+          "text": "검색 가능한 PDF",
+          "confidence": 93,
+          "bbox": {
+            "x0": 85,
+            "y0": 247,
+            "x1": 452,
+            "y1": 294
+          }
+        },
+        {
+          "text": "HELLO 검색 PDF",
+          "confidence": 94,
+          "bbox": {
+            "x0": 85,
+            "y0": 377,
+            "x1": 449,
+            "y1": 424
+          }
+        }
+      ]
+    },
+    {
+      "pageNumber": 3,
+      "rasterToPdfTransform": [
+        -0.5,
+        0,
+        0,
+        0.5,
+        480,
+        0
+      ],
+      "lines": [
+        {
+          "text": "HELLO SEARCHABLE PDF",
+          "confidence": 96,
+          "bbox": {
+            "x0": 85,
+            "y0": 123,
+            "x1": 645,
+            "y1": 160
+          }
+        },
+        {
+          "text": "검색 가능한 PDF",
+          "confidence": 93,
+          "bbox": {
+            "x0": 85,
+            "y0": 247,
+            "x1": 452,
+            "y1": 294
+          }
+        },
+        {
+          "text": "HELLO 검색 PDF",
+          "confidence": 94,
+          "bbox": {
+            "x0": 85,
+            "y0": 377,
+            "x1": 449,
+            "y1": 424
+          }
+        }
+      ]
+    },
+    {
+      "pageNumber": 4,
+      "rasterToPdfTransform": [
+        0,
+        -0.5,
+        -0.5,
+        0,
+        320,
+        480
+      ],
+      "lines": [
+        {
+          "text": "HELLO SEARCHABLE PDF",
+          "confidence": 96,
+          "bbox": {
+            "x0": 85,
+            "y0": 123,
+            "x1": 645,
+            "y1": 160
+          }
+        },
+        {
+          "text": "검색 가능한 PDF",
+          "confidence": 93,
+          "bbox": {
+            "x0": 85,
+            "y0": 247,
+            "x1": 452,
+            "y1": 294
+          }
+        },
+        {
+          "text": "HELLO 검색 PDF",
+          "confidence": 94,
+          "bbox": {
+            "x0": 85,
+            "y0": 377,
+            "x1": 449,
+            "y1": 424
+          }
+        }
+      ]
+    },
+    {
+      "pageNumber": 5,
+      "rasterToPdfTransform": [
+        0.5,
+        0,
+        0,
+        -0.5,
+        0,
+        320
+      ],
+      "lines": [
+        {
+          "text": "EXISTING TEXT",
+          "confidence": 96,
+          "bbox": {
+            "x0": 84,
+            "y0": 124,
+            "x1": 454,
+            "y1": 160
+          }
+        }
+      ]
+    }
+  ],
+  "inputBytes": 15450,
+  "outputBytes": 19545,
+  "networkGatePassed": false
+}
