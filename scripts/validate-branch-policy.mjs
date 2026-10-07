@@ -1,9 +1,24 @@
 import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
 
 export const ACTIVE_INTEGRATION_BRANCH = "v2.2";
 
 const routineBranch = /^(?:feat|fix|test|chore)\/.+$/;
 const hotfixBranch = /^hotfix\/.+$/;
+const deploymentRecoveryBranch = "fix/production-deploy-workflow";
+const deploymentRecoveryFiles = new Set([
+  ".github/workflows/deploy-cloudflare-bridge.yml",
+  ".github/workflows/ci.yml",
+  "tests/cloudflare-bridge.test.mjs",
+  "scripts/validate-branch-policy.mjs",
+  "tests/branch-policy.test.mjs",
+]);
+
+export function validateDeploymentRecoveryScope(files) {
+  if (!files.length || files.some(file => !deploymentRecoveryFiles.has(file))) {
+    throw new Error("Deployment recovery may change only its workflow and prerequisite/policy validation files.");
+  }
+}
 
 export function validateBranchPolicy(baseRef, headRef) {
   if (baseRef === ACTIVE_INTEGRATION_BRANCH) {
@@ -16,7 +31,7 @@ export function validateBranchPolicy(baseRef, headRef) {
   }
 
   if (baseRef === "main") {
-    return headRef === ACTIVE_INTEGRATION_BRANCH || hotfixBranch.test(headRef)
+    return headRef === ACTIVE_INTEGRATION_BRANCH || hotfixBranch.test(headRef) || headRef === deploymentRecoveryBranch
       ? { valid: true, reason: null }
       : {
         valid: false,
@@ -33,6 +48,14 @@ export function run([baseRef, headRef] = process.argv.slice(2)) {
   }
   const result = validateBranchPolicy(baseRef, headRef);
   if (!result.valid) throw new Error(result.reason);
+  // Exact user-authorized incident recovery; ordinary fix/* branches stay rejected.
+  if (baseRef === "main" && headRef === deploymentRecoveryBranch) {
+    const { BASE_SHA, HEAD_SHA } = process.env;
+    if (!BASE_SHA || !HEAD_SHA) throw new Error("Deployment recovery requires BASE_SHA and HEAD_SHA for file-scope validation.");
+    if (BASE_SHA !== "6c369953a84295ee1564f116e807f260363c332c") throw new Error("Deployment recovery requires the explicitly authorized incident baseline.");
+    const files = execFileSync("git", ["diff", "--name-only", `${BASE_SHA}...${HEAD_SHA}`], { encoding: "utf8" }).trim().split(/\r?\n/).filter(Boolean);
+    validateDeploymentRecoveryScope(files);
+  }
   console.log(`Branch policy accepted ${headRef} → ${baseRef}.`);
 }
 

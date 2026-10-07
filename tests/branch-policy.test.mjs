@@ -4,6 +4,7 @@ import {
   ACTIVE_INTEGRATION_BRANCH,
   run,
   validateBranchPolicy,
+  validateDeploymentRecoveryScope,
 } from "../scripts/validate-branch-policy.mjs";
 
 assert.equal(ACTIVE_INTEGRATION_BRANCH, "v2.2");
@@ -40,5 +41,11 @@ for (const headRef of ["v2.1", "main", "hotfix/example", "feature/example"]) {
 }
 
 assert.throws(() => run([]), /Usage:/);
+assert.equal(validateBranchPolicy("main", "fix/production-deploy-workflow").valid, true);
+assert.equal(validateBranchPolicy("main", "fix/production-deploy-workflow-other").valid, false);
+assert.doesNotThrow(() => validateDeploymentRecoveryScope([".github/workflows/deploy-cloudflare-bridge.yml", "tests/cloudflare-bridge.test.mjs"]));
+assert.throws(() => validateDeploymentRecoveryScope([]), /only its workflow/);
+assert.throws(() => validateDeploymentRecoveryScope(["tools/pdf/to-text/app.ts"]), /only its workflow/);
+assert.throws(() => validateDeploymentRecoveryScope([".github/workflows/deploy-cloudflare-bridge.yml", "package.json"]), /only its workflow/);
 
 console.log("v2.2 integration, production promotion, hotfix, and rejection branch-policy checks passed.");

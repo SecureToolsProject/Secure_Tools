@@ -32,8 +32,15 @@ jobs:
         with:
           node-version: 24
 
+      - name: Install pinned build inputs
+        run: npm ci --ignore-scripts
+
+      - name: Prepare pinned OCR and PDF assets
+        run: npm run prepare:ocr
+
       - name: Run static tool validation
-        run: node tests/run-all.mjs
+        # npm test typechecks and compiles/stages TypeScript before the test runner.
+        run: npm test
 
       - name: Validate bridge prerequisites
         shell: bash
