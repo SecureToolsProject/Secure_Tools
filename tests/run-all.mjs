@@ -55,6 +55,7 @@ for (const test of [
   "tests/branch-policy.test.mjs",
   "tests/ci-foundation.test.mjs",
   "tests/commit-message.test.mjs",
+  "tests/build-provenance.test.mjs",
   "tests/cloudflare-bridge.test.mjs",
   "tests/release-hardening-http.test.mjs",
   "tests/verify-browser-export-artifacts.mjs",

@@ -4,9 +4,12 @@ import { fileURLToPath } from "node:url";
 
 import { canonicalPages, legacyRedirects, redirectStatus } from "./site-routes.mjs";
 import { compiledBrowserModules } from "./typescript-modules.mjs";
+import { buildIdentity, writeBuildInfo } from "./build-provenance.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.join(root, "dist");
+// Resolve before replacing output; production CI cannot fall back to a local SHA.
+const identity = buildIdentity();
 
 fs.rmSync(output, { recursive: true, force: true });
 fs.mkdirSync(output, { recursive: true });
@@ -50,5 +53,6 @@ for (const file of ["404.html", "robots.txt", "sitemap.xml"]) {
 
 const redirectFile = `${legacyRedirects.map(({ from, to }) => `${from} ${to} ${redirectStatus}`).join("\n")}\n`;
 fs.writeFileSync(path.join(output, "_redirects"), redirectFile);
+writeBuildInfo(output, identity);
 
 console.log(`Built ${canonicalPages.length} canonical pages and ${legacyRedirects.length} permanent redirects in dist/.`);

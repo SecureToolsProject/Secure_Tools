@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { validateBuildProvenance } from "../scripts/build-provenance.mjs";
 
 const workflow = fs.readFileSync(".github/workflows/deploy-cloudflare-bridge.yml", "utf8");
 
@@ -81,6 +82,7 @@ try {
   assert.equal(fs.readFileSync("CNAME", "utf8").trim(), "securetools.app");
   assert.equal(fs.readFileSync("dist/CNAME", "utf8").trim(), "securetools.app", "Generic build retains hosting ownership file");
   assert.ok(!fs.existsSync(path.join(artifact, "CNAME")), "Isolated Cloudflare artifact excludes CNAME");
+  assert.deepEqual(validateBuildProvenance(artifact), validateBuildProvenance("dist"), "Exact provenance survives isolated deployment packaging");
   assert.ok(!fs.existsSync(path.join(artifact, "_worker.js")) && !fs.existsSync(path.join(artifact, "functions")));
   assert.match(fs.readFileSync(path.join(artifact, "_headers"), "utf8"), /X-Robots-Tag: noindex, nofollow/);
 } finally {

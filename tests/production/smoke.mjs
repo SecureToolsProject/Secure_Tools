@@ -8,6 +8,7 @@ import { pdfToTextLocales } from "../../js/locales/pdf-to-text.js";
 import { createFixtures } from "./fixtures.mjs";
 import { auditContext } from "./audit.mjs";
 import { verifyPdf } from "./pdf-artifact.mjs";
+import { verifyDeployedBuildInfo } from "../../scripts/verify-build-provenance.mjs";
 
 function origin(value, name) {
   assert.ok(value, `${name} is required`);
@@ -182,6 +183,12 @@ async function writerFlow(page, fixtures, downloads) {
   return { cancellation: "zero downloads; retry passed", staleReplacement: "zero A; one B", existingText: "exactly once per page", ...inspected };
 }
 try {
+  await gate("Production source provenance", async () => {
+    const commit = process.env.EXPECTED_PRODUCTION_SHA;
+    const results = await Promise.all([canonical, immutable].map(o => verifyDeployedBuildInfo(o, commit)));
+    assert.deepEqual(results[0], results[1], "Production origins must expose identical provenance");
+    return results[0];
+  });
   await gate("HTTP routes and SEO", httpSmoke);
   await gate("Release asset equivalence", assetComparison);
   browser = await chromium.launch({ headless: true, args: ["--disable-extensions"] }); report.browser = browser.version();
