@@ -2,7 +2,7 @@
 
 ## Application model
 
-Secure Tools is a static GitHub Pages application built with semantic HTML, CSS, and Vanilla JavaScript ES Modules. It has no framework, backend, database, authentication service, or runtime API. Production deploys committed static files directly. A pinned npm preparation step reproduces and verifies the vendored OCR runtime; it does not create a server-side production dependency.
+Secure Tools is a static application built with semantic HTML, CSS, and browser ES Modules. JavaScript and strict TypeScript coexist without a framework, Vite configuration, or bundler. It has no backend, database, authentication service, or runtime API. The build compiles an explicit list of TypeScript modules to ignored staging output, then stages deployable files in `dist/`; a pinned npm preparation step reproduces and verifies the vendored OCR runtime without creating a server-side production dependency.
 
 Production routes load application code and pinned libraries from the same origin. File-processing workflows run through browser APIs and in-memory data. The [privacy model](./privacy-model.md) defines the limits of that statement.
 
@@ -15,7 +15,7 @@ The homepage points to stable category hubs instead of maintaining a flat list o
 - Privacy: a cross-category hub for the two metadata tools;
 - Scan/OCR and Media: planned, non-interactive surfaces.
 
-Each production tool owns a route under `tools/<category>/<tool>/`. The legacy `/tools/image-to-pdf/` route is a static migration page to `/tools/pdf/images-to-pdf/` with a visible fallback link.
+Each production tool has a canonical route at `/<category>/<tool>/`. The `tools/` directory remains the source-code organization, while `scripts/site-routes.mjs` maps its pages into the root-level public namespace. Every previously public `/tools/*` path has a one-hop 308 redirect to its canonical destination. The Privacy policy and metadata-tool hub share `/privacy/` because stripping the old prefix would otherwise collide with the existing policy route.
 
 ```text
 .
@@ -27,9 +27,11 @@ Each production tool owns a route under `tools/<category>/<tool>/`. The legacy `
 │   ├── shared/              input, validation, output, save, PDF, and UI foundations
 │   ├── pdf/                 PDF hub and production tools
 │   ├── image/               Image hub and production tools
-│   ├── privacy/             metadata-tool navigation hub
+│   ├── privacy/             source template retained for route-history checks
 │   ├── scan/, media/        planned category pages
-│   └── image-to-pdf/        legacy static redirect
+│   └── image-to-pdf/        retired client-side migration source
+├── scripts/site-routes.mjs  canonical pages and legacy redirect manifest
+├── dist/                    generated deployment artifact (ignored)
 ├── assets/vendor/           pinned same-origin runtime libraries
 ├── docs/                    technical, privacy, and audit records
 └── tests/                   static and functional validation
@@ -45,6 +47,7 @@ The current production inventory and tool-specific behavior live in [tool status
 - `js/config.js` centralizes repository links.
 - `tools/shared/` owns common file admission, signature validation, image/PDF helpers, queue conventions, local save behavior, and shared tool presentation.
 - `tools/shared/ocr.js` owns language selection, same-origin OCR paths, normalized progress, orientation-aware image preparation, worker reuse, cancellation, and disposal for the public Image → Text workflow.
+- `tools/shared/pdf-ocr.ts` composes the existing PDF.js renderer and OCR service into a sequential, cancellable per-page text pipeline for future PDF OCR interfaces. It does not generate searchable PDFs.
 - The File System Access API is used when available; a revoking Blob-download fallback serves other browsers.
 
 Tool implementations retain specialized models when their workflows differ. Organizer uses a page grid and PDF rendering lifecycle; Metadata tools use bounded inspection models and fail-closed output verification. Shared UI does not erase these tool-specific guarantees.
@@ -57,9 +60,9 @@ Image conversion, resizing, and compression use browser decode, Canvas, and enco
 
 ## Development and delivery
 
-Serving the committed production tree requires only an HTTP server. Reproducing OCR assets and running the full CI checks requires Node.js 24 and the exact lockfile. `npm run build` verifies prepared OCR assets, `npm test` runs the static and unit suite, and `node tests/ocr-smoke.test.mjs` performs real English, Korean, and combined recognition.
+Serving the generated `dist/` tree requires only an HTTP server. Reproducing OCR assets and running the full CI checks requires Node.js 24 and the exact lockfile. `npm run typecheck` enforces strict TypeScript contracts, `npm run build` verifies prepared OCR assets, compiles the declared TypeScript modules, and stages the site, `npm test` includes typechecking plus the static and unit suite, and `node tests/ocr-smoke.test.mjs` performs real English, Korean, and combined recognition. The incremental migration policy is documented in [TypeScript migration policy](./typescript-migration.md).
 
-`.github/workflows/ci.yml` validates pull requests and pushes to `main` using Node.js 24. It installs the lockfile only to reproduce and verify OCR assets, then checks commit-range whitespace, JavaScript syntax, unit coverage, and real local OCR without adding deployment behavior.
+`.github/workflows/ci.yml` validates pull requests and pushes to `main`, `v2`, and `v2.2` using Node.js 24. It installs the lockfile to reproduce and verify OCR assets and use the locked TypeScript compiler, then checks strict types, commit-range whitespace, JavaScript syntax, unit coverage, and real local OCR without adding deployment behavior.
 
 Development uses short-lived branches and normal merge commits. Shared `main` history is not force-pushed or rewritten. GitHub Pages can publish `main` from the repository root; relative links support both the `/Secure_Tools/` project path and root-hosted deployments.
 

@@ -1,5 +1,6 @@
 import { t } from "../../../js/i18n.js";
 import { formatBytes } from "../../shared/file.js";
+import { updateJobFocus } from "../../shared/job-focus.js";
 import { createOcrService } from "../../shared/ocr.js";
 import { createImageToTextController, defaultOcrLanguage, OCR_UI_STATES } from "./controller.js";
 import { copyText, downloadText, textFilename } from "./output.js";
@@ -41,6 +42,7 @@ function statusForState() {
 
 function render() {
   if (!state) return;
+  const focused = document.activeElement;
   const hasSource = Boolean(state.source);
   const recognizing = state.phase === OCR_UI_STATES.RECOGNIZING;
   elements.source_empty.hidden = hasSource;
@@ -73,6 +75,7 @@ function render() {
   const status = statusForState();
   elements.tool_status.textContent = status ? message(status.key, status.values) : "";
   if (status?.tone) elements.tool_status.dataset.tone = status.tone; else delete elements.tool_status.dataset.tone;
+  updateJobFocus(focused, elements.recognize, elements.cancel, recognizing);
 }
 
 const controller = createImageToTextController({

@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'none'; worker-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
+<title>v2.2 release hardening — test-only PDF.js viewer</title><link rel="stylesheet" href="release-hardening.css"></head>
+<body><h1>v2.2 release hardening</h1><p>This test-only viewer uses the production OCR pipeline, PDF writer, and PDF.js text-layer renderer. It is excluded from production builds.</p>
+<button id="generate">Generate scanned fixtures and run real OCR</button><button id="download" disabled>Download generated PDF</button>
+<label>Find text <input id="query" value="검색"></label><button id="find" disabled>Find in PDF.js text layer</button><button id="select" disabled>Select matching text</button>
+<p id="status" role="status">Ready</p><pre id="report"></pre><div id="viewer"></div>
+<script src="/assets/vendor/pdf-lib/pdf-lib.min.js"></script><script src="/assets/vendor/searchable-pdf/fontkit.umd.min.js"></script><script src="/assets/vendor/searchable-pdf/NotoSansKR-400.js"></script><script src="/assets/vendor/tesseract/engine/tesseract.min.js"></script><script type="module" src="release-hardening.js"></script></body></html>

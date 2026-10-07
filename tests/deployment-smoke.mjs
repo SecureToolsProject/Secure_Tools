@@ -1,27 +1,6 @@
 import assert from "node:assert/strict";
 
-const routes = [
-  "/",
-  "/privacy/",
-  "/about/",
-  "/tools/pdf/",
-  "/tools/pdf/images-to-pdf/",
-  "/tools/pdf/merge/",
-  "/tools/pdf/split/",
-  "/tools/pdf/organize/",
-  "/tools/pdf/to-images/",
-  "/tools/pdf/metadata/",
-  "/tools/image/",
-  "/tools/image/converter/",
-  "/tools/image/resize/",
-  "/tools/image/compress/",
-  "/tools/image/metadata/",
-  "/tools/image/to-text/",
-  "/tools/privacy/",
-  "/tools/scan/",
-  "/tools/media/",
-  "/tools/image-to-pdf/",
-];
+import { canonicalPages, legacyRedirects, productionOrigin, redirectStatus } from "../scripts/site-routes.mjs";
 
 const assets = [
   "/css/base.css",
@@ -33,11 +12,9 @@ const assets = [
   "/assets/vendor/pdf-lib/pdf-lib.min.js",
 ];
 
-const canonicalExcludedRoutes = new Set(["/tools/image-to-pdf/"]);
-
 const base = new URL(process.argv[2] || "");
 const indexing = process.argv[3] || "noindex";
-const canonicalBase = new URL("https://tools.securetools.app");
+const canonicalBase = new URL(productionOrigin);
 const socialImage = new URL("/assets/images/og-image.png", canonicalBase).href;
 
 assert.equal(base.protocol, "https:", "deployment validation requires HTTPS");
@@ -55,40 +32,36 @@ function metadataValue(html, selectorName, selectorValue, valueName) {
   return "";
 }
 
-async function request(pathname) {
+async function request(pathname, options = {}) {
   const url = new URL(pathname, base);
   const response = await fetch(url, { redirect: "manual" });
-
-  assert.equal(response.status, 200, `${url.href} must return HTTP 200 without a redirect`);
-  assert.equal(
-    response.headers.get("x-robots-tag"),
-    indexing === "noindex" ? "noindex, nofollow" : null,
-    indexing === "noindex" ? `${url.href} must remain non-indexable` : `${url.href} must not inherit the pages.dev noindex header`,
-  );
+  if (options.status) assert.equal(response.status, options.status, `${url.href} status`);
+  else {
+    assert.equal(response.status, 200, `${url.href} must return HTTP 200 without a redirect`);
+    assert.equal(
+      response.headers.get("x-robots-tag"),
+      indexing === "noindex" ? "noindex, nofollow" : null,
+      indexing === "noindex" ? `${url.href} must remain non-indexable` : `${url.href} must not inherit the pages.dev noindex header`,
+    );
+  }
   return response;
 }
 
-for (const route of routes) {
+for (const { route } of canonicalPages) {
   const response = await request(route);
   const html = await response.text();
   const expectedCanonical = new URL(route, canonicalBase).href;
-  const canonical = metadataValue(html, "rel", "canonical", "href");
-  const openGraphUrl = metadataValue(html, "property", "og:url", "content");
-  const openGraphImage = metadataValue(html, "property", "og:image", "content");
-  const twitterImage = metadataValue(html, "name", "twitter:image", "content");
+  assert.equal(metadataValue(html, "rel", "canonical", "href"), expectedCanonical, `${route} canonical changed`);
+  assert.equal(metadataValue(html, "property", "og:url", "content"), expectedCanonical, `${route} og:url changed`);
+  assert.equal(metadataValue(html, "property", "og:image", "content"), socialImage, `${route} og:image changed`);
+  assert.equal(metadataValue(html, "name", "twitter:image", "content"), socialImage, `${route} twitter:image changed`);
+}
 
-  if (canonicalExcludedRoutes.has(route)) {
-    assert.equal(canonical, "", `${route} must remain outside the canonical inventory`);
-    assert.equal(openGraphUrl, "", `${route} must remain outside the Open Graph inventory`);
-    assert.equal(openGraphImage, "", `${route} must remain outside the social image inventory`);
-    assert.equal(twitterImage, "", `${route} must remain outside the X image inventory`);
-    assert.match(html, /<meta name="robots" content="noindex">/i, `${route} must retain its source-level noindex`);
-  } else {
-    assert.equal(canonical, expectedCanonical, `${route} canonical changed`);
-    assert.equal(openGraphUrl, expectedCanonical, `${route} og:url changed`);
-    assert.equal(openGraphImage, socialImage, `${route} og:image changed`);
-    assert.equal(twitterImage, socialImage, `${route} twitter:image changed`);
-  }
+for (const { from, to } of legacyRedirects) {
+  const response = await request(`${from}?namespace=legacy`, { status: redirectStatus });
+  const location = new URL(response.headers.get("location"), base);
+  assert.equal(location.pathname, to, `${from} redirect target`);
+  assert.equal(location.search, "?namespace=legacy", `${from} preserves the query string`);
 }
 
 for (const asset of assets) {
@@ -96,4 +69,4 @@ for (const asset of assets) {
   await response.arrayBuffer();
 }
 
-console.log(`Deployment smoke checks passed for ${base.origin}: indexing=${indexing}, 20 routes, 7 assets, no redirects, expected indexing header, 19 tools-host canonical and social metadata pages plus the intentional noindex legacy alias.`);
+console.log(`Deployment smoke checks passed for ${base.origin}: indexing=${indexing}, ${canonicalPages.length} canonical routes, ${legacyRedirects.length} permanent redirects, and ${assets.length} assets.`);

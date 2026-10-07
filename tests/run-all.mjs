@@ -17,7 +17,8 @@ function runNode(argumentsList, label) {
   if (result.status !== 0) throw new Error(`${label} failed with exit code ${result.status ?? "unknown"}.`);
 }
 
-const sourceFiles = ["js", "tools", "tests"]
+const sourceDirectories = ["js", "tools", "tests", ".ts-build"].filter((directory) => fs.existsSync(path.join(root, directory)));
+const sourceFiles = sourceDirectories
   .flatMap((directory) => listFiles(path.join(root, directory)))
   .filter((file) => /\.(?:js|mjs)$/.test(file));
 
@@ -30,7 +31,11 @@ for (const test of [
   "tests/image-compressor.test.mjs",
   "tests/image-metadata.test.mjs",
   "tests/ocr-foundation.test.mjs",
+  "tests/pdf-ocr-foundation.test.mjs",
+  "tests/pdf-to-text.test.mjs",
+  "tests/searchable-pdf.test.mjs",
   "tests/image-to-text.test.mjs",
+  "tests/typescript-foundation.test.mjs",
   "tests/category-availability.test.mjs",
   "tests/pdf-merge-and-categories.test.mjs",
   "tests/file-input-queue-state.test.mjs",
@@ -38,6 +43,7 @@ for (const test of [
   "tests/security-hardening.test.mjs",
   "tests/release-gate.test.mjs",
   "tests/seo-foundation.test.mjs",
+  "tests/url-namespace.test.mjs",
   "tests/home-structure.test.mjs",
   "tests/typography-i18n-layout.test.mjs",
   "tests/pdf-to-images.test.mjs",
@@ -45,9 +51,13 @@ for (const test of [
   "tests/pdf-metadata.test.mjs",
   "tests/i18n-quality.test.mjs",
   "tests/ux-consistency.test.mjs",
+  "tests/job-focus.test.mjs",
+  "tests/branch-policy.test.mjs",
   "tests/ci-foundation.test.mjs",
   "tests/commit-message.test.mjs",
   "tests/cloudflare-bridge.test.mjs",
+  "tests/release-hardening-http.test.mjs",
+  "tests/verify-browser-export-artifacts.mjs",
 ]) {
   runNode([test], test);
 }

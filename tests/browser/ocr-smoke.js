@@ -1,4 +1,4 @@
-import { createOcrService } from "../../tools/shared/ocr.js";
+import { createOcrService } from "/shared/ocr.js";
 
 const output = document.querySelector("#result");
 const requestsBefore = performance.getEntriesByType("resource").map((entry) => entry.name);
@@ -15,8 +15,8 @@ async function verifyCategoryAvailability() {
   const cardPath = (card, categoryPath) => new URL(card.getAttribute("href"), new URL(categoryPath, location.origin)).pathname;
 
   const [imageDocument, scanDocument] = await Promise.all([
-    loadCategory("/tools/image/"),
-    loadCategory("/tools/scan/"),
+    loadCategory("/image/"),
+    loadCategory("/scan/"),
   ]);
   const imageCard = findOcrCard(imageDocument);
   const scanCard = findOcrCard(scanDocument);
@@ -24,9 +24,9 @@ async function verifyCategoryAvailability() {
   if (!imageCard.querySelector(".status--available") || !scanCard.querySelector(".status--available")) {
     throw new Error("Image to Text must be available in both categories");
   }
-  const imagePath = cardPath(imageCard, "/tools/image/");
-  const scanPath = cardPath(scanCard, "/tools/scan/");
-  if (imagePath !== "/tools/image/to-text/" || scanPath !== imagePath) {
+  const imagePath = cardPath(imageCard, "/image/");
+  const scanPath = cardPath(scanCard, "/scan/");
+  if (imagePath !== "/image/to-text/" || scanPath !== imagePath) {
     throw new Error(`Category routes differ: ${imagePath}, ${scanPath}`);
   }
   const routeResponse = await fetch(scanPath);

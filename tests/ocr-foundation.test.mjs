@@ -67,7 +67,7 @@ function workerHarness() {
     const worker = {
       language,
       terminated: 0,
-      async recognize(image) { calls.push(["recognize", language, image]); return { data: { text: `${language} text` } }; },
+      async recognize(image, parameters, output) { calls.push(["recognize", language, image, parameters, output]); return { data: { text: `${language} text`, blocks: [{ paragraphs: [{ lines: [{ text: "Layout line ", confidence: 71.5, bbox: { x0: 2, y0: 3, x1: 42, y1: 13 } }] }] }] } }; },
       async terminate() { this.terminated += 1; calls.push(["terminate", language]); },
     };
     workers.push(worker);
@@ -82,6 +82,8 @@ const harness = workerHarness();
 const progress = [];
 const service = createOcrService({ createWorker: harness.createWorker, prepareImage: async (image) => image });
 assert.deepEqual(await service.recognizeImage(png, { language: "eng", onProgress: (value) => progress.push(value) }), { text: "eng text" });
+assert.deepEqual(await service.recognizeImage(png, { language: "eng", includeLayout: true }), { text: "eng text", lines: [{ text: "Layout line", confidence: 71.5, bbox: { x0: 2, y0: 3, x1: 42, y1: 13 } }] });
+assert.deepEqual(harness.calls.filter((call) => call[0] === "recognize").at(-1)[4], { text: true, blocks: true });
 assert.deepEqual(await service.recognizeImage(png, { language: "eng" }), { text: "eng text" });
 assert.equal(harness.workers.length, 1, "same-language recognition reuses the worker");
 assert.equal(harness.workers[0].terminated, 0);
@@ -210,7 +212,7 @@ const publicOcrReferences = listAbsoluteFiles(path.join(root, "tools"))
   .filter((file) => file.endsWith(".html"))
   .map((file) => path.relative(root, file).replaceAll("\\", "/"))
   .filter((relative) => read(relative).includes("assets/vendor/tesseract"));
-assert.deepEqual(publicOcrReferences, ["tools/image/to-text/index.html"], "OCR runtime must stay lazy to its public route");
+assert.deepEqual(publicOcrReferences, ["tools/image/to-text/index.html", "tools/pdf/to-text/index.html"], "OCR runtime must stay lazy to public OCR routes");
 for (const required of ["engine/tesseract.min.js", "worker/worker.min.js", "lang/eng.traineddata.gz", "lang/kor.traineddata.gz"]) {
   assert.ok(manifest.assets[required], `missing ${required}`);
 }

@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": ".ts-build",
+    "rootDir": "."
+  },
+  "include": [
+    "tools/image/to-text/controller.ts",
+    "tools/image/to-text/output.ts",
+    "tools/image/to-text/preview.ts",
+    "tools/pdf/to-text/app.ts",
+    "tools/pdf/to-text/controller.ts",
+    "tools/pdf/to-text/output.ts",
+    "tools/shared/pdf-ocr.ts",
+    "tools/shared/searchable-pdf.ts",
+    "tools/shared/*.d.ts"
+  ]
+}

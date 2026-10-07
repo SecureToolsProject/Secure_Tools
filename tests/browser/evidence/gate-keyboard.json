@@ -1,0 +1,263 @@
+{
+  "image": [
+    {
+      "id": "",
+      "label": "Secure Tools home",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Tools",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Privacy",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "About",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Source",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "English한국어日本語EspañolDeutschFrançais",
+      "tag": "SELECT"
+    },
+    {
+      "id": "",
+      "label": "SystemLightDark",
+      "tag": "SELECT"
+    },
+    {
+      "id": "",
+      "label": "PDF",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Image",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Privacy",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Scan & OCR",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Media",
+      "tag": "A"
+    },
+    {
+      "id": "file-input",
+      "label": "",
+      "tag": "INPUT"
+    },
+    {
+      "id": "",
+      "label": "How privacy works",
+      "tag": "A"
+    },
+    {
+      "id": "replace-source",
+      "label": "Replace image",
+      "tag": "BUTTON"
+    },
+    {
+      "id": "remove-source",
+      "label": "Remove image",
+      "tag": "BUTTON"
+    },
+    {
+      "id": "result-text",
+      "label": "",
+      "tag": "TEXTAREA"
+    },
+    {
+      "id": "copy-result",
+      "label": "Copy text",
+      "tag": "BUTTON"
+    },
+    {
+      "id": "download-result",
+      "label": "Download TXT",
+      "tag": "BUTTON"
+    },
+    {
+      "id": "ocr-language",
+      "label": "EnglishKoreanEnglish + Korean",
+      "tag": "SELECT"
+    },
+    {
+      "id": "recognize",
+      "label": "Recognize text",
+      "tag": "BUTTON"
+    },
+    {
+      "id": "",
+      "label": "Secure Tools home",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Tools",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Privacy",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "About",
+      "tag": "A"
+    }
+  ],
+  "pdf": [
+    {
+      "id": "",
+      "label": "Secure Tools home",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Tools",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Privacy",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "About",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Source",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "English한국어日本語EspañolDeutschFrançais",
+      "tag": "SELECT"
+    },
+    {
+      "id": "",
+      "label": "SystemLightDark",
+      "tag": "SELECT"
+    },
+    {
+      "id": "",
+      "label": "PDF",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Image",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Privacy",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Scan & OCR",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Media",
+      "tag": "A"
+    },
+    {
+      "id": "file-input",
+      "label": "",
+      "tag": "INPUT"
+    },
+    {
+      "id": "",
+      "label": "How privacy works",
+      "tag": "A"
+    },
+    {
+      "id": "replace-source",
+      "label": "Replace PDF",
+      "tag": "BUTTON"
+    },
+    {
+      "id": "remove-source",
+      "label": "Remove PDF",
+      "tag": "BUTTON"
+    },
+    {
+      "id": "copy-all",
+      "label": "Copy all",
+      "tag": "BUTTON"
+    },
+    {
+      "id": "download-result",
+      "label": "Download TXT",
+      "tag": "BUTTON"
+    },
+    {
+      "id": "download-searchable",
+      "label": "Download searchable PDF",
+      "tag": "BUTTON"
+    },
+    {
+      "id": "",
+      "label": "Copy page",
+      "tag": "BUTTON"
+    },
+    {
+      "id": "page-text-1",
+      "label": "",
+      "tag": "TEXTAREA"
+    },
+    {
+      "id": "pages-all",
+      "label": "",
+      "tag": "INPUT"
+    },
+    {
+      "id": "ocr-language",
+      "label": "EnglishKoreanEnglish + Korean",
+      "tag": "SELECT"
+    },
+    {
+      "id": "recognize",
+      "label": "Recognize text",
+      "tag": "BUTTON"
+    },
+    {
+      "id": "",
+      "label": "Secure Tools home",
+      "tag": "A"
+    },
+    {
+      "id": "",
+      "label": "Tools",
+      "tag": "A"
+    }
+  ],
+  "selectedPageTabTarget": "page-range",
+  "status": "role=status aria-live=polite; range error role=alert; screen-reader audio not independently tested"
+}

@@ -25,8 +25,10 @@ assert.match(workflow, /web_analytics_tag/);
 assert.match(workflow, /web_analytics_token/);
 assert.match(workflow, /Pages project state:/);
 assert.match(workflow, /\[\[ ! -e "\$BRIDGE_DIRECTORY\/CNAME" \]\]/);
-assert.match(workflow, /\[\[ ! -e "\$BRIDGE_DIRECTORY\/_redirects" \]\]/);
-assert.match(workflow, /find "\$BRIDGE_DIRECTORY" -name index\.html -type f \| wc -l\)" -eq 20/);
+assert.match(workflow, /npm run build/);
+assert.match(workflow, /cp -R dist\/\. "\$BRIDGE_DIRECTORY\/"/);
+assert.match(workflow, /node scripts\/validate-build\.mjs "\$BRIDGE_DIRECTORY"/);
+assert.doesNotMatch(workflow, /find "\$BRIDGE_DIRECTORY" -name index\.html -type f \| wc -l/);
 assert.doesNotMatch(workflow, /securetools\.app\/tools/);
 assert.match(workflow, /node tests\/deployment-smoke\.mjs "\$DEPLOYMENT_URL" noindex/);
 assert.match(workflow, /smoke_with_retry https:\/\/secure-tools-web-bridge\.pages\.dev noindex/);
@@ -37,14 +39,13 @@ assert.match(workflow, /sleep 10/);
 assert.doesNotMatch(workflow, /node tests\/deployment-smoke\.mjs https:\/\/securetools\.app/);
 
 const deploymentSmoke = fs.readFileSync("tests/deployment-smoke.mjs", "utf8");
-const routeLines = deploymentSmoke.match(/^  "\/(?:"|[^"].*\/"),$/gm) || [];
-assert.equal(routeLines.length, 20, "deployment smoke must validate all 20 public and migration routes");
+assert.match(deploymentSmoke, /canonicalPages/);
+assert.match(deploymentSmoke, /legacyRedirects/);
 assert.match(deploymentSmoke, /redirect: "manual"/);
 assert.match(deploymentSmoke, /\["noindex", "indexable"\]/);
 assert.match(deploymentSmoke, /"x-robots-tag"/);
 assert.match(deploymentSmoke, /"noindex, nofollow"/);
-assert.match(deploymentSmoke, /new URL\("https:\/\/tools\.securetools\.app"\)/);
-assert.match(deploymentSmoke, /canonicalExcludedRoutes = new Set\(\["\/tools\/image-to-pdf\/"\]\)/);
+assert.match(deploymentSmoke, /canonicalBase = new URL\(productionOrigin\)/);
 assert.match(deploymentSmoke, /"canonical"/);
 assert.match(deploymentSmoke, /"og:url"/);
 assert.match(deploymentSmoke, /"og:image"/);
@@ -52,6 +53,6 @@ assert.match(deploymentSmoke, /"twitter:image"/);
 
 assert.equal(fs.readFileSync("CNAME", "utf8").trim(), "securetools.app");
 assert.ok(!fs.existsSync("_headers"), "bridge headers must not enter the GitHub Pages artifact");
-assert.ok(!fs.existsSync("_redirects"), "H3 must not add production redirects");
+assert.ok(!fs.existsSync("_redirects"), "redirects are generated only in the build artifact");
 
 console.log("Cloudflare bridge workflow contract checks passed.");
