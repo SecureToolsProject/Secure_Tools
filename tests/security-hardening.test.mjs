@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { assertSecurityHeaders, headersForUrl, parsePagesHeaders, validateHostingHeaders } from "../scripts/http-security-headers.mjs";
 import {
   MAX_DIMENSION, MAX_FILE_SIZE, MAX_PIXELS, MAX_QUEUE_BYTES, MAX_QUEUE_FILES,
   detectImageFormat, selectImageQueueFiles, validateImageDimensions, validateImageSignature,
@@ -91,4 +92,36 @@ for (const source of firstParty) assert.doesNotMatch(fs.readFileSync(source, "ut
 
 const { auditActionPins } = await import("../scripts/validate-action-pins.mjs");
 auditActionPins();
+const policy = read("config/cloudflare/_headers");
+validateHostingHeaders(path.join(root, "config/cloudflare"));
+const policyDirectory = fs.mkdtempSync(path.join(root, ".ts-build/header-policy-"));
+try {
+  for (const mutation of [
+    policy.replace(/  Content-Security-Policy:.*\r?\n/, ""),
+    policy.replace("connect-src 'none'", "connect-src 'self'"),
+    policy.replace("frame-ancestors 'none'", "frame-ancestors 'self'"),
+    policy.replace("script-src 'self'", "script-src 'self' 'unsafe-inline'"),
+    policy.replace("script-src 'self'", "script-src 'self' 'unsafe-eval'"),
+    policy.replace("script-src 'self'", "script-src 'self' https://cdn.example"),
+    policy.replace("Referrer-Policy: no-referrer", "Referrer-Policy: unsafe-url"),
+    policy.replace("camera=()", "camera=*"),
+    policy.replace("X-Content-Type-Options: nosniff", "X-Content-Type-Options: other"),
+    policy.replace("/assets/vendor/tesseract/worker/worker.min.js", "/*"),
+  ]) {
+    fs.writeFileSync(path.join(policyDirectory, "_headers"), mutation);
+    assert.throws(() => validateHostingHeaders(policyDirectory), "Missing/weakened policy must fail artifact validation");
+  }
+  fs.writeFileSync(path.join(policyDirectory, "_headers"), policy);
+  fs.writeFileSync(path.join(policyDirectory, "CNAME"), "securetools.app");
+  assert.throws(() => validateHostingHeaders(policyDirectory, { isolated: true }), /CNAME/);
+  const headers = headersForUrl(parsePagesHeaders(policy), "https://tools.securetools.app/");
+  assertSecurityHeaders(headers);
+  headers.set("permissions-policy", headers.get("permissions-policy") + ", browsing-topics=()");
+  assertSecurityHeaders(headers); // Extra denials preserve required capability restrictions.
+  headers.set("permissions-policy", "camera=(*), microphone=(), geolocation=()");
+  assert.throws(() => assertSecurityHeaders(headers), /capability denials/);
+  headers.set("permissions-policy", "camera=(), microphone=(), geolocation=()");
+  headers.delete("content-security-policy");
+  assert.throws(() => assertSecurityHeaders(headers), /HTTP CSP/);
+} finally { fs.rmSync(policyDirectory, { recursive: true, force: true }); }
 console.log("Security hardening checks passed.");

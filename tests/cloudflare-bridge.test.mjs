@@ -3,8 +3,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { validateBuildProvenance } from "../scripts/build-provenance.mjs";
+import { validateHostingHeaders } from "../scripts/http-security-headers.mjs";
 
 const workflow = fs.readFileSync(".github/workflows/deploy-cloudflare-bridge.yml", "utf8");
+const headerPolicy = fs.readFileSync("config/cloudflare/_headers", "utf8");
 
 assert.match(workflow, /^name: Deploy Cloudflare bridge$/m);
 assert.match(workflow, /^\s{2}push:\s*$[\s\S]*?^\s{6}- main$/m);
@@ -24,9 +26,10 @@ assert.match(workflow, /secrets\.CLOUDFLARE_ACCOUNT_ID/);
 assert.match(workflow, /secure-tools-web-bridge/);
 assert.match(workflow, /pages deploy .* --project-name=secure-tools-web-bridge --branch=main --commit-hash=\$\{\{ github\.sha \}\}/);
 assert.match(workflow, /gitHubToken: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
-assert.match(workflow, /X-Robots-Tag: noindex, nofollow/);
-assert.match(workflow, /https:\/\/secure-tools-web-bridge\.pages\.dev\/\*/);
-assert.match(workflow, /https:\/\/:version\.secure-tools-web-bridge\.pages\.dev\/\*/);
+assert.match(headerPolicy, /X-Robots-Tag: noindex, nofollow/);
+assert.match(headerPolicy, /https:\/\/secure-tools-web-bridge\.pages\.dev\/\*/);
+assert.match(headerPolicy, /https:\/\/:version\.secure-tools-web-bridge\.pages\.dev\/\*/);
+assert.doesNotMatch(workflow, />\s*"\$BRIDGE_DIRECTORY\/_headers"/, "Deployment cannot overwrite the validated header policy");
 assert.doesNotMatch(workflow, /printf '\/\*\\n  X-Robots-Tag/);
 assert.match(workflow, /steps\.deploy\.outputs\.deployment-url/);
 assert.match(workflow, /api\.cloudflare\.com\/client\/v4\/accounts\/\$\{CLOUDFLARE_ACCOUNT_ID\}\/pages\/projects\/secure-tools-web-bridge/);
@@ -85,6 +88,8 @@ try {
   assert.deepEqual(validateBuildProvenance(artifact), validateBuildProvenance("dist"), "Exact provenance survives isolated deployment packaging");
   assert.ok(!fs.existsSync(path.join(artifact, "_worker.js")) && !fs.existsSync(path.join(artifact, "functions")));
   assert.match(fs.readFileSync(path.join(artifact, "_headers"), "utf8"), /X-Robots-Tag: noindex, nofollow/);
+  assert.equal(fs.readFileSync(path.join(artifact, "_headers"), "utf8"), headerPolicy);
+  validateHostingHeaders(artifact, { isolated: true });
 } finally {
   assert.equal(path.dirname(artifact), staging);
   fs.rmSync(artifact, { recursive: true, force: true });
