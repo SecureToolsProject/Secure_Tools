@@ -12,6 +12,10 @@ on:
         description: Immutable deployment origin to compare
         required: true
         type: string
+      source_commit:
+        description: Full source SHA of the deployment being verified
+        required: true
+        type: string
   # Bootstrap this new workflow before its explicitly authorized merge.
   # Ordinary development PRs do not run the production browser gate.
   pull_request:
@@ -33,15 +37,22 @@ jobs:
     env:
       PRODUCTION_ORIGIN: ${{ inputs.production_origin || 'https://tools.securetools.app' }}
       IMMUTABLE_ORIGIN: ${{ inputs.immutable_origin || 'https://b9802e7e.secure-tools-web-bridge.pages.dev' }}
+      EXPECTED_PRODUCTION_SHA: ${{ inputs.source_commit || github.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          # Read canonical version and verification code from the expected deployment.
+          ref: ${{ inputs.source_commit || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Require deployment source provenance
+        run: |
+          node scripts/verify-build-provenance.mjs "$PRODUCTION_ORIGIN" "$EXPECTED_PRODUCTION_SHA"
+          node scripts/verify-build-provenance.mjs "$IMMUTABLE_ORIGIN" "$EXPECTED_PRODUCTION_SHA"
       - run: npx playwright install --with-deps chromium
       - run: npm run test:production
       - name: Publish technical result

@@ -70,6 +70,9 @@ jobs:
       - name: Verify prepared production OCR assets
         run: npm run build
 
+      - name: Validate generated artifact and source provenance
+        run: node scripts/validate-build.mjs
+
       - name: Run static tool validation
         run: npm test
 
