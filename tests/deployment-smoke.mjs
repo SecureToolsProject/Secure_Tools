@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 
 import { canonicalPages, legacyRedirects, productionOrigin, redirectStatus } from "../scripts/site-routes.mjs";
+import { assertSecurityHeaders, OCR_WORKER_PATH } from "../scripts/http-security-headers.mjs";
 
 const assets = [
   "/css/base.css",
@@ -38,6 +39,7 @@ async function request(pathname, options = {}) {
   if (options.status) assert.equal(response.status, options.status, `${url.href} status`);
   else {
     assert.equal(response.status, 200, `${url.href} must return HTTP 200 without a redirect`);
+    assertSecurityHeaders(response.headers, { ocrWorker: pathname === OCR_WORKER_PATH });
     assert.equal(
       response.headers.get("x-robots-tag"),
       indexing === "noindex" ? "noindex, nofollow" : null,
@@ -67,6 +69,10 @@ for (const { from, to } of legacyRedirects) {
 for (const asset of assets) {
   const response = await request(asset);
   await response.arrayBuffer();
+}
+for (const asset of ["/build-info.json", OCR_WORKER_PATH, "/assets/vendor/pdfjs/pdf.worker.min.mjs"]) {
+  const response = await request(asset);
+  await response.body.cancel();
 }
 
 console.log(`Deployment smoke checks passed for ${base.origin}: indexing=${indexing}, ${canonicalPages.length} canonical routes, ${legacyRedirects.length} permanent redirects, and ${assets.length} assets.`);

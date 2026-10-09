@@ -27,5 +27,8 @@ assert.match(workflow, /run: npm ci --ignore-scripts/);
 assert.match(workflow, /run: npm run build/);
 assert.match(workflow, /run: npm test/);
 assert.match(workflow, /run: node tests\/ocr-smoke\.test\.mjs/);
+assert.match(workflow, /run: npx playwright install --with-deps chromium/);
+assert.match(workflow, /run: node tests\/production\/local-smoke\.mjs/);
+assert.ok(workflow.indexOf("run: npm test") < workflow.indexOf("run: node tests/production/local-smoke.mjs"));
 
 console.log("CI workflow contract checks passed.");
