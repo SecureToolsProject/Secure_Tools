@@ -107,7 +107,7 @@ await assert.rejects(createSearchablePdf({ sourceBytes: new ArrayBuffer(1), page
 const midBuild = new AbortController();
 const fakePage = { drawText() {}, pushOperators() {} };
 const fakeLibrary = { degrees: (angle) => angle, pushGraphicsState() {}, popGraphicsState() {}, setCharacterSqueeze() {}, PDFDocument: { async load() { return { registerFontkit() {}, async embedFont() { return { widthOfTextAtSize: () => 10 }; }, getPages: () => [fakePage, fakePage], async save() { return Uint8Array.of(1); } }; } } };
-await assert.rejects(createSearchablePdf({ sourceBytes: new ArrayBuffer(1), pages: [pages[0], { ...pages[0], pageNumber: 2 }], PDFLib: fakeLibrary, fontkit: {}, fontBytes: new ArrayBuffer(1), signal: midBuild.signal, onProgress(value) { if (value.phase === "building-pdf" && value.pageIndex === 1) midBuild.abort(); } }), (error) => error.code === "SEARCHABLE_PDF_CANCELLED");
+await assert.rejects(createSearchablePdf({ sourceBytes: new TextEncoder().encode("%PDF-1.7").buffer, pages: [pages[0], { ...pages[0], pageNumber: 2 }], PDFLib: fakeLibrary, fontkit: {}, fontBytes: new ArrayBuffer(1), signal: midBuild.signal, onProgress(value) { if (value.phase === "building-pdf" && value.pageIndex === 1) midBuild.abort(); } }), (error) => error.code === "SEARCHABLE_PDF_CANCELLED");
 const sourceCode = fs.readFileSync(path.join(root, "tools/shared/searchable-pdf.ts"), "utf8");
 assert.doesNotMatch(sourceCode, /fetch\s*\(|XMLHttpRequest|sendBeacon|WebSocket|EventSource|https?:\/\//);
 assert.match(sourceCode, /opacity: 0/);
