@@ -89,4 +89,6 @@ const firstParty = ["js", "tools"].flatMap((directory) => {
 const networkApi = /\bfetch\s*\(|\bXMLHttpRequest\b|\bsendBeacon\s*\(|\bWebSocket\b|\bEventSource\b/;
 for (const source of firstParty) assert.doesNotMatch(fs.readFileSync(source, "utf8"), networkApi, `Unexpected network API: ${path.relative(root, source)}`);
 
+const { auditActionPins } = await import("../scripts/validate-action-pins.mjs");
+auditActionPins();
 console.log("Security hardening checks passed.");

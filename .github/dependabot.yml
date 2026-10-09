@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "v2.3"
+    schedule:
+      interval: "weekly"
+    pull-request-branch-name:
+      prefix: "chore/dependabot"
+    commit-message:
+      # Trailing space prevents Dependabot from inserting a colon after [Config].
+      prefix: "🔧[Config] "

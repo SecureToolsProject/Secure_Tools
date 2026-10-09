@@ -54,6 +54,7 @@ for (const test of [
   "tests/job-focus.test.mjs",
   "tests/branch-policy.test.mjs",
   "tests/ci-foundation.test.mjs",
+  "tests/action-pins.test.mjs",
   "tests/commit-message.test.mjs",
   "tests/build-provenance.test.mjs",
   "tests/cloudflare-bridge.test.mjs",
