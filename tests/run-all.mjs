@@ -40,6 +40,7 @@ for (const test of [
   "tests/pdf-merge-and-categories.test.mjs",
   "tests/file-input-queue-state.test.mjs",
   "tests/pdf-split.test.mjs",
+  "tests/pdf-signature.test.mjs",
   "tests/security-hardening.test.mjs",
   "tests/release-gate.test.mjs",
   "tests/seo-foundation.test.mjs",

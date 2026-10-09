@@ -1,6 +1,6 @@
 import { t } from "../../../js/i18n.js";
 import { formatBytes, sanitizePdfFilename } from "../../shared/file.js";
-import { inspectPdf, isSupportedPdf } from "../../shared/pdf.js";
+import { inspectPdf } from "../../shared/pdf.js";
 import { downloadBlob, requestSaveHandle, writeBlobToHandle } from "../../shared/save.js";
 import { createPageGroups, createSplitNames, splitPdfFile } from "./pdf.js";
 
@@ -97,10 +97,6 @@ async function addSource(files) {
     return;
   }
   const file = files[0];
-  if (!isSupportedPdf(file)) {
-    setStatus("splitPdf.errors.unsupported", {}, "error");
-    return;
-  }
   state.busy = true;
   setStatus("splitPdf.status.reading", {}, "neutral");
   renderSource();

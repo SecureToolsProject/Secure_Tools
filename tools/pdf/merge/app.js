@@ -1,7 +1,7 @@
 import { t } from "../../../js/i18n.js";
 import { formatBytes, moveArrayItem, sanitizePdfFilename } from "../../shared/file.js";
 import { downloadBlob, requestPdfSaveHandle, writeBlobToHandle } from "../../shared/save.js";
-import { inspectPdf, isSupportedPdf, mergePdfFiles } from "./pdf.js";
+import { inspectPdf, mergePdfFiles } from "./pdf.js";
 
 const elements = {
   input: document.querySelector("#file-input"), dropZone: document.querySelector("#drop-zone"),
@@ -79,8 +79,8 @@ function errorMessage(error) {
 
 async function addFiles(files) {
   if (state.busy || !files.length) return;
-  const candidates = files.filter(isSupportedPdf);
-  let rejected = files.length - candidates.length;
+  const candidates = files;
+  let rejected = 0;
   let added = 0;
   let lastError = null;
   state.busy = true;
