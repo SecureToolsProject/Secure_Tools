@@ -9,14 +9,14 @@ import {
   validateProductionVerificationLock,
 } from "../scripts/validate-branch-policy.mjs";
 
-assert.equal(ACTIVE_INTEGRATION_BRANCH, "v2.2");
+assert.equal(ACTIVE_INTEGRATION_BRANCH, "v2.3");
 
 for (const [headRef, baseRef] of [
-  ["feat/example", "v2.2"],
-  ["fix/example", "v2.2"],
-  ["test/example", "v2.2"],
-  ["chore/example", "v2.2"],
-  ["v2.2", "main"],
+  ["feat/example", "v2.3"],
+  ["fix/example", "v2.3"],
+  ["test/example", "v2.3"],
+  ["chore/example", "v2.3"],
+  ["v2.3", "main"],
   ["hotfix/example", "main"],
 ]) {
   assert.deepEqual(validateBranchPolicy(baseRef, headRef), { valid: true, reason: null }, `${headRef} → ${baseRef}`);
@@ -29,19 +29,24 @@ for (const [headRef, baseRef] of [
   ["test/example", "main"],
   ["chore/example", "main"],
   ["v2.1", "main"],
+  ["v2.2", "main"],
 ]) {
   const result = validateBranchPolicy(baseRef, headRef);
   assert.equal(result.valid, false, `${headRef} → ${baseRef}`);
-  assert.match(result.reason, /Only v2\.2 release promotion or an explicit hotfix/);
-  assert.throws(() => run([baseRef, headRef]), /Only v2\.2 release promotion or an explicit hotfix/);
+  assert.match(result.reason, /Only v2\.3 release promotion or an explicit hotfix/);
+  assert.throws(() => run([baseRef, headRef]), /Only v2\.3 release promotion or an explicit hotfix/);
 }
 
 for (const headRef of ["v2.1", "main", "hotfix/example", "feature/example"]) {
-  const result = validateBranchPolicy("v2.2", headRef);
-  assert.equal(result.valid, false, `${headRef} → v2.2`);
-  assert.match(result.reason, /Pull requests into v2\.2 must come from feat\/\*, fix\/\*, test\/\*, or chore\/\*/);
+  const result = validateBranchPolicy("v2.3", headRef);
+  assert.equal(result.valid, false, `${headRef} → v2.3`);
+  assert.match(result.reason, /Pull requests into v2\.3 must come from feat\/\*, fix\/\*, test\/\*, or chore\/\*/);
 }
 
+for (const base of ["v2.2", "v2.1", "unknown"]) {
+  assert.equal(validateBranchPolicy(base, "feat/example").valid, false);
+  assert.throws(() => run([base, "feat/example"]), /Unsupported pull request base/);
+}
 assert.throws(() => run([]), /Usage:/);
 assert.equal(validateBranchPolicy("main", "fix/production-deploy-workflow").valid, true);
 assert.equal(validateBranchPolicy("main", "fix/production-deploy-workflow-other").valid, false);
@@ -78,4 +83,4 @@ assert.throws(() => validateProductionVerificationLock(originalLock, changedLock
 const leakedRuntime = structuredClone(verificationLock); leakedRuntime.packages["node_modules/playwright"].dev = false;
 assert.throws(() => validateProductionVerificationLock(originalLock, leakedRuntime), /test-only Playwright/);
 
-console.log("v2.2 integration, production promotion, hotfix, and rejection branch-policy checks passed.");
+console.log("v2.3 integration, production promotion, hotfix, and rejection branch-policy checks passed.");
