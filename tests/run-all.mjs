@@ -42,6 +42,7 @@ for (const test of [
   "tests/pdf-split.test.mjs",
   "tests/pdf-signature.test.mjs",
   "tests/security-hardening.test.mjs",
+  "tests/security-monitoring.test.mjs",
   "tests/release-gate.test.mjs",
   "tests/seo-foundation.test.mjs",
   "tests/url-namespace.test.mjs",

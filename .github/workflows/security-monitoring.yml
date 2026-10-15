@@ -1,0 +1,60 @@
+name: Security monitoring
+
+on:
+  pull_request:
+    branches: [v2.3, main]
+  push:
+    branches: [v2.3, main]
+  schedule:
+    - cron: '29 3 * * 3'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  codeql:
+    name: CodeQL JavaScript and TypeScript
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: Initialize JS/TS analysis
+        uses: github/codeql-action/init@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+        with:
+          languages: javascript-typescript
+          build-mode: none
+          config-file: .github/codeql/config.yml
+      - name: Analyze and upload results
+        uses: github/codeql-action/analyze@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+        with:
+          category: /language:javascript-typescript
+
+  advisories:
+    name: Lockfile and vendor advisories
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+      - name: Install locked inputs without scripts
+        run: npm ci --ignore-scripts
+      - name: Check inventory and scanner failure regressions
+        run: node tests/security-monitoring.test.mjs
+      - name: Query lockfile advisories (all severities, including dev inputs)
+        run: |
+          mkdir -p .ts-build
+          npm audit --json --audit-level=low > .ts-build/npm-audit.json
+      - name: Query exact vendored versions and project release advisories
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/check-security-advisories.mjs .ts-build/npm-audit.json
