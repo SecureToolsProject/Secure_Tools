@@ -25,6 +25,7 @@ See the [privacy model](./docs/privacy-model.md) for exact guarantees and bounda
 - [PDF Organizer](https://tools.securetools.app/pdf/organize/) — preview, reorder, rotate, remove, and export pages.
 - [PDF to Images](https://tools.securetools.app/pdf/to-images/) — render pages to PNG, JPEG, or WebP.
 - [PDF Metadata Inspector & Cleaner](https://tools.securetools.app/pdf/metadata/) — inspect and remove supported document-info fields.
+- [PDF to Text OCR](https://tools.securetools.app/pdf/to-text/) — recognize selected pages locally and save text or a searchable PDF.
 
 ### Image
 
@@ -32,10 +33,11 @@ See the [privacy model](./docs/privacy-model.md) for exact guarantees and bounda
 - [Image Resize](https://tools.securetools.app/image/resize/) — resize batches by pixels or percentage.
 - [Image Compressor](https://tools.securetools.app/image/compress/) — quality-compress images and compare byte results.
 - [Image Metadata Inspector & Cleaner](https://tools.securetools.app/image/metadata/) — inspect supported metadata and save a verified cleaned copy without pixel re-encoding.
+- [Image to Text OCR](https://tools.securetools.app/image/to-text/) — recognize English/Korean text locally and save editable UTF-8 text.
 
 ### Privacy
 
-The [Privacy hub](https://tools.securetools.app/privacy/) links to the specialized Image and PDF metadata tools. It is a cross-category navigation surface, not a generic sanitizer. Scan/OCR and Media remain planned.
+The [Privacy hub](https://tools.securetools.app/privacy/) links to the specialized Image and PDF metadata tools. It is a cross-category navigation surface, not a generic sanitizer. The Scan & OCR category links to the existing OCR tools; document scanning and Media tools remain planned.
 
 Detailed formats, limits, and behavior are listed in [tool status](./docs/tool-status.md).
 

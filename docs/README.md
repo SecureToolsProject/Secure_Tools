@@ -25,6 +25,10 @@ The root [README](../README.md) introduces Secure Tools. This directory owns det
 
 ## Release evidence
 
+- [v2.3 release readiness](./v2.3-release-readiness.md) freezes feature scope,
+  inventories the integration delta and open findings, and separates candidate
+  artifact validation from the later [production verification gate](./v2.3-post-deploy-checklist.md).
+
 - [v1.0.0 release QA](./release-qa.md) is a historical Sprint 11 release-candidate snapshot. Its unchecked items remain historical and are not current requirements.
 - [v2 promotion QA](./v2-release-qa.md) preserves the automated, manual Chrome, Orientation-regression, and promotion evidence for the v2.0.0 pre-release line.
 - The root [changelog](../CHANGELOG.md) records release and change history; it is not a technical specification.
