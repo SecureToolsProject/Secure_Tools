@@ -3,12 +3,13 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { chromium } from "playwright";
-import { canonicalPages, legacyRedirects } from "../../scripts/site-routes.mjs";
+import { canonicalPages, legacyRedirects, productionOrigin } from "../../scripts/site-routes.mjs";
 import { pdfToTextLocales } from "../../js/locales/pdf-to-text.js";
 import { createFixtures } from "./fixtures.mjs";
 import { auditContext } from "./audit.mjs";
 import { verifyPdf } from "./pdf-artifact.mjs";
 import { verifyDeployedBuildInfo } from "../../scripts/verify-build-provenance.mjs";
+import { assertSecurityHeaders, OCR_WORKER_PATH } from "../../scripts/http-security-headers.mjs";
 
 function origin(value, name) {
   assert.ok(value, `${name} is required`);
@@ -19,9 +20,10 @@ function origin(value, name) {
 }
 const canonical = origin(process.env.PRODUCTION_ORIGIN, "PRODUCTION_ORIGIN");
 const immutable = origin(process.env.IMMUTABLE_ORIGIN, "IMMUTABLE_ORIGIN");
+const targetLabel = canonical.startsWith("http:") && immutable.startsWith("http:") ? "Artifact smoke" : "Production smoke";
 const directory = path.resolve(".ts-build/production-smoke");
 await fs.mkdir(directory, { recursive: true });
-const report = { checkedAt: new Date().toISOString(), runner: process.env.GITHUB_ACTIONS ? "GitHub-hosted Ubuntu" : "local validation", canonical, immutable, gates: [], surfaces: {}, artifacts: [], status: "NO-GO" };
+const report = { checkedAt: new Date().toISOString(), target: targetLabel, runner: process.env.GITHUB_ACTIONS ? "GitHub-hosted Ubuntu" : "local validation", canonical, immutable, gates: [], surfaces: {}, artifacts: [], status: "NO-GO" };
 let browser;
 const diagnosticError = error => String(error.stack || error).replaceAll(process.cwd(), "<repository>").replaceAll(process.cwd().replaceAll("\\", "/"), "<repository>");
 async function gate(name, action, page) {
@@ -40,8 +42,8 @@ async function get(url) { const r = await fetch(url, { redirect: "manual", signa
 async function httpSmoke() {
   for (const { route } of canonicalPages) {
     const text = await (await get(canonical + route)).text();
-    assert.ok(text.includes(`href="${canonical}${route}"`), `canonical ${route}`);
-    assert.ok(text.includes(`content="${canonical}${route}"`), `OG ${route}`);
+    assert.ok(text.includes(`href="${productionOrigin}${route}"`), `canonical ${route}`);
+    assert.ok(text.includes(`content="${productionOrigin}${route}"`), `OG ${route}`);
   }
   for (const { from, to } of legacyRedirects) {
     const query = "?release=2.2&text=hello%20world";
@@ -49,9 +51,21 @@ async function httpSmoke() {
     assert.equal(r.status, 308); assert.equal(r.headers.get("location"), to + query); await get(canonical + to + query);
   }
   const sitemap = await (await get(canonical + "/sitemap.xml")).text();
-  assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]).sort(), canonicalPages.map(p => canonical + p.route).sort());
-  assert.ok((await (await get(canonical + "/robots.txt")).text()).includes(canonical + "/sitemap.xml"));
+  assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]).sort(), canonicalPages.map(p => productionOrigin + p.route).sort());
+  assert.ok((await (await get(canonical + "/robots.txt")).text()).includes(productionOrigin + "/sitemap.xml"));
   return { routes: canonicalPages.length, redirects: legacyRedirects.length, sitemap: canonicalPages.length, robots: true };
+}
+async function httpHeaders() {
+  const results = [];
+  for (const o of [canonical, immutable]) {
+    for (const route of ["/", "/pdf/to-text/", "/image/to-text/", "/build-info.json", "/assets/vendor/pdfjs/pdf.worker.min.mjs", OCR_WORKER_PATH]) {
+      const response = await get(o + route);
+      assertSecurityHeaders(response.headers, { ocrWorker: route === OCR_WORKER_PATH });
+      results.push({ url: o + route, headers: Object.fromEntries(response.headers) });
+      await response.body.cancel();
+    }
+  }
+  return results;
 }
 async function assetComparison() {
   const routes = ["/js/main.js", "/js/i18n.js", "/pdf/to-text/app.js", "/image/to-text/app.js", "/shared/pdf-ocr.js", "/css/base.css", "/js/locales/pdf-to-text.js", "/assets/vendor/pdfjs/pdf.min.mjs", "/assets/vendor/pdfjs/pdf.worker.min.mjs", "/assets/vendor/tesseract/engine/tesseract.min.js", "/assets/vendor/tesseract/worker/worker.min.js", "/assets/vendor/tesseract/core/tesseract-core.wasm", "/assets/vendor/tesseract/lang/eng.traineddata.gz", "/assets/vendor/tesseract/lang/kor.traineddata.gz", "/assets/vendor/searchable-pdf/NotoSansKR-400.js"];
@@ -190,6 +204,7 @@ try {
     return results[0];
   });
   await gate("HTTP routes and SEO", httpSmoke);
+  await gate("Production HTTP security headers", httpHeaders);
   await gate("Release asset equivalence", assetComparison);
   browser = await chromium.launch({ headless: true, args: ["--disable-extensions"] }); report.browser = browser.version();
   const fixtures = await createFixtures(browser);
@@ -218,7 +233,7 @@ try {
 finally {
   await browser?.close();
   await fs.writeFile(path.join(directory, "report.json"), JSON.stringify(report, null, 2));
-  const summary = `# Production smoke: ${report.status}\n\nCanonical: ${canonical}\n\nImmutable: ${immutable}\n\n${report.gates.map(g => `- ${g.passed ? "PASS" : "FAIL"} ${g.name}${g.passed ? `: ${JSON.stringify(g.value)}` : `: ${g.error?.split("\n")[0]}`}`).join("\n")}\n`;
+  const summary = `# ${targetLabel}: ${report.status}\n\nCanonical: ${canonical}\n\nImmutable: ${immutable}\n\n${report.gates.map(g => `- ${g.passed ? "PASS" : "FAIL"} ${g.name}${g.passed ? `: ${JSON.stringify(g.value)}` : `: ${g.error?.split("\n")[0]}`}`).join("\n")}\n`;
   await fs.writeFile(path.join(directory, "summary.md"), summary); console.log(summary);
 }
 if (report.status !== "GO") process.exitCode = 1;

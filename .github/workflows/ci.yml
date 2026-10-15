@@ -78,3 +78,17 @@ jobs:
 
       - name: Run real local OCR smoke test
         run: node tests/ocr-smoke.test.mjs
+
+      - name: Install pinned browser for artifact security verification
+        run: npx playwright install --with-deps chromium
+
+      - name: Verify HTTP headers, browser OCR and downloads on built artifact
+        run: node tests/production/local-smoke.mjs
+
+      - name: Retain artifact browser diagnostics
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: artifact-browser-diagnostics
+          path: .ts-build/production-smoke
+          retention-days: 7

@@ -6,10 +6,12 @@ import { fileURLToPath } from "node:url";
 import { canonicalPages, legacyRedirects, redirectStatus } from "./site-routes.mjs";
 import { compiledBrowserModules } from "./typescript-modules.mjs";
 import { validateBuildProvenance } from "./build-provenance.mjs";
+import { validateHostingHeaders } from "./http-security-headers.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.resolve(root, process.argv[2] || "dist");
 validateBuildProvenance(output);
+validateHostingHeaders(output, { isolated: Boolean(process.argv[2]) });
 const htmlFiles = [];
 const outputFiles = [];
 

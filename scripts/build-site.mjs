@@ -54,5 +54,6 @@ for (const file of ["404.html", "robots.txt", "sitemap.xml"]) {
 const redirectFile = `${legacyRedirects.map(({ from, to }) => `${from} ${to} ${redirectStatus}`).join("\n")}\n`;
 fs.writeFileSync(path.join(output, "_redirects"), redirectFile);
 writeBuildInfo(output, identity);
+fs.copyFileSync(path.join(root, "config", "cloudflare", "_headers"), path.join(output, "_headers"));
 
 console.log(`Built ${canonicalPages.length} canonical pages and ${legacyRedirects.length} permanent redirects in dist/.`);

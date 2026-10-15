@@ -76,13 +76,7 @@ jobs:
           # Keep the generic/GitHub Pages CNAME; strip only the isolated Pages copy.
           rm -f "$BRIDGE_DIRECTORY/CNAME"
 
-          printf '%s\n' \
-            'https://secure-tools-web-bridge.pages.dev/*' \
-            '  X-Robots-Tag: noindex, nofollow' \
-            '' \
-            'https://:version.secure-tools-web-bridge.pages.dev/*' \
-            '  X-Robots-Tag: noindex, nofollow' \
-            > "$BRIDGE_DIRECTORY/_headers"
+          # _headers is copied from the reviewed config by build-site, not overwritten.
 
           [[ ! -e "$BRIDGE_DIRECTORY/CNAME" ]]
           [[ ! -e "$BRIDGE_DIRECTORY/_worker.js" ]]
