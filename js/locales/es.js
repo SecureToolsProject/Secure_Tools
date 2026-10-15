@@ -66,6 +66,7 @@ export const es = {
     }
   },
   "common": {
+    "menu": "Menú",
     "skip": "Saltar al contenido principal",
     "brandTagline": "Herramientas privadas, procesadas en tu dispositivo",
     "nav": {
