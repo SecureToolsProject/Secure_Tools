@@ -17,7 +17,7 @@ fs.mkdirSync(output, { recursive: true });
 for (const directory of ["assets", "css", "js"]) {
   fs.cpSync(path.join(root, directory), path.join(output, directory), {
     recursive: true,
-    filter: (source) => !/\.(?:d\.ts|ts|tsx|map)$/.test(source),
+    filter: (source) => path.basename(source) !== ".gitkeep" && !/\.(?:d\.ts|ts|tsx|map)$/.test(source),
   });
 }
 fs.cpSync(path.join(root, "tools", "shared"), path.join(output, "shared"), {

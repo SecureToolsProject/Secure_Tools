@@ -33,6 +33,7 @@ function visit(directory) {
 }
 
 visit(output);
+assert.ok(outputFiles.every(file => path.basename(file) !== ".gitkeep"), "Production output excludes repository scaffolding");
 assert.equal(htmlFiles.length, canonicalPages.length, "build output canonical page count matches the route manifest");
 for (const { route } of canonicalPages) {
   const target = route === "/" ? path.join(output, "index.html") : path.join(output, route.slice(1), "index.html");

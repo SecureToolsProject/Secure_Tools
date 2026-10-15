@@ -9,6 +9,7 @@ for (const file of ['AGENTS.md','package.json','package-lock.json','tsconfig.jso
 }
 assert.equal(fs.readFileSync('dist/CNAME','utf8').trim(),'securetools.app');
 assert.ok(fs.existsSync('dist/LICENSE'));
+for (const file of ['assets/icons/.gitkeep','assets/images/.gitkeep']) assert.ok(!fs.existsSync(path.join('dist',file)), 'No repository scaffolding');
 const probe = path.resolve('dist','unexpected-release-file.txt');
 assert.equal(path.dirname(probe), path.resolve('dist'));
 try {
