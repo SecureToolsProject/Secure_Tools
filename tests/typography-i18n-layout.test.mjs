@@ -43,7 +43,7 @@ function testLocaleWrappingPolicy() {
 
   const nowrapRules = [...css.matchAll(/([^{}]+)\{[^{}]*white-space:\s*nowrap/g)].map((match) => match[1].trim());
   for (const selector of nowrapRules) {
-    assert.match(selector, /brand|visually-hidden|source-name|queue-name|metadata-table thead/, `Unexpected nowrap rule: ${selector}`);
+    assert.match(selector, /brand|visually-hidden|source-name|queue-name|metadata-table thead|category-nav a/, `Unexpected nowrap rule: ${selector}`);
   }
 }
 
@@ -58,7 +58,8 @@ function testControlAndLongCopyLayout() {
   assert.match(tools, /\.tool-layout > \*[^}]*min-width:\s*0/);
   assert.match(tools, /\.mode-option strong, \.mode-option span\s*\{[^}]*overflow-wrap:\s*anywhere/);
   assert.match(metadata, /\.metadata-value\s*\{[^}]*overflow-wrap:\s*anywhere[^}]*white-space:\s*pre-wrap/);
-  assert.match(base, /body\s*\{[^}]*min-width:\s*20rem/);
+  assert.match(base, /html\s*\{[^}]*font-family:\s*var\(--font-sans\)/);
+  assert.match(base, /body\s*\{[^}]*min-width:\s*0/);
 }
 
 function testNoRemoteFontResources() {

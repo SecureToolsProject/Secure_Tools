@@ -18,6 +18,7 @@ export const ko = {
     mediaCategory: { title: "미디어 도구 — Secure Tools", description: "Secure Tools의 로컬 오디오 및 비디오 유틸리티입니다." },
   },
   common: {
+    menu: "메뉴",
     skip: "본문으로 바로가기", brandTagline: "기기에서 바로 처리하는 프라이버시 중심 도구",
     nav: { tools: "도구", privacy: "개인정보 보호", source: "소스", about: "소개" },
     aria: { home: "Secure Tools 홈", primaryNavigation: "주 탐색", footerNavigation: "바닥글 탐색", toolCategories: "도구 카테고리", localProcessingSummary: "로컬 처리 요약" },

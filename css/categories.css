@@ -24,3 +24,8 @@ a.category-tool:hover { border-color: var(--border-strong); transform: translate
   .category-tool { min-height: 10rem; }
 }
 @media (prefers-reduced-motion: reduce) { a.category-tool:hover { transform: none; } }
+
+@media (max-width: 38rem) {
+  .category-nav__inner { flex-wrap: nowrap; padding-block: var(--space-1); gap: var(--space-1); }
+  .category-nav a { white-space: nowrap; padding-inline: var(--space-3); }
+}
