@@ -14,55 +14,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 const sha256 = (relative) => createHash("sha256").update(fs.readFileSync(path.join(root, relative))).digest("hex");
 
-const vendors = {
-  jspdf: {
-    name: "jspdf",
-    version: "4.2.1",
-    license: "MIT",
-    files: ["LICENSE.txt", "README.md", "jspdf.umd.min.js", "package.json"],
-    runtimes: {
-      "jspdf.umd.min.js": "e6551fcdc32f09d6853b2c5126d18d01d9447e0da618a41a11ebeee0f6c20d54",
-    },
-  },
-  jszip: {
-    name: "jszip",
-    version: "3.10.1",
-    license: "(MIT OR GPL-3.0-or-later)",
-    files: ["LICENSE.markdown", "README.md", "jszip.min.js", "package.json"],
-    runtimes: {
-      "jszip.min.js": "acc7e41455a80765b5fd9c7ee1b8078a6d160bbbca455aeae854de65c947d59e",
-    },
-  },
-  "pdf-lib": {
-    name: "pdf-lib",
-    version: "1.17.1",
-    license: "MIT",
-    files: ["LICENSE.md", "README.md", "package.json", "pdf-lib.min.js"],
-    runtimes: {
-      "pdf-lib.min.js": "0f9a5cad07941f0826586c94e089d89b918c46e5c17cf2d5a3c6f666e3bc694f",
-    },
-  },
-  pdfjs: {
-    name: "pdfjs-dist",
-    version: "6.2.108",
-    license: "Apache-2.0",
-    files: ["LICENSE", "README.md", "package.json", "pdf.min.mjs", "pdf.worker.min.mjs"],
-    runtimes: {
-      "pdf.min.mjs": "e0be3863c23c8af2305b16548febd58e7f8874a460253317d7771cddbc1c0f6d",
-      "pdf.worker.min.mjs": "0613f41490dd6aaceed7a93fbbd38c85e6d6aa60474b6588c6e7709cfbe18cb3",
-    },
-  },
-  "secure-metadata": {
-    name: "secure-metadata",
-    version: "0.1.1",
-    license: "MIT",
-    files: ["LICENSE", "README.md", "package.json", "secure-metadata-0.1.1.browser.js"],
-    runtimes: {
-      "secure-metadata-0.1.1.browser.js": "4bfcc9e0e484db12192e46f076c19cf69cd36c496c7cfbb5a71c1057cbcccba1",
-    },
-  },
-
-};
+const vendors = JSON.parse(read("config/security/vendor-release-pins.json"));
 
 assert.deepEqual(fs.readdirSync(path.join(root, "assets/vendor")).sort(), [...Object.keys(vendors), "searchable-pdf", "tesseract"].sort());
 for (const [directory, expected] of Object.entries(vendors)) {

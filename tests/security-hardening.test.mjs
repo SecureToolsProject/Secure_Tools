@@ -92,6 +92,8 @@ for (const source of firstParty) assert.doesNotMatch(fs.readFileSync(source, "ut
 
 const { auditActionPins } = await import("../scripts/validate-action-pins.mjs");
 auditActionPins();
+const { loadInventory } = await import("../scripts/security-inventory.mjs");
+loadInventory();
 const policy = read("config/cloudflare/_headers");
 validateHostingHeaders(path.join(root, "config/cloudflare"));
 const policyDirectory = fs.mkdtempSync(path.join(root, ".ts-build/header-policy-"));
