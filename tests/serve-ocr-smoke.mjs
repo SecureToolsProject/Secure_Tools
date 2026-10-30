@@ -4,9 +4,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { legacyRedirects, redirectStatus } from "../scripts/site-routes.mjs";
+import { headersForUrl, parsePagesHeaders } from "../scripts/http-security-headers.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteRoot = path.join(root, "dist");
+const headerRules = parsePagesHeaders(fs.readFileSync(path.join(siteRoot, "_headers"), "utf8"));
 const port = Number.parseInt(process.argv[2] || "4173", 10);
 const audit = process.argv.includes("--audit");
 const gates = process.argv.includes("--gates");
@@ -21,6 +23,11 @@ const contentTypes = new Map([
   [".pdf", "application/pdf"],
   [".ico", "image/x-icon"],
   [".wasm", "application/wasm"],
+  [".svg", "image/svg+xml"],
+  [".woff", "font/woff"],
+  [".woff2", "font/woff2"],
+  [".jpg", "image/jpeg"],
+  [".webp", "image/webp"],
 ]);
 
 const server = http.createServer((request, response) => {
@@ -45,6 +52,7 @@ const server = http.createServer((request, response) => {
       return;
     }
     response.writeHead(200, {
+      ...Object.fromEntries(headersForUrl(headerRules, `http://127.0.0.1${pathname}`)),
       "Cache-Control": "no-store",
       "Content-Type": contentTypes.get(path.extname(target)) || "application/octet-stream",
     });

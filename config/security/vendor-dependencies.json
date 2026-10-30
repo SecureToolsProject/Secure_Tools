@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "dependencies": [
+    { "name": "pdfjs-dist", "source": "npm" },
+    { "name": "jspdf", "source": "npm" },
+    { "name": "jszip", "source": "npm" },
+    { "name": "pdf-lib", "source": "npm" },
+    { "name": "tesseract.js", "source": "npm" },
+    { "name": "tesseract.js-core", "source": "npm" },
+    { "name": "@tesseract.js-data/eng", "source": "npm" },
+    { "name": "@tesseract.js-data/kor", "source": "npm" },
+    { "name": "@pdf-lib/fontkit", "source": "npm" },
+    { "name": "@fontsource/noto-sans-kr", "source": "npm" },
+    {
+      "name": "secure-metadata",
+      "source": "github",
+      "repository": "SecureToolsProject/Secure_Metadata"
+    }
+  ]
+}

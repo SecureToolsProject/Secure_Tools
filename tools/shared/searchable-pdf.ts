@@ -1,4 +1,5 @@
 import type { PdfOcrPageResult } from "./pdf-ocr.js";
+import { requirePdfSignature } from "./pdf.js";
 
 type Matrix = readonly [number, number, number, number, number, number];
 interface PdfFontLike { widthOfTextAtSize(text: string, size: number): number }
@@ -26,6 +27,7 @@ export function searchablePdfFilename(name = "document.pdf"): string {
 
 export async function createSearchablePdf(request: SearchablePdfRequest): Promise<Uint8Array> {
   abort(request.signal);
+  requirePdfSignature(request.sourceBytes);
   const document = await request.PDFLib.PDFDocument.load(request.sourceBytes.slice(0), { updateMetadata: false });
   const needsFont = request.pages.some((page) => !page.hasMeaningfulText && Boolean(page.lines?.some((line) => line.text.trim())));
   let font: PdfFontLike | null = null;

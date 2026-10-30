@@ -4,6 +4,7 @@ import path from "node:path";
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { canonicalPages, legacyRedirects, productionOrigin } from "../scripts/site-routes.mjs";
+import { assertSecurityHeaders, OCR_WORKER_PATH } from "../scripts/http-security-headers.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 // CI runs npm test without requiring a production build. Build-site only stages
@@ -23,6 +24,7 @@ try {
   for (const { route } of canonicalPages) {
     const response = await fetch(`${origin}${route}`, { redirect: "manual" });
     assert.equal(response.status, 200, `Direct route: ${route}`);
+    assertSecurityHeaders(response.headers);
     const html = await response.text();
     assert.match(html, /<title>[^<]+<\/title>/, `Title: ${route}`);
     assert.match(html, /<meta name="description" content="[^"]+"/, `Description: ${route}`);
@@ -36,6 +38,7 @@ try {
       // Canonical links name the production origin and are not static assets.
       if (checkedAssets.has(url.href)) continue;
       const asset = await fetch(url); assert.equal(asset.status, 200, `Asset ${url.href}`);
+      assertSecurityHeaders(asset.headers);
       checkedAssets.add(url.href);
     }
   }
@@ -47,6 +50,14 @@ try {
     assert.equal((await fetch(new URL(response.headers.get("location"), origin), { redirect: "manual" })).status, 200, `One hop: ${from}`);
   }
   const sitemap = await (await fetch(`${origin}/sitemap.xml`)).text();
+  for (const [route, type] of [["/build-info.json", "application/json"], ["/assets/vendor/tesseract/core/tesseract-core.wasm", "application/wasm"], [OCR_WORKER_PATH, "text/javascript"], ["/assets/vendor/pdfjs/pdf.worker.min.mjs", "text/javascript"], ["/assets/vendor/tesseract/lang/eng.traineddata.gz", "application/gzip"]]) {
+    const response = await fetch(origin + route);
+    assert.equal(response.status, 200);
+    assert.ok(response.headers.get("content-type").startsWith(type), `${route} retains correct MIME`);
+    assertSecurityHeaders(response.headers, { ocrWorker: route === OCR_WORKER_PATH });
+    if (route === "/build-info.json") assert.ok((await response.json()).commit);
+    else await response.body.cancel();
+  }
   const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]).sort();
   assert.deepEqual(locations, canonicalPages.map(({ route }) => `${productionOrigin}${route}`).sort());
   const robots = await (await fetch(`${origin}/robots.txt`)).text();

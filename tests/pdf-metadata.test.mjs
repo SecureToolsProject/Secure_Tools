@@ -112,7 +112,7 @@ async function testFailuresAndNames() {
   await assert.rejects(readPdfMetadata(new File(["not pdf"], "broken.pdf", { type: "application/pdf" }), PDFDocument), (error) => error.code === "UNREADABLE_PDF");
   await assert.rejects(readPdfMetadata(new File(["text"], "notes.txt", { type: "text/plain" }), PDFDocument), (error) => error.code === "UNSUPPORTED_PDF");
   const encryptedLibrary = { create: PDFDocument.create, load: async () => { throw new Error("password encrypted"); } };
-  await assert.rejects(readPdfMetadata(new File(["%PDF"], "locked.pdf", { type: "application/pdf" }), encryptedLibrary), (error) => error.code === "ENCRYPTED_PDF");
+  await assert.rejects(readPdfMetadata(new File(["%PDF-1.7"], "locked.pdf", { type: "application/pdf" }), encryptedLibrary), (error) => error.code === "ENCRYPTED_PDF");
   assert.equal(metadataFilename("report.pdf"), "report_clean.pdf");
   assert.equal(metadataFilename("report.PDF"), "report_clean.pdf");
   assert.equal(metadataFilename("report.pdf", "client/private"), "client_private.pdf");

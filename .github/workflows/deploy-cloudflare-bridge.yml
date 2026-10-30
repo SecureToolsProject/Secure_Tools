@@ -22,13 +22,12 @@ jobs:
 
     steps:
       - name: Check out repository
-        # actions/checkout v6.0.2
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 24
 
@@ -77,13 +76,7 @@ jobs:
           # Keep the generic/GitHub Pages CNAME; strip only the isolated Pages copy.
           rm -f "$BRIDGE_DIRECTORY/CNAME"
 
-          printf '%s\n' \
-            'https://secure-tools-web-bridge.pages.dev/*' \
-            '  X-Robots-Tag: noindex, nofollow' \
-            '' \
-            'https://:version.secure-tools-web-bridge.pages.dev/*' \
-            '  X-Robots-Tag: noindex, nofollow' \
-            > "$BRIDGE_DIRECTORY/_headers"
+          # _headers is copied from the reviewed config by build-site, not overwritten.
 
           [[ ! -e "$BRIDGE_DIRECTORY/CNAME" ]]
           [[ ! -e "$BRIDGE_DIRECTORY/_worker.js" ]]
@@ -126,8 +119,7 @@ jobs:
 
       - name: Deploy to Cloudflare Pages
         id: deploy
-        # cloudflare/wrangler-action v4.0.0
-        uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0
+        uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -139,6 +131,11 @@ jobs:
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
         run: node tests/deployment-smoke.mjs "$DEPLOYMENT_URL" noindex
 
+      - name: Verify deployed source provenance
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+        run: node scripts/verify-build-provenance.mjs "$DEPLOYMENT_URL" "$GITHUB_SHA"
+
       - name: Validate stable deployment aliases
         shell: bash
         run: |
@@ -147,7 +144,7 @@ jobs:
             local indexing="$2"
 
             for attempt in 1 2 3 4 5 6; do
-              if node tests/deployment-smoke.mjs "$url" "$indexing"; then
+              if node tests/deployment-smoke.mjs "$url" "$indexing" && node scripts/verify-build-provenance.mjs "$url" "$GITHUB_SHA"; then
                 return 0
               fi
               [[ "$attempt" -lt 6 ]] || return 1

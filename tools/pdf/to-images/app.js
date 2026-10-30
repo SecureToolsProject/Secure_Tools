@@ -1,6 +1,6 @@
 import { t } from "../../../js/i18n.js";
 import { formatBytes, sanitizePdfFilename } from "../../shared/file.js";
-import { inspectPdf, isSupportedPdf } from "../../shared/pdf.js";
+import { inspectPdf, readPdfSourceBytes } from "../../shared/pdf.js";
 import { downloadBlob, requestSaveHandle, writeBlobToHandle } from "../../shared/save.js";
 import { createConversionPlan, convertPdfToImages, IMAGE_FORMATS } from "./converter.js";
 
@@ -90,13 +90,12 @@ async function addSource(files) {
   await stopActiveJob();
   if (files.length !== 1) { setStatus("pdfToImages.errors.oneFile", {}, "error"); return; }
   const file = files[0];
-  if (!isSupportedPdf(file)) { setStatus("pdfToImages.errors.unsupported", {}, "error"); return; }
   const session = ++state.session;
   state.loading = true;
   renderState();
   setStatus("pdfToImages.status.reading");
   try {
-    const [{ pageCount }, bytes] = await Promise.all([inspectPdf(file, window.PDFLib?.PDFDocument), file.arrayBuffer()]);
+    const [{ pageCount }, bytes] = await Promise.all([inspectPdf(file, window.PDFLib?.PDFDocument), readPdfSourceBytes(file)]);
     if (session !== state.session) return;
     state.source = { file, pageCount, bytes };
     elements.filename.value = sourceBaseName(file.name);

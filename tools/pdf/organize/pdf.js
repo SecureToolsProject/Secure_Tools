@@ -1,5 +1,5 @@
 import { sanitizePdfFilename } from "../../shared/file.js";
-import { createPdfError, loadPdfSource, requirePdfDocument } from "../../shared/pdf.js";
+import { createPdfError, loadPdfSource, readPdfSourceBytes, requirePdfDocument, requirePdfSignature } from "../../shared/pdf.js";
 import { visiblePages } from "./model.js";
 
 export function organizerFilename(sourceName, customValue = "") {
@@ -12,7 +12,7 @@ export async function readOrganizerSource(file, PDFDocument) {
   requirePdfDocument(PDFDocument);
   const document = await loadPdfSource(file, PDFDocument);
   return {
-    bytes: await file.arrayBuffer(),
+    bytes: await readPdfSourceBytes(file),
     pageCount: document.getPageCount(),
     rotations: document.getPages().map((page) => page.getRotation().angle),
   };
@@ -23,6 +23,7 @@ export async function organizePdf({ sourceBytes, pages, PDFDocument, degrees }) 
   const active = visiblePages(pages);
   if (!active.length) throw createPdfError("NO_PAGES_REMAIN");
   try {
+    requirePdfSignature(sourceBytes);
     const source = await PDFDocument.load(sourceBytes, { ignoreEncryption: false, updateMetadata: false });
     const output = await PDFDocument.create();
     const copied = await output.copyPages(source, active.map((page) => page.originalIndex));

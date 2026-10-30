@@ -2,7 +2,18 @@
 
 Run `npm ci --ignore-scripts`, `npx playwright install --with-deps chromium`, then
 `npm run test:production` with `PRODUCTION_ORIGIN` and `IMMUTABLE_ORIGIN` set to
-the canonical and deployment-specific HTTPS origins. Node 24 is required.
+the canonical and deployment-specific HTTPS origins and `EXPECTED_PRODUCTION_SHA`
+set to the full lowercase source commit SHA. Check out that source commit so its
+canonical package version matches the deployment. Node 24 is required.
+
+The manual workflow requires `source_commit`, checks out that exact commit, and
+checks `/build-info.json` on both origins before browser gates. The strict public
+record must match the expected SHA, the checked-out `package.json` version, schema
+1, and the GitHub Actions build marker. Missing JSON, redirects, fallback HTML,
+unsupported fields, or mismatches fail signoff. The deployment workflow also
+checks this record on the immutable URL and both stable aliases, with existing
+alias propagation retries. A small record binds declared source identity; it is
+not a signed attestation, full artifact digest, or proof of reproducible builds.
 
 Use the **Production smoke** workflow's manual dispatch inputs for release
 signoff. The initial infrastructure PR has a narrowly scoped bootstrap trigger;

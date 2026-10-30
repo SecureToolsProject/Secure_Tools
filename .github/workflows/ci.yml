@@ -6,7 +6,7 @@ on:
     branches:
       - main
       - v2
-      - v2.2
+      - v2.3
 
 permissions:
   contents: read
@@ -19,12 +19,12 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 24
 
@@ -70,8 +70,41 @@ jobs:
       - name: Verify prepared production OCR assets
         run: npm run build
 
+      - name: Validate generated artifact and source provenance
+        run: node scripts/validate-build.mjs
+
       - name: Run static tool validation
         run: npm test
 
       - name: Run real local OCR smoke test
         run: node tests/ocr-smoke.test.mjs
+
+      - name: Install pinned browser for artifact security verification
+        run: npx playwright install --with-deps chromium
+
+      - name: Verify HTTP headers, browser OCR and downloads on built artifact
+        run: node tests/production/local-smoke.mjs
+
+      - name: Verify responsive navigation, metadata layouts and accessibility
+        run: node tests/browser/responsive.mjs
+
+      - name: Inspect isolated release review artifact
+        run: node scripts/inspect-release-artifact.mjs
+
+      - name: Retain inspected release review artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-review-${{ github.sha }}
+          path: .ts-build/release-review
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Retain artifact browser diagnostics
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: artifact-browser-diagnostics
+          path: |
+            .ts-build/production-smoke
+            .ts-build/responsive
+          retention-days: 7

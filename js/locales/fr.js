@@ -66,6 +66,7 @@ export const fr = {
     }
   },
   "common": {
+    "menu": "Menu",
     "skip": "Passer au contenu principal",
     "brandTagline": "Outils privés, traités sur votre appareil",
     "nav": {
