@@ -12,6 +12,12 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.resolve(root, process.argv[2] || "dist");
 validateBuildProvenance(output);
 validateHostingHeaders(output, { isolated: Boolean(process.argv[2]) });
+const expectedRootFiles = ["index.html", "404.html", "robots.txt", "sitemap.xml", "LICENSE", "_headers", "_redirects", "build-info.json", ...(process.argv[2] ? [] : ["CNAME"])];
+const expectedRootDirectories = new Set(["assets", "css", "js", "shared", ...canonicalPages.map(({route}) => route.split('/')[1]).filter(Boolean)]);
+for (const entry of fs.readdirSync(output, { withFileTypes: true })) {
+  assert.ok(entry.isDirectory() ? expectedRootDirectories.has(entry.name) : expectedRootFiles.includes(entry.name), `Unexpected artifact root entry: ${entry.name}`);
+}
+for (const file of expectedRootFiles) assert.ok(fs.statSync(path.join(output, file)).isFile(), `Missing public root file: ${file}`);
 const htmlFiles = [];
 const outputFiles = [];
 
@@ -27,6 +33,7 @@ function visit(directory) {
 }
 
 visit(output);
+assert.ok(outputFiles.every(file => path.basename(file) !== ".gitkeep"), "Production output excludes repository scaffolding");
 assert.equal(htmlFiles.length, canonicalPages.length, "build output canonical page count matches the route manifest");
 for (const { route } of canonicalPages) {
   const target = route === "/" ? path.join(output, "index.html") : path.join(output, route.slice(1), "index.html");

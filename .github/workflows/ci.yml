@@ -88,6 +88,17 @@ jobs:
       - name: Verify responsive navigation, metadata layouts and accessibility
         run: node tests/browser/responsive.mjs
 
+      - name: Inspect isolated release review artifact
+        run: node scripts/inspect-release-artifact.mjs
+
+      - name: Retain inspected release review artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-review-${{ github.sha }}
+          path: .ts-build/release-review
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Retain artifact browser diagnostics
         if: failure()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
