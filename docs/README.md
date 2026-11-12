@@ -25,6 +25,10 @@ The root [README](../README.md) introduces Secure Tools. This directory owns det
 
 ## Release evidence
 
+- [v2.3 production verification](./v2.3-production-verification.md) records the
+  November 12 actual-main deployment/provenance/header/browser evidence and
+  bounded issue dispositions; tagging and release publication remain separate.
+
 - [v2.3 release readiness](./v2.3-release-readiness.md) freezes feature scope,
   inventories the integration delta and open findings, and separates candidate
   artifact validation from the later [production verification gate](./v2.3-post-deploy-checklist.md).
