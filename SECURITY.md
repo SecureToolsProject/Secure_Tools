@@ -4,7 +4,7 @@
 
 | Version | Security support |
 | --- | --- |
-| Latest stable GitHub release (currently `v2.2.0`) | Security fixes target the latest stable release; upgrade when a fix is released. |
+| Latest stable GitHub release (currently `v2.3.0`) | Security fixes target the latest stable release; upgrade when a fix is released. |
 | Current integration branch (`v2.3`) | Pre-release development and triage only; not a supported production release. |
 | Older releases | No maintained security backports; upgrade to the latest stable release. |
 
