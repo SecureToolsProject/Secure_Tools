@@ -1,7 +1,6 @@
 import { t } from "../../../js/i18n.js";
 import { formatBytes } from "../../shared/file.js";
 import { downloadBlob, requestPdfSaveHandle, writeBlobToHandle } from "../../shared/save.js";
-import { isSupportedPdf } from "../../shared/pdf.js";
 import { clearMetadataSelection, selectedMetadataKeys, selectAllPresentMetadata, setMetadataSelected } from "./model.js";
 import { cleanPdfMetadata, metadataFilename, readPdfMetadata } from "./pdf.js";
 
@@ -108,7 +107,7 @@ function errorKey(error) {
 async function addSource(files) {
   if (state.busy || !files.length) return;
   if (files.length !== 1) { setStatus("pdfMetadata.errors.oneFile", {}, "error"); return; }
-  const file = files[0]; if (!isSupportedPdf(file)) { setStatus("pdfMetadata.errors.unsupported", {}, "error"); return; }
+  const file = files[0];
   state.busy = true; state.source = null; state.fields = []; state.comparison = null; elements.filename.value = "";
   elements.inspectionDetails.open = false; elements.customizeCleaning.open = false; render(); setStatus("pdfMetadata.status.reading");
   try {

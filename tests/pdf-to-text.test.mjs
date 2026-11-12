@@ -42,7 +42,7 @@ const service = {
   async dispose() {},
 };
 const controller = createPdfToTextController({ service, inspect: async () => ({ pageCount: 2 }), onChange: (state) => states.push(state.phase) });
-const file = Object.assign(new Blob(["%PDF"], { type: "application/pdf" }), { name: "sample.pdf", lastModified: 0 });
+const file = Object.assign(new Blob(["%PDF-1.7"], { type: "application/pdf" }), { name: "sample.pdf", lastModified: 0 });
 await controller.select(file);
 const running = controller.recognize("eng", { mode: "all" });
 await controller.cancel();
@@ -92,8 +92,8 @@ const replacementController = createPdfToTextController({
   service: { async recognizeDocument() { throw new Error("unused"); }, async cancel() { return false; }, async dispose() {} },
   inspect: async (source) => source.name === "old.pdf" ? new Promise((resolve) => { releaseOld = () => resolve({ pageCount: 9 }); }) : { pageCount: 2 },
 });
-const oldFile = Object.assign(new Blob(["%PDF"], { type: "application/pdf" }), { name: "old.pdf", lastModified: 0 });
-const newFile = Object.assign(new Blob(["%PDF"], { type: "application/pdf" }), { name: "new.pdf", lastModified: 0 });
+const oldFile = Object.assign(new Blob(["%PDF-1.7"], { type: "application/pdf" }), { name: "old.pdf", lastModified: 0 });
+const newFile = Object.assign(new Blob(["%PDF-1.7"], { type: "application/pdf" }), { name: "new.pdf", lastModified: 0 });
 const oldSelection = replacementController.select(oldFile);
 await replacementController.select(newFile);
 releaseOld(); await oldSelection;

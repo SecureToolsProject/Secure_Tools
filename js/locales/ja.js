@@ -66,6 +66,7 @@ export const ja = {
     }
   },
   "common": {
+    "menu": "メニュー",
     "skip": "メインコンテンツへ移動",
     "brandTagline": "端末内で処理するプライバシーツール",
     "nav": {

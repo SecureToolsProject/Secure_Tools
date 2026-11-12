@@ -1,6 +1,43 @@
 # Changelog
 
-## Unreleased
+## 2.3.0 — Release candidate, unpublished
+
+### Security and reliability
+
+- Bind CI artifacts to the source commit and canonical package version through
+  `/build-info.json`; live production equality remains a release-time gate.
+- Pin all external GitHub Actions to reviewed full SHAs; prepare reviewed weekly
+  Actions/npm maintenance, whose default-branch activation is still pending.
+- Require `%PDF-` at byte zero before original-source PDF parsing. Signature
+  admission is not a parser safety or resource-budget guarantee.
+- Add root SECURITY.md, supported-version boundaries and verified GitHub private
+  vulnerability reporting.
+- Deliver the reviewed HTTP CSP, no-referrer, Permissions-Policy and nosniff policy
+  in the isolated Pages artifact. Live delivery is not yet signed off.
+- Add JS/TS CodeQL and exact lockfile/vendor advisory monitoring. Nested/native
+  dependency coverage remains incomplete; no-known-advisory results are bounded.
+- Retain pdf-lib 1.17.1 and JSZip 3.10.1 following the maintenance assessment;
+  investigate a pdf-lib successor separately in v2.4, without an automatic upgrade.
+- Exclude repository instructions, package manifests and build configs from the
+  public artifact root; retain license metadata and isolate Cloudflare CNAME removal.
+
+### UX
+
+- Compact mobile navigation, language and theme into a native disclosure, with
+  keyboard/Escape support and usable navigation without JavaScript.
+- Reduce category-bar padding, keep one scrollable row and retain touch targets.
+- Improve mobile workspace spacing, intended system-font inheritance and narrow
+  viewport fit without changing the brand or adding a component framework.
+- Move both metadata scope cards after results on desktop/mobile, preserving all
+  supported-scope limitations.
+- Theme native selects and supported desktop pickers while retaining mobile
+  platform pickers and existing form/accessibility behavior.
+
+Image OCR, PDF OCR/TXT and searchable PDF export are existing v2.2 capabilities,
+not newly introduced v2.3 tools. Release notes are a candidate record, not
+production GO, audit closure, release publication or deployment authorization.
+
+## Earlier development history
 
 ### Added
 

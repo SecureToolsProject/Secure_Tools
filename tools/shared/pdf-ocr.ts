@@ -1,6 +1,6 @@
 import { createOcrService, resolveOcrLanguage } from "./ocr.js";
 import type { OcrLanguage, OcrProgress, OcrService } from "./ocr.js";
-import { isSupportedPdf } from "./pdf.js";
+import { readPdfSourceBytes, requirePdfSignature } from "./pdf.js";
 import type { PdfFileLike } from "./pdf.js";
 import type { LocalPdfRenderer, PdfPageProxy, PdfRenderContext } from "./pdf-renderer.js";
 
@@ -115,6 +115,7 @@ function throwIfAborted(signal: AbortSignal): void {
 function normalizePipelineError(error: unknown, signal: AbortSignal): ErrorWithCode {
   if (signal.aborted || errorCode(error) === "OCR_CANCELLED") return pdfOcrError("PDF_OCR_CANCELLED", error);
   if (hasErrorCode(error) && error.code.startsWith("PDF_OCR_")) return error;
+  if (hasErrorCode(error) && error.code === "UNREADABLE_PDF") return error;
   const detail = errorDetail(error);
   if (detail.includes("password") || detail.includes("encrypt")) return pdfOcrError("ENCRYPTED_PDF", error);
   if (detail.includes("invalid pdf") || detail.includes("missing pdf") || detail.includes("formaterror")) {
@@ -212,8 +213,7 @@ export function resolvePdfOcrPages(selection: PdfOcrPageSelection | undefined, p
 }
 
 export async function readPdfOcrSource(file: PdfFileLike): Promise<ArrayBuffer> {
-  if (!isSupportedPdf(file)) throw pdfOcrError("UNSUPPORTED_PDF");
-  return file.arrayBuffer();
+  return readPdfSourceBytes(file);
 }
 
 async function defaultRendererFactory(sourceBytes: ArrayBuffer): Promise<PdfOcrRenderer> {
@@ -235,7 +235,7 @@ export function createPdfOcrService(configuration: PdfOcrServiceConfiguration = 
 
   async function run(request: PdfOcrRequest, jobGeneration: number, signal: AbortSignal): Promise<PdfOcrDocumentResult> {
     const language = resolveOcrLanguage(request.language);
-    let sourceBytes = request.sourceBytes.slice(0);
+    let sourceBytes = request.sourceBytes;
     let renderer: PdfOcrRenderer | null = null;
     let destroying: Promise<void> | null = null;
     const destroyRenderer = (): Promise<void> => {
@@ -253,6 +253,8 @@ export function createPdfOcrService(configuration: PdfOcrServiceConfiguration = 
     signal.addEventListener("abort", abortRenderer, { once: true });
     try {
       throwIfAborted(signal);
+      requirePdfSignature(sourceBytes);
+      sourceBytes = sourceBytes.slice(0);
       emit({ phase: "loading-document", pageNumber: null, pageIndex: 0, pageCount: 0, documentPageCount: null, pageProgress: null, overallProgress: 0, ocrStage: null });
       renderer = await rendererFactory(sourceBytes);
       const documentPageCount = await renderer.load();

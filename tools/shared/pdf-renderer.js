@@ -1,4 +1,5 @@
 import * as pdfjsLib from "../../assets/vendor/pdfjs/pdf.min.mjs";
+import { requirePdfSignature } from "./pdf.js";
 
 export const PDFJS_VERSION = pdfjsLib.version;
 export const PDFJS_WORKER_URL = new URL("../../assets/vendor/pdfjs/pdf.worker.min.mjs", import.meta.url).href;
@@ -17,6 +18,7 @@ export class LocalPdfRenderer {
 
   async load() {
     if (this.destroyed) throw new Error("RENDERER_UNAVAILABLE");
+    requirePdfSignature(this.sourceBytes);
     this.loadingTask = pdfjsLib.getDocument({
       data: new Uint8Array(this.sourceBytes.slice(0)),
       isEvalSupported: false,

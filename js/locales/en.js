@@ -18,6 +18,7 @@ export const en = {
     mediaCategory: { title: "Media tools — Secure Tools", description: "Local audio and video utilities from Secure Tools." },
   },
   common: {
+    menu: "Menu",
     skip: "Skip to main content", brandTagline: "Private utilities, processed on your device",
     nav: { tools: "Tools", privacy: "Privacy", source: "Source", about: "About" },
     aria: { home: "Secure Tools home", primaryNavigation: "Primary navigation", footerNavigation: "Footer navigation", toolCategories: "Tool categories", localProcessingSummary: "Local processing summary" },

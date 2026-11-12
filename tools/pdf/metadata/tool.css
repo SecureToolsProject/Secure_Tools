@@ -1,18 +1,14 @@
 .source-empty[hidden],
 .metadata-workspace [hidden], .metadata-comparison[hidden] { display: none; }
-.scope-note,
 .metadata-workspace,
 .metadata-comparison { margin-top: var(--space-5); padding: var(--space-5); }
-.scope-note { border-left: .25rem solid var(--accent); }
-.scope-note h2,
-.scope-note p,
+
 .metadata-toolbar h2,
 .metadata-toolbar p,
 .inspector-heading h3,
 .inspector-heading p,
 .metadata-comparison h2,
 .metadata-comparison p { margin: 0; }
-.scope-note p,
 .metadata-toolbar p,
 .inspector-heading p,
 .metadata-toolbar #source-summary,
@@ -46,7 +42,7 @@
   .inspector-heading { flex-direction: column; }
 }
 @media (max-width: 38rem) {
-  .scope-note, .metadata-workspace, .tool-output, .metadata-comparison { padding: var(--space-4); }
+  .metadata-workspace, .tool-output, .metadata-comparison { padding: var(--space-4); }
   .metadata-toolbar { align-items: flex-start; flex-direction: column; }
   .selection-actions { width: 100%; align-items: stretch; flex-direction: column; }
   .selection-actions .button, .metadata-toolbar .button { width: 100%; }

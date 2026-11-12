@@ -1,0 +1,18 @@
+# Static Pages policy. Keep MIME types and caching under Pages' control.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; font-src 'self'; worker-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Referrer-Policy: no-referrer
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Content-Type-Options: nosniff
+
+# Preserve the existing dedicated worker context: it fetches same-origin
+# core/WASM/language assets. Document connect-src remains none; workerBlobURL=false.
+# Do not inherit the document policy on this one worker response.
+/assets/vendor/tesseract/worker/worker.min.js
+  ! Content-Security-Policy
+
+https://secure-tools-web-bridge.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+
+https://:version.secure-tools-web-bridge.pages.dev/*
+  X-Robots-Tag: noindex, nofollow

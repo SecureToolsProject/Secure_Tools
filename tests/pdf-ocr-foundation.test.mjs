@@ -110,7 +110,7 @@ assert.equal(new TextDecoder().decode(await readPdfOcrSource(acceptedPdf)), "%PD
     canvasFactory() { const canvas = canvasHarness(renderer.events); canvases.push(canvas); return canvas; },
   });
   const result = await service.recognizeDocument({
-    sourceBytes: Uint8Array.of(1, 2, 3).buffer,
+    sourceBytes: new TextEncoder().encode("%PDF-1.7").buffer,
     language: "eng+kor",
     selection: { mode: "selected", pageNumbers: [3, 1] },
     onProgress(value) { progress.push(value); },
@@ -144,7 +144,7 @@ assert.equal(new TextDecoder().decode(await readPdfOcrSource(acceptedPdf)), "%PD
     return { text: "layout", lines: [{ text: "layout", confidence: 54, bbox: { x0: 2, y0: 4, x1: 20, y1: 14 } }] };
   });
   const service = createPdfOcrService({ rendererFactory: async () => renderer.renderer, ocrService: ocr.service, canvasFactory: () => canvasHarness([]) });
-  const result = await service.recognizeDocument({ sourceBytes: new ArrayBuffer(1), language: "eng", includeLayout: true, inspectExistingText: true });
+  const result = await service.recognizeDocument({ sourceBytes: new TextEncoder().encode("%PDF-1.7").buffer, language: "eng", includeLayout: true, inspectExistingText: true });
   assert.deepEqual(result.pages[0].lines, [{ text: "layout", confidence: 54, bbox: { x0: 2, y0: 4, x1: 20, y1: 14 } }]);
   assert.deepEqual(result.pages[0].rasterToPdfTransform.map((value) => Object.is(value, -0) ? 0 : value), [0.5, 0, 0, -0.5, 0, 50]);
   assert.equal(result.pages[0].hasMeaningfulText, false);
@@ -160,7 +160,7 @@ assert.equal(new TextDecoder().decode(await readPdfOcrSource(acceptedPdf)), "%PD
     canvasFactory: () => canvasHarness([]),
   });
   for (const language of ["eng", "kor", "eng+kor"]) {
-    const result = await service.recognizeDocument({ sourceBytes: new ArrayBuffer(1), language });
+    const result = await service.recognizeDocument({ sourceBytes: new TextEncoder().encode("%PDF-1.7").buffer, language });
     assert.equal(result.pages[0].text, language);
   }
   assert.deepEqual(languages, ["eng", "kor", "eng+kor"]);
@@ -186,7 +186,7 @@ assert.equal(new TextDecoder().decode(await readPdfOcrSource(acceptedPdf)), "%PD
     canvasFactory: () => canvasHarness([]),
   });
   const task = service.recognizeDocument({
-    sourceBytes: new ArrayBuffer(2), language: "eng",
+    sourceBytes: new TextEncoder().encode("%PDF-1.7").buffer, language: "eng",
     onProgress(value) { emitted.push(value); },
     onPageResult(value) { appended.push(value); },
   });
@@ -199,7 +199,7 @@ assert.equal(new TextDecoder().decode(await readPdfOcrSource(acceptedPdf)), "%PD
   assert.deepEqual(appended, [], "no stale page result is appended");
 
   const replacementResult = await service.recognizeDocument({
-    sourceBytes: Uint8Array.of(9).buffer,
+    sourceBytes: new TextEncoder().encode("%PDF-1.7").buffer,
     language: "eng",
     selection: { mode: "selected", pageNumbers: [2] },
   });
@@ -215,7 +215,7 @@ assert.equal(new TextDecoder().decode(await readPdfOcrSource(acceptedPdf)), "%PD
     ocrService: ocr.service,
     canvasFactory: () => canvasHarness(renderer.events),
   });
-  const task = service.recognizeDocument({ sourceBytes: new ArrayBuffer(1), language: "eng" });
+  const task = service.recognizeDocument({ sourceBytes: new TextEncoder().encode("%PDF-1.7").buffer, language: "eng" });
   await waitTurn();
   const started = performance.now();
   assert.equal(await service.cancel(), true);
@@ -237,17 +237,17 @@ assert.equal(new TextDecoder().decode(await readPdfOcrSource(acceptedPdf)), "%PD
     ocrService: ocr.service,
     canvasFactory: () => canvasHarness([]),
   });
-  await assert.rejects(service.recognizeDocument({ sourceBytes: new ArrayBuffer(1), language: "eng" }), (error) => error.code === "PDF_OCR_FAILED");
-  assert.equal((await service.recognizeDocument({ sourceBytes: new ArrayBuffer(1), language: "eng" })).pages[0].text, "retry succeeded");
+  await assert.rejects(service.recognizeDocument({ sourceBytes: new TextEncoder().encode("%PDF-1.7").buffer, language: "eng" }), (error) => error.code === "PDF_OCR_FAILED");
+  assert.equal((await service.recognizeDocument({ sourceBytes: new TextEncoder().encode("%PDF-1.7").buffer, language: "eng" })).pages[0].text, "retry succeeded");
   await service.dispose();
-  await assert.rejects(service.recognizeDocument({ sourceBytes: new ArrayBuffer(1), language: "eng" }), (error) => error.code === "PDF_OCR_DISPOSED");
+  await assert.rejects(service.recognizeDocument({ sourceBytes: new TextEncoder().encode("%PDF-1.7").buffer, language: "eng" }), (error) => error.code === "PDF_OCR_DISPOSED");
 }
 
 {
   const renderer = rendererHarness({ loadError: new Error("FormatError: Invalid PDF structure") });
   const ocr = ocrHarness();
   const service = createPdfOcrService({ rendererFactory: async () => renderer.renderer, ocrService: ocr.service, canvasFactory: () => canvasHarness([]) });
-  await assert.rejects(service.recognizeDocument({ sourceBytes: new ArrayBuffer(1), language: "eng" }), (error) => error.code === "UNREADABLE_PDF");
+  await assert.rejects(service.recognizeDocument({ sourceBytes: new TextEncoder().encode("%PDF-1.7").buffer, language: "eng" }), (error) => error.code === "UNREADABLE_PDF");
   assert.equal(renderer.events.filter((event) => event === "destroy").length, 1);
   await service.dispose();
 }
@@ -257,7 +257,7 @@ assert.equal(new TextDecoder().decode(await readPdfOcrSource(acceptedPdf)), "%PD
   const ocr = ocrHarness();
   const service = createPdfOcrService({ rendererFactory: async () => renderer.renderer, ocrService: ocr.service, canvasFactory: () => canvasHarness([]) });
   const result = await service.recognizeDocument({
-    sourceBytes: new ArrayBuffer(1), language: "eng", selection: { mode: "selected", pageNumbers: [1] },
+    sourceBytes: new TextEncoder().encode("%PDF-1.7").buffer, language: "eng", selection: { mode: "selected", pageNumbers: [1] },
   });
   assert.equal(result.largeDocument, true, "large documents surface a warning signal without an arbitrary hard limit");
   await service.dispose();

@@ -9,6 +9,9 @@
 .tool-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, 21rem); gap: var(--space-5); align-items: start; }
 .tool-layout > *, .tool-workspace > *, .settings, .settings form, .field, .mode-option > span, .check-field > span, .tool-actions, .tool-status { min-width: 0; }
 .tool-workspace { display: grid; min-width: 0; gap: var(--space-5); }
+.scope-note { margin-top: var(--space-5); padding: var(--space-4); box-shadow: none; }
+.scope-note h2 { margin: 0 0 var(--space-2); font-size: var(--font-size-base); }
+.scope-note p { margin: 0; color: var(--text-secondary); font-size: var(--font-size-sm); }
 .drop-zone { position: relative; padding: clamp(2.5rem, 7vw, 4.75rem) var(--space-5); overflow: hidden; border: 1px dashed var(--border-strong); border-radius: var(--radius-lg); text-align: center; background: var(--bg-secondary); cursor: pointer; transition: border-color var(--transition-fast), background-color var(--transition-fast); }
 .drop-zone::before { display: grid; width: 3rem; height: 3rem; place-items: center; margin: 0 auto var(--space-4); border: 1px solid var(--border); border-radius: 50%; background: var(--bg-primary); color: var(--accent); content: "+"; font-size: 1.5rem; font-weight: 500; }
 .drop-zone[data-dragging="true"] { border-color: var(--accent); background: var(--accent-soft); }
@@ -60,7 +63,9 @@
 .settings h2 { margin-bottom: var(--space-5); padding-bottom: var(--space-4); border-bottom: 1px solid var(--border); font-size: 1.35rem; }
 .field { display: grid; gap: var(--space-2); margin-bottom: var(--space-4); }
 .field label { color: var(--text-secondary); font-size: 0.78rem; font-weight: var(--font-weight-bold); }
-.field input, .field select { width: 100%; min-height: 2.75rem; padding: 0.55rem 0.7rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-primary); color: var(--text-primary); line-height: var(--line-height-control); transition: border-color var(--transition-fast), background-color var(--transition-theme); }
+.field input, .field select { width: 100%; min-height: 2.75rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background-color: var(--bg-primary); color: var(--text-primary); line-height: var(--line-height-control); transition: border-color var(--transition-fast), background-color var(--transition-theme); }
+.field input { padding: 0.55rem 0.7rem; }
+.field select { padding-block: .55rem; }
 .field input:hover, .field select:hover { border-color: var(--border-strong); }
 .field-help { margin: 0; color: var(--text-secondary); font-size: 0.72rem; }
 .field-error { min-height: 1.25rem; margin: var(--space-2) 0 0; color: var(--tool-danger); font-size: 0.78rem; }
@@ -121,4 +126,13 @@
   .queue { padding: var(--space-4); }
   .queue-header { align-items: flex-start; flex-direction: column; gap: var(--space-1); }
   .drop-zone .button { width: 100%; }
+}
+
+@media (max-width: 38rem) {
+  .tool-main { --tool-stack-gap: var(--space-6); }
+  .tool-layout, .tool-workspace { gap: var(--tool-stack-gap); }
+  .tool-intro { margin-bottom: var(--tool-stack-gap); }
+  .tool-main :is(.metadata-workspace, .metadata-comparison, .clean-result, .organizer, .scope-note) { margin-top: var(--tool-stack-gap); }
+  .tool-status:not(:empty) { margin-top: var(--space-5); }
+  .source-panel__header { flex-wrap: wrap; }
 }

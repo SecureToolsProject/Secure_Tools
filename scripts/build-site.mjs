@@ -4,9 +4,12 @@ import { fileURLToPath } from "node:url";
 
 import { canonicalPages, legacyRedirects, redirectStatus } from "./site-routes.mjs";
 import { compiledBrowserModules } from "./typescript-modules.mjs";
+import { buildIdentity, writeBuildInfo } from "./build-provenance.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.join(root, "dist");
+// Resolve before replacing output; production CI cannot fall back to a local SHA.
+const identity = buildIdentity();
 
 fs.rmSync(output, { recursive: true, force: true });
 fs.mkdirSync(output, { recursive: true });
@@ -14,7 +17,7 @@ fs.mkdirSync(output, { recursive: true });
 for (const directory of ["assets", "css", "js"]) {
   fs.cpSync(path.join(root, directory), path.join(output, directory), {
     recursive: true,
-    filter: (source) => !/\.(?:d\.ts|ts|tsx|map)$/.test(source),
+    filter: (source) => path.basename(source) !== ".gitkeep" && !/\.(?:d\.ts|ts|tsx|map)$/.test(source),
   });
 }
 fs.cpSync(path.join(root, "tools", "shared"), path.join(output, "shared"), {
@@ -30,6 +33,9 @@ for (const { source, route } of canonicalPages) {
   fs.copyFileSync(path.join(root, source), destination);
 
   const sourceDirectory = path.dirname(path.join(root, source));
+  // The root page has no sibling tool assets. Copy its public files explicitly
+  // below rather than publishing package manifests, agent policy or build config.
+  if (sourceDirectory === root) continue;
   for (const entry of fs.readdirSync(sourceDirectory, { withFileTypes: true })) {
     if (entry.name === "index.html" || entry.isDirectory() || /\.(?:d\.ts|ts|tsx|map)$/.test(entry.name)) continue;
     fs.copyFileSync(path.join(sourceDirectory, entry.name), path.join(path.dirname(destination), entry.name));
@@ -44,11 +50,13 @@ for (const module of compiledBrowserModules) {
   fs.copyFileSync(source, destination);
 }
 
-for (const file of ["404.html", "robots.txt", "sitemap.xml"]) {
+for (const file of ["404.html", "robots.txt", "sitemap.xml", "LICENSE", "CNAME"]) {
   fs.copyFileSync(path.join(root, file), path.join(output, file));
 }
 
 const redirectFile = `${legacyRedirects.map(({ from, to }) => `${from} ${to} ${redirectStatus}`).join("\n")}\n`;
 fs.writeFileSync(path.join(output, "_redirects"), redirectFile);
+writeBuildInfo(output, identity);
+fs.copyFileSync(path.join(root, "config", "cloudflare", "_headers"), path.join(output, "_headers"));
 
 console.log(`Built ${canonicalPages.length} canonical pages and ${legacyRedirects.length} permanent redirects in dist/.`);

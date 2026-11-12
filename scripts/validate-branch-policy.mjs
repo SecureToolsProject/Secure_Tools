@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 
-export const ACTIVE_INTEGRATION_BRANCH = "v2.2";
+export const ACTIVE_INTEGRATION_BRANCH = "v2.3";
 
 const routineBranch = /^(?:feat|fix|test|chore)\/.+$/;
 const hotfixBranch = /^hotfix\/.+$/;
@@ -76,7 +76,7 @@ export function validateBranchPolicy(baseRef, headRef) {
       };
   }
 
-  return { valid: true, reason: null };
+  return { valid: false, reason: `Unsupported pull request base ${baseRef}; use ${ACTIVE_INTEGRATION_BRANCH} or an authorized main promotion/hotfix.` };
 }
 
 export function run([baseRef, headRef] = process.argv.slice(2)) {

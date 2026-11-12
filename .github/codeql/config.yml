@@ -1,0 +1,7 @@
+name: First-party JavaScript and TypeScript
+paths-ignore:
+  - assets/vendor/**
+  - node_modules/**
+  - dist/**
+  - .ts-build/**
+  - tests/fixtures/**

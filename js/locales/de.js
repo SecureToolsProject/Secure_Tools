@@ -66,6 +66,7 @@ export const de = {
     }
   },
   "common": {
+    "menu": "Menü",
     "skip": "Zum Hauptinhalt springen",
     "brandTagline": "Private Dateitools, direkt auf Ihrem Gerät",
     "nav": {

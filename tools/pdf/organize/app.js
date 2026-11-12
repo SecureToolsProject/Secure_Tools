@@ -1,7 +1,6 @@
 import { t } from "../../../js/i18n.js";
 import { formatBytes } from "../../shared/file.js";
 import { downloadBlob, requestPdfSaveHandle, writeBlobToHandle } from "../../shared/save.js";
-import { isSupportedPdf } from "../../shared/pdf.js";
 import { createPageState, isDirty, movePage, removePage, resetPages, rotatePage, visiblePages } from "./model.js";
 import { organizePdf, organizerFilename, readOrganizerSource } from "./pdf.js";
 import { PdfThumbnailRenderer, runRenderQueue } from "./renderer.js";
@@ -135,7 +134,6 @@ async function addSource(files) {
   if (state.busy || !files.length) return;
   if (files.length !== 1) { setStatus("organizePdf.errors.oneFile", {}, "error"); return; }
   const file = files[0];
-  if (!isSupportedPdf(file)) { setStatus("organizePdf.errors.unsupported", {}, "error"); return; }
   state.busy = true;
   renderState();
   setStatus("organizePdf.status.loading");

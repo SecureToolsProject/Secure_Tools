@@ -1,5 +1,5 @@
 import { sanitizePdfFilename } from "../../shared/file.js";
-import { createPdfError, loadPdfSource, requirePdfDocument } from "../../shared/pdf.js";
+import { createPdfError, loadPdfSource, readPdfSourceBytes, requirePdfDocument, requirePdfSignature } from "../../shared/pdf.js";
 import { extractMetadata, isSupportedMetadataKey, SUPPORTED_METADATA_FIELDS } from "./model.js";
 
 function pageSnapshot(document) {
@@ -40,7 +40,7 @@ export async function readPdfMetadata(file, PDFDocument) {
   requirePdfDocument(PDFDocument);
   const document = await loadPdfSource(file, PDFDocument);
   return {
-    bytes: await file.arrayBuffer(),
+    bytes: await readPdfSourceBytes(file),
     fields: extractMetadata(document),
     pages: pageSnapshot(document),
   };
@@ -57,6 +57,7 @@ export async function cleanPdfMetadata({ sourceBytes, selectedKeys, PDFDocument,
   }
 
   try {
+    requirePdfSignature(sourceBytes);
     const source = await PDFDocument.load(sourceBytes, { ignoreEncryption: false, updateMetadata: false });
     const before = extractMetadata(source);
     const beforePages = pageSnapshot(source);
