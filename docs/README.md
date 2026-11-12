@@ -27,7 +27,9 @@ The root [README](../README.md) introduces Secure Tools. This directory owns det
 
 - [v2.3 production verification](./v2.3-production-verification.md) records the
   November 12 actual-main deployment/provenance/header/browser evidence and
-  bounded issue dispositions; tagging and release publication remain separate.
+  bounded issue dispositions, followed by separately authorized
+  [v2.3.0 publication](https://github.com/SecureToolsProject/Secure_Tools/releases/tag/v2.3.0)
+  without a redeployment or change to the verified production SHA.
 
 - [v2.3 release readiness](./v2.3-release-readiness.md) freezes feature scope,
   inventories the integration delta and open findings, and separates candidate
