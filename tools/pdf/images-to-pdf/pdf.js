@@ -63,7 +63,11 @@ export async function createPdfBlob({
   onProgress = () => {},
   decode = decodeImage,
   convert = imageToJpegData,
+  imageFormat = "JPEG",
+  signal,
 }) {
+  const checkCancelled = () => { if (signal?.aborted) throw new DOMException("Cancelled", "AbortError"); };
+  checkCancelled();
   if (!files.length) {
     const error = new Error("NO_FILES");
     error.code = "NO_FILES";
@@ -79,7 +83,9 @@ export async function createPdfBlob({
   for (let index = 0; index < files.length; index += 1) {
     let image;
     try {
+      checkCancelled();
       image = await decode(files[index]);
+      checkCancelled();
       const [pageWidth, pageHeight] = getPageDimensions(
         options.pageSize,
         options.orientation,
@@ -98,7 +104,8 @@ export async function createPdfBlob({
         pdf.addPage([pageWidth, pageHeight], pageOrientation);
       }
 
-      const jpegData = convert(image, Number(options.quality) || 0.92);
+      const imageData = await convert(image, Number(options.quality) || 0.92, index);
+      checkCancelled();
       const placement = getImagePlacement(
         image,
         pageWidth,
@@ -107,8 +114,8 @@ export async function createPdfBlob({
         options.fillPage,
       );
       pdf.addImage(
-        jpegData,
-        "JPEG",
+        imageData,
+        imageFormat,
         placement.x,
         placement.y,
         placement.width,
@@ -119,6 +126,7 @@ export async function createPdfBlob({
       onProgress(index + 1, files.length);
       await new Promise((resolve) => setTimeout(resolve, 0));
     } catch (cause) {
+      if (signal?.aborted || cause.name === "AbortError") throw new DOMException("Cancelled", "AbortError");
       const error = new Error(cause.code || "PDF_GENERATION_FAILED", { cause });
       error.code = cause.code || "PDF_GENERATION_FAILED";
       error.fileName = files[index]?.name || "";
@@ -128,5 +136,8 @@ export async function createPdfBlob({
     }
   }
 
-  return pdf.output("blob");
+  checkCancelled();
+  const result = pdf.output("blob");
+  checkCancelled();
+  return result;
 }

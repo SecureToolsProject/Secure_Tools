@@ -16,12 +16,13 @@
 | Image | [Image Metadata Inspector & Cleaner](https://tools.securetools.app/image/metadata/) | Production | Supported JPEG, PNG, WebP metadata |
 | Image | [Image → Text OCR](https://tools.securetools.app/image/to-text/) | Production | One PNG, JPEG, or WebP → editable English/Korean text |
 | Privacy | [Privacy hub](https://tools.securetools.app/privacy/) | Production hub | Navigation to Image and PDF metadata tools |
-| Scan/OCR | Category surface | Planned | No production processing tool |
+| Scan/OCR | Category surface | Available | Image/PDF OCR links; Document Scanner Core in v2.4 development |
+| Scan/OCR | Document Scanner | Development (24A/24B) | JPEG/PNG/WebP; arrange/preprocess pages; source-resolution PDF preview/download; no scanner OCR yet |
 | Media | Category surface | Planned | No production processing tool |
 
 “Production” means linked and covered by the current repository validation. “Planned” cards are non-interactive. Secure Tools may later link separately deployed companion applications, but no Companion status or integration exists on the live site today.
 
-The Image category exposes the tested OCR runtime through a single-image Image → Text workflow with English, Korean, and combined recognition. The broader Scan/OCR category remains planned; PDF OCR and searchable PDF output are deferred.
+The Image category exposes the tested OCR runtime through a single-image Image → Text workflow with English, Korean, and combined recognition. PDF OCR and searchable PDF output already exist in PDF to Text. Scanner Core is available in v2.4 development; scanner PDF export is implemented in 24B and optional OCR remains deferred to 24C.
 
 ## Shared Image boundaries
 
@@ -79,7 +80,7 @@ Inspects Title, Author, Subject, Keywords, Creator, Producer, Creation Date, and
 
 ## Deferred directions
 
-Broader PDF modification, compression, encryption, XMP/structural sanitization, PDF OCR, searchable PDF output, broader Scan/OCR workflows, Media, and offline/PWA work remain deferred. Separately deployed companion applications are an architectural possibility, not a current product status or integration.
+Broader PDF modification, compression, encryption, XMP/structural sanitization, scanner PDF export/OCR integration, broader Scan/OCR workflows, Media, and offline/PWA work remain deferred. Separately deployed companion applications are an architectural possibility, not a current product status or integration.
 
 ## Related guarantees
 

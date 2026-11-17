@@ -9,14 +9,14 @@ import {
   validateProductionVerificationLock,
 } from "../scripts/validate-branch-policy.mjs";
 
-assert.equal(ACTIVE_INTEGRATION_BRANCH, "v2.3");
+assert.equal(ACTIVE_INTEGRATION_BRANCH, "v2.4");
 
 for (const [headRef, baseRef] of [
-  ["feat/example", "v2.3"],
-  ["fix/example", "v2.3"],
-  ["test/example", "v2.3"],
-  ["chore/example", "v2.3"],
-  ["v2.3", "main"],
+  ["feat/example", "v2.4"],
+  ["fix/example", "v2.4"],
+  ["test/example", "v2.4"],
+  ["chore/example", "v2.4"],
+  ["v2.4", "main"],
   ["hotfix/example", "main"],
 ]) {
   assert.deepEqual(validateBranchPolicy(baseRef, headRef), { valid: true, reason: null }, `${headRef} → ${baseRef}`);
@@ -33,14 +33,14 @@ for (const [headRef, baseRef] of [
 ]) {
   const result = validateBranchPolicy(baseRef, headRef);
   assert.equal(result.valid, false, `${headRef} → ${baseRef}`);
-  assert.match(result.reason, /Only v2\.3 release promotion or an explicit hotfix/);
-  assert.throws(() => run([baseRef, headRef]), /Only v2\.3 release promotion or an explicit hotfix/);
+  assert.match(result.reason, /Only v2\.4 release promotion or an explicit hotfix/);
+  assert.throws(() => run([baseRef, headRef]), /Only v2\.4 release promotion or an explicit hotfix/);
 }
 
 for (const headRef of ["v2.1", "main", "hotfix/example", "feature/example"]) {
-  const result = validateBranchPolicy("v2.3", headRef);
-  assert.equal(result.valid, false, `${headRef} → v2.3`);
-  assert.match(result.reason, /Pull requests into v2\.3 must come from feat\/\*, fix\/\*, test\/\*, or chore\/\*/);
+  const result = validateBranchPolicy("v2.4", headRef);
+  assert.equal(result.valid, false, `${headRef} → v2.4`);
+  assert.match(result.reason, /Pull requests into v2\.4 must come from feat\/\*, fix\/\*, test\/\*, or chore\/\*/);
 }
 
 for (const base of ["v2.2", "v2.1", "unknown"]) {
@@ -83,4 +83,4 @@ assert.throws(() => validateProductionVerificationLock(originalLock, changedLock
 const leakedRuntime = structuredClone(verificationLock); leakedRuntime.packages["node_modules/playwright"].dev = false;
 assert.throws(() => validateProductionVerificationLock(originalLock, leakedRuntime), /test-only Playwright/);
 
-console.log("v2.3 integration, production promotion, hotfix, and rejection branch-policy checks passed.");
+console.log("v2.4 integration, production promotion, hotfix, and rejection branch-policy checks passed.");

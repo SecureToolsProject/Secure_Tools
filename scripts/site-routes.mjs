@@ -19,6 +19,7 @@ export const canonicalPages = [
   { source: "tools/image/metadata/index.html", route: "/image/metadata/" },
   { source: "tools/image/to-text/index.html", route: "/image/to-text/" },
   { source: "tools/scan/index.html", route: "/scan/" },
+  { source: "tools/scan/document/index.html", route: "/scan/document/", legacy: false },
   { source: "tools/media/index.html", route: "/media/" },
 ];
 

@@ -4,7 +4,7 @@ import fs from "node:fs";
 const workflow = fs.readFileSync(".github/workflows/ci.yml", "utf8");
 assert.match(workflow, /^name: CI$/m);
 assert.match(workflow, /^\s{2}pull_request:$/m);
-assert.match(workflow, /^\s{2}push:\s*$[\s\S]*?^\s{6}- main$[\s\S]*?^\s{6}- v2$[\s\S]*?^\s{6}- v2\.3$/m);
+assert.match(workflow, /^\s{2}push:\s*$[\s\S]*?^\s{6}- main$[\s\S]*?^\s{6}- v2$[\s\S]*?^\s{6}- v2\.4$/m);
 assert.match(workflow, /uses: actions\/checkout@[0-9a-f]{40} # v4\.\d+\.\d+/);
 assert.match(workflow, /uses: actions\/setup-node@[0-9a-f]{40} # v4\.\d+\.\d+/);
 assert.match(workflow, /node-version: 24/);

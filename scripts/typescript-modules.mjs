@@ -1,4 +1,7 @@
 export const compiledBrowserModules = Object.freeze([
+  Object.freeze({ source: "tools/scan/document/pdf.ts", compiled: "tools/scan/document/pdf.js", public: "scan/document/pdf.js" }),
+  Object.freeze({ source: "tools/shared/scan.ts", compiled: "tools/shared/scan.js", public: "shared/scan.js" }),
+  Object.freeze({ source: "tools/scan/document/state.ts", compiled: "tools/scan/document/state.js", public: "scan/document/state.js" }),
   Object.freeze({
     source: "tools/pdf/to-text/app.ts",
     compiled: "tools/pdf/to-text/app.js",

@@ -5,28 +5,30 @@ Secure Tools separates product versions from Sprint numbers. A Sprint is a bound
 ## Branch roles
 
 - `main` is the production branch. Routine development does not target it.
-- `v2.3` is the active integration branch for the v2.3.0 cycle.
-- Short-lived `feat/*`, `fix/*`, `test/*`, and `chore/*` branches start from `v2.3` and return through pull requests into `v2.3`.
-- Direct feature or fix commits to `main` or `v2.3` are prohibited.
+- `v2.4` is the active integration branch for the v2.4.0 cycle.
+- Short-lived `feat/*`, `fix/*`, `test/*`, and `chore/*` branches start from `v2.4` and return through pull requests into `v2.4`.
+- Direct feature or fix commits to `main` or `v2.4` are prohibited.
 
 ```text
 main (production)
   ↑
-release PR after v2.3 hardening
+release PR after v2.4 hardening
   ↑
-v2.3 (active integration)
+v2.4 (active integration)
   ↑
 Sprint PRs
   ↑
 feat/* fix/* test/* chore/*
 ```
 
+The v2.4 branch starts at production main commit `2eb8e865e32558bfd031cd65c85d5d0fea64f5c7`. The policy migration is reviewed as a separate prerequisite commit in the first v2.4 PR; no integration or production merge is implied. Existing v2.3 dependency proposals remain unmerged and require separate review.
+
 ## Sprint delivery
 
-1. Update local `v2.3` from `origin/v2.3`.
+1. Update local `v2.4` from `origin/v2.4`.
 2. Create a short-lived branch from that exact integration state.
 3. Commit and validate only the Sprint’s intended changes.
-4. Open a pull request into `v2.3` and wait for required CI.
+4. Open a pull request into `v2.4` and wait for required CI.
 5. Treat review and merge as a separate step. An agent does not merge its own pull request or enable auto-merge unless the user explicitly authorizes that specific action.
 6. After a successful merge and verification, remove the merged short-lived branch when branch cleanup is authorized.
 
@@ -40,7 +42,7 @@ CI validates non-merge commits introduced by the pull request’s actual base-to
 
 ## Production release
 
-The v2.2.0 cycle is released. The v2.3.0 cycle is active development. After the v2.3.0 scope is integrated, complete release hardening and final verification on `v2.3`. Promote it through a dedicated `v2.3` → `main` pull request. Only after that pull request is explicitly reviewed and merged may a separately authorized task create the v2.3.0 tag and release.
+The v2.3.0 cycle is released. The v2.4.0 cycle is active development. After the v2.4.0 scope is integrated, complete release hardening and final verification on `v2.4`. Promote it through a dedicated `v2.4` → `main` pull request. Only after that pull request is explicitly reviewed and merged may a separately authorized task create the v2.4.0 tag and release.
 
 ## Hotfixes
 
@@ -48,4 +50,4 @@ Urgent production fixes use a dedicated `hotfix/*` branch and pull request into 
 
 ## Enforced pull request policy
 
-CI permits routine `feat/*`, `fix/*`, `test/*`, and `chore/*` pull requests into `v2.3`. Pull requests into `main` pass the branch-policy gate only when the head is exactly `v2.3` or a dedicated `hotfix/*` branch. The repository protects both long-lived branches with required pull requests, the existing `Validate static tools` check, resolved review conversations, blocked force pushes, and blocked deletion. Because the repository currently has one maintainer, an approving-review count is not required; explicit merge authorization remains mandatory.
+CI permits routine `feat/*`, `fix/*`, `test/*`, and `chore/*` pull requests into `v2.4`. Pull requests into `main` pass the branch-policy gate only when the head is exactly `v2.4` or a dedicated `hotfix/*` branch. Existing main/v2.3 branch protections are unchanged. The new v2.4 branch does not inherit remote branch protections automatically; equivalent required-PR/check, resolved-conversation, force-push and deletion protections remain an administrator follow-up. This PR enforces the branch policy in CI but does not claim to configure remote protection settings. Because the repository currently has one maintainer, an approving-review count is not required; explicit merge authorization remains mandatory.

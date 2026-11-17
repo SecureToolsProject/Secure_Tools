@@ -86,3 +86,7 @@ Release history is recorded in the [changelog](./CHANGELOG.md). The current v2.0
 Source: [SecureToolsProject/Secure_Tools](https://github.com/SecureToolsProject/Secure_Tools)
 
 See [LICENSE](./LICENSE). Vendored third-party code retains its own license beside each dependency.
+
+## v2.4 development
+
+Document Scanner Core is available in the development build at `/scan/document/`: local multi-image input, accessible ordering, orientation-aware previews, and Original/Grayscale/Document appearance. Scan to PDF now exports source-resolution pages with per-page appearance, progress/cancel, local PDF preview and download. Optional scanner OCR remains planned. See [Sprint 24B implementation and QA](docs/sprint-24b-scan-to-pdf.md). See [Sprint 24A implementation and QA](docs/sprint-24a-scanner-core.md).

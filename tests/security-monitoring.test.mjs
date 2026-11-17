@@ -87,7 +87,7 @@ await assert.rejects(scanGithubVendor(github, projectRequest({ advisories: {} })
 await assert.rejects(scanGithubVendor(github, projectRequest({ secondPage: true, advisories: [{ ghsa_id: "GHSA-test-test-test", state: "published", published_at: "2026-10-01T00:00:00Z", withdrawn_at: null }] })), /applicability needs review/);
 
 const workflow = fs.readFileSync(".github/workflows/security-monitoring.yml", "utf8");
-assert.match(workflow, /branches: \[v2\.3, main\]/);
+assert.match(workflow, /branches: \[v2\.4, main\]/);
 assert.match(workflow, /languages: javascript-typescript\n\s+build-mode: none/);
 assert.match(workflow, /security-events: write/);
 assert.doesNotMatch(workflow, /contents: write|pull-requests: write|continue-on-error|\|\| true|pull_request_target/);
@@ -96,7 +96,7 @@ assert.match(workflow, /npm audit --json --audit-level=low/);
 assert.match(workflow, /node scripts\/check-security-advisories\.mjs/);
 assert.match(fs.readFileSync(".github/codeql/config.yml", "utf8"), /assets\/vendor\/\*\*/);
 const dependabot = fs.readFileSync(".github/dependabot.yml", "utf8");
-assert.match(dependabot, /package-ecosystem: "npm"[\s\S]*?target-branch: "v2\.3"/);
+assert.match(dependabot, /package-ecosystem: "npm"[\s\S]*?target-branch: "v2\.4"/);
 assert.match(dependabot, /package-ecosystem: "github-actions"/);
 assert.doesNotMatch(dependabot, /auto-merge/);
 auditActionPins();
