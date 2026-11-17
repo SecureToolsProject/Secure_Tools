@@ -2,13 +2,13 @@
 
 ## Protected branches
 
-- `main` is production-only. `v2.3` is the active integration branch for the v2.3.0 development cycle.
-- Never commit feature, fix, test, or chore work directly to `main` or `v2.3`.
+- `main` is production-only. `v2.4` is the active integration branch for the v2.4.0 development cycle, bootstrapped from production `main` after v2.3.0.
+- Never commit feature, fix, test, or chore work directly to `main` or `v2.4`.
 
 ## Development work
 
-- Create short-lived `feat/*`, `fix/*`, `test/*`, or `chore/*` branches from `v2.3`.
-- Sprint and routine development pull requests target `v2.3`, not `main`.
+- Create short-lived `feat/*`, `fix/*`, `test/*`, or `chore/*` branches from `v2.4`.
+- Sprint and routine development pull requests target `v2.4`, not `main`.
 - After a successful merge, delete only the merged short-lived branch when cleanup is authorized.
 
 ## Commit messages
@@ -30,8 +30,8 @@
 
 ## Production promotion
 
-- Normal development reaches `main` only through a dedicated release or hardening pull request from `v2.3`.
-- Creating the v2.3.0 tag or release requires separate explicit authorization after final verification.
+- Normal development reaches `main` only through a dedicated release or hardening pull request from `v2.4`.
+- Creating the v2.4.0 tag or release requires separate explicit authorization after final verification.
 
 ## Hotfixes
 

@@ -2,7 +2,7 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
-    target-branch: "v2.3"
+    target-branch: "v2.4"
     schedule:
       interval: "weekly"
     pull-request-branch-name:
@@ -12,7 +12,7 @@ updates:
       prefix: "🔧[Config] "
   - package-ecosystem: "npm"
     directory: "/"
-    target-branch: "v2.3"
+    target-branch: "v2.4"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
