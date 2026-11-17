@@ -47,9 +47,12 @@ for (const action of ["clear", "cancel", "dispose", "replace"]) {
   const delayed = createScanQueue({ ...config, preview: async () => ++calls === 1 ? new Promise(resolve => { release = resolve; }) : preview() });
   const pending = delayed.add([file("old.png")], "original");
   while (!release) await new Promise(resolve => setTimeout(resolve, 0));
-  if (action === "replace") await delayed.add([file("new.png")], "grayscale"); else delayed[action]();
+  let replacement;
+  if (action === "replace") replacement = delayed.add([file("new.png")], "grayscale"); else delayed[action]();
+  assert.equal(calls, 1, "Replacement decode waits for native work already in flight");
   release(await preview());
   assert.equal((await pending).cancelled, true);
+  await replacement;
   assert.deepEqual(delayed.pages.map(page => page.file.name), action === "replace" ? ["new.png"] : []);
   delayed.dispose();
 }
@@ -59,6 +62,7 @@ let releaseMode;
 const modeQueue = createScanQueue({ ...config, preview: async (file, mode) => mode === "original" ? preview() : new Promise(resolve => { releaseMode = resolve; }) });
 await modeQueue.add([file("mode.png")], "original");
 const change = modeQueue.setMode("grayscale");
+while (!releaseMode) await new Promise(resolve => setTimeout(resolve, 0));
 modeQueue.remove(modeQueue.pages[0].id);
 const before = created.length; releaseMode(await preview()); await change;
 assert.equal(created.length, before);

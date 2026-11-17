@@ -20,7 +20,19 @@ export function createScanQueue(options: QueueOptions = {}) {
   let controller: AbortController | null = null;
   let sequence = 0;
   let disposed = false;
+  let previewWork: Promise<void> = Promise.resolve();
   const changed = () => options.changed?.();
+
+  // Native decode cannot be interrupted. Serialize replacements behind it so
+  // rapid input changes cannot accumulate concurrent full-resolution bitmaps.
+  function renderPreview(file: File, mode: ScanMode, signal: AbortSignal) {
+    const result = previewWork.then(() => {
+      if (signal.aborted) throw new DOMException("Cancelled", "AbortError");
+      return preview(file, mode, { signal });
+    });
+    previewWork = result.then(() => {}, () => {});
+    return result;
+  }
 
   function cancel() { controller?.abort(); controller = null; changed(); }
   function start() {
@@ -53,7 +65,7 @@ export function createScanQueue(options: QueueOptions = {}) {
           if (pages.length >= MAX_SCAN_PAGES || pages.reduce((total, page) => total + page.file.size, 0) + file.size > MAX_SCAN_BYTES) throw new Error("SCAN_QUEUE_LIMIT");
           await validateImageSignature(file);
           if (!current(job)) break;
-          const result = await preview(file, mode, { signal: job.signal });
+          const result = await renderPreview(file, mode, job.signal);
           if (!current(job)) break;
           pages.push({ id: ++sequence, file, url: createUrl(result.blob), width: result.width, height: result.height, mode });
           added++; changed();
@@ -72,7 +84,7 @@ export function createScanQueue(options: QueueOptions = {}) {
       for (const page of [...pages]) {
         if (!current(job)) return false;
         if (page.mode === mode) continue;
-        const result = await preview(page.file, mode, { signal: job.signal });
+        const result = await renderPreview(page.file, mode, job.signal);
         if (!current(job)) return false;
         if (!pages.includes(page)) continue;
         const url = createUrl(result.blob);

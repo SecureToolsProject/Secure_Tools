@@ -10,7 +10,7 @@ await fs.mkdir(directory, { recursive: true });
 const port = 44000 + Math.floor(Math.random() * 9000);
 const origin = `http://127.0.0.1:${port}`;
 const server = spawn(process.execPath, ["tests/serve-ocr-smoke.mjs", String(port)], { stdio: ["ignore", "pipe", "inherit"] });
-const report = { cases: [], external: [], errors: [], headerErrors: [], status: "FAIL" };
+const report = { cases: [], external: [], mutating: [], errors: [], headerErrors: [], status: "FAIL" };
 let browser;
 try {
   await new Promise((resolve, reject) => {
@@ -51,7 +51,10 @@ try {
       URL.revokeObjectURL = url => { window.scanUrls.revoked.push(url); revoke(url); };
       document.addEventListener("securitypolicyviolation", event => console.error(`CSP: ${event.effectiveDirective}`));
     }, language);
-    context.on("request", request => { if (!request.url().startsWith(`${origin}/`) && !/^(blob:|data:|about:)/.test(request.url())) report.external.push(request.url()); });
+    context.on("request", request => {
+      if (!request.url().startsWith(`${origin}/`) && !/^(blob:|data:|about:)/.test(request.url())) report.external.push(request.url());
+      if (!["GET", "HEAD"].includes(request.method())) report.mutating.push({ url: request.url(), method: request.method() });
+    });
     const page = await context.newPage();
     page.on("pageerror", error => report.errors.push(error.message));
     page.on("console", message => { if (message.type() === "error") report.errors.push(message.text()); });
@@ -125,6 +128,7 @@ try {
     await context.close();
   }
   assert.deepEqual(report.headerErrors, []);
+  assert.deepEqual(report.mutating, [], "No document data is posted even to the same origin");
   assert.deepEqual(report.external, []); assert.deepEqual(report.errors, []);
   report.status = "PASS";
   console.log("Scanner browser smoke passed: 30 viewport/locale cases; JPEG/PNG/WebP; EXIF; modes; keyboard order; input/drop/paste; large images; cleanup; CSP/network.");

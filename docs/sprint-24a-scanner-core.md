@@ -6,7 +6,7 @@ The v2.4 development scanner is `/scan/document/`. It accepts signature-validate
 
 Previews retain aspect ratio and EXIF normalization through `decodeImage`. Each preview is at most 1,000 pixels on its longest edge. Source File references remain unchanged; decoded bitmaps and canvas backing stores are released after processing. Preview URLs are revoked on replacement, removal, clear and page exit. The queue admits at most 20 pages / 200 MiB total, plus existing 50-MiB-file / 50-megapixel / 16,384-pixel decoder limits. Oversized or broken inputs produce recoverable messages, while valid files in the batch remain available.
 
-Adding another batch cancels publication from the previous batch. Clear and cancellation invalidate in-flight results. Cancelling appearance changes retains completed pages with their actual mode labels; Apply to all pages is the retry mechanism. Native decoding/encoding cannot be interrupted mid-call, but resources are released and stale results cannot enter the queue.
+Adding another batch cancels publication from the previous batch. Clear and cancellation invalidate in-flight results. Cancelling appearance changes retains completed pages with their actual mode labels; Apply to all pages is the retry mechanism. Native decoding/encoding cannot be interrupted mid-call, but resources are released and stale results cannot enter the queue. Replacement previews wait for existing native work to finish, preventing overlapping full-resolution decodes under rapid input changes.
 
 ## Branch policy
 
