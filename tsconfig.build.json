@@ -14,6 +14,8 @@
     "tools/pdf/to-text/output.ts",
     "tools/shared/pdf-ocr.ts",
     "tools/shared/searchable-pdf.ts",
-    "tools/shared/*.d.ts"
+    "tools/shared/*.d.ts",
+    "tools/shared/scan.ts",
+    "tools/scan/document/*.ts"
   ]
 }

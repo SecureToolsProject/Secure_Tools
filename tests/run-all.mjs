@@ -25,6 +25,7 @@ const sourceFiles = sourceDirectories
 for (const file of sourceFiles) runNode(["--check", file], `Syntax check for ${path.relative(root, file)}`);
 
 for (const test of [
+  "tests/scanner.test.mjs",
   "tests/image-to-pdf.test.mjs",
   "tests/image-converter.test.mjs",
   "tests/image-resize.test.mjs",

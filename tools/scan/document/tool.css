@@ -1,0 +1,12 @@
+.scanner-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 1.25rem; margin-block: 1.5rem; }
+.tool-main [hidden] { display: none !important; }
+.scanner-controls, .scanner-pages { padding: clamp(1rem, 3vw, 1.5rem); min-width: 0; }
+.scanner-controls select { display: block; width: 100%; margin-block: .5rem; }
+.scan-page-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1rem; padding: 0; list-style: none; }
+.scan-page { min-width: 0; border: 1px solid var(--border); border-radius: .75rem; padding: 1rem; }
+.scan-page img { display: block; width: 100%; height: 280px; object-fit: contain; background: #fff; }
+.scan-page strong, .scan-page p { display: block; overflow-wrap: anywhere; margin-block: .75rem; }
+.scan-page-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.scan-page-actions button { min-height: 44px; min-width: 44px; white-space: normal; overflow-wrap: anywhere; }
+#tool-status { overflow-wrap: anywhere; }
+@media (max-width: 700px) { .scanner-layout { grid-template-columns: minmax(0, 1fr); } }

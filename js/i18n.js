@@ -1,3 +1,4 @@
+import { documentScannerLocales } from "./locales/document-scanner.js";
 import { en } from "./locales/en.js";
 import { ko } from "./locales/ko.js";
 import { ja } from "./locales/ja.js";
@@ -16,9 +17,10 @@ const STORAGE_KEY = "secure-tools-language";
 const baseTranslations = { en, ko, ja, es, de, fr };
 export const translations = Object.fromEntries(Object.entries(baseTranslations).map(([language, catalog]) => [language, {
   ...catalog,
-  metadata: { ...catalog.metadata, imageResize: imageResizeLocales[language].metadata, imageCompressor: imageCompressorLocales[language].metadata, imageMetadata: imageMetadataLocales[language].metadata, imageToText: imageToTextLocales[language].metadata, pdfToText: pdfToTextLocales[language].metadata, privacyCategory: privacyHubLocales[language].metadata },
+  metadata: { ...catalog.metadata, documentScanner: documentScannerLocales[language].metadata, imageResize: imageResizeLocales[language].metadata, imageCompressor: imageCompressorLocales[language].metadata, imageMetadata: imageMetadataLocales[language].metadata, imageToText: imageToTextLocales[language].metadata, pdfToText: pdfToTextLocales[language].metadata, privacyCategory: privacyHubLocales[language].metadata },
   tools: { ...catalog.tools, imageMetadata: imageMetadataLocales[language].toolName, imageToText: imageToTextLocales[language].toolName, pdfToText: pdfToTextLocales[language].toolName, categoryDescriptions: { ...catalog.tools.categoryDescriptions, privacy: privacyHubLocales[language].categoryDescription } },
   categories: { ...catalog.categories, pdf: { ...catalog.categories.pdf, toText: pdfToTextLocales[language].categoryDescription }, image: { ...catalog.categories.image, metadata: imageMetadataLocales[language].categoryDescription, toText: imageToTextLocales[language].categoryDescription }, scan: { ...catalog.categories.scan, pdfToText: pdfToTextLocales[language].categoryDescription } },
+  documentScanner: documentScannerLocales[language].copy,
   imageResize: imageResizeLocales[language].copy,
   imageCompressor: imageCompressorLocales[language].copy,
   imageMetadata: { ...imageMetadataLocales[language].copy, source: { ...imageMetadataLocales[language].copy.source, ...metadataUxLocales[language].image.source }, inspector: { ...imageMetadataLocales[language].copy.inspector, ...metadataUxLocales[language].image.inspector }, clean: { ...imageMetadataLocales[language].copy.clean, ...metadataUxLocales[language].image.clean }, policy: metadataUxLocales[language].image.policy },

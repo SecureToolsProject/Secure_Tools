@@ -11,7 +11,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
 const html = read("tools/pdf/to-text/index.html");
 
-assert.equal(canonicalPages.length, 19);
+assert.equal(canonicalPages.length, 20);
 assert.equal(legacyRedirects.length, 17);
 assert.ok(canonicalPages.some(({ route }) => route === "/pdf/to-text/"));
 assert.ok(!legacyRedirects.some(({ from }) => from === "/tools/pdf/to-text/"));

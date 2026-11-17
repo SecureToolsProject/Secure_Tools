@@ -88,6 +88,9 @@ jobs:
       - name: Verify responsive navigation, metadata layouts and accessibility
         run: node tests/browser/responsive.mjs
 
+      - name: Verify scanner inputs, orientation, lifecycle and privacy
+        run: node tests/browser/scanner.mjs
+
       - name: Inspect isolated release review artifact
         run: node scripts/inspect-release-artifact.mjs
 
@@ -107,4 +110,5 @@ jobs:
           path: |
             .ts-build/production-smoke
             .ts-build/responsive
+            .ts-build/scanner-qa
           retention-days: 7
