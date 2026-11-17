@@ -2,6 +2,8 @@
 
 ## 2.4.0 — Unreleased
 
+- Add source-resolution Scan to PDF with per-page appearance, EXIF-aware ordered pages, A4 fitting, cancellable generation, local PDF preview/download, export workload limits and cleanup.
+
 - Add Document Scanner Core with local JPEG/PNG/WebP input, page ordering, removal, clear, EXIF-aware bounded previews, and Original/Grayscale/Document modes.
 - Bound the scanner queue to 20 pages and 200 MiB, release temporary resources, and invalidate cancelled or replaced preview work.
 - Establish v2.4 integration policy and scanner regression/browser coverage. PDF export and scanner OCR are reserved for later sprints.

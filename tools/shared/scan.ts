@@ -29,16 +29,24 @@ export interface ScanPreviewOptions {
   canvasFactory?: () => HTMLCanvasElement;
 }
 
+export interface ScanRasterOptions extends ScanPreviewOptions { maxEdge?: number }
+
 // Only the source File and a bounded preview are retained by the page queue.
 // Future exports can decode the source again without exporting thumbnail pixels.
 export async function createScanPreview(file: Blob, mode: ScanMode, options: ScanPreviewOptions = {}): Promise<ScanPreview> {
   checkCancellation(options.signal);
   const image = await (options.decode || decodeImage)(file);
+  try { return await renderScanImage(image, mode, { ...options, maxEdge: SCAN_PREVIEW_EDGE }); }
+  finally { image.close(); }
+}
+
+// No maxEdge means full decoded source resolution. Export callers own image.close.
+export async function renderScanImage(image: DecodedImage, mode: ScanMode, options: ScanRasterOptions = {}): Promise<ScanPreview> {
   let canvas: HTMLCanvasElement | undefined;
   try {
     checkCancellation(options.signal);
     canvas = (options.canvasFactory || (() => document.createElement("canvas")))();
-    const ratio = Math.min(1, SCAN_PREVIEW_EDGE / Math.max(image.width, image.height));
+    const ratio = Math.min(1, (options.maxEdge ?? Infinity) / Math.max(image.width, image.height));
     const width = canvas.width = Math.max(1, Math.round(image.width * ratio));
     const height = canvas.height = Math.max(1, Math.round(image.height * ratio));
     const context = canvas.getContext("2d", { alpha: false });
@@ -47,9 +55,14 @@ export async function createScanPreview(file: Blob, mode: ScanMode, options: Sca
     context.fillRect(0, 0, width, height);
     context.drawImage(image.source, 0, 0, width, height);
     if (mode !== "original") {
-      const pixels = context.getImageData(0, 0, width, height);
-      pixels.data.set(preprocessScanPixels(pixels.data, mode));
-      context.putImageData(pixels, 0, 0);
+      // Bounded strips avoid two additional full-resolution pixel buffers.
+      for (let y = 0; y < height; y += 64) {
+        checkCancellation(options.signal);
+        const pixels = context.getImageData(0, y, width, Math.min(64, height - y));
+        pixels.data.set(preprocessScanPixels(pixels.data, mode));
+        context.putImageData(pixels, 0, y);
+        if (y % 1024 === 0) await new Promise(resolve => setTimeout(resolve, 0));
+      }
     }
     const blob = await new Promise<Blob>((resolve, reject) => canvas!.toBlob(
       result => result ? resolve(result) : reject(new Error("IMAGE_EXPORT_FAILED")), "image/png",
@@ -57,7 +70,6 @@ export async function createScanPreview(file: Blob, mode: ScanMode, options: Sca
     checkCancellation(options.signal);
     return { blob, width, height };
   } finally {
-    image.close();
     if (canvas) canvas.width = canvas.height = 1;
   }
 }

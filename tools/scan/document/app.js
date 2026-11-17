@@ -1,5 +1,8 @@
 import { t } from "../../../js/i18n.js";
 import { createScanQueue } from "./state.js";
+import { createScanPdf, createScanPdfController } from "./pdf.js";
+import { createScanResultPreview } from "./result.js";
+import { downloadBlob } from "../../shared/save.js";
 
 const input = document.querySelector("#file-input");
 const list = document.querySelector("#page-list");
@@ -13,7 +16,17 @@ let notice = null;
 let noticeValues = {};
 let actionVersion = 0;
 const message = (key, values = {}) => Object.entries(values).reduce((text, [name, value]) => text.replaceAll(`{${name}}`, String(value)), t(`documentScanner.${key}`));
-const queue = createScanQueue({ changed: render });
+let queueKey = "";
+let pdfVersion = 0;
+const queue = createScanQueue({ changed: queueChanged });
+const pdf = createScanPdfController((pages, signal, onProgress) => createScanPdf({ pages, signal, onProgress, JsPDF: window.jspdf?.jsPDF }), render);
+const resultPreview = createScanResultPreview(document.querySelector("#pdf-preview"), render, () => announce("pdfPreviewError"));
+function invalidatePdf() { ++pdfVersion; pdf.invalidate(); resultPreview.clear(); }
+function queueChanged() {
+  const key = queue.pages.map(page => `${page.id}/${page.mode}`).join(",");
+  if (key !== queueKey) { queueKey = key; invalidatePdf(); }
+  render();
+}
 
 function announce(key, values = {}) { notice = key; noticeValues = values; render(); }
 function render() {
@@ -47,16 +60,26 @@ function render() {
   if (focused?.isConnected && document.activeElement !== focused) focused.focus();
   document.querySelector("#queue-empty").hidden = queue.pages.length > 0;
   document.querySelector("#page-count").textContent = message("count", { count: queue.pages.length });
-  clear.disabled = !queue.pages.length && !queue.busy;
+  clear.disabled = !queue.pages.length && !queue.busy && !pdf.busy && !pdf.result;
   apply.disabled = !queue.pages.length || queue.busy;
   mode.disabled = queue.busy;
   cancel.hidden = !queue.busy;
   list.setAttribute("aria-busy", String(queue.busy));
-  status.textContent = queue.busy ? message("processing", { count: queue.pages.length }) : notice ? message(notice, noticeValues) : "";
+  document.querySelector("#create-pdf").disabled = !queue.pages.length || queue.busy || pdf.busy;
+  document.querySelector("#cancel-pdf").hidden = !pdf.busy;
+  const progress = document.querySelector("#pdf-progress");
+  progress.hidden = !pdf.busy; progress.max = pdf.total || 1; progress.value = pdf.progress;
+  document.querySelector("#pdf-result").hidden = !pdf.result;
+  document.querySelector("#pdf-preview").setAttribute("aria-busy", String(resultPreview.busy));
+  document.querySelector("#pdf-page").textContent = resultPreview.busy ? message("pdfLoading") : message("pdfPage", { page: resultPreview.pageNumber, total: resultPreview.pageCount });
+  document.querySelector("#pdf-previous").disabled = resultPreview.busy || resultPreview.pageNumber <= 1;
+  document.querySelector("#pdf-next").disabled = resultPreview.busy || resultPreview.pageNumber >= resultPreview.pageCount;
+  status.textContent = pdf.busy ? message("pdfProgress", { done: pdf.progress, total: pdf.total }) : queue.busy ? message("processing", { count: queue.pages.length }) : notice ? message(notice, noticeValues) : "";
 }
 
 async function addFiles(files) {
   if (!files.length) return;
+  invalidatePdf();
   const version = ++actionVersion;
   try {
     const result = await queue.add(files, mode.value);
@@ -81,9 +104,10 @@ document.addEventListener("paste", event => {
   const files = [...(event.clipboardData?.files || [])];
   if (files.length) { event.preventDefault(); void addFiles(files); }
 });
-clear.addEventListener("click", () => { ++actionVersion; queue.clear(); announce("cleared"); add.focus(); });
+clear.addEventListener("click", () => { ++actionVersion; invalidatePdf(); queue.clear(); announce("cleared"); add.focus(); });
 cancel.addEventListener("click", () => { ++actionVersion; queue.cancel(); announce("cancelled"); add.focus(); });
 apply.addEventListener("click", async () => {
+  invalidatePdf();
   const version = ++actionVersion;
   try { const complete = await queue.setMode(mode.value); if (version === actionVersion) announce(complete ? "applied" : "cancelled"); }
   catch { if (version === actionVersion) announce("failure"); }
@@ -103,5 +127,38 @@ list.addEventListener("click", event => {
   }
 });
 document.addEventListener("securetools:languagechange", render);
-window.addEventListener("pagehide", event => { ++actionVersion; if (event.persisted) queue.clear(); else queue.dispose(); });
+document.querySelector("#create-pdf").addEventListener("click", async () => {
+  if (queue.busy || pdf.busy || !queue.pages.length) return;
+  const version = ++pdfVersion;
+  resultPreview.clear();
+  const creation = pdf.create(queue.pages);
+  document.querySelector("#cancel-pdf").focus();
+  try {
+    const blob = await creation;
+    if (version !== pdfVersion || !blob) return;
+    announce("pdfReady");
+    void resultPreview.open(blob);
+  } catch (error) {
+    if (version === pdfVersion) announce(error.code === "SCAN_EXPORT_LIMIT" ? "pdfLimit" : "pdfError");
+  } finally {
+    if (version === pdfVersion) document.querySelector("#create-pdf").focus();
+  }
+});
+document.querySelector("#cancel-pdf").addEventListener("click", () => { ++actionVersion; invalidatePdf(); announce("pdfCancelled"); document.querySelector("#create-pdf").focus(); });
+document.querySelector("#download-pdf").addEventListener("click", () => {
+  if (!pdf.result) return;
+  try { downloadBlob(pdf.result, "scanned-document.pdf"); announce("pdfDownloaded"); }
+  catch { announce("pdfDownloadError"); }
+});
+async function movePdfPreview(offset) {
+  const focused = document.activeElement;
+  await resultPreview.move(offset);
+  if (!pdf.result || (document.activeElement !== document.body && document.activeElement !== focused)) return;
+  const preferred = document.querySelector(offset < 0 ? "#pdf-previous" : "#pdf-next");
+  const alternate = document.querySelector(offset < 0 ? "#pdf-next" : "#pdf-previous");
+  (preferred.disabled ? alternate : preferred).focus();
+}
+document.querySelector("#pdf-previous").addEventListener("click", () => { void movePdfPreview(-1); });
+document.querySelector("#pdf-next").addEventListener("click", () => { void movePdfPreview(1); });
+window.addEventListener("pagehide", event => { ++actionVersion; invalidatePdf(); if (event.persisted) queue.clear(); else queue.dispose(); });
 render();

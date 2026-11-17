@@ -91,6 +91,9 @@ jobs:
       - name: Verify scanner inputs, orientation, lifecycle and privacy
         run: node tests/browser/scanner.mjs
 
+      - name: Verify scanner PDF output, source quality and lifecycle
+        run: node tests/browser/scanner-pdf.mjs
+
       - name: Inspect isolated release review artifact
         run: node scripts/inspect-release-artifact.mjs
 
@@ -111,4 +114,5 @@ jobs:
             .ts-build/production-smoke
             .ts-build/responsive
             .ts-build/scanner-qa
+            .ts-build/scanner-pdf-qa
           retention-days: 7

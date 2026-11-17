@@ -17,12 +17,12 @@
 | Image | [Image → Text OCR](https://tools.securetools.app/image/to-text/) | Production | One PNG, JPEG, or WebP → editable English/Korean text |
 | Privacy | [Privacy hub](https://tools.securetools.app/privacy/) | Production hub | Navigation to Image and PDF metadata tools |
 | Scan/OCR | Category surface | Available | Image/PDF OCR links; Document Scanner Core in v2.4 development |
-| Scan/OCR | Document Scanner | Development (24A) | JPEG/PNG/WebP; arrange pages; local appearance previews; no PDF/OCR export yet |
+| Scan/OCR | Document Scanner | Development (24A/24B) | JPEG/PNG/WebP; arrange/preprocess pages; source-resolution PDF preview/download; no scanner OCR yet |
 | Media | Category surface | Planned | No production processing tool |
 
 “Production” means linked and covered by the current repository validation. “Planned” cards are non-interactive. Secure Tools may later link separately deployed companion applications, but no Companion status or integration exists on the live site today.
 
-The Image category exposes the tested OCR runtime through a single-image Image → Text workflow with English, Korean, and combined recognition. PDF OCR and searchable PDF output already exist in PDF to Text. Scanner Core is available in v2.4 development; scanner PDF export and optional OCR are deferred to 24B/24C.
+The Image category exposes the tested OCR runtime through a single-image Image → Text workflow with English, Korean, and combined recognition. PDF OCR and searchable PDF output already exist in PDF to Text. Scanner Core is available in v2.4 development; scanner PDF export is implemented in 24B and optional OCR remains deferred to 24C.
 
 ## Shared Image boundaries
 
