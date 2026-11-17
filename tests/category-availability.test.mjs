@@ -68,8 +68,8 @@ assert.equal(
   "Image and Scan/OCR entries must resolve to the same route",
 );
 assertRoutesExist("tools/scan/index.html", [scanOcrCard[1]]);
-assert.equal((scanList.match(/<article class="category-tool surface">/g) || []).length, 1);
-assert.equal((scanList.match(/tools\.comingSoon/g) || []).length, 1);
+assert.equal((scanList.match(/<article class="category-tool surface">/g) || []).length, 0);
+assert.equal((scanList.match(/tools\.comingSoon/g) || []).length, 0);
 assert.match(scanList, /data-i18n="categories\.scan\.documentTitle"/);
 
 const privacyHtml = read("privacy/index.html");

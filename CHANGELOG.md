@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.0 — Unreleased
+
+- Add Document Scanner Core with local JPEG/PNG/WebP input, page ordering, removal, clear, EXIF-aware bounded previews, and Original/Grayscale/Document modes.
+- Bound the scanner queue to 20 pages and 200 MiB, release temporary resources, and invalidate cancelled or replaced preview work.
+- Establish v2.4 integration policy and scanner regression/browser coverage. PDF export and scanner OCR are reserved for later sprints.
+
 ## 2.3.0 — Release candidate, unpublished
 
 ### Security and reliability

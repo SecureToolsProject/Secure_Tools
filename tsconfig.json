@@ -4,7 +4,11 @@
     "declaration": false,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "noEmit": true,
@@ -21,6 +25,8 @@
     "tools/shared/searchable-pdf.ts",
     "tools/shared/*.d.ts",
     "tools/pdf/split/*.d.ts",
-    "js/*.d.ts"
+    "js/*.d.ts",
+    "tools/shared/scan.ts",
+    "tools/scan/document/*.ts"
   ]
 }

@@ -69,6 +69,6 @@ try {
     assert.doesNotMatch(file, /(?:\.d)?\.ts$|\.map$|[\\/]\.ts-build[\\/]|[\\/]tests[\\/]/);
     if (/\.(?:js|mjs|html|css|json)$/.test(file)) assert.doesNotMatch(fs.readFileSync(file, "utf8"), /C:\\Users\\|C:\/Users\//);
   }
-  assert.equal(canonicalPages.length, 19); assert.equal(legacyRedirects.length, 17);
-  console.log(`Release hardening HTTP: all 19 routes, ${checkedAssets.size} linked static assets, 17 single-hop/query-preserving redirects, SEO/sitemap/robots, and production artifact hygiene passed.`);
+  assert.equal(canonicalPages.length, 20); assert.equal(legacyRedirects.length, 17);
+  console.log(`Release hardening HTTP: all 20 routes, ${checkedAssets.size} linked static assets, 17 single-hop/query-preserving redirects, SEO/sitemap/robots, and production artifact hygiene passed.`);
 } finally { server.kill(); }

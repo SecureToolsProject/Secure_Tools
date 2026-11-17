@@ -74,3 +74,9 @@ Secure Tools may evolve as both:
 - a discovery hub for separately deployed companion applications that need different runtime or resource models.
 
 This is a direction, not a current integration contract. There is no companion registry, external-application schema, plugin framework, service discovery mechanism, or v3 navigation implementation in the present architecture.
+
+## Document Scanner Core (v2.4 / 24A)
+
+`tools/shared/scan.ts` decodes through the existing signature-validated, EXIF-aware image helper, bounds previews to 1,000 pixels on the longest edge, composites transparency over white, and provides deterministic pixel preprocessing. `tools/scan/document/state.ts` holds ordered source Files and preview URLs, with 20-page/200-MiB aggregate limits, per-operation cancellation and stale-result guards. It releases replaced/removed/cleared URLs and decoded/canvas resources. Only one current queue operation may publish results. The UI is a static ES module with native picker, drop/paste inputs and keyboard ordering.
+
+Appearance is recorded per page; cancelling a batch retains completed previews. Apply to all pages retries the selected mode. Originals remain immutable and are retained as File references for future full-resolution export. 24B must decode originals again and must not compose a PDF from bounded thumbnails. Shared OCR/PDF services remain unchanged. No new external service, persistence, runtime dependency or CSP relaxation is introduced.

@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 
-export const ACTIVE_INTEGRATION_BRANCH = "v2.3";
+export const ACTIVE_INTEGRATION_BRANCH = "v2.4";
 
 const routineBranch = /^(?:feat|fix|test|chore)\/.+$/;
 const hotfixBranch = /^hotfix\/.+$/;

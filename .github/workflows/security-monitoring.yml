@@ -2,9 +2,9 @@ name: Security monitoring
 
 on:
   pull_request:
-    branches: [v2.3, main]
+    branches: [v2.4, main]
   push:
-    branches: [v2.3, main]
+    branches: [v2.4, main]
   schedule:
     - cron: '29 3 * * 3'
   workflow_dispatch:
