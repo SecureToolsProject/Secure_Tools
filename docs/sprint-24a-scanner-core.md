@@ -10,7 +10,7 @@ Adding another batch cancels publication from the previous batch. Clear and canc
 
 ## Branch policy
 
-Production `main` and tag v2.3.0 were inspected at `2eb8e865e32558bfd031cd65c85d5d0fea64f5c7`; no v2.4 branch existed. v2.4 was bootstrapped from that production commit. The prerequisite policy migration is an independent Config commit in the scanner feature branch, covering AGENTS, workflow documentation, CI/security triggers, Dependabot targets and policy tests. It remains reviewable in the v2.4 PR; neither integration nor production was merged. Existing v2.3 maintenance PRs were not changed.
+Production `main` and tag v2.3.0 were inspected at `2eb8e865e32558bfd031cd65c85d5d0fea64f5c7`; no v2.4 branch existed. v2.4 was bootstrapped from that production commit. The prerequisite policy migration is an independent Config commit in the scanner feature branch, covering AGENTS, workflow documentation, CI/security triggers, Dependabot targets and policy tests. It remains reviewable in the v2.4 PR; neither integration nor production was merged. Existing v2.3 maintenance PRs were not changed. Remote protections do not inherit automatically onto a newly created branch; equivalent v2.4 protection settings remain an administrator follow-up. Dependabot’s new target configuration takes effect when present on the repository default branch; this task does not promote development changes into main.
 
 ## Verification
 
